@@ -1,0 +1,1 @@
+ <p class="footer-text text-center">Copyright &copy; C.P.Bangladesh Meeting Room Booking Powered by <strong>CPB-IT</strong> </p>

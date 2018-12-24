@@ -1,0 +1,46 @@
+
+body{
+	background:#fff;
+	
+}
+.navbar{
+	border-bottom:3px solid #008ed6;
+	background-color:#292b2c;
+	opacity:0.7;
+}
+#home-section{
+	background:url(../img/img9.jpg) no-repeat center top;
+	background-attachment:fixed;
+	background-size:cover;
+	min-height:700px;
+	font-family:arial;
+	
+}
+.dark-overlay{
+		background:rgba(0,0,0,0.7);
+		min-height:700px;
+}
+.fa{
+	background:#fff;
+	color:blue;
+	padding:3px;
+	font-size:20px;
+	border-radius:4px;
+	
+}
+.home-inner{
+	padding-top:100px;
+}
+#main-section{
+	padding-top:100px;
+}
+#second-se{
+	background:url(../img/satellite.png) no-repeat center top;
+	background-attachment:fixed;
+	background-size:cover;
+	min-height:700px;
+	font-family:arial;
+}
+#main-Share{
+	padding-top:100px;
+}
