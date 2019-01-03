@@ -1,43 +1,32 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
+if(strlen($_SESSION['admin-all-login'])==0)
   { 
-header('location:login');
+header('location:../../admin');
 }
 else{ 
 
-include('../db/config.php');
-include('../db/calDB.php');
+include('../../db/config.php');
+
 
 
 //start For Load data for show on calender.......................
-$data = array();
+$calData = array();
 
-$query = "SELECT * FROM `car_booking` LEFT JOIN `user` ON car_booking.user_id = user.user_id WHERE  car_booking.boking_status='1' ORDER BY `booking_id` ";
+$calenderSql =mysqli_query($con,"SELECT car_booking.booking_id, car_booking.start_date, car_booking.end_date, car_booking.location, car_booking.car_number, user.user_name, user.user_dept FROM car_booking INNER JOIN user ON car_booking.user_id=user.user_id WHERE car_booking.boking_status='1'");
 
-//$query = "SELECT * FROM car_booking ORDER BY booking_id";
-
-$statement = $connect->prepare($query);
-
-$statement->execute();
-
-$result = $statement->fetchAll();
-
-foreach($result as $row)
+while ($cal_row = $calenderSql->fetch_assoc()) 
 {
- $data[] = array(
-  'id'   => $row["booking_id"],
-  //'title'   => $row["car_name"].' Car Number--'. $row["car_number"] ,
-  'title' => $row["location"].' || '. $row["user_name"].' || '. $row["user_department"].' || '. $row["car_number"],
-  'start'   => $row["start_date"],
-  'end'   => $row["end_date"],
-  
- );
+  $calData[]=array(
+
+    'id'=> $cal_row["booking_id"],
+    'title'=> $cal_row["car_number"].' || '. $cal_row["location"].' || '. $cal_row["user_name"].' || '.$cal_row["user_dept"],
+    'start'=> $cal_row["start_date"],
+    'end'=> $cal_row["end_date"],
+  );  
 }
-
- //end For Load data for show on calender.......................
-
+//***********End Calendar Data Show ************//
 
 
 ?>
@@ -117,16 +106,10 @@ foreach($result as $row)
         <!-- plugins:js -->
         <script src="vendors/js/vendor.bundle.base.js"></script>
         <script src="vendors/js/vendor.bundle.addons.js"></script>
-        <!-- endinject -->
-        <!-- Plugin js for this page-->
-        <!-- End plugin js for this page-->
-        <!-- inject:js -->
+        
         <script src="js/off-canvas.js"></script>
         <script src="js/misc.js"></script>
         <!-- endinject -->
-        <!-- Custom js for this page-->
-        <!-- End custom js for this page-->
-
 
         <!-- For Calendar Load Links -->
         <link href='cal/fullcalendar.min.css' rel='stylesheet' />
@@ -156,7 +139,7 @@ foreach($result as $row)
 
       //editable: true,
       eventLimit: true, // allow "more" link when too many events
-      events: <?php echo json_encode($data); ?>
+      events: <?php echo json_encode($calData); ?>
         
     });    
   });

@@ -1,13 +1,13 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
+if(strlen($_SESSION['admin-all-login'])==0)
   { 
-header('location:login');
+header('location:../../admin');
 }
 else{ 
 
-include('../db/config.php');
+include('../../db/config.php');
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -282,28 +282,28 @@ if(isset($_POST['submit']))
         <script src="js/misc.js"></script>
         <!-- endinject -->
         <!-- Custom js for this page-->
-        <!-- End custom js for this page-->
-        <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
-        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+
+<!--*************** For Data Table PDF Xcel JS ****************-->       
+ <script src="../../assets/table_adv/js/dataTables.min.js"></script>
+ <script src="../../assets/table_adv/js/dataTables.bootstrap4.min.js"></script>
+ <script src="../../assets/table_adv/js/dataTables.buttons.min.js"></script>
+ <script src="../../assets/table_adv/js/buttons.bootstrap4.min.js"></script>
+ <script src="../../assets/table_adv/js/jszip.min.js"></script>
+ <script src="../../assets/table_adv/js/pdfmake.min.js"></script>
+ <script src="../../assets/table_adv/js/vfs_fonts.js"></script>
+ <script src="../../assets/table_adv/js/buttons.html5.min.js"></script>
+ <script src="../../assets/table_adv/js/buttons.print.min.js"></script>
+ <script src="../../assets/table_adv/js/buttons.colVis.min.js"></script>
 
         <script type="text/javascript">
             $(document).ready(function() {
                 var table = $('#example').DataTable({
                     lengthChange: false,
-                    buttons: ['copy', 'excel', 'pdf', 'colvis']
+                    buttons: [ 'excel', 'copy', 'colvis' ]
                 });
 
                 table.buttons().container()
-                    .appendTo('#example_wrapper .col-md-6:eq(0)');
+                    .appendTo( '#example_wrapper .col-md-6:eq(0)' );
             });
         </script>
 

@@ -1,33 +1,31 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
+if(strlen($_SESSION['admin-all-login'])==0)
   { 
-header('location:login');
+header('location:../../admin');
 }
 else{ 
 
-include('../db/config.php');
+include('../../db/config.php');
 
-//car used chart Mysql
-// $q2="SELECT `car_name`, COUNT(*) as number FROM `car_booking` GROUP BY `car_id`";
-// $r2 = mysqli_query($con, $q2);
-
+//********** For Car Booking Chart *************//
 $query2="SELECT `car_number`, COUNT(*) as number FROM `car_booking` WHERE `boking_status`=1 GROUP BY `car_number`";
 $result2 = mysqli_query($con, $query2);
         
-$query3="SELECT `user_name`, COUNT(*) as number FROM `car_booking` WHERE `boking_status`=1 GROUP BY `user_name` ";
+// Two table Join For pie Chart of *****User by Car Pool      
+$query3="SELECT user.user_name, COUNT(car_booking.user_id) as number FROM car_booking LEFT JOIN user ON car_booking.user_id= user.user_id WHERE car_booking.boking_status='1' GROUP BY user_name";
 $result3 = mysqli_query($con, $query3);
-
+// Count Total User
 $sql=mysqli_query($con,"SELECT * FROM `user`");
 $users=mysqli_num_rows($sql);
-
+// Count Total Driver
 $sql2=mysqli_query($con,"SELECT * FROM `car_driver`");
 $drivers=mysqli_num_rows($sql2);
-
+// Count Total Car
 $sql3=mysqli_query($con,"SELECT * FROM `tbl_car`");
 $cars=mysqli_num_rows($sql3);
-
+// Count Total Booking
 $sql4=mysqli_query($con,"SELECT * FROM `car_booking`");
 $booking=mysqli_num_rows($sql4);
 
@@ -215,9 +213,10 @@ $booking=mysqli_num_rows($sql4);
         <!-- container-scroller -->
 
 
-       <!--  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
-
-       <script type="text/javascript" src="js/saif/chart.js" ></script>
+<!--************* Google Pai Chart Link *****************-->
+    <script type="text/javascript" src="../../assets/js/g_pi_chart/chart.js" ></script>
+    <script type="text/javascript" src="../../assets/js/g_pi_chart/jquery-1.12.4.js" ></script>
+    <script type="text/javascript" src="../../assets/js/g_pi_chart/loader.js" ></script>
 
         <script type="text/javascript">
             google.charts.load('current', {
@@ -272,16 +271,6 @@ $booking=mysqli_num_rows($sql4);
             }
         </script>
 
-       
-
-
-
-
-        <!-- Bar Chart Link -->
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <!-- Bar Chart Link -->
 
 
 

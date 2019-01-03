@@ -25,6 +25,11 @@
      <!--*********start Sweet alert For Submiting data **********-->
  <!--  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>  -->
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css"> -->
+
+
+  <!-- <script src="../../assets/coustom/swwetalert/jslib.js"></script> -->
+<script src="../../assets/coustom/swwetalert/dev.js"></script>
+<link rel="stylesheet" type="text/css" href="../../assets/coustom/swwetalert/sweetalert.css">
 <!--*********end Sweet alert For Submiting data **********-->

@@ -173,7 +173,7 @@ $admin_st_ch = $_POST['admin_st'];
                                     <div class="card-body">
                                         <!-- <h4 class="card-title">Car Add Form</h4> -->
                                         <button class="card-title btn btn-outline btn-block ">Admin Registration</button>
-                                        <form class="form-sample" action="" method="post" enctype="multipart/form-data">
+                <form class="form-sample" action="admin-reg-action.php" method="post" enctype="multipart/form-data">
 
 
                                             <div class="row">

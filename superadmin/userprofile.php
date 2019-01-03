@@ -60,7 +60,7 @@ $row=$query->fetch_assoc();
                         <div class="col-lg-4 mx-auto">
                             <div class="auto-form-wrapper">
 
-                                <img class="user-s" src="../admin/p_img/userImg/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" />
+                                <img class="user-s" src="../pimages/user/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" />
                                 <table>
 
                                     <td>
@@ -76,23 +76,23 @@ $row=$query->fetch_assoc();
 
                                      <tr>
                                         <td> User Department:</td>
-                                        <th> <strong><?php echo $row['user_department'];?></strong> </th>
+                                        <th> <strong><?php echo $row['user_dept'];?></strong> </th>
                                     </tr>
 
                                     <tr>
                                         <td> User Contract:</td>
-                                        <th> <strong><?php echo $row['user_contract'];?></strong> </th>
+                                        <th> <strong><?php echo $row['user_contact'];?></strong> </th>
                                     </tr>
 
 
                                     <tr>
                                         <td> User Office ID:</td>
-                                        <th> <strong><?php echo $row['user_officeId'];?></strong> </th>
+                                        <th> <strong><?php echo $row['user_office_id'];?></strong> </th>
                                     </tr>
 
                                     <tr>
                                         <td> User Status:</td>
-                                        <th> <strong><?php $st =$row['user_status'];
+                                        <th> <strong><?php $st =$row['user_st'];
 
           if ($st==1) {
             echo "Active";

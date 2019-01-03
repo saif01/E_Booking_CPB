@@ -1,13 +1,13 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
+if(strlen($_SESSION['admin-all-login'])==0)
   { 
-header('location:login');
+header('location:../../admin');
 }
 else{ 
 
-include('../db/config.php');
+include('../../db/config.php');
 
 $car_id=$_GET['car_id'];
 
@@ -65,7 +65,7 @@ $row=$query->fetch_assoc();
                         <div class="col-lg-4 mx-auto">
                             <div class="auto-form-wrapper">
 
-                                <img class="user-s" src="p_img/carImg/<?php echo($row['car_img1']);?>" class="img-responsive" alt="Image" />
+                                <img class="user-s" src="../../pimages/car//<?php echo($row['car_img1']);?>" class="img-responsive" alt="Image" />
                                 <table>
 
                                     <td>

@@ -1,4 +1,13 @@
-<?php 
+<?php
+session_start();
+error_reporting(0);
+date_default_timezone_set('Asia/Dhaka');// change according timezone
+$currentTime = date( 'Y-m-d H:i:s', time ()); //H=24 hours and h=12 hours
+if(strlen($_SESSION['user_all'])==0)
+  { 
+header('location:../../index');
+}
+else{
 include('../../db/config.php');
 include('../../line/line_Room_Msg.php');
 $r_booking_id= $_GET['r_booking_id'];
@@ -13,12 +22,10 @@ while ($row=mysqli_fetch_array($sql)) {
 	$end_book= $row['booking_end'];
 	$U_realName= $row['user_name'];
 	$dept=$row['user_dept']; 
-	//$location= $row['location'];
 	$purpose= $row['purpose'];
-	//$dariver_name=$row['driver_name'];
 	$room_name=$row['room_name'];
 	
-    $u_dept=str_replace('&', 'and', $dept);
+  $u_dept=str_replace('&', 'and', $dept);
 	$purposeLine = str_replace('&', 'and', $purpose);
 
 //*************For Sending Line Group Message*******************//
@@ -27,10 +34,9 @@ while ($row=mysqli_fetch_array($sql)) {
 	}
 ?>
 <!--*********start Sweet alert For Submiting data **********-->
-  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+<script src="../../assets/coustom/swwetalert/jslib.js"></script>
+<script src="../../assets/coustom/swwetalert/dev.js"></script>
+<link rel="stylesheet" type="text/css" href="../../assets/coustom/swwetalert/sweetalert.css">
 <!--*********end Sweet alert For Submiting data **********-->
 
     <!-- //****************** Start Sweet Alert ********************/// -->                         
@@ -46,8 +52,9 @@ while ($row=mysqli_fetch_array($sql)) {
                                   if (isConfirm) {
                                     window.location.href = "user-booked-room.php";
                                   }
-                                }); }, 1000);
+                                }); }, 0);
                       </script>            
                          
 <!-- //****************** End Sweet Alert ********************///
  -->
+<?php } ?>

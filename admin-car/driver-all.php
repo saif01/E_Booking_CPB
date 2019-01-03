@@ -126,7 +126,7 @@ include('../db/config.php');
                                                            
 
                                                             <td>
-                                            <a href="javascript:void(0);" onClick="popUpWindow('driver-leave.php?driver_id=<?php echo htmlentities($row['driver_id']);?>');" title="Hide"> <button class="btn btn-info">Leave</button></a>  
+<a href="javascript:void(0);" onClick="popUpWindow('driver-leave.php?driver_id=<?php echo $row['driver_id'];?>&car_id=<?php echo $row['car_id'];?> ');" title="Hide"> <button class="btn btn-info">Leave</button></a>    
 
 
                                                             </td>

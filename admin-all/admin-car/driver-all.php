@@ -1,13 +1,13 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
+if(strlen($_SESSION['admin-all-login'])==0)
   { 
-header('location:login');
+header('location:../../admin');
 }
 else{ 
 
-include('../db/config.php');
+include('../../db/config.php');
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -93,7 +93,7 @@ include('../db/config.php');
 
                                                         <td>
                                                             <a href="javascript:void(0);" onClick="popUpWindow('driver-profile.php?driver_id=<?php echo htmlentities($row['driver_id']);?>');" title="View Driver Info.">
-                  <img src="p_img/driverimg/<?php echo($row['driver_img']);?>" class="img-responsive" alt="Image" height="42" width="42"/>  
+                  <img src="../../pimages/driver/<?php echo($row['driver_img']);?>" class="img-responsive" alt="Image" height="42" width="42"/>  
 
 <?php echo htmlentities($row['driver_name']) ; ?>
 
@@ -109,7 +109,7 @@ include('../db/config.php');
 
                 ?>
                     <a href="javascript:void(0);" onClick="popUpWindow('car-profile.php?car_id=<?php echo htmlentities($row['car_id']);?>');" title="View Car Info.">
-                 <img src="p_img/carImg/<?php echo($row2['car_img1']);?>" class="img-responsive" alt="Not Assign" height="42" width="70"/>
+                 <img src="../../pimages/car/<?php echo($row2['car_img1']);?>" class="img-responsive" alt="Not Assign" height="42" width="70"/>
                 <?php echo htmlentities($row2['car_name'].'--'.$row2['car_namePlate']); ?>
 
                   </a>
@@ -126,7 +126,7 @@ include('../db/config.php');
                                                            
 
                                                             <td>
-                                            <a href="javascript:void(0);" onClick="popUpWindow('driver-leave.php?driver_id=<?php echo htmlentities($row['driver_id']);?>');" title="Hide"> <button class="btn btn-info">Leave</button></a>  
+<a href="javascript:void(0);" onClick="popUpWindow('driver-leave.php?driver_id=<?php echo $row['driver_id'];?>&car_id=<?php echo $row['car_id'];?> ');" title="Hide"> <button class="btn btn-info">Leave</button></a>    
 
 
                                                             </td>

@@ -1,44 +1,14 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
+if(strlen($_SESSION['admin-all-login'])==0)
   { 
-header('location:login');
+header('location:../../admin');
 }
 else{ 
-include('../db/config.php');
+include('../../db/config.php');
 
-if (isset($_POST['submit'])) {
-
-$logIn_id=$_POST['logIn_id'];
-$user_pass=$_POST['user_pass'];
-$user_name=$_POST['user_name'];
-$user_department=$_POST['user_department'];
-$user_contract=$_POST['user_contract'];
-$user_officeId=$_POST['user_officeId'];
-$user_status = 1;
-
-
-//$user_img=$_FILES["user_img"]["name"];
-//move_uploaded_file($_FILES["user_img"]["tmp_name"],"p_img/userImg/".$_FILES["user_img"]["name"]);
-
-$file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['user_img']['name']);
-    $storeFile="p_img/userImg/".$file_name;
-    $fileName=$_FILES['user_img']['tmp_name'];
-
-    move_uploaded_file($fileName,$storeFile);
-
-
-
-$query=mysqli_query($con," INSERT INTO `user`(`logIn_id`, `user_pass`, `user_name`, `user_department`, `user_contract`, `user_img`, `user_officeId`, `user_status`) VALUES ('$logIn_id','$user_pass','$user_name','$user_department','$user_contract','$file_name','$user_officeId','$user_status')");
-
-?>
-    <script>
-        alert('Update successfull.  !');
-        window.open('user-all-info', '_self'); //for locating other page.
-        //window.location.reload(); //For reload Same page
-    </script>
-    <?php } ?>
+ ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -98,7 +68,7 @@ $query=mysqli_query($con," INSERT INTO `user`(`logIn_id`, `user_pass`, `user_nam
                                     <div class="card-body">
                                         <!-- <h4 class="card-title">Car Add Form</h4> -->
                                         <button class="card-title btn btn-outline btn-block ">User Registration</button>
-                                        <form class="form-sample" action="" method="post" enctype="multipart/form-data">
+<form class="form-sample" action="user-reg-action.php" method="post" enctype="multipart/form-data">
 
 
                                             <div class="row">
@@ -108,7 +78,7 @@ $query=mysqli_query($con," INSERT INTO `user`(`logIn_id`, `user_pass`, `user_nam
                                                         <label class="col-sm-3 col-form-label">User ID  </label>
                                                         <div class="col-sm-9">
                                                             
-                                                            <input type="text" id="check_value" onBlur="userAvailability()" name="logIn_id" class="form-control" placeholder="Enter User Name" required>
+                                                            <input type="text" id="check_value" onBlur="userAvailability()" name="user_login" class="form-control" placeholder="Enter User Name" required>
                                                 <span id="user-availability-status1" style="font-size:12px;"></span>
 
                                                         </div>
@@ -139,7 +109,7 @@ $query=mysqli_query($con," INSERT INTO `user`(`logIn_id`, `user_pass`, `user_nam
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">User Contact</label>
                                                         <div class="col-sm-9">
-                                                             <input type="text" name="user_contract" class="form-control" placeholder="Enter User Phone Number" required>
+                                                             <input type="text" name="user_contact" class="form-control" placeholder="Enter User Phone Number" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -152,7 +122,7 @@ $query=mysqli_query($con," INSERT INTO `user`(`logIn_id`, `user_pass`, `user_nam
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Department</label>
                                                         <div class="col-sm-9">
-                                                             <input type="text" name="user_department" class="form-control" placeholder="Enter User Department Name" required>
+                                                             <input type="text" name="user_dept" class="form-control" placeholder="Enter User Department Name" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -160,7 +130,7 @@ $query=mysqli_query($con," INSERT INTO `user`(`logIn_id`, `user_pass`, `user_nam
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">User Office ID </label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" name="user_officeId" class="form-control" placeholder="Enter User Office ID" required>
+                                                            <input type="text" name="user_office_id" class="form-control" placeholder="Enter User Office ID" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -168,30 +138,39 @@ $query=mysqli_query($con," INSERT INTO `user`(`logIn_id`, `user_pass`, `user_nam
                                             
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <div class="form-group row">
+                                            <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">User Image</label>
                                                         <div class="col-sm-9">
-                                    <input name="user_img" type="file" class="form-control file-upload-info" onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0])" required>
-                                        <p style="color:red;">Resolution 300*300 pixels</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label"></label>
-                                                        <div class="col-sm-9">
-                                                            <img id="preview" alt="Image Not Selected" width="100" height="100" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    <input name="user_img" type="file" class="form-control file-upload-info" placeholder="Upload Image" onchange="readURL(this);" required>
+                                        <p style="color:red;">Resolution 250*300 pixels</p>
 
+                                        <img id="image" src="" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                 <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">User Define </label>
+                                                        <div class="col-sm-9">
+                                    <select class="form-control" name="user_st_ch" required>
+                                                 <option value="" disabled selected>Select Data</option>
+                                                <option value="carpool">Car Pool</option>
+                                                <option value="room" >Room Booking</option>
+                                                <option value="car_room" >Car Pool & Room Booking (Both)</option>
+                                               
+
+                                    </select>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>    
+                                            </div>
 
 
                                             <div class="row">
                                                 <div class="col-12 text-center">
                                                     <button type="submit" name="submit" class="btn btn-outline-success btn-block btn-rounded">User Registration </button>
-                                                    <button class="btn btn-light btn-block btn-rounded ">Cancel</button>
+                                                    <button class="btn btn-light btn-block btn-rounded ">Reset</button>
                                                     
                                                     <a href="##" onClick="history.go(-1); return false;"> <button class="btn btn-light btn-block btn-rounded " style="background-color:#a08e8e; margin-top: 8px;">Cancel</button></a>
                                                 </div>
@@ -234,6 +213,25 @@ $query=mysqli_query($con," INSERT INTO `user`(`logIn_id`, `user_pass`, `user_nam
         <!-- endinject -->
         <!-- Custom js for this page-->
         <!-- End custom js for this page-->
+
+
+<!--************************ FOR IMAGE SHOW WHEN SELECETED *******************  -->
+<script type="text/javascript">
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+              $('#image')
+                  .attr('src', e.target.result)
+                  .width(80)
+                  .height(80);
+          };
+          reader.readAsDataURL(input.files[0]);
+      }
+   }
+</script>
+<!--************************ FOR IMAGE SHOW WHEN SELECETED *******************  -->
+
     </body>
 
     </html>

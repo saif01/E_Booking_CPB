@@ -117,6 +117,26 @@ $value = $query->fetch_assoc();
 
 
                             </li>
+                        <li> Police Requisition : 
+                            <?php 
+                         
+$police_req=mysqli_query($con,"SELECT * FROM `police_req` WHERE `driver_id`='$driver_id' AND `req_st` ='1' AND `req_end` >= '$currentTime' ORDER BY `req_id` DESC LIMIT 1 ");
+$police_num=mysqli_num_rows($police_req);
+$police_row=$police_req ->fetch_assoc();
+
+
+                                    if ($police_num == 0) {
+                                       echo "No Data Available";
+                                    }
+                                    else{
+
+                    echo date("F j, Y", strtotime($police_row['req_start'])) ." -- To -- ".date("F j, Y", strtotime($police_row['req_end']));
+                                    }
+
+                                    ?> 
+
+
+                            </li>
                             	<li> </li>
                                 </ul>
                             </div>

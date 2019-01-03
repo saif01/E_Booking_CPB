@@ -5,7 +5,7 @@ if(strlen($_SESSION['admin-super-login'])==0)
   { 
 header('location:../admin/index');
 }
-else{ 
+else{  
 
 include('../db/config.php');
 ?>
@@ -126,7 +126,7 @@ include('../db/config.php');
                                                            
 
                                                             <td>
-                                            <a href="javascript:void(0);" onClick="popUpWindow('driver-leave.php?driver_id=<?php echo htmlentities($row['driver_id']);?>');" title="Hide"> <button class="btn btn-info">Leave</button></a>  
+<a href="javascript:void(0);" onClick="popUpWindow('driver-leave.php?driver_id=<?php echo $row['driver_id'];?>&car_id=<?php echo $row['car_id'];?> ');" title="Hide"> <button class="btn btn-info">Leave</button></a> 
 
 
                                                             </td>
@@ -134,19 +134,17 @@ include('../db/config.php');
                                                   <?php              
                                     if($row['driver_status']==1)
                                          {?>
-                                    <a href="driver-status.php?h_user_id=<?php echo htmlentities($row['driver_id']);?>" id="hide" title="Hide"> <i class="mdi mdi-eye text-success icon-lg"></i></a>
+<a href="driver-status.php?h_user_id=<?php echo htmlentities($row['driver_id']);?>" id="hide" title="Hide"> <i class="mdi mdi-eye text-success icon-lg"></i></a>
                                             
                                         <?php } else {?>
 
-                                            <a href="driver-status.php?s_user_id=<?php echo htmlentities($row['driver_id']);?>" id="show" title="Show"> <i class="mdi mdi-eye-off text-danger icon-lg"></i></a> 
+<a href="driver-status.php?s_user_id=<?php echo htmlentities($row['driver_id']);?>" id="show" title="Show"> <i class="mdi mdi-eye-off text-danger icon-lg"></i></a> 
                                             <?php } ?>
-                  <a href="driver-edit?driver_id=<?php echo htmlentities($row['driver_id']);?>" title="Edit"
-                    >
-                    <i class="mdi mdi-pencil-box-outline text-warning icon-lg"></i>  
-                  </a>
+<a href="driver-edit?driver_id=<?php echo htmlentities($row['driver_id']);?>" title="Edit">
+<i class="mdi mdi-pencil-box-outline text-warning icon-lg"></i>  </a>
                   
                     
-                   <a href="driver-delete.php?driver_id=<?php echo $row['driver_id']?>" id="delete" title="Delete"> <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a>
+<a href="driver-delete.php?driver_id=<?php echo $row['driver_id']?>" id="delete" title="Delete"> <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a>
 
                                                             </td>
                                                             <td>
@@ -168,7 +166,7 @@ include('../db/config.php');
                                                                     echo "No Data"; 
                                                                 }
                                                                 else{
-                                                                    echo date("M j, Y", strtotime($row['leave_end'])); 
+                                      echo date("M j, Y", strtotime($row['leave_end'])); 
                                                                 }
 
                                                                 ?>

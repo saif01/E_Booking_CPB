@@ -16,14 +16,14 @@ $end_book=$_SESSION['end_book'];
 $location=$_SESSION['location'];
 
 include('../../db/config.php');
-include('line/lineMsg.php');
+include('../../line/line_Car_Msg.php');
 
 if (isset($_POST['cancel'])) {
 	$sql2=mysqli_query($con,"UPDATE `car_booking` SET `boking_status`='0' WHERE `user_name`='$user_id' ORDER BY `booking_id` DESC LIMIT 1");
 
 
   //**************Three table joining*****************//
-$sql=mysqli_query($con,"SELECT car_booking.car_number, car_booking.start_date, car_booking.end_date, car_booking.location, car_booking.purpose, car_driver.driver_name, user.user_name, user.user_department FROM car_booking INNER JOIN car_driver ON car_booking.car_id=car_driver.car_id INNER JOIN user ON car_booking.user_id=user.user_id WHERE car_booking.user_name='$user_id' ORDER BY car_booking.booking_id DESC LIMIT 1 ");
+$sql=mysqli_query($con,"SELECT car_booking.car_number, car_booking.start_date, car_booking.end_date, car_booking.location, car_booking.purpose, car_driver.driver_name, user.user_name, user.user_dept FROM car_booking INNER JOIN car_driver ON car_booking.car_id=car_driver.car_id INNER JOIN user ON car_booking.user_id=user.user_id WHERE car_booking.user_name='$user_id' ORDER BY car_booking.booking_id DESC LIMIT 1 ");
 
 while ($row3=mysqli_fetch_array($sql)) {
   // $start_book3= date("M j, g:i a", strtotime($row3['start_date']));
@@ -31,7 +31,7 @@ while ($row3=mysqli_fetch_array($sql)) {
   $start_book3= $row3['start_date'];
   $end_book3= $row3['end_date'];
   $U_realName= $row3['user_name'];
-  $dept=$row3['user_department']; 
+  $dept=$row3['user_dept']; 
   $location3= $row3['location'];
   $purpose3= $row3['purpose'];
   $dariver_name=$row3['driver_name'];
@@ -42,22 +42,37 @@ while ($row3=mysqli_fetch_array($sql)) {
     $locationLine = str_replace('&', 'and', $location3);
 
 //*************For Sending Line Group Message*******************//
-        $message="Canceled Status %0A Canceled By: $U_realName,%0A Department: $u_dept,%0A Destination: $locationLine,%0A Purpose: $purposeLine,%0A Driver: $dariver_name,%0A Car: $car_number3,%0A Start: $start_book3,%0A End: $end_book3.";
+    $message="Canceled Status %0A Canceled By: $U_realName,%0A Department: $u_dept,%0A Destination: $locationLine,%0A Purpose: $purposeLine,%0A Driver: $dariver_name,%0A Car: $car_number3,%0A Start: $start_book3,%0A End: $end_book3.";
           lineMsg($message);
   }
 
+?>
+<!--*********start Sweet alert For Submiting data **********-->
+<script src="../../assets/coustom/swwetalert/jslib.js"></script>
+<script src="../../assets/coustom/swwetalert/dev.js"></script>
+<link rel="stylesheet" type="text/css" href="../../assets/coustom/swwetalert/sweetalert.css">
+<!--*********end Sweet alert For Submiting data **********-->
 
+    <!-- //****************** Start Sweet Alert ********************/// -->                         
+                          <script type="text/javascript">
+                        setTimeout(function () { 
+                                swal({
+                                  title: "Successfully!",
+                                  text: "Your Booking canceled successfully..!!",
+                                  type: "success",
+                                  confirmButtonText: "OK"
+                                },
+                                function(isConfirm){
+                                  if (isConfirm) {
+                                    window.location.href = "car-list-reg.php";
+                                  }
+                                }); }, 0);
+                      </script>            
+                         
+<!-- //****************** End Sweet Alert ********************///
+ -->
 
-
-
-      				?>
-
-<script>
-    alert('Your Booking canceled successfully..!!');
-    window.open('car-list-reg','_self');
-    </script>
-
-      <?php 
+<?php 
 
 }?>
 

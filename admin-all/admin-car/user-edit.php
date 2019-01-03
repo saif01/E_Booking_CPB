@@ -1,75 +1,15 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
+if(strlen($_SESSION['admin-all-login'])==0)
   { 
-header('location:login');
+header('location:../../admin');
 }
 else{
-include('../db/config.php');
-
-if (isset($_POST['submit'])) {
-
-
-$user_name=$_POST['user_name'];
-$user_contract=$_POST['user_contract'];
-$user_officeId=$_POST['user_officeId'];
-$user_department=$_POST['user_department'];
-$user_status = 1;
-
+include('../../db/config.php');
 $user_id=$_GET['user_id'];
 
-$fileName=$_FILES['user_img']['tmp_name'];
-
-        if ($fileName !=="") 
-        {
-             $user_id=$_GET['user_id'];
-             $sql=mysqli_query($con,"SELECT `user_img` FROM `user` WHERE `user_id`='$user_id' ");
-               while($row2=mysqli_fetch_array($sql))
-                   {
-                       $file="p_img/userImg/".$row2['user_img'];
-                        unlink($file);
-                    }
-              
-            
-             $file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['user_img']['name']);
-
-                $storeFile="p_img/userImg/".$file_name;
-                $fileName=$_FILES['user_img']['tmp_name'];
-                move_uploaded_file($fileName,$storeFile);
-
-                           
-
-                $query2=mysqli_query($con,"UPDATE `user` SET `user_name`='$user_name', `user_department`='$user_department', `user_contract`='$user_contract', `user_img`='$file_name',`user_officeId`='$user_officeId',`user_status`='$user_status'  WHERE `user_id`='$user_id'");
-
-                ?>
-            <script>
-                alert('Update successfull.  !');
-                window.open('user-all-info', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-        
-       
-
-        } 
-            else{
-
-                
-                $query=mysqli_query($con,"UPDATE `user` SET `user_name`='$user_name', `user_department`='$user_department', `user_contract`='$user_contract',`user_officeId`='$user_officeId',`user_status`='$user_status'  WHERE `user_id`='$user_id'");
-
-            ?>
-            <script>
-                alert('Update successfull.  !');
-                window.open('user-all-info', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-            }
-
-}
-
-            ?>
+?>
 
 
 
@@ -118,10 +58,9 @@ $fileName=$_FILES['user_img']['tmp_name'];
                                     <div class="card-body">
                                         <!-- <h4 class="card-title">Car Add Form</h4> -->
                                         <button class="card-title btn btn-outline btn-block ">User Information Update</button>
-                                        <form class="form-sample" action="" method="post" enctype="multipart/form-data">
+<form class="form-sample" action="user-edit-action.php?user_id=<?php echo $user_id ; ?>" method="post" enctype="multipart/form-data">
 
 <?php 
-     $user_id=$_GET['user_id'];
 
 $query=mysqli_query($con,"SELECT * FROM `user` WHERE `user_id`='$user_id'");
 
@@ -136,7 +75,7 @@ $row=$query->fetch_assoc();
                                                         <label class="col-sm-3 col-form-label">User ID  </label>
                                                         <div class="col-sm-9">
 
-                                                            <input type="text" class="form-control" placeholder="Enter User Name" value="<?php echo htmlentities($row['logIn_id']); ?>" readonly>
+                                                            <input type="text" class="form-control" placeholder="Enter User Name" value="<?php echo htmlentities($row['user_login']); ?>" readonly>
                                                 
 
                                                         </div>
@@ -147,7 +86,7 @@ $row=$query->fetch_assoc();
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">User Office ID </label>
                                                         <div class="col-sm-9">
-                                        <input type="text" name="user_officeId" class="form-control" placeholder="Enter User Office ID" value="<?php echo htmlentities($row['user_officeId']); ?>" required>
+                                        <input type="text" name="user_office_id" class="form-control" placeholder="Enter User Office ID" value="<?php echo htmlentities($row['user_office_id']); ?>" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -170,7 +109,7 @@ $row=$query->fetch_assoc();
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label"> Department </label>
                                                         <div class="col-sm-9">
-                                        <input type="text" name="user_department" class="form-control" placeholder="Enter Department Name" value="<?php echo htmlentities($row['user_department']); ?>" required>
+                                        <input type="text" name="user_dept" class="form-control" placeholder="Enter Department Name" value="<?php echo htmlentities($row['user_dept']); ?>" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -180,9 +119,9 @@ $row=$query->fetch_assoc();
                                              <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">User Contarct </label>
+                                                        <label class="col-sm-3 col-form-label">User Contact </label>
                                                         <div class="col-sm-9">
-                                        <input type="text" name="user_contract" class="form-control" placeholder="Enter User Office ID" value="<?php echo htmlentities($row['user_contract']); ?>" required>
+                                        <input type="text" name="user_contact" class="form-control" placeholder="Enter User Office ID" value="<?php echo htmlentities($row['user_contact']); ?>" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -224,7 +163,7 @@ $row=$query->fetch_assoc();
                                             
                                             <tbody>
 
-                                                <td><img src="p_img/userImg/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" height="100" width="100" >   </td>
+                                                <td><img src="../../pimages/user/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" height="100" width="100" >   </td>
 
                                                 <td> <img id="preview" alt="Not Selected" width="100" height="100" /> </td>
 

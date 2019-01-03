@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 if(strlen($_SESSION['admin-room-login'])==0)
   { 
-header('location:login');
+header('location:../admin');
 }
 else{ 
 include('../db/config.php');
@@ -15,7 +15,7 @@ include('../db/config.php');
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <title>CPB.RoomBooking</title>
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
@@ -75,7 +75,7 @@ include('../db/config.php');
                                                 </thead>
                                                 <tbody>
                                                     <?php 
-		$query=mysqli_query($con," SELECT * FROM `user`");
+		$query=mysqli_query($con," SELECT * FROM `user` WHERE `user_room_st`='1'");
 		while($row=mysqli_fetch_array($query))
 		{
 
@@ -84,7 +84,7 @@ include('../db/config.php');
 
                                                         <td>
                                         <a href="javascript:void(0);" onClick="popUpWindow('userprofile.php?user_id=<?php echo htmlentities($row['user_id']);?>');" title="View User Info.">
-                                        <img src="../imgs/user/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" /> </td></a>
+                                            <img src="../pimages/user/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" /></a></td>
                                                         <td>
                                             <a href="javascript:void(0);" onClick="popUpWindow('userprofile.php?user_id=<?php echo htmlentities($row['user_id']);?>');" title="View User Info.">
                                                 <?php echo htmlentities($row['user_name']) ; ?></a>
@@ -94,20 +94,20 @@ include('../db/config.php');
                                                             <?php echo htmlentities($row['user_dept']); ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo htmlentities($row['user_number']); ?>
+                                                            <?php echo htmlentities($row['user_contact']); ?>
                                                         </td>
 
                                                         <td class="center">
                                                             <?php
                                          if($row['user_st']==1)
                                          {?>
-                                <!-- <a href="user-status.php?h_user_id=<?php echo htmlentities($row['user_id']);?>" onclick="return confirm('Are you sure you want to Deactive this ** User **?');" title="Hide"> <i class="mdi mdi-eye text-success icon-lg"></i></a> -->
+              
 
                                 <a href="user-status.php?h_user_id=<?php echo htmlentities($row['user_id']);?>" title="Hide" id="hide" > <i class="mdi mdi-eye text-success icon-lg"></i></a>
                                             
                                         <?php } else {?>
 
-                                    <!-- <a href="user-status.php?s_user_id=<?php echo htmlentities($row['user_id']);?>" onclick="return confirm('Are you sure you want to Active this ** User **?');" title="Show"> <i class="mdi mdi-eye-off text-danger icon-lg"></i></a> --> 
+            
 
                                     <a href="user-status.php?s_user_id=<?php echo htmlentities($row['user_id']);?>" title="Show" id="show" > <i class="mdi mdi-eye-off text-danger icon-lg"></i></a> 
                                             <?php } ?>
@@ -118,7 +118,6 @@ include('../db/config.php');
                     <i class="mdi mdi-pencil-box-outline text-warning icon-lg"></i>  
                   </a>
 									
-                       <!--  <a href="user-delete.php?user_id=<?php echo $row['user_id']?>" onClick="return confirm('Are you sure you want to delete???')" title="Delete"> <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a> -->
 
                         <a href="user-delete.php?user_id=<?php echo $row['user_id']?>"
                  title="Delete" id="delete" > <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a>
@@ -161,32 +160,18 @@ include('../db/config.php');
         <script src="js/off-canvas.js"></script>
         <script src="js/misc.js"></script>
         <!-- endinject -->
-        <!-- Custom js for this page-->
-        <!-- End custom js for this page-->
-        <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
-        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
-
-
+       <!--********* Data Table js Link *********-->
+        <!-- <script type="text/javascript" src="assets/dataTable/libry.js"></script> -->
+        <script type="text/javascript" src="../assets/dataTable/tbl.js"></script>
+        <script type="text/javascript" src="../assets/dataTable/boots.js"></script>
+         
         <script type="text/javascript">
             $(document).ready(function() {
-                var table = $('#example').DataTable({
-                    // lengthChange: false,
-                    // buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
-                });
-
-                // table.buttons().container()
-                //     .appendTo( '#example_wrapper .col-md-6:eq(0)' );
-            });
+            $('#example').DataTable();
+        } );
         </script>
+
+
 
         <!-- Sweet Alert CDN Link -->
 <script src="{{asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>

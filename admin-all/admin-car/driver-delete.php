@@ -1,5 +1,5 @@
 <?php
-include('../db/config.php');
+include('../../db/config.php');
 
 if ($_GET['driver_id']) {
 	
@@ -10,7 +10,7 @@ $query2=mysqli_query($con,"SELECT * FROM `car_driver` WHERE `driver_id`='$id' ")
 while($row=mysqli_fetch_array($query2))
     {
 
-    	$file="p_img/driverimg/".$row['driver_img'];
+    	$file="../../pimages/driver/".$row['driver_img'];
     	unlink($file);
 
    	}

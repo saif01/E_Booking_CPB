@@ -56,8 +56,6 @@ $adminSql=mysqli_query($con,"SELECT * FROM `admin` WHERE `admin_login`='$admin_l
                          header("Location:../admin-car");
                         exit(); 
 
-
-
                 }
 
      // *********** Room Booking Admin Section ************//
@@ -72,6 +70,22 @@ $adminSql=mysqli_query($con,"SELECT * FROM `admin` WHERE `admin_login`='$admin_l
                          $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`,`login_st`) VALUES ('$admin_login','$admin_name','$ip',' $os','$browser','$device','$currentTime','$admin_st')");
                                         
                          header("Location:../admin-room");
+                        exit();      
+
+                }
+
+    // ***********Car And Room Booking Admin Both Section ************//
+
+                elseif($admin_st=='1' && $admin_car_st=='1' && $admin_room_st=='1' && $admin_super_st=='0') 
+                    {  
+
+
+                        $_SESSION['admin-all-login']=$_POST['admin_login'];
+                        $_SESSION['admin_id']=$row['admin_id'];
+                         
+                         $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`,`login_st`) VALUES ('$admin_login','$admin_name','$ip',' $os','$browser','$device','$currentTime','$admin_st')");
+                                        
+                         header("Location:../admin-all/project_direct");
                         exit();      
 
                 }
@@ -91,10 +105,6 @@ $adminSql=mysqli_query($con,"SELECT * FROM `admin` WHERE `admin_login`='$admin_l
                         exit();      
 
                 }
-
-
-
-
 
             elseif($st==0)
                 {
@@ -120,8 +130,7 @@ $adminSql=mysqli_query($con,"SELECT * FROM `admin` WHERE `admin_login`='$admin_l
                      $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_ip`, `user_os`, `user_browser`, `user_device`) VALUES ('".$_SESSION['adminName']."','$ip','$rowcount','$browser','$device')");
 
                      header("location: login");
-                    exit();
-                   
+                    exit();                   
 
                  }
             }

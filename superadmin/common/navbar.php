@@ -1,11 +1,11 @@
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
         <a class="navbar-brand brand-logo" href="index">
-          <img src="../assets/img/logo.png" alt="Syful-IT" style="height: 50px; width: 50px;">
-          <p> C.P.Bangladesh </p>
+          <img src="vendors/e-booking.gif" alt="Syful-IT" style="height: 60px; width: 240px; border: 2px solid #11f7d4; padding: 2px;">
+          
         </a>
         <a class="navbar-brand brand-logo-mini" href="index">
-          <img src="../assets/img/logo.png" alt="Syful-IT" style="height: 50px; width: 50px;">
+          <img src="vendors/e-booking.gif" alt="Syful-IT" style="height: 60px; width: 70px; border: 2px solid #11f7d4; padding: 2px;">
         </a>
         
       </div>

@@ -1,13 +1,13 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
+if(strlen($_SESSION['admin-all-login'])==0)
   { 
-header('location:login');
+header('location:../../admin');
 }
 else{ 
 
-include('../db/config.php');
+include('../../db/config.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

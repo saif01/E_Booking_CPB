@@ -8,11 +8,30 @@
             </a>
           </li>
 
-          <li class="nav-item">
+         <!--  <li class="nav-item">
             <a class="nav-link" href="calendar">
               <i class="menu-icon mdi mdi mdi-calendar-plus text-danger "></i>
               <span class="menu-title">Calendar View</span>
             </a>
+          </li> -->
+
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#calendar_section" aria-expanded="false" aria-controls="calendar_section">
+              <i class="menu-icon mdi mdi mdi-calendar-plus text-danger "></i>
+              <span class="menu-title">Calendar View</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="calendar_section">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+
+                  <a class="nav-link" href="calendar-car"> <i class="menu-icon mdi mdi mdi-calendar-plus text-info"> </i>Car Pool Calendar </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="calendar-room"><i class="menu-icon mdi mdi mdi-calendar-plus text-info"> </i>M. Room Calendar</a>
+                </li>
+              </ul>
+            </div>
           </li>
 
 
@@ -25,11 +44,16 @@
             <div class="collapse" id="report_section">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-
-                  <a class="nav-link" href="report-all"> <i class="menu-icon mdi mdi-book-multiple-variant text-info"> </i> All Report </a>
+                  <a class="nav-link" href="report-all-car"> <i class="menu-icon mdi mdi-book-multiple-variant text-info"> </i>Car Pool Report </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="report-byDate"><i class="menu-icon mdi mdi-book-variant text-info"> </i> Date Wise Report</a>
+                  <a class="nav-link" href="report-all-room"> <i class="menu-icon mdi mdi-book-multiple-variant text-info"> </i>M. Room Report </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="report-byDate-car"><i class="menu-icon mdi mdi-book-variant text-info"> </i>Car Report By Date</a>
+                </li>
+                 <li class="nav-item">
+                  <a class="nav-link" href="report-byDate-room"><i class="menu-icon mdi mdi-book-variant text-info"> </i>Room Report By Date</a>
                 </li>
               </ul>
             </div>
@@ -72,6 +96,9 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="driver-report-dateWise"><i class="menu-icon mdi mdi-chart-bar text-danger"></i> Date Wise Report</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="police-requisition-report"><i class="menu-icon mdi mdi-chart-bar text-danger"></i>Police Reqisition Report</a>
                 </li>
               </ul>
             </div>

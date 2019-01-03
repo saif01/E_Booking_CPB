@@ -10,93 +10,9 @@ header('location:../index');
 else{
 
 include('../db/config.php');
-include('../line/line_Room_Msg.php');
-
 $room_id=$_GET['room_id'];
-$user_id=$_SESSION['user_id'];
-
-//******** Room Name For Line Message ************/// 
-$RoomLineSql=mysqli_query($con,"SELECT `room_name` FROM `room` WHERE `room_id`='$room_id'");
-$room_row=$RoomLineSql->fetch_assoc();
-$roomName=$room_row['room_name'];
-
-//******** User Name And Department For Line Message ************/// 
-$userLineSql=mysqli_query($con,"SELECT `user_name`, `user_dept`  FROM `user` WHERE `user_id`='$user_id'");
-$user_row=$userLineSql->fetch_assoc();
-$U_Name=$user_row['user_name'];
-$u_dept=$user_row['user_dept'];
-
-
-if (isset($_POST['submit'])) {
-  $start_date=$_POST['start_date'];
-  //****** Time **********//
-  $start_time=$_POST['start_time'];
-  $return_time=$_POST['return_time'];
-
-  $booking_start=$_POST['start_date'] . ' ' . $_POST['start_time'];
-  $booking_end=$_POST['start_date'] . ' ' . $_POST['return_time'];
-    $purpose=$_POST['purpose'];
-  $booking_st=1;
-
-  //Start Time Subtraction and convert to days.
-        $ts1    =   strtotime($booking_start);
-        $ts2    =   strtotime($booking_end);
-        $seconds    = abs($ts2 - $ts1); # difference will always be positive
-        //$days = round($seconds/(60*60*24));
-        $hours=round($seconds/(60*60));
-  //Start Time Subtraction and convert to days.
-
-
-//****** Booked info Check **********//
-  $bookedCh=mysqli_query($con,"SELECT * FROM `room_booking` WHERE `booking_st`='1' AND '$booking_start' BETWEEN `booking_start` AND `booking_end` AND `room_id`='$room_id' ");
-  
-  $booked=mysqli_num_rows($bookedCh);
-
-
-
-  if ($booked>0) 
-  {
-    $_SESSION['error']="booked";
-  }
-
-  else
-  {
-
-  $storeData=mysqli_query($con,"INSERT INTO `room_booking`(`room_id`, `booking_start`, `booking_end`, `purpose`, `hours`, `booking_st`, `user_id`) VALUES ('$room_id','$booking_start','$booking_end','$purpose','$hours','$booking_st','$user_id')");
-
-  $U_dept=str_replace('&', 'and', $u_dept);
-  $purposeLine = str_replace('&', 'and', $purpose);
-
-//*************For Sending Line Group Message*******************//
-  $message="Booked Status,%0A Booked By: $U_Name,%0A Department: $U_dept,%0A Purpose: $purposeLine,%0A Room: $roomName,%0A Start: $booking_start,%0A End: $booking_end.";
-            lineMsg($message);
-
-        //**********Start Sweet Alert and redirect other Page ***********// 
-                      ?>
-                      <script type="text/javascript">
-                        setTimeout(function () { 
-                                swal({
-                                  title: "Booked Successfully!",
-                                  text: "Your Room Booking Completed!",
-                                  type: "success",
-                                  confirmButtonText: "OK"
-                                },
-                                function(isConfirm){
-                                  if (isConfirm) {
-                                    window.location.href = "meeting-room.php";
-                                  }
-                                }); }, 1000);
-                      </script>
-                      <?php
-          //**********End Sweet Alert and redirect other Page ***********// 
-      }
-
-
-}
-
 
 //*********** 3 table join ******************//
-
 $calData=array();
 $calenderSql=mysqli_query($con,"SELECT room_booking.r_booking_id, room_booking.booking_start, room_booking.booking_end, user.user_name, user.user_dept, room.room_name FROM `room_booking` INNER JOIN `user` ON room_booking.user_id=user.user_id INNER JOIN room ON room_booking.room_id=room.room_id WHERE room_booking.booking_st='1' AND room_booking.room_id='$room_id'");
 
@@ -126,21 +42,13 @@ while ($cal_row = $calenderSql->fetch_assoc())
     <!--=== Favicon ===-->
     <link rel="shortcut icon" href="assets/img/cpb.ico" type="image/x-icon" />
 
-<!--*********start Sweet alert For Submiting data **********-->
-  <!-- <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script> -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
-<!--*********end Sweet alert For Submiting data **********-->
-
-
- <!-- For Calendar Load Links -->
-<link href='cal/fullcalendar.min.css' rel='stylesheet' />
-<link href='cal/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-<script src='cal/lib/moment.min.js'></script>
-<script src='cal/lib/jquery.min.js'></script>
-<script src='cal/fullcalendar.min.js'></script>
-<script src='cal/locale-all.js'></script>
+     <!-- For Calendar Load Links -->
+    <link href='cal/fullcalendar.min.css' rel='stylesheet' />
+    <link href='cal/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+    <script src='cal/lib/moment.min.js'></script>
+    <script src='cal/lib/jquery.min.js'></script>
+    <script src='cal/fullcalendar.min.js'></script>
+    <script src='cal/locale-all.js'></script>
     
     <?php require('common/title.php'); ?> 
     <?php require('common/allcss.php'); ?>
@@ -169,53 +77,8 @@ while ($cal_row = $calenderSql->fetch_assoc())
   });
 </script>
 
-
-
-
-<style type="text/css">   
-      
-/************ My Coustom CSS For Warning Button *******************/
-.alert {
-    padding: 20px;
-    background-color: #f44336;
-    color: white;
-}
  
-.closebtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.closebtn:hover {
-    color: black;
-}
-.driverImg{
-    border-radius: 10px 20px;
-    background: #ffd000;
-    padding: 2px; 
-    width: 100px;
-    height: 110px;
-  margin-right: 0px;
-  float: right;
-}
-
-.carImg{
-    border-radius: 10px 20px;
-    background: #ffd000;
-    padding: 2px; 
-    width: 200px;
-    height: 110px;
-    margin-right: 0px;
-    float: left;
-}
-
-    </style> 
+      
 
 </head>
 
@@ -291,20 +154,31 @@ while ($cal_row = $calenderSql->fetch_assoc())
           						  echo htmlentities($_SESSION['error']="");
 
           						}
+      //*********Room Booked Have or Not Checking
                       if($_SESSION['error']=="booked")
                         {?>
           						<div class="alert">
                         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                        <strong>Sorry!</strong> This Car Booked By Another User!!!.
+                        <strong>Sorry!</strong> This Room Booked By Another User!!!.
                       </div>
           						<?php
           						echo htmlentities($_SESSION['error']="");
           						 }
+      //*********Room Booked Date Checking
+                       if($_SESSION['error']=="pre_Time")
+                        {?>
+                      <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        <strong>Sorry!</strong> You Can't Put Previous Date!!!.
+                      </div>
+                      <?php
+                      echo htmlentities($_SESSION['error']="");
+                       }
                       
 
                        ?>
 
-              <form action="" method="POST" onsubmit="return Validate(this);">
+              <form action="booking-action.php?room_id=<?php echo $room_id; ?>" method="POST" onsubmit="return Validate(this);">
                 
 
                   <div class="row">
@@ -432,9 +306,12 @@ while ($cal_row = $calenderSql->fetch_assoc())
     <!--=======================Javascript============================-->
 
 
-<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
- -->
 
+<!--*********start Sweet alert For Submiting data **********-->
+<!-- <script src="../assets/coustom/swwetalert/jslib.js"></script> -->
+<script src="../assets/coustom/swwetalert/dev.js"></script>
+<link rel="stylesheet" type="text/css" href="../assets/coustom/swwetalert/sweetalert.css">
+<!--*********end Sweet alert For Submiting data **********-->
 
 <script type="text/javascript">
         function Validate(objForm) {

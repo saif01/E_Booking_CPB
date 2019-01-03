@@ -11,22 +11,13 @@ else{
 
 //***************************************Temporary*********************************************************************************************************************************************************************** Temporary Car Booking Page **************************************************************************************************************************************************************Temporary****************************************//
 
-
-
 include('../../db/config.php');
-include('line/lineMsg.php');
 
 $car_id= $_GET['car_id'];
 
 $user_login= $_SESSION['user_all'];
 $user_id= $_SESSION['user_id'];
 
-//*********Only User Real Name finding *********//
-$Query0=mysqli_query($con,"SELECT `user_name`, `user_dept` FROM `user` WHERE `user_id`='$user_id'");
-$S_name=$Query0->fetch_assoc();
-$U_realName=$S_name['user_name'];
-$dept=$S_name['user_dept'];
-$u_dept=str_replace('&', 'and', $dept);
 
  //******************* Car and Driver joining *********************//
 $drCarSql=mysqli_query($con,"SELECT tbl_car.car_name, tbl_car.car_namePlate, tbl_car.car_img1, car_driver.driver_id, car_driver.driver_name, car_driver.driver_img FROM tbl_car INNER JOIN car_driver ON tbl_car.car_id=car_driver.car_id WHERE tbl_car.car_id='$car_id' ");
@@ -42,150 +33,22 @@ $driver_img=$value['driver_img'];
 
 
 
-//*********** 2 table join ******************//
-//***********Start Calendar Data Show ************//
-$calData=array();
-$calenderSql=mysqli_query($con,"SELECT car_booking.booking_id, car_booking.start_date, car_booking.end_date, car_booking.location, user.user_name, user.user_dept FROM car_booking INNER JOIN user ON car_booking.user_id=user.user_id WHERE car_booking.boking_status='1' AND car_booking.car_id='$car_id'");
+      //*********** 2 table join ******************//
+    //***********Start Calendar Data Show ************//
+   $calData=array();
+    $calenderSql=mysqli_query($con,"SELECT car_booking.booking_id, car_booking.start_date, car_booking.end_date, car_booking.location, user.user_name, user.user_dept FROM car_booking INNER JOIN user ON car_booking.user_id=user.user_id WHERE car_booking.boking_status='1' AND car_booking.car_id='$car_id'");
 
-while ($cal_row = $calenderSql->fetch_assoc()) 
-{
-  $calData[]=array(
+    while ($cal_row = $calenderSql->fetch_assoc()) 
+    {
+      $calData[]=array(
 
-    'id'=> $cal_row["booking_id"],
-    'title'=> $cal_row["location"].' || '. $cal_row["user_name"].' || '. $cal_row["user_dept"],
-    'start'=> $cal_row["start_date"],
-    'end'=> $cal_row["end_date"],
-  );  
-}
-//***********End Calendar Data Show ************//
-
-
-
-if (isset($_POST['submit'])) {
-
-   $start_date=$_POST['start_date'];
-    $start_book= $_POST['start_date'] . ' ' . $_POST['start_time'];
-    $end_book= $_POST['start_date'] . ' ' . $_POST['return_time'];  
-
-    //Start Time Subtraction and convert to days.
-        $ts1    =   strtotime($start_book);
-        $ts2    =   strtotime($end_book);
-        $seconds    = abs($ts2 - $ts1); # difference will always be positive
-        $days = round($seconds/(60*60*24));
-        //$days2 = $seconds/(60*60*24);
-  //Start Time Subtraction and convert to days.
- 
-        $currentTime = date( 'Y-m-d h:i:s', time () );   
-      $ts3   =   strtotime($currentTime);
-      $ts4    =   strtotime($start_book);
-      $seconds    = abs($ts3 - $ts4); # difference will always be positive
-      $afterdays = round($seconds/(60*60*24));
-
-//**************** Driver leave Status Checking ***********************//
- $drivLev=mysqli_query($con,"SELECT * FROM `driver_leave` WHERE `leave_status`='1' AND `driver_id`='$driver_id' AND date('$start_date') BETWEEN date(`driver_leave_start`) AND date(`driver_leave_end`)");
-$drivLevs=mysqli_num_rows($drivLev);
-      
-
-        if(date($start_date) < date('Y-m-d'))
-                {
-                  $_SESSION['error']="pre";
-                }
-//************For checking Driver leave Status *********//
-        elseif($drivLevs>0)
-              {
-                $_SESSION['error']="driverLeave";
-              }                  
-
-        else{
-
-            $sql=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND `boking_status`='1' AND '$start_book' BETWEEN `start_date` AND `end_date`");
-
-            //SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND '$start_book' BETWEEN `start_date` AND `end_date` 
-
-                $result=mysqli_num_rows($sql);
-
-                if ($result > 0) 
-                {
-                    
-                    $_SESSION['error']="booked";
-                   
-                }
-
-                
-                else
-                {
-
-                   
-                    $start_book= $_POST['start_date'] . ' ' . $_POST['start_time'];
-                    $end_book= $_POST['start_date'] . ' ' . $_POST['return_time'];
-
-                    $location=$_POST['location'];
-                     $purpose=$_POST['purpose'];
-
-                     $purposeLine = str_replace('&', 'and', $purpose);
-                     $locationLine = str_replace('&', 'and', $location);
-
-                    $status=1;
-
-                      $samRecd=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `boking_status`='1' AND `start_date`='$start_book' AND `end_date`='$end_book' AND `location`='$location' AND `user_name`!='$username'");
-                       $sameResult=mysqli_num_rows($samRecd);
-
-                      if ($sameResult > 0) {
-
-                        $query=mysqli_query($con,"INSERT INTO `car_booking`(`car_id`, `user_id`, `user_name`, `car_name`, `car_number`, `car_img`, `start_date`, `end_date`, `location`, `purpose`, `day_count`, `boking_status`) VALUES ('$car_id','$user_id','$username','$car_name','$car_number','$car_img','$start_book','$end_book','$location','$purpose','$days','$status')");
-
-  //*************For Sending Line Group Message*******************//
-                    $message="Booked Status,%0A Booked By: $U_realName,%0A Department: $u_dept,%0A Destination: $locationLine,%0A Purpose: $purposeLine,%0A Driver: $dariver_name,%0A Car: $car_number,%0A Start: $start_book,%0A End: $end_book.";
-                    lineMsg($message);
-
-                   $_SESSION['error']="same_result";
- //************Store Value in SESSION for show same record*********//                
-                  $_SESSION['start_book']=$start_book;
-                  $_SESSION['end_book']= $end_book;
-                  $_SESSION['location']=$location;
-
-                        
-                      }
-                      else
-                      {
-                        $query=mysqli_query($con,"INSERT INTO `car_booking`(`car_id`, `user_id`, `user_name`, `car_name`, `car_number`, `car_img`, `start_date`, `end_date`, `location`, `purpose`, `day_count`, `boking_status`) VALUES ('$car_id','$user_id','$username','$car_name','$car_number','$car_img','$start_book','$end_book','$location','$purpose','$days','$status')");
-                        
-//*************For Sending Line Group Message*******************//
-                      $message="Booked Status,%0A Booked By: $U_realName,%0A Department: $u_dept,%0A Destination: $locationLine,%0A Purpose: $purposeLine,%0A Driver: $dariver_name,%0A Car: $car_number,%0A Start: $start_book,%0A End: $end_book.";
-                        lineMsg($message);
-                    
-                         
-//****************** Start Sweet Alert ********************///
-                          ?>
-                      <script>
-                        setTimeout(function () { 
-                                swal({
-                                  title: "Booked Successfully!",
-                                  text: "Your Car Booking Completed!",
-                                  type: "success",
-                                  confirmButtonText: "OK"
-                                },
-                                function(isConfirm){
-                                  if (isConfirm) {
-                                    window.location.href = "car-list-temp.php";
-                                  }
-                                }); }, 1000);
-                         // alert('Update successfull.  !');
-                         // window.open('car-list-reg.php', '_self');
-                      </script>
-                      <?php
-//****************** End Sweet Alert ********************///
-
-                              // alert('Update successfull..  !');
-                              // window.open('car-list-temp.php','_self');
-                           $_SESSION['error']="";
-                      }
-                    
-                }
-
-        }
-
- }
+        'id'=> $cal_row["booking_id"],
+        'title'=> $cal_row["location"].' || '. $cal_row["user_name"].' || '. $cal_row["user_dept"],
+        'start'=> $cal_row["start_date"],
+        'end'=> $cal_row["end_date"],
+      );  
+    }
+    //***********End Calendar Data Show ************//
 
 
   ?>
@@ -199,6 +62,7 @@ $drivLevs=mysqli_num_rows($drivLev);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--=== Favicon ===-->
     <link rel="shortcut icon" href="assets/img/cpb.ico" type="image/x-icon" />
+   <link rel="stylesheet" type="text/css" href="assets/coustom/myCoustom.css">
 
     
     <?php require('common/title.php'); ?> 
@@ -212,48 +76,6 @@ $drivLevs=mysqli_num_rows($drivLev);
 <script src='cal/lib/jquery.min.js'></script>
 <script src='cal/fullcalendar.min.js'></script>
 <script src='cal/locale-all.js'></script>
-
-<style>
-.alert {
-    padding: 20px;
-    background-color: #f44336;
-    color: white;
-}
- 
-.closebtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.closebtn:hover {
-    color: black;
-}
-.driverImg{
-    border-radius: 10px 20px;
-    background: #ffd000;
-    padding: 2px; 
-    width: 100px;
-    height: 110px;
-    margin-right: 0px;
-    float: right;
-}
-
-.carImg{
-    border-radius: 10px 20px;
-    background: #ffd000;
-    padding: 2px; 
-    width: 200px;
-    height: 110px;
-    margin-right: 0px;
-    float: left;
-}
-</style>
 
 </head>
 
@@ -294,8 +116,6 @@ $drivLevs=mysqli_num_rows($drivLev);
     </header>
     <!--== Header Area End ==-->
      <!--==************************* Header Area End ****************************************************************************************************************************==-->
-
-
 
 
 
@@ -373,6 +193,17 @@ $drivLevs=mysqli_num_rows($drivLev);
                       echo htmlentities($_SESSION['error']="");
                        } 
 
+ //***** If Police Requisition Then show*****//
+                       if($_SESSION['error']=="ploce_requisition")
+                        { ?>
+                      <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        <strong>Sorry!</strong> You can't Book because Police Requisition have at this date!!.
+                      </div>
+                      <?php 
+                      echo htmlentities($_SESSION['error']="");
+                       }                      
+
 //******** After Same Result Found Show This Message *************//
                        if($_SESSION['error']=="same_result")
                         { ?>
@@ -385,13 +216,10 @@ $drivLevs=mysqli_num_rows($drivLev);
                       echo htmlentities($_SESSION['error']="");
                        } 
 
-                        
-
-                       
-              
+             
                        ?>
 
-              <form action="" method="POST" onsubmit="return Validate(this);">
+              <form action="booking-action-temp.php?car_id=<?php echo $car_id; ?>" method="POST" onsubmit="return Validate(this);">
                 
 
                   <div class="row">

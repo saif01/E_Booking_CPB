@@ -6,44 +6,8 @@ if(strlen($_SESSION['admin-car-login'])==0)
 header('location:../admin');
 }
 else{ 
-
 include('../db/config.php');
-
-if (isset($_POST['submit'])) {
-
-$driver_name=$_POST['driver_name'];
-$for_car=$_POST['for_car'];
-$driver_phone=$_POST['driver_phone'];
-$driver_nid=$_POST['driver_nid'];
-
-$driver_license=$_POST['driver_license'];
-
-$driver_st=1;
-
-
-//$compfile=$_FILES["compfile"]["name"]; 
-// $driver_img=$_FILES["driver_img"]["name"];
-
-
-// move_uploaded_file($_FILES["driver_img"]["tmp_name"],"../pimages/driver/".$_FILES["driver_img"]["name"]);
-
-$file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['driver_img']['name']);
-    $storeFile="../pimages/driver/".$file_name;
-    $fileName=$_FILES['driver_img']['tmp_name'];
-
-    move_uploaded_file($fileName,$storeFile);
-
-
-
- $query=mysqli_query($con,"INSERT INTO `car_driver`(`car_id`, `driver_name`, `driver_phone`, `driver_img`, `driver_license`, `driver_nid`, `driver_status`) VALUES ('$for_car','$driver_name','$driver_phone','$file_name','$driver_license','$driver_nid','$driver_st')");
-
-
 ?>
-    <script>
-        alert('Update successfull.  !');
-        window.open('driver-all', '_self');
-    </script>
-    <?php } ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -110,7 +74,7 @@ $file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['driver_im
                                     <div class="card-body">
                                         <!-- <h4 class="card-title">Car Add Form</h4> -->
                                         <button class="card-title btn btn-outline btn-block ">Driver Add Form</button>
-                                        <form class="form-sample" action="" method="post" enctype="multipart/form-data">
+<form class="form-sample" action="driver-add-action.php" method="post" enctype="multipart/form-data">
 
                                             <div class="row">
                                                 <div class="col-md-6">

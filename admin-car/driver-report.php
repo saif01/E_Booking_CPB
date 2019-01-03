@@ -67,7 +67,7 @@ include('../db/config.php');
                                         <!-- <h4 class="card-title">All Booked Information </h4> -->
                                         <button class="card-title btn btn-outline btn-block ">All Driver Leave Report</button>
                                         <div class="table-responsive ">
-                                            <table id="example" class="table table-striped table-bordered table-responsive-md col-lg-12">
+                                            <table id="example" class="table table-striped table-bordered table-dark table-responsive-md col-lg-12">
                                                 <thead>
                                                     <tr>
                                                         <th>ID</th>
@@ -175,19 +175,17 @@ include('../db/config.php');
         <script src="js/off-canvas.js"></script>
         <script src="js/misc.js"></script>
         <!-- endinject -->
-        <!-- Custom js for this page-->
-        <!-- End custom js for this page-->
-        <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
-        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+<!--********** Advance Data Table JS *************-->
+ <script src="../assets/table_adv/js/dataTables.min.js"></script>
+ <script src="../assets/table_adv/js/dataTables.bootstrap4.min.js"></script>
+ <script src="../assets/table_adv/js/dataTables.buttons.min.js"></script>
+ <script src="../assets/table_adv/js/buttons.bootstrap4.min.js"></script>
+ <script src="../assets/table_adv/js/jszip.min.js"></script>
+ <script src="../assets/table_adv/js/pdfmake.min.js"></script>
+ <script src="../assets/table_adv/js/vfs_fonts.js"></script>
+ <script src="../assets/table_adv/js/buttons.html5.min.js"></script>
+ <script src="../assets/table_adv/js/buttons.print.min.js"></script>
+ <script src="../assets/table_adv/js/buttons.colVis.min.js"></script>
 
 
 

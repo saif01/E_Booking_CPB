@@ -1,5 +1,5 @@
 <?php
-include('../db/config.php');
+include('../../db/config.php');
 
 /*  anable or disable code for user  */
 

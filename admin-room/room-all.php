@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 if(strlen($_SESSION['admin-room-login'])==0)
   { 
-header('location:login');
+header('location:../admin');
 }
 else{ 
 include('../db/config.php');
@@ -15,7 +15,7 @@ include('../db/config.php');
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <title>CPB.RoomBooking</title>
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
@@ -89,7 +89,7 @@ include('../db/config.php');
 
                                                         <td>
                                        
-                                        <img src="../imgs/room/<?php echo($row['room_img1']);?>" class="img-responsive" alt="Car Img" />
+                                        <img src="../pimages/room/<?php echo($row['room_img1']);?>" class="img-responsive" alt="Car Img" />
                                                         </td>
 
                                                         <td class="center">
@@ -165,33 +165,18 @@ include('../db/config.php');
         <script src="js/off-canvas.js"></script>
         <script src="js/misc.js"></script>
         <!-- endinject -->
-        <!-- Custom js for this page-->
-        <!-- End custom js for this page-->
-        <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
-        <script src="
-https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
-
-
+        <!--********* Data Table js Link *********-->
+        <!-- <script type="text/javascript" src="assets/dataTable/libry.js"></script> -->
+        <script type="text/javascript" src="../assets/dataTable/tbl.js"></script>
+        <script type="text/javascript" src="../assets/dataTable/boots.js"></script>
+         
         <script type="text/javascript">
             $(document).ready(function() {
-                var table = $('#example').DataTable({
-                    // lengthChange: false,
-                    // buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
-                });
-
-                // table.buttons().container()
-                //     .appendTo( '#example_wrapper .col-md-6:eq(0)' );
-            });
+            $('#example').DataTable();
+        } );
         </script>
+
+
 
         <!-- Sweet Alert CDN Link -->
 <script src="{{asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>

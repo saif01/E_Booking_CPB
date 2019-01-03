@@ -1,49 +1,14 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
+if(strlen($_SESSION['admin-all-login'])==0)
   { 
-header('location:login');
+header('location:../../admin');
 }
 else{ 
+include('../../db/config.php');
 
-include('../db/config.php');
-
-if (isset($_POST['submit'])) {
-
-$driver_name=$_POST['driver_name'];
-$for_car=$_POST['for_car'];
-$driver_phone=$_POST['driver_phone'];
-$driver_nid=$_POST['driver_nid'];
-
-$driver_license=$_POST['driver_license'];
-
-$driver_st=1;
-
-
-//$compfile=$_FILES["compfile"]["name"]; 
-// $driver_img=$_FILES["driver_img"]["name"];
-
-
-// move_uploaded_file($_FILES["driver_img"]["tmp_name"],"p_img/driverimg/".$_FILES["driver_img"]["name"]);
-
-$file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['driver_img']['name']);
-    $storeFile="p_img/driverimg/".$file_name;
-    $fileName=$_FILES['driver_img']['tmp_name'];
-
-    move_uploaded_file($fileName,$storeFile);
-
-
-
- $query=mysqli_query($con,"INSERT INTO `car_driver`(`car_id`, `driver_name`, `driver_phone`, `driver_img`, `driver_license`, `driver_nid`, `driver_status`) VALUES ('$for_car','$driver_name','$driver_phone','$file_name','$driver_license','$driver_nid','$driver_st')");
-
-
-?>
-    <script>
-        alert('Update successfull.  !');
-        window.open('driver-all', '_self');
-    </script>
-    <?php } ?>
+ ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -110,7 +75,7 @@ $file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['driver_im
                                     <div class="card-body">
                                         <!-- <h4 class="card-title">Car Add Form</h4> -->
                                         <button class="card-title btn btn-outline btn-block ">Driver Add Form</button>
-                                        <form class="form-sample" action="" method="post" enctype="multipart/form-data">
+<form class="form-sample" action="driver-add-action.php" method="post" enctype="multipart/form-data">
 
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -194,7 +159,7 @@ echo "<option value='". $row2['car_id'] ."'>" .$row2['car_name'] ." -- ". $row2[
                                                         <label class="col-sm-3 col-form-label">Driver Image</label>
                                                         <div class="col-sm-9">
                                     <input name="driver_img" type="file" class="form-control file-upload-info" onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0])" required>
-                                        <p style="color:red;">Resolution 300*300 pixels</p>
+                                        <p style="color:red;">Resolution 250*300 pixels</p>
                                                         </div>
                                                     </div>
                                                 </div>

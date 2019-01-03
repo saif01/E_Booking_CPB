@@ -65,44 +65,57 @@ include('../db/config.php');
               <div class="card">
                 <div class="card-body">
                   <!-- <h4 class="card-title">All Booked Information </h4> -->
-                  <button  class="card-title btn btn-outline btn-block ">User Login Log Information</button>
+                  <button  class="card-title btn btn-outline btn-block ">Login Log Information</button>
                   <div class="table-responsive ">
-                    <table id="example" class="table table-striped table-bordered table-responsive-md col-lg-12" >
+                    <table id="example" class="table table-striped table-bordered table-responsive-md table-dark" >
                       <thead>
-                         <tr >
-                 <th>id</th>
-                   <th>User</th>
-                   <th>User IP</th>
-                 <th>LogIn</th>
-                 <th>LogOut</th>
-                 <th>User OS</th> 
-                 <th>Browser</th>             
-                 <th>User Device</th>
-                 <th>User Status</th>
+                    <tr>
+                    <th>id</th>
+                    <th>User ID</th>
+                    <th>User Name</th>
+                    <th>LogIn</th>
+                    <th>LogOut</th>
+                    <th>User IP</th>
+                    <th>User OS</th> 
+                    <th>Browser</th>             
+                    <th>User Device</th>
+                    <th>User Status</th>
                
                   
                 </tr>
                       </thead>
                       <tbody>
                        <?php 
-    $query=mysqli_query($con," SELECT * FROM `loginlog` ORDER BY `login_id` DESC");
+    $query=mysqli_query($con,"SELECT * FROM `login_log`");
     while($row=mysqli_fetch_array($query))
     {
  
 ?>
               <tr>
-                <td class="center" ><?php echo htmlentities($row['login_id']) ; ?></td>
-                <td class="center" ><?php echo htmlentities($row['user_name']) ; ?></td>
-                <td class="center"><?php echo htmlentities($row['user_ip']); ?></td>
-                <td class="center"><?php echo date("M j, Y, g:i a", strtotime($row['logIn'])); ?></td>
-                <td class="center"><?php echo $row['logOut'];?></td>
-                <td class="center"><?php echo htmlentities($row['user_os']); ?></td>
-                <td class="center"><?php echo htmlentities($row['user_browser']); ?></td>
-                
-                <td class="center"><?php echo htmlentities($row['user_device']); ?></td>
+                <td><?php echo htmlentities($row['log_id']) ; ?></td>
+                <td><?php echo htmlentities($row['login_id']) ; ?></td>
+                <td><?php echo htmlentities($row['login_name']) ; ?></td>
+                <td><?php echo date("M j, Y, g:i a", strtotime($row['login_time'])); ?></td>
+                <td>
+                <?php
+                $logout_time=$row['logout_time'];
+                if ($logout_time=='') {
+                  echo "Not Log Out";
+                }
+                else
+                {
+                  echo date("M j, Y, g:i a", strtotime($row['logout_time']));
+                }?>
 
-                <td class="center"><?php 
-                $st=$row['user_status']; 
+                </td>
+                <td><?php echo htmlentities($row['login_ip']); ?></td>
+                <td><?php echo htmlentities($row['login_os']); ?></td>
+                <td><?php echo htmlentities($row['login_browser']); ?></td>
+                
+                <td><?php echo htmlentities($row['login_device']); ?></td>
+
+                <td><?php 
+                $st=$row['login_st']; 
                 if ($st==1) {
                   echo "Active";
                 }else{echo "Deactive";}
@@ -149,34 +162,29 @@ include('../db/config.php');
   <!-- endinject -->
   <!-- Custom js for this page-->
   <!-- End custom js for this page-->
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
-<script src="
-https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+<!--*************** For Data Table PDF Xcel JS ****************-->       
+ <script src="../assets/table_adv/js/dataTables.min.js"></script>
+ <script src="../assets/table_adv/js/dataTables.bootstrap4.min.js"></script>
+ <script src="../assets/table_adv/js/dataTables.buttons.min.js"></script>
+ <script src="../assets/table_adv/js/buttons.bootstrap4.min.js"></script>
+ <script src="../assets/table_adv/js/jszip.min.js"></script>
+ <script src="../assets/table_adv/js/pdfmake.min.js"></script>
+ <script src="../assets/table_adv/js/vfs_fonts.js"></script>
+ <script src="../assets/table_adv/js/buttons.html5.min.js"></script>
+ <script src="../assets/table_adv/js/buttons.print.min.js"></script>
+ <script src="../assets/table_adv/js/buttons.colVis.min.js"></script>
 
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var table = $('#example').DataTable({
+                    lengthChange: false,
+                    buttons: [ 'excel', 'copy', 'colvis' ]
+                });
 
-
-
-<script type="text/javascript">
-  
-  $(document).ready(function() {
-    var table = $('#example').DataTable( {
-        lengthChange: false,
-        buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
-    } );
- 
-    table.buttons().container()
-        .appendTo( '#example_wrapper .col-md-6:eq(0)' );
-} );
-</script>
+                table.buttons().container()
+                    .appendTo( '#example_wrapper .col-md-6:eq(0)' );
+            });
+        </script>
 </body>
 </html>
 

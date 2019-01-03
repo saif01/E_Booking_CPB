@@ -130,11 +130,9 @@ else{
                                     <?php
                 //****** Booked info Check **********//
                          $currTime = date('Y-m-d H:i:s');
-                         //$currTime = '2018-12-16 19:00:00';
                          $room_id=$row['room_id'];
-    $bookedCh=mysqli_query($con,"SELECT * FROM `booking` WHERE `booking_st`='1' AND `room_id`='$room_id' AND '$currTime' BETWEEN `booking_start` AND `booking_end`");
+    $bookedCh=mysqli_query($con,"SELECT * FROM `room_booking` WHERE `booking_st`='1' AND `room_id`='$room_id' AND '$currTime' BETWEEN `booking_start` AND `booking_end`");
 
-    //SELECT * FROM `booking` WHERE `booking_st`='1' AND `room_id`='4' AND '2018-12-16 19:00:00' BETWEEN `booking_start` AND `booking_end` 
     $booked=mysqli_num_rows($bookedCh);
 
                         if ($booked>0) {

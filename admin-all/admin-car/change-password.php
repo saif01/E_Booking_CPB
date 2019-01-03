@@ -1,22 +1,22 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
+if(strlen($_SESSION['admin-all-login'])==0)
   { 
-header('location:login');
+header('location:../../admin');
 }
 else{ 
-include('../db/config.php');
+include('../../db/config.php');
 
 if(isset($_POST['submit']))
 {
 
-$adminName=$_SESSION['adminName'];
+$admin_login=$_SESSION['admin-all-login'];
 $password= $_POST['password'];
 $newpassword= $_POST['newpassword'];
 
 
-$sql=mysqli_query($con,"SELECT * FROM `admin` WHERE `admin_name`='$adminName' AND `admin_password`='$password'");
+$sql=mysqli_query($con,"SELECT * FROM `admin` WHERE `admin_login`='$admin_login' AND `admin_pass`='$password'");
 $num=mysqli_num_rows($sql);
 
 //print_r($num);
@@ -24,7 +24,7 @@ $num=mysqli_num_rows($sql);
 
 if($num>0)
     {
-        $con=mysqli_query($con,"UPDATE `admin` SET `admin_password` = '$newpassword'  WHERE  `admin_name`='$adminName'");
+        $con=mysqli_query($con,"UPDATE `admin` SET `admin_pass` = '$newpassword'  WHERE  `admin_login`='$admin_login'");
 
         //$smsg="Password Changed Successfully !!";
 
@@ -59,8 +59,6 @@ else
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
         <!-- endinject -->
-        <!-- plugin css for this page -->
-        <!-- End plugin css for this page -->
         <!-- inject:css -->
         <link rel="stylesheet" href="css/style.css">
         <!-- endinject -->
@@ -88,15 +86,12 @@ else
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <button class="card-title btn btn-outline btn-block ">Change Registration</button>
-                                        <!-- <h4 class="card-title text-center btn-rounded" style="background-color: red">  </h4> -->
+                                        
 
-
-
-
-                                        <form class="forms-sample" action="" method="post" name="chngpwd" onSubmit="return valid();">
+                        <form class="forms-sample" action="" method="post" name="chngpwd" onSubmit="return valid();">
 
                                             <?php if($smsg)
-                      {?>
+                                                {?>
                                             <div class="alert alert-success alert-dismissable">
                                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                                 <b>Well done!</b>
@@ -105,7 +100,7 @@ else
                                             <?php }?>
 
                                             <?php if($errormsg)
-                      {?>
+                                                {?>
                                             <div class="alert alert-danger alert-dismissable">
                                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                                 <b>Oh snap!</b>
@@ -183,14 +178,11 @@ else
         <script src="vendors/js/vendor.bundle.base.js"></script>
         <script src="vendors/js/vendor.bundle.addons.js"></script>
         <!-- endinject -->
-        <!-- Plugin js for this page-->
-        <!-- End plugin js for this page-->
         <!-- inject:js -->
         <script src="js/off-canvas.js"></script>
         <script src="js/misc.js"></script>
         <!-- endinject -->
-        <!-- Custom js for this page-->
-        <!-- End custom js for this page-->
+        
     </body>
 
     </html>

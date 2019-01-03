@@ -1,196 +1,15 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
+if(strlen($_SESSION['admin-all-login'])==0)
   { 
-header('location:login');
+header('location:../../admin');
 }
 else{  
+include('../../db/config.php');
+$car_id=$_GET['car_id'];
 
-include('../db/config.php');
-
-
-if (isset($_POST['submit'])) {
-
-$car_name=$_POST['car_name'];
-$car_namePlate=$_POST['car_namePlate'];
-$car_type=$_POST['car_type'];
-$car_capacity=$_POST['car_capacity'];
-$car_gearbox=$_POST['car_gearbox'];
-$car_door=$_POST['car_door'];
-$car_gps=$_POST['car_gps'];
-
-$car_aircondition=$_POST['car_aircondition'];
-$car_power_doorLock=$_POST['car_power_doorLock'];
-$car_cd_player=$_POST['car_cd_player'];
-
-$remarks=$_POST['remarks'];
-
- 
-// $imgA=$_FILES["imgA"]["name"];
-// $imgB=$_FILES["imgB"]["name"];
-// $imgC=$_FILES["imgC"]["name"];
-
-// move_uploaded_file($_FILES["imgA"]["tmp_name"],"p_img/carImg/".$_FILES["imgA"]["name"]);
-// move_uploaded_file($_FILES["imgB"]["tmp_name"],"p_img/carImg/".$_FILES["imgB"]["name"]);
-// move_uploaded_file($_FILES["imgC"]["tmp_name"],"p_img/carImg/".$_FILES["imgC"]["name"]);
-
-$fileName1=$_FILES['imgA']['tmp_name'];
-$fileName2=$_FILES['imgB']['tmp_name'];
-$fileName3=$_FILES['imgC']['tmp_name'];
-
-        if ($fileName1 !=="" && $fileName2 !=="" && $fileName3 !=="") 
-        {
-             $car_id=$_GET['car_id'];
-             $sql=mysqli_query($con,"SELECT * FROM `tbl_car` WHERE `car_id`='$car_id'");
-               while($row2=mysqli_fetch_array($sql))
-                   {
-                       $file="p_img/carImg/".$row2['car_img1'];
-                        unlink($file);
-                        $file="p_img/carImg/".$row2['car_img2'];
-                        unlink($file);
-                        $file="p_img/carImg/".$row2['car_img3'];
-                        unlink($file);
-                    }
-              
-
-
-                $file_name1=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['imgA']['name']);
-                $storeFile1="p_img/carImg/".$file_name1;
-                $fileName1=$_FILES['imgA']['tmp_name'];
-                move_uploaded_file($fileName1,$storeFile1);
-
-                $file_name2=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['imgB']['name']);
-                $storeFile2="p_img/carImg/".$file_name2;
-                $fileName2=$_FILES['imgB']['tmp_name'];
-                move_uploaded_file($fileName2,$storeFile2);
-
-                $file_name3=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['imgC']['name']);
-                $storeFile3="p_img/carImg/".$file_name3;
-                $fileName3=$_FILES['imgC']['tmp_name'];
-                move_uploaded_file($fileName3,$storeFile3);
-
-                           
-
-                $query2=mysqli_query($con,"UPDATE `tbl_car` SET `car_name`='$car_name',`car_namePlate`='$car_namePlate',`car_type`='$car_type',`car_capacity`='$car_capacity',`car_img1`='$file_name1',`car_img2`='$file_name2',`car_img3`='$file_name3',`car_door`='$car_door',`car_gearbox`='$car_gearbox',`car_gps`='$car_gps',`car_aircobdition`='$car_aircondition',`car_power_doorLock`='$car_power_doorLock',`car_cdPlayer`='$car_cd_player',`car_remarks`='$remarks' WHERE `car_id`='$car_id'");
-
-                ?>
-            <script>
-                alert('Update successfull.  !');
-                window.open('car-all', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-        
-                 } 
-
-                 elseif ($fileName1 !=="") 
-            {
-             $car_id=$_GET['car_id'];
-             $sql=mysqli_query($con,"SELECT * FROM `tbl_car` WHERE `car_id`='$car_id'");
-               while($row2=mysqli_fetch_array($sql))
-                   {
-                       $file="p_img/carImg/".$row2['car_img1'];
-                        unlink($file);
-                    }
-              
-            
-             $file_name1=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['imgA']['name']);
-
-                $storeFile1="p_img/carImg/".$file_name1;
-                $fileName1=$_FILES['imgA']['tmp_name'];
-                move_uploaded_file($fileName1,$storeFile1);
-
-                           
-
-                $query2=mysqli_query($con,"UPDATE `tbl_car` SET `car_name`='$car_name',`car_namePlate`='$car_namePlate',`car_type`='$car_type',`car_capacity`='$car_capacity',`car_img1`='$file_name1',`car_door`='$car_door',`car_gearbox`='$car_gearbox',`car_gps`='$car_gps',`car_aircobdition`='$car_aircondition',`car_power_doorLock`='$car_power_doorLock',`car_cdPlayer`='$car_cd_player',`car_remarks`='$remarks' WHERE `car_id`='$car_id'");
-
-                ?>
-            <script>
-                alert('Update successfull.  !');
-                window.open('car-all', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-        
-                 } 
-
-                 elseif ($fileName2 !=="") 
-             {
-             $car_id=$_GET['car_id'];
-             $sql=mysqli_query($con,"SELECT * FROM `tbl_car` WHERE `car_id`='$car_id'");
-               while($row2=mysqli_fetch_array($sql))
-                   {
-                       $file="p_img/carImg/".$row2['car_img2'];
-                        unlink($file);
-                    }
-              
-            
-              $file_name2=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['imgB']['name']);
-                $storeFile2="p_img/carImg/".$file_name2;
-                $fileName2=$_FILES['imgB']['tmp_name'];
-                move_uploaded_file($fileName2,$storeFile2);
-
-                           
-
-                $query2=mysqli_query($con,"UPDATE `tbl_car` SET `car_name`='$car_name',`car_namePlate`='$car_namePlate',`car_type`='$car_type',`car_capacity`='$car_capacity',`car_img2`='$file_name2',`car_door`='$car_door',`car_gearbox`='$car_gearbox',`car_gps`='$car_gps',`car_aircobdition`='$car_aircondition',`car_power_doorLock`='$car_power_doorLock',`car_cdPlayer`='$car_cd_player',`car_remarks`='$remarks' WHERE `car_id`='$car_id'");
-
-                ?>
-            <script>
-                alert('Update successfull.  !');
-                window.open('car-all', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-        
-                 } 
-
-                 elseif ($fileName3 !=="") 
-            {
-             $car_id=$_GET['car_id'];
-             $sql=mysqli_query($con,"SELECT * FROM `tbl_car` WHERE `car_id`='$car_id'");
-               while($row2=mysqli_fetch_array($sql))
-                   {
-                       $file="p_img/carImg/".$row2['car_img3'];
-                        unlink($file);
-                    }
-              
-            
-             $file_name3=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['imgC']['name']);
-                $storeFile3="p_img/carImg/".$file_name3;
-                $fileName3=$_FILES['imgC']['tmp_name'];
-                move_uploaded_file($fileName3,$storeFile3);
-                           
-
-                $query2=mysqli_query($con,"UPDATE `tbl_car` SET `car_name`='$car_name',`car_namePlate`='$car_namePlate',`car_type`='$car_type',`car_capacity`='$car_capacity',`car_img3`='$file_name3',`car_door`='$car_door',`car_gearbox`='$car_gearbox',`car_gps`='$car_gps',`car_aircobdition`='$car_aircondition',`car_power_doorLock`='$car_power_doorLock',`car_cdPlayer`='$car_cd_player',`car_remarks`='$remarks' WHERE `car_id`='$car_id'");
-
-                ?>
-            <script>
-                alert('Update successfull.  !');
-                window.open('car-all', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-        
-                 } 
-
-            else{
-                $car_id=$_GET['car_id'];
-
-                $query=mysqli_query($con,"UPDATE `tbl_car` SET `car_name`='$car_name',`car_namePlate`='$car_namePlate',`car_type`='$car_type',`car_capacity`='$car_capacity',`car_door`='$car_door',`car_gearbox`='$car_gearbox',`car_gps`='$car_gps',`car_aircobdition`='$car_aircondition',`car_power_doorLock`='$car_power_doorLock',`car_cdPlayer`='$car_cd_player',`car_remarks`='$remarks' WHERE `car_id`='$car_id'");
-
-            ?>
-            <script>
-                alert( 'Update successfull.  !');
-                window.open('car-all', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-            }
-
-
-}?>
-
+?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -233,10 +52,9 @@ $fileName3=$_FILES['imgC']['tmp_name'];
                                     <div class="card-body">
                                         <!-- <h4 class="card-title">Car Add Form</h4> -->
                                         <button class="card-title btn btn-outline btn-block ">Car Edit Form</button>
-                                        <form class="form-sample" action="" method="post" enctype="multipart/form-data">
-                                            <?php 
-                                            $car_id=$_GET['car_id'];
-
+<form class="form-sample" action="car-edit-action.php?car_id=<?php echo $car_id; ?>" method="post" enctype="multipart/form-data">
+         <?php 
+                                          
 $query=mysqli_query($con,"SELECT * FROM `tbl_car` WHERE `car_id`='$car_id' ");
 
 $row=$query->fetch_assoc();
@@ -260,7 +78,7 @@ $row=$query->fetch_assoc();
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Car Number</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" name="car_namePlate" class="form-control" value="<?php echo htmlentities($row['car_namePlate']); ?>" />
+                                                            <input type="text" name="car_namePlate" class="form-control" value="<?php echo htmlentities($row['car_namePlate']); ?>" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -462,7 +280,7 @@ $row=$query->fetch_assoc();
                                                     <h4  style="margin-left: 38%;">New </h4>
                                                         </div>
                                                         <!-- <p class="float-left" >Old</p> -->
-                                                    <img src="p_img/carImg/<?php echo htmlentities($row['car_img1']); ?>" alt="Old Image" class="rounded float-left" width="100" height="100" />
+                                                    <img src="../../pimages/car/<?php echo htmlentities($row['car_img1']); ?>" alt="Old Image" class="rounded float-left" width="100" height="100" />
                                                     
                                                    <img id="preview1" alt="Image Not Selected" class="rounded float-right" width="100" height="100" />
                                                    <!--  <p class="float-right">New</p> -->
@@ -478,7 +296,7 @@ $row=$query->fetch_assoc();
                                                         </div>
                                                        <!--  <p class="float-left" >Old</p> -->
                                                        
-                                                    <img src="p_img/carImg/<?php echo htmlentities($row['car_img2']); ?>" alt="Old Image" class="rounded float-left" width="100" height="100" />
+                                                    <img src="../../pimages/car/<?php echo htmlentities($row['car_img2']); ?>" alt="Old Image" class="rounded float-left" width="100" height="100" />
                                                     
                                                     <img id="preview2" alt="Image Not Selected" class="rounded float-right" width="100" height="100" />
                                                    <!--  <p class="float-right">New</p> -->
@@ -493,7 +311,7 @@ $row=$query->fetch_assoc();
                                                     <h4  style="margin-left: 38%;">New </h4>
                                                         </div>
                                                        <!--  <p class="float-left" >Old</p> -->
-                                                    <img src="p_img/carImg/<?php echo htmlentities($row['car_img3']); ?>" alt="Old Image" class="rounded float-left" width="100" height="100" />
+                                                    <img src="../../pimages/car/<?php echo htmlentities($row['car_img3']); ?>" alt="Old Image" class="rounded float-left" width="100" height="100" />
                                                     
                                                     <img id="preview3" alt="Image Not Selected" class="rounded float-right" width="100" height="100" />
                                                    <!--  <p class="float-right">New</p> -->

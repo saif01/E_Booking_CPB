@@ -1,5 +1,5 @@
 <?php 
-include('../db/config.php');
+include('../../db/config.php');
 if(!empty($_POST["check_value"])) 
 {
 	$check_value= $_POST["check_value"];

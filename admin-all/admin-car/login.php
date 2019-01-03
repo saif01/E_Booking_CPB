@@ -1,4 +1,4 @@
-<?php include('../db/config.php');
+<?php include('../../db/config.php');
 require('../assets/coustom/UserInfo.php');
 
 session_start();
@@ -41,7 +41,7 @@ if($rowcount>0 )
 
                               
                                             
-                        $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_id`, `user_ip`, `user_os`, `user_browser`, `user_device`, `user_status`) VALUES ('".$_SESSION['adminName']."','".$_SESSION['admin_id']."','$ip','$os','$browser','$device','$admin_status')");
+                        $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_id`, `user_ip`, `user_os`, `user_browser`, `user_device`, `user_status`) VALUES ('".$_SESSION['admin-all-login']."','".$_SESSION['admin_id']."','$ip','$os','$browser','$device','$admin_status')");
                                         
                          header("Location:../superadmin");
                         exit(); 
@@ -54,7 +54,7 @@ if($rowcount>0 )
                     {  
 
 
-                        $_SESSION['adminName']=$_POST['adminName'];
+                        $_SESSION['admin-all-login']=$_POST['adminName'];
                         $_SESSION['admin_id']=$row['admin_id'];
                         $admin_status=$row['admin_status'];
                         $ip= UserInfo::get_ip();
@@ -64,7 +64,7 @@ if($rowcount>0 )
 
                               
                                             
-                        $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_id`, `user_ip`, `user_os`, `user_browser`, `user_device`, `user_status`) VALUES ('".$_SESSION['adminName']."','".$_SESSION['admin_id']."','$ip','$os','$browser','$device','$admin_status')");
+                        $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_id`, `user_ip`, `user_os`, `user_browser`, `user_device`, `user_status`) VALUES ('".$_SESSION['admin-all-login']."','".$_SESSION['admin_id']."','$ip','$os','$browser','$device','$admin_status')");
                                         
                          header("Location:index");
                         exit();         
@@ -78,14 +78,14 @@ if($rowcount>0 )
             elseif($st==0)
                 {
                     $_SESSION['errmsg']="Your ID Was Blocked.!!! Contract With IT Department";       
-                    $_SESSION['adminName']=$_POST['adminName'];
+                    $_SESSION['admin-all-login']=$_POST['adminName'];
                     $admin_status=$row['admin_status'];
                      $ip= UserInfo::get_ip();
                      $os= UserInfo::get_os();
                      $browser= UserInfo::get_browser();
                      $device= UserInfo::get_device();
                                            
-                     $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_id`, `user_ip`, `user_os`, `user_browser`, `user_device`, `user_status`) VALUES ('".$_SESSION['adminName']."','".$_SESSION['admin_id']."','$ip','$os','$browser','$device','$admin_status')");
+                     $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_id`, `user_ip`, `user_os`, `user_browser`, `user_device`, `user_status`) VALUES ('".$_SESSION['admin-all-login']."','".$_SESSION['admin_id']."','$ip','$os','$browser','$device','$admin_status')");
 
                      header("location: login");
                     exit();
@@ -95,14 +95,14 @@ if($rowcount>0 )
                  else{
 
                     $_SESSION['errmsg']="Username Or Password Not Match.!!!";       
-                    $_SESSION['adminName']=$_POST['adminName'];
+                    $_SESSION['admin-all-login']=$_POST['adminName'];
                     
                      $ip= UserInfo::get_ip();
                      $os= UserInfo::get_os();
                      $browser= UserInfo::get_browser();
                      $device= UserInfo::get_device();
                                            
-                     $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_ip`, `user_os`, `user_browser`, `user_device`) VALUES ('".$_SESSION['adminName']."','$ip','$rowcount','$browser','$device')");
+                     $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_ip`, `user_os`, `user_browser`, `user_device`) VALUES ('".$_SESSION['admin-all-login']."','$ip','$rowcount','$browser','$device')");
 
                      header("location: login");
                     exit();
@@ -115,14 +115,14 @@ if($rowcount>0 )
  else{
 
                     $_SESSION['errmsg']="Username Or Password Not Match.!!!";       
-                    $_SESSION['adminName']=$_POST['adminName'];
+                    $_SESSION['admin-all-login']=$_POST['adminName'];
                     
                      $ip= UserInfo::get_ip();
                      $os= UserInfo::get_os();
                      $browser= UserInfo::get_browser();
                      $device= UserInfo::get_device();
                                            
-                     $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_ip`, `user_os`, `user_browser`, `user_device`) VALUES ('".$_SESSION['adminName']."','$ip','$rowcount','$browser','$device')");
+                     $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_ip`, `user_os`, `user_browser`, `user_device`) VALUES ('".$_SESSION['admin-all-login']."','$ip','$rowcount','$browser','$device')");
 
                      header("location: login");
                     exit();

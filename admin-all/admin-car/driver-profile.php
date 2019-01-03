@@ -1,13 +1,13 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
+if(strlen($_SESSION['admin-all-login'])==0)
   { 
-header('location:login');
+header('location:../../admin');
 }
 else{ 
 
-include('../db/config.php');
+include('../../db/config.php');
 $driver_id=$_GET['driver_id'];
 
 $query=mysqli_query($con,"SELECT * FROM `car_driver` WHERE `driver_id`='$driver_id' ");
@@ -59,7 +59,7 @@ $row=$query->fetch_assoc();
                         <div class="col-lg-4 mx-auto">
                             <div class="auto-form-wrapper">
 
-                                <img class="user-s" src="p_img/driverimg/<?php echo($row['driver_img']);?>" class="img-responsive" alt="Image" />
+                                <img class="user-s" src="../../pimages/driver/<?php echo($row['driver_img']);?>" class="img-responsive" alt="Image" />
                                 <table>
 
 

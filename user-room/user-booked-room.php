@@ -99,9 +99,9 @@ $user_id=$_SESSION['user_id'];
                             <!-- <h3>Booked Info</h3> -->
 
                             <?php
-
+$currDate = date('Y-m-d');
    //********* Two Table join *******//                         
-$query=mysqli_query($con,"SELECT room_booking.r_booking_id, room_booking.booking_start, room_booking.booking_end, room_booking.purpose, room_booking.hours, room_booking.booking_st, room.room_id, room.room_name, room.room_img1, room.room_capicity FROM room_booking INNER JOIN room ON room_booking.room_id=room.room_id WHERE room_booking.user_id='$user_id' AND room_booking.booking_start >='$currentDate' ORDER BY room_booking.booking_start ASC ");
+$query=mysqli_query($con,"SELECT room_booking.r_booking_id, room_booking.booking_start, room_booking.booking_end, room_booking.purpose, room_booking.hours, room_booking.booking_st, room.room_id, room.room_name, room.room_img1, room.room_capicity FROM room_booking INNER JOIN room ON room_booking.room_id=room.room_id WHERE room_booking.user_id='$user_id' AND room_booking.booking_start >='$currDate' ORDER BY room_booking.booking_start ASC ");
         while($row=mysqli_fetch_array($query))
             {   ?>
 
@@ -154,6 +154,18 @@ $query=mysqli_query($con,"SELECT room_booking.r_booking_id, room_booking.booking
                                             </ul>
                                             <ul class="car-info-list">
                                                 <li>Capacity :<b> <?php echo $row['room_capicity']; ?></b>
+                                                  
+                                                </li>
+                                                <li>Projector :<b> <?php
+                                                    if ( $row['projector']=='1') 
+                                                    {
+                                                        echo "Yes";
+                                                    }
+                                                    else{
+                                                        echo "No";
+                                                    }
+
+                                                    ?></b>
                                                   
                                                 </li>
                                             </ul>

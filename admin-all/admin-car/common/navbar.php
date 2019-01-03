@@ -1,10 +1,10 @@
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
         <a class="navbar-brand brand-logo" href="index">
-          <img src="../cpb.carpool.gif" alt="CPB.CarPool" />
+          <img src="images/cpb.carpool.gif" alt="CPB.CarPool" />
         </a>
         <a class="navbar-brand brand-logo-mini" href="index.html">
-          <img src="../cpb.carpool.gif" alt="CPB.CarPool" />
+          <img src="images/cpb.carpool.gif" alt="CPB.CarPool" />
         </a>
         
       </div>
@@ -13,19 +13,21 @@
 
       <div class="navbar-menu-wrapper d-flex align-items-center">
         
-        <span class="profile-text">Hello, <b style="color: dimgray; text-transform: capitalize;"> <?php echo $_SESSION['adminName']; ?> </b> </span>
+        <span class="profile-text">Hello, <b style="color: dimgray; text-transform: capitalize;"> <?php echo $_SESSION['admin-all-login']; ?> </b> </span>
         <ul class="navbar-nav navbar-nav-right">
+
+           <a href="../admin-room"><button class="btn btn-default"> Room Section </button></a>
           
           
           <li class="nav-item dropdown d-none d-xl-inline-block">
 
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
               <?php 
-              $admin= $_SESSION['adminName'];
-              $query=mysqli_query($con,"SELECT `admin_img` FROM `admin` WHERE `admin_name`='$admin'");
+              $admin= $_SESSION['admin-all-login'];
+              $query=mysqli_query($con,"SELECT `admin_img` FROM `admin` WHERE `admin_login`='$admin'");
              $row=$query->fetch_assoc();
                ?>
-              <img class="img-xs rounded-circle" src="p_img/adminimg/<?php echo $row['admin_img']; ?>" alt="Profile image">
+              <img class="img-xs rounded-circle" src="../../pimages/admin/<?php echo $row['admin_img']; ?>" alt="Image">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               

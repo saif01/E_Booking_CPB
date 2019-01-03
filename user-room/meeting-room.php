@@ -130,11 +130,10 @@ else{
                                     <?php
                 //****** Booked info Check **********//
                          $currTime = date('Y-m-d H:i:s');
-                         //$currTime = '2018-12-16 19:00:00';
                          $room_id=$row['room_id'];
-    $bookedCh=mysqli_query($con,"SELECT * FROM `booking` WHERE `booking_st`='1' AND `room_id`='$room_id' AND '$currTime' BETWEEN `booking_start` AND `booking_end`");
+    $bookedCh=mysqli_query($con,"SELECT * FROM `room_booking` WHERE `booking_st`='1' AND `room_id`='$room_id' AND '$currTime' BETWEEN `booking_start` AND `booking_end`");
 
-    //SELECT * FROM `booking` WHERE `booking_st`='1' AND `room_id`='4' AND '2018-12-16 19:00:00' BETWEEN `booking_start` AND `booking_end` 
+    
     $booked=mysqli_num_rows($bookedCh);
 
                         if ($booked>0) {
@@ -162,24 +161,7 @@ else{
 
                             <?php } ?>
 
-                           <!--  <div class="col-lg-6 col-md-6">
-                                <div class="single-car-wrap">
-                                    <div class="car-list-thumb">
-                                         <img src="assets/img/car/car-1.jpg" style="height: 300px; width: 100%;" >
-                                    </div>
-                                    <div class="booking_st">Booked</div>
-                                    <div class="car-list-info without-bar text-center">
-                                        <h2><a href="#">Aston Martin One-77</a></h2>   
-                                        <p>Vivamus eget nibh. </p>     
-                                        <a href="#" class="rent-btn">Book It</a>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- Single Car End -->
-
-                          
-
-                         
+                    
 
                         </div>
                     </div>

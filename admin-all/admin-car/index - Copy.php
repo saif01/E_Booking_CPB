@@ -1,13 +1,13 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
+if(strlen($_SESSION['admin-all-login'])==0)
   { 
-header('location:login');
+header('location:../../admin');
 }
 else{ 
 
-include('../db/config.php');
+include('../../db/config.php');
 
 //car used chart Mysql
 $query2="SELECT `car_name`,`car_number`, COUNT(*) as number FROM `car_booking` GROUP BY `car_id`";

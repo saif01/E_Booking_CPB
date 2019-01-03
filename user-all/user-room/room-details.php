@@ -178,7 +178,21 @@ while($row=mysqli_fetch_array($query))
                                                 <tr>
                                                     <th>Capacity</th>
                                                     <td><?php echo $row['room_capicity'];?></td>
-                                                </tr> 
+                                                </tr>
+                                                 <tr>
+                                                    <th>Projector</th>
+                                                    <td><?php
+                                                    if ( $row['projector']=='1') 
+                                                    {
+                                                        echo "Yes";
+                                                    }
+                                                    else{
+                                                        echo "No";
+                                                    }
+
+
+                                                    ?></td>
+                                                </tr>  
 
                                             </table> 
                                

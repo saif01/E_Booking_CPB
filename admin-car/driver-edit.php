@@ -6,77 +6,10 @@ if(strlen($_SESSION['admin-car-login'])==0)
 header('location:../admin');
 }
 else{ 
-
+$driver_id=$_GET['driver_id'];
 include('../db/config.php');
 
-
-if (isset($_POST['submit'])) {
-
-$driver_name=$_POST['driver_name'];
-$for_car=$_POST['for_car'];
-$driver_phone=$_POST['driver_phone'];
-$driver_nid=$_POST['driver_nid'];
-
-$driver_license=$_POST['driver_license'];
-
-$driver_st=1;
-
-$driver_id=$_GET['driver_id'];
-$fileName=$_FILES['driver_img']['tmp_name'];
-
-        if ($fileName !=="") 
-        {
-             $user_id=$_GET['user_id'];
-             $sql=mysqli_query($con,"SELECT `driver_img` FROM `car_driver` WHERE `driver_id`='$driver_id' ");
-               while($row2=mysqli_fetch_array($sql))
-                   {
-                       $file="../pimages/driver/".$row2['driver_img'];
-                        unlink($file);
-                    }
-              
-            
-            $file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['driver_img']['name']);
-                $storeFile="../pimages/driver/".$file_name;
-                $fileName=$_FILES['driver_img']['tmp_name'];
-
-                move_uploaded_file($fileName,$storeFile);
-
-                           
-                $query2=mysqli_query($con,"UPDATE `car_driver` SET `driver_name`='$driver_name',`driver_phone`='$driver_phone', `driver_img`='$file_name',`driver_license`='$driver_license',`driver_nid`='$driver_nid',`driver_status`='$driver_st' WHERE `driver_id` ='$driver_id'");
-
-                ?>
-            <script>
-                alert('Update successfull.  !');
-                window.open('driver-all', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-        
-       
-
-        } 
-            else{
-
-                
-               $query=mysqli_query($con,"UPDATE `car_driver` SET `driver_name`='$driver_name',`driver_phone`='$driver_phone',`driver_license`='$driver_license',`driver_nid`='$driver_nid',`driver_status`='$driver_st' WHERE `driver_id` ='$driver_id'");
-
-            ?>
-            <script>
-                alert('Update successfull.  !');
-                window.open('driver-all', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-            }
-
- 
-
 ?>
-    <script>
-        alert('Update successfull.  !');
-        window.open('driver-all', '_self');
-    </script>
-    <?php } ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -98,21 +31,7 @@ $fileName=$_FILES['driver_img']['tmp_name'];
         <!-- endinject -->
         <link rel="shortcut icon" href="images/favicon.png" />
 
-        <script>
-            function userAvailability() {
-                $("#loaderIcon").show();
-                jQuery.ajax({
-                    url: "check_availability.php",
-                    data: 'check_value=' + $("#check_value").val(),
-                    type: "POST",
-                    success: function(data) {
-                        $("#user-availability-status1").html(data);
-                        $("#loaderIcon").hide();
-                    },
-                    error: function() {}
-                });
-            }
-        </script>
+       
 
     </head>
 
@@ -137,11 +56,11 @@ $fileName=$_FILES['driver_img']['tmp_name'];
                                     <div class="card-body">
                                         <!-- <h4 class="card-title">Car Add Form</h4> -->
                                         <button class="card-title btn btn-outline btn-block ">Driver Update Form</button>
-                                        <form class="form-sample" action="" method="post" enctype="multipart/form-data">
+
+<form class="form-sample" action="driver-edit-action.php?driver_id=<?php echo $driver_id; ?>" method="post" enctype="multipart/form-data">
 
 <?php 
-                                            $driver_id=$_GET['driver_id'];
-
+                                        
 $query=mysqli_query($con,"SELECT * FROM `car_driver` WHERE `driver_id`='$driver_id' ");
 
 $row=$query->fetch_assoc();
@@ -154,9 +73,7 @@ $row=$query->fetch_assoc();
                                                         <label class="col-sm-3 col-form-label">Driver Name </label>
                                                         <div class="col-sm-9">
 
-                                                            <input type="text" id="check_value" onBlur="userAvailability()" name="driver_name" class="form-control" value="<?php echo htmlentities($row['driver_name']); ?>" required>
-
-                                                            <span id="user-availability-status1" style="font-size:12px;"></span>
+                                                            <input type="text" id="check_value" onBlur="userAvailability()" name="driver_name" class="form-control" value="<?php echo htmlentities($row['driver_name']); ?>" readonly>
 
                                                         </div>
                                                     </div>

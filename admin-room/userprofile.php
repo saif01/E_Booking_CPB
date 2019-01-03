@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 if(strlen($_SESSION['admin-room-login'])==0)
   { 
-header('location:login');
+header('location:../admin');
 }
 else{ 
 
@@ -24,7 +24,7 @@ $row=$query->fetch_assoc();
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <title>CPB.RoomBooking</title>
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
@@ -60,7 +60,7 @@ $row=$query->fetch_assoc();
                         <div class="col-lg-4 mx-auto">
                             <div class="auto-form-wrapper">
 
-                                <img class="user-s" src="../imgs/user/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" />
+                                <img class="user-s" src="../pimages/user/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" />
                                 <table>
 
                                     <td>
@@ -80,7 +80,7 @@ $row=$query->fetch_assoc();
                                     </tr>
                                     <tr>
                                         <td> User Contract:</td>
-                                        <th> <strong><?php echo $row['user_number'];?></strong> </th>
+                                        <th> <strong><?php echo $row['user_contact'];?></strong> </th>
                                     </tr>
 
 

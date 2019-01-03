@@ -9,39 +9,7 @@ else{
 
 include('../db/config.php');
  
-if (isset($_POST['submit'])) {
-
-$room_name=$_POST['room_name'];
-$room_capicity=$_POST['room_capicity'];
-$room_details=$_POST['room_details'];
-$show_st=1;
-
-
-    $file_name1=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['room_img1']['name']);
-    $storeFile1="../pimages/room/".$file_name1;
-    $fileName1=$_FILES['room_img1']['tmp_name'];
-    move_uploaded_file($fileName1,$storeFile1);
-
-    $file_name2=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['room_img2']['name']);
-    $storeFile2="../pimages/room/".$file_name2;
-    $fileName2=$_FILES['room_img2']['tmp_name'];
-    move_uploaded_file($fileName2,$storeFile2);
-
-    $file_name3=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['room_img3']['name']);
-    $storeFile3="../pimages/room/".$file_name3;
-    $fileName3=$_FILES['room_img3']['tmp_name'];
-    move_uploaded_file($fileName3,$storeFile3);
-
-
-$query=mysqli_query($con,"INSERT INTO `room`(`room_name`, `room_img1`, `room_img2`, `room_img3`, `room_capicity`, `room_details`, `show_st`) VALUES ('$room_name','$file_name1','$file_name2','$file_name3','$room_capicity','$room_details','$show_st')");
-
-
 ?>
-    <script>
-        alert('Update successfull.  !');
-        window.open('room-all.php', '_self');
-    </script>
-    <?php } ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -100,7 +68,7 @@ $query=mysqli_query($con,"INSERT INTO `room`(`room_name`, `room_img1`, `room_img
                                     <div class="card-body">
                                         <!-- <h4 class="card-title">Car Add Form</h4> -->
                                         <button class="card-title btn btn-outline btn-block ">Meeting Room Add Form </button>
-                                        <form class="form-sample" action="" method="post" enctype="multipart/form-data">
+    <form class="form-sample" action="room-add-action.php" method="post" enctype="multipart/form-data">
 
                                             <div class="row">
                                                 
@@ -128,25 +96,41 @@ $query=mysqli_query($con,"INSERT INTO `room`(`room_name`, `room_img1`, `room_img
                                             </div>
                                             
                                             
-                                 
-
-                                            <div class="row">
-                                                
-
-                                                <div class="col-md-9">
+                                  <div class="row">
+                                                <div class="col-md-6">
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Room Details:</label>
                                                         <div class="col-sm-9">
 
-                                                            <textarea type="text" name="room_details" class="form-control" rows="3" placeholder="Enter Some information About This Room" required></textarea> 
-
+                                                            <textarea type="text" name="room_details" class="form-control" rows="3" required><?php echo $row['room_details']; ?></textarea> 
+ 
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Projector</label>
+                                                        <div class="col-sm-4">
+                                                            <div class="form-radio">
+                                                                <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="projector" id="membershipRadios1" value="1" checked> Yes
+                              </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-5">
+                                                            <div class="form-radio">
+                                                                <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="projector" id="membershipRadios2" value="0"> No
+                              </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>  
+
 
                                             <p class="card-description">
-                                                Car Image
+                                                Room Image
                                             </p>
                                             <div class="row">
 

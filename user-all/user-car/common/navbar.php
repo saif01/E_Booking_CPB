@@ -29,6 +29,9 @@
 <div class="col-lg-8 d-none d-xl-block">
                         <nav class="mainmenu alignright">
                             <ul>
+ <li><a href="../user-room">Room Section </a>    
+                                </li>
+
                               <li>
                                  <?php
 $user_id=$_SESSION['user_id'];

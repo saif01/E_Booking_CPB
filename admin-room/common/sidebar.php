@@ -1,36 +1,6 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
-
-<!-- <style type="text/css">
-  .profile-image-s{
-    /*border-radius: 10px 20px;*/
-    border-radius: 5px;
-    /*border: 5px solid #73AD21;*/
-    padding: 1px; 
-    width: 60px;
-    height: 50px;
-  }
-
-</style> -->
         <ul class="nav">
-          <!-- <li class="nav-item nav-profile">
-            <div class="nav-link">
-              <a href="index">
-              <div class="user-wrapper">
-                <div class="profile-image">
-
-                  <img src="images/favicon.png" alt="profile image">
-                </div>
-                <div class="text-wrapper">
-                  <p class="profile-name">Car Pool </p>
-                  <div>
-                    <small class="designation text-muted">Management</small>
-                    <span class="status-indicator online"></span>
-                  </div>
-                </div>
-              </div>
-              </a>
-            </div>
-          </li> -->
+         
           <li class="nav-item">
             <a class="nav-link" href="index">
               <i class="menu-icon mdi mdi-television text-warning"></i>
@@ -108,12 +78,12 @@
 
            
 
-          <li class="nav-item">
+         <!--  <li class="nav-item">
             <a class="nav-link" href="location-add">
               <i class="menu-icon mdi mdi-at text-success"></i>
               <span class="menu-title">Location Add</span>
             </a>
-          </li>
+          </li> -->
 
       
 

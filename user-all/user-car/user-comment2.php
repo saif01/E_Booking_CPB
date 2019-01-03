@@ -14,70 +14,7 @@ include('../../db/config.php');
  $booking_id=$_GET['booking_id'];
  $driver_id=$_GET['driver_id'];
 
-if (isset($_POST['submit'])) 
-
-{
-    
- $cost=$_POST['cost'];
- $driver_rating=$_POST['driver_rating'];
- $start_mileage=$_POST['start_mileage'];
- $end_mileage=$_POST['end_mileage'];
-
- 
-$query4=mysqli_query($con,"UPDATE `car_booking` SET `booking_cost`='$cost', `driver_rating`='$driver_rating',`driver_id`='$driver_id' ,`start_mileage`='$start_mileage' ,`end_mileage`='$end_mileage'  WHERE `booking_id` ='$booking_id' ");
-
-//****************** Start Sweet Alert ********************/// 
-                          ?>
-                          <script type="text/javascript">
-                        setTimeout(function () { 
-                                swal({
-                                  title: "Successfully!",
-                                  text: "Your Comment Update Successfull..!!",
-                                  type: "success",
-                                  confirmButtonText: "OK"
-                                },
-                                function(isConfirm){
-                                  if (isConfirm) {
-                                    window.location.href = "user-notclosed-car.php";
-                                  }
-                                }); }, 1000);
-                      </script>            
-                        <?php  
- //****************** End Sweet Alert ********************///
-        
-}
-
-if (isset($_POST['closeComit']))
-{
-
-$cost=$_POST['cost'];
- $driver_rating=$_POST['driver_rating'];
- $start_mileage=$_POST['start_mileage'];
- $end_mileage=$_POST['end_mileage'];
-
-$query5=mysqli_query($con,"UPDATE `car_booking` SET `booking_cost`='$cost', `driver_rating`='$driver_rating',`driver_id`='$driver_id' ,`start_mileage`='$start_mileage' ,`end_mileage`='$end_mileage' , `comit_st`='1'  WHERE `booking_id` ='$booking_id' ");
-
-//****************** Start Sweet Alert ********************///
-                          ?>
-                          <script type="text/javascript">
-                        setTimeout(function () { 
-                                swal({
-                                  title: "Successfully!",
-                                  text: "Permanently Close This Comment!!",
-                                  type: "success",
-                                  confirmButtonText: "OK"
-                                },
-                                function(isConfirm){
-                                  if (isConfirm) {
-                                    window.location.href = "user-notclosed-car.php";
-                                  }
-                                }); }, 1000);
-                      </script>            
-                          <?php 
-//****************** End Sweet Alert ********************///
-
-}
-                    
+                  
 ?>
 
 
@@ -264,17 +201,12 @@ $row2 = $query2->fetch_assoc();
 
                                    
                                     <p><?php echo htmlentities($row2['driver_name']) ; ?> </p> 
-                                    <p><i class="fa fa-mobile"></i> <?php echo htmlentities($row2['driver_phone']) ; ?> </p>                                   
-                                  
+                                    <p><i class="fa fa-mobile"></i> <?php echo htmlentities($row2['driver_phone']) ; ?> </p>                                                                     
                                 </div>
 
                          <?php } ?>
 
-                
-
                             </div>
-
-
 
                         </div>
                     </article>
@@ -292,7 +224,7 @@ $row2 = $query2->fetch_assoc();
         </button>
       </div>
       <div class="modal-body">
-        <form method="post" name="chngpwd" >
+        <form action="user-comment-action.php?booking_id=<?php echo $booking_id; ?> &driver_id=<?php echo $driver_id ?>" method="post" name="chngpwd" >
           <div class="field form-group">
             <label  class="col-form-label">Start Mileage :</label>
             <input type="number" id="target1" name="start_mileage" placeholder="Put Meter Reading" class="form-control" value="<?php echo $start_mileage; ?>">

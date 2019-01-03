@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 if(strlen($_SESSION['admin-room-login'])==0)
   { 
-header('location:login');
+header('location:../admin');
 }
 else{
 include('../db/config.php');
@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
 
 $user_name=$_POST['user_name'];
 $user_dept=$_POST['user_dept'];
-$user_number=$_POST['user_number'];
+$user_contact=$_POST['user_contact'];
 
 
 
@@ -23,24 +23,23 @@ $fileName=$_FILES['user_img']['tmp_name'];
 
         if ($fileName !=="") 
         {
-             $user_id=$_GET['user_id'];
              $sql=mysqli_query($con,"SELECT `user_img` FROM `user` WHERE `user_id`='$user_id' ");
                while($row2=mysqli_fetch_array($sql))
                    {
-                       $file="../imgs/user/".$row2['user_img'];
+                       $file="../pimages/user/".$row2['user_img'];
                         unlink($file);
                     }
               
             
              $file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['user_img']['name']);
 
-                $storeFile="../imgs/user/".$file_name;
+                $storeFile="../pimages/user/".$file_name;
                 $fileName=$_FILES['user_img']['tmp_name'];
                 move_uploaded_file($fileName,$storeFile);
 
                            
 
-                $query2=mysqli_query($con,"UPDATE `user` SET `user_name`='$user_name',`user_img`='$file_name',`user_number`='$user_number',`user_dept`='$user_dept' WHERE `user_id`='$user_id'");
+                $query2=mysqli_query($con,"UPDATE `user` SET `user_name`='$user_name',`user_img`='$file_name',`user_contact`='$user_contact',`user_dept`='$user_dept' WHERE `user_id`='$user_id'");
 
                 ?>
             <script>
@@ -56,7 +55,7 @@ $fileName=$_FILES['user_img']['tmp_name'];
             else{
 
                 
-                $query=mysqli_query($con,"UPDATE `user` SET `user_name`='$user_name',`user_number`='$user_number',`user_dept`='$user_dept' WHERE `user_id`='$user_id'");
+                $query=mysqli_query($con,"UPDATE `user` SET `user_name`='$user_name',`user_contact`='$user_contact',`user_dept`='$user_dept' WHERE `user_id`='$user_id'");
 
             ?>
             <script>
@@ -81,7 +80,7 @@ $fileName=$_FILES['user_img']['tmp_name'];
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <title>CPB.RoomBooking</title>
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
@@ -147,7 +146,7 @@ $row=$query->fetch_assoc();
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">User Contact </label>
                                                         <div class="col-sm-9">
-                                        <input type="text" name="user_number" class="form-control" value="<?php echo htmlentities($row['user_number']); ?>" required>
+                                        <input type="text" name="user_contact" class="form-control" value="<?php echo htmlentities($row['user_contact']); ?>" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -178,14 +177,7 @@ $row=$query->fetch_assoc();
                                             </div>
 
                                              <div class="row">
-                                               <!--  <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">User Contarct </label>
-                                                        <div class="col-sm-9">
-                                        <input type="text" name="user_contract" class="form-control" placeholder="Enter User Office ID"  required>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
+                                               
 
 
                                            <div class="col-md-6">
@@ -215,7 +207,7 @@ $row=$query->fetch_assoc();
                                     <label class="col-sm-3 col-form-label">User Image</label>
                                         <div class="col-sm-9">
                                     <input type="file"  name="user_img" accept="image/*" class="form-control file-upload-info" onchange="readURL(this);">
-                                       <img id="image" src="../imgs/user/<?php echo($row['user_img']);?>" style="height: 80px; width: 80px;" />
+                                       <img id="image" src="../pimages/user/<?php echo($row['user_img']);?>" style="height: 80px; width: 80px;" />
                                         <p style="color:red;">Resolution 300*250 pixels</p>
                                         </div>
 

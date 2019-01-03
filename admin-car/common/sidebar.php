@@ -104,6 +104,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="driver-report-dateWise"><i class="menu-icon mdi mdi-chart-bar text-danger"></i> Date Wise Report</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="police-requisition-report"><i class="menu-icon mdi mdi-chart-bar text-danger"></i>Police Reqisition Report</a>
+                </li>
               </ul>
             </div>
           </li>

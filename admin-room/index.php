@@ -3,30 +3,30 @@ session_start();
 error_reporting(0);
 if(strlen($_SESSION['admin-room-login'])==0)
   { 
-header('location:login');
+header('location:../admin');
 }
 else{ 
 
 include('../db/config.php');
+ 
 
-
-
-$query2="SELECT `car_number`, COUNT(*) as number FROM `car_booking` WHERE `boking_status`=1 GROUP BY `car_number`";
+// Two table Join For pie Chart of ******Room Booking
+$query2="SELECT room.room_name, COUNT(room_booking.room_id) as number FROM room_booking LEFT JOIN room ON room_booking.room_id= room.room_id WHERE room_booking.booking_st='1' GROUP BY room_name";
 $result2 = mysqli_query($con, $query2);
-        
-$query3="SELECT `user_name`, COUNT(*) as number FROM `car_booking` WHERE `boking_status`=1 GROUP BY `user_name` ";
-$result3 = mysqli_query($con, $query3);
+ 
 
+// Two table Join For pie Chart of *****User by Room Booking
+$query3="SELECT user.user_name, COUNT(room_booking.user_id) as number FROM room_booking LEFT JOIN user ON room_booking.user_id= user.user_id WHERE room_booking.booking_st='1' GROUP BY user_name";
+$result3 = mysqli_query($con, $query3);
+//Total Users
 $sql=mysqli_query($con,"SELECT * FROM `user`");
 $users=mysqli_num_rows($sql);
 
-$sql2=mysqli_query($con,"SELECT * FROM `car_driver`");
-$drivers=mysqli_num_rows($sql2);
-
-$sql3=mysqli_query($con,"SELECT * FROM `tbl_car`");
-$cars=mysqli_num_rows($sql3);
-
-$sql4=mysqli_query($con,"SELECT * FROM `car_booking`");
+//Total Rooms
+$sql3=mysqli_query($con,"SELECT * FROM `room`");
+$rooms=mysqli_num_rows($sql3);
+//Total Room Booking
+$sql4=mysqli_query($con,"SELECT * FROM `room_booking`");
 $booking=mysqli_num_rows($sql4);
 
 ?>
@@ -38,7 +38,7 @@ $booking=mysqli_num_rows($sql4);
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <title>CPB.RoomBooking</title>
 
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
@@ -66,7 +66,7 @@ $booking=mysqli_num_rows($sql4);
                     <div class="content-wrapper">
 
                         <div class="row">
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
                                 <div class="card card-statistics">
                                     <a href="report-all">
                                         <div class="card-body">
@@ -92,55 +92,32 @@ $booking=mysqli_num_rows($sql4);
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
                                 <div class="card card-statistics">
-                                    <a href="car-all">
+                                    <a href="room-all">
                                         <div class="card-body">
                                             <div class="clearfix">
                                                 <div class="float-left">
-                                                    <i class="mdi mdi-car text-warning icon-lg"></i>
+                                                    <i class="mdi mdi-home text-warning icon-lg"></i>
                                                 </div>
                                                 <div class="float-right">
-                                                    <p class="mb-0 text-right">Total Cars</p>
+                                                    <p class="mb-0 text-right">Total Rooms</p>
                                                     <div class="fluid-container">
                                                         <h3 class="font-weight-medium text-right mb-0">
-                                                            <?php echo $cars; ?>
+                                                            <?php echo $rooms; ?>
                                                         </h3>
                                                     </div>
                                                 </div>
                                             </div>
                                             <p class="text-muted mt-3 mb-0">
-                                                <i class="mdi mdi-cursor-pointer mr-1" aria-hidden="true"></i> Click To Show Report
+                                                <i class="mdi mdi-cursor-pointer mr-1" aria-hidden="true"></i> Click To Show 
                                             </p>
                                         </div>
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-                                <div class="card card-statistics">
-                                    <a href="driver-all">
-                                        <div class="card-body">
-                                            <div class="clearfix">
-                                                <div class="float-left">
-                                                    <i class="mdi mdi-radioactive text-success icon-lg"></i>
-                                                </div>
-                                                <div class="float-right">
-                                                    <p class="mb-0 text-right">All Drivers</p>
-                                                    <div class="fluid-container">
-                                                        <h3 class="font-weight-medium text-right mb-0">
-                                                            <?php echo $drivers; ?>
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p class="text-muted mt-3 mb-0">
-                                                <i class="mdi mdi-cursor-pointer mr-1" aria-hidden="true"></i> Click To Show Report
-                                            </p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+                           
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 grid-margin stretch-card">
                                 <div class="card card-statistics">
                                     <a href="user-all-info">
                                         <div class="card-body">
@@ -212,10 +189,12 @@ $booking=mysqli_num_rows($sql4);
         </div>
         <!-- container-scroller -->
 
+<!--************* Google Pai Chart Link *****************-->
+    <script type="text/javascript" src="../assets/js/g_pi_chart/chart.js" ></script>
+    <script type="text/javascript" src="../assets/js/g_pi_chart/jquery-1.12.4.js" ></script>
+    <script type="text/javascript" src="../assets/js/g_pi_chart/loader.js" ></script>
 
-       <!--  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
 
-       <script type="text/javascript" src="js/saif/chart.js" ></script>
 
         <script type="text/javascript">
             google.charts.load('current', {
@@ -229,7 +208,7 @@ $booking=mysqli_num_rows($sql4);
                           <?php  
                           while($row2 = mysqli_fetch_array($result2))  
                           {  
-                               echo "['".$row2["car_number"]."', ".$row2["number"]."],";  
+                               echo "['".$row2["room_name"]."', ".$row2["number"]."],";  
                           }  
                           ?>  
                 ]);
@@ -271,17 +250,6 @@ $booking=mysqli_num_rows($sql4);
         </script>
 
        
-
-
-
-
-        <!-- Bar Chart Link -->
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <!-- Bar Chart Link -->
-
-
 
         <!-- plugins:js -->
         <script src="vendors/js/vendor.bundle.base.js"></script>

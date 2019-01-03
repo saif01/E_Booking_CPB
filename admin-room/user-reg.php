@@ -3,40 +3,12 @@ session_start();
 error_reporting(0);
 if(strlen($_SESSION['admin-room-login'])==0)
   { 
-header('location:login');
+header('location:../admin');
 }
 else{ 
 include('../db/config.php');
 
-if (isset($_POST['submit'])) {
-
-$user_login=$_POST['user_login'];
-$user_pass=$_POST['user_pass'];
-$user_name=$_POST['user_name'];
-$user_dept=$_POST['user_dept'];
-$user_number=$_POST['user_number'];
-$user_status = 1;
-
-
-//$user_img=$_FILES["user_img"]["name"];
-//move_uploaded_file($_FILES["user_img"]["tmp_name"],"p_img/userImg/".$_FILES["user_img"]["name"]);
-
-$file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['photo']['name']);
-    $storeFile="../imgs/user/".$file_name;
-    $fileName=$_FILES['photo']['tmp_name'];
-    move_uploaded_file($fileName,$storeFile);
-
-
-
-$query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_name`, `user_img`, `user_number`, `user_dept`, `user_st`) VALUES ('$user_login','$user_pass','$user_name','$file_name','$user_number','$user_dept','$user_status')");
-
-?>
-    <script>
-        alert('Update successfull.  !');
-        window.open('user-all-info', '_self'); //for locating other page.
-        //window.location.reload(); //For reload Same page
-    </script>
-    <?php } ?>
+ ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -45,7 +17,7 @@ $query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_na
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <title>CPB.RoomBooking</title>
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
@@ -96,7 +68,7 @@ $query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_na
                                     <div class="card-body">
                                         <!-- <h4 class="card-title">Car Add Form</h4> -->
                                         <button class="card-title btn btn-outline btn-block ">User Registration</button>
-                                        <form class="form-sample" action="" method="post" enctype="multipart/form-data">
+                <form class="form-sample" action="user-reg-action.php" method="post" enctype="multipart/form-data">
 
 
                                             <div class="row">
@@ -137,7 +109,7 @@ $query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_na
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">User Contact</label>
                                                         <div class="col-sm-9">
-                                                             <input type="text" name="user_number" class="form-control" placeholder="Enter User Phone Number" required>
+                                                             <input type="text" name="user_contact" class="form-control" placeholder="Enter User Phone Number" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -156,43 +128,36 @@ $query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_na
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">User Office ID</label>
+                                                        <div class="col-sm-9">
+                                                             <input type="text" name="user_office_id" class="form-control" placeholder="Enter User Office ID" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                
+                                            </div>
+
+                                            <div class="row">
+                                              <div class="col-md-6">
+                                                    <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">User Image</label>
                                                          <div class="col-sm-9">
                                     <input type="file"  name="photo" accept="image/*" class="form-control file-upload-info" required onchange="readURL(this);">
                                        <img id="image" src="#" />
-                                        <p style="color:red;">Resolution 300*250 pixels</p>
+                                        <p style="color:red;">Resolution 250*300 pixels</p>
                                                         </div>
 
                                                     </div>
-                                                </div>
+                                                </div>  
+                                               
                                             </div>
                                             
-                                            <!-- <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">User Image</label>
-                                                        <div class="col-sm-9">
-                                   <input name="user_img" type="file" class="form-control file-upload-info" onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0])" required>
-                                        <p style="color:red;">Resolution 300*250 pixels</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label"></label>
-                                                        <div class="col-sm-9">
-                                                            <img id="preview" alt="Image Not Selected" width="100" height="100" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
- -->
-
-
+                
                                             <div class="row">
                                                 <div class="col-12 text-center">
                                                     <button type="submit" name="submit" class="btn btn-outline-success btn-block btn-rounded">User Registration </button>
-                                                    <button class="btn btn-light btn-block btn-rounded ">Cancel</button>
+                                                    <button class="btn btn-light btn-block btn-rounded ">Reset</button>
                                                     
                                                     <a href="##" onClick="history.go(-1); return false;"> <button class="btn btn-light btn-block btn-rounded " style="background-color:#a08e8e; margin-top: 8px;">Cancel</button></a>
                                                 </div>

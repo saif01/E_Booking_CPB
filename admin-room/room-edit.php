@@ -3,169 +3,12 @@ session_start();
 error_reporting(0);
 if(strlen($_SESSION['admin-room-login'])==0)
   { 
-header('location:login');
+header('location:../admin');
 }
 else{  
 include('../db/config.php');
 $room_id=$_GET['room_id'];
  
-
-if (isset($_POST['submit'])) {
-
-$room_capicity=$_POST['room_capicity'];
-$room_details=$_POST['room_details'];
-
-$fileName1=$_FILES['room_img1']['tmp_name'];
-$fileName2=$_FILES['room_img2']['tmp_name'];
-$fileName3=$_FILES['room_img3']['tmp_name'];
-
-        if ($fileName1 !=="" && $fileName2 !=="" && $fileName3 !=="") 
-        {
-             
-             $sql=mysqli_query($con,"SELECT `room_img1`, `room_img2`, `room_img3` FROM `room` WHERE `room_id`='$room_id'");
-               while($row2=mysqli_fetch_array($sql))
-                   {
-                       $file="../imgs/room/".$row2['car_img1'];
-                        unlink($file);
-                        $file="../imgs/room/".$row2['car_img2'];
-                        unlink($file);
-                        $file="../imgs/room/".$row2['car_img3'];
-                        unlink($file);
-                    }
-              
-
-
-                $file_name1=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['room_img1']['name']);
-                $storeFile1="../imgs/room/".$file_name1;
-                $fileName1=$_FILES['room_img1']['tmp_name'];
-                move_uploaded_file($fileName1,$storeFile1);
-
-                $file_name2=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['room_img2']['name']);
-                $storeFile2="../imgs/room/".$file_name2;
-                $fileName2=$_FILES['room_img2']['tmp_name'];
-                move_uploaded_file($fileName2,$storeFile2);
-
-                $file_name3=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['room_img3']['name']);
-                $storeFile3="../imgs/room/".$file_name3;
-                $fileName3=$_FILES['room_img3']['tmp_name'];
-                move_uploaded_file($fileName3,$storeFile3);
-
-                           
-                $query2=mysqli_query($con,"UPDATE `room` SET `room_img1`='$file_name1',`room_img2`='$file_name2',`room_img3`='$file_name3',`room_capicity`='$room_capicity',`room_details`='$room_details' WHERE `room_id`='$room_id' ");
-
-                ?>
-            <script>
-                alert('Update successfull.  !');
-                window.open('room-all', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-        
-                 } 
-
-                 elseif ($fileName1 !=="") 
-            {
-            
-             $sql=mysqli_query($con,"SELECT `room_img1` FROM `room` WHERE `room_id`='$room_id'");
-               while($row2=mysqli_fetch_array($sql))
-                   {
-                       $file="../imgs/room/".$row2['room_img1'];
-                        unlink($file);
-                    }
-                         
-             $file_name1=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['room_img1']['name']);
-
-                $storeFile1="../imgs/room/".$file_name1;
-                $fileName1=$_FILES['room_img1']['tmp_name'];
-                move_uploaded_file($fileName1,$storeFile1);
-
-                           
-
-                $query2=mysqli_query($con,"UPDATE `room` SET `room_img1`='$file_name1',`room_capicity`='$room_capicity',`room_details`='$room_details' WHERE `room_id`='$room_id' ");
-
-                ?>
-            <script>
-                alert('Update successfull.  !');
-                window.open('room-all', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-        
-                 } 
-
-                 elseif ($fileName2 !=="") 
-             {
-             
-             $sql=mysqli_query($con,"SELECT `room_img2` FROM `room` WHERE `room_id`='$room_id'");
-               while($row2=mysqli_fetch_array($sql))
-                   {
-                       $file="../imgs/room/".$row2['room_img2'];
-                        unlink($file);
-                    }
-                      
-              $file_name2=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['room_img2']['name']);
-                $storeFile2="../imgs/room/".$file_name2;
-                $fileName2=$_FILES['room_img2']['tmp_name'];
-                move_uploaded_file($fileName2,$storeFile2);
-
-                           
-
-                $query2=mysqli_query($con,"UPDATE `room` SET `room_img2`='$file_name2',`room_capicity`='$room_capicity',`room_details`='$room_details' WHERE `room_id`='$room_id' ");
-
-                ?>
-            <script>
-                alert('Update successfull.  !');
-                window.open('room-all', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-        
-                 } 
-
-                 elseif ($fileName3 !=="") 
-            {
-             
-             $sql=mysqli_query($con,"SELECT `room_img3` FROM `room` WHERE `room_id`='$room_id'");
-               while($row2=mysqli_fetch_array($sql))
-                   {
-                       $file="../imgs/room/".$row2['room_img3'];
-                        unlink($file);
-                    }
-              
-            
-             $file_name3=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['room_img3']['name']);
-                $storeFile3="../imgs/room/".$file_name3;
-                $fileName3=$_FILES['room_img3']['tmp_name'];
-                move_uploaded_file($fileName3,$storeFile3);
-                           
-
-                $query2=mysqli_query($con,"UPDATE `room` SET `room_img3`='$file_name3',`room_capicity`='$room_capicity',`room_details`='$room_details' WHERE `room_id`='$room_id'");
-
-                ?>
-            <script>
-                alert('Update successfull.  !');
-                window.open('room-all', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-        
-                 } 
-
-            else{
-  
-                $query=mysqli_query($con,"UPDATE `room` SET `room_capicity`='$room_capicity',`room_details`='$room_details' WHERE `room_id`='$room_id'");
-
-            ?>
-            <script>
-                alert( 'Update successfull.  !');
-                window.open('room-all', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-            }
-        
-}
-
 ?>
    
 
@@ -176,7 +19,7 @@ $fileName3=$_FILES['room_img3']['tmp_name'];
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <title>CPB.RoomBooking</title>
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
@@ -211,8 +54,8 @@ $fileName3=$_FILES['room_img3']['tmp_name'];
                                 <div class="card">
                                     <div class="card-body">
                                         <!-- <h4 class="card-title">Car Add Form</h4> -->
-                                        <button class="card-title btn btn-outline btn-block ">Meeting Room Add Form </button>
-                                        <form class="form-sample" action="" method="post" enctype="multipart/form-data">
+                                        <button class="card-title btn btn-outline btn-block ">Meeting Room Update Form </button>
+                <form class="form-sample" action="room-edit-action.php?room_id=<?php echo $room_id; ?>" method="post" enctype="multipart/form-data">
 
                                             <div class="row">
                 <?php 
@@ -239,16 +82,11 @@ $fileName3=$_FILES['room_img3']['tmp_name'];
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                             
                                             
-                                 
-
                                             <div class="row">
-                                                
-
-                                                <div class="col-md-9">
+                                                <div class="col-md-6">
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Room Details:</label>
                                                         <div class="col-sm-9">
@@ -258,10 +96,29 @@ $fileName3=$_FILES['room_img3']['tmp_name'];
                                                         </div>
                                                     </div>
                                                 </div>
+                                                    <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Projector</label>
+                                                        <div class="col-sm-4">
+                                                            <div class="form-radio">
+                                                                <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="projector" id="membershipRadios1" value="1" checked> Yes
+                              </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-5">
+                                                            <div class="form-radio">
+                                                                <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="projector" id="membershipRadios2" value="0"> No
+                              </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <p class="card-description">
-                                                Car Image
+                                                Room Image
                                             </p>
                                             <div class="row">
 
@@ -304,7 +161,7 @@ $fileName3=$_FILES['room_img3']['tmp_name'];
                                                     <h4  style="margin-left: 38%;">New </h4>
                                                         </div>
                                                         <!-- <p class="float-left" >Old</p> -->
-                                                    <img src="../imgs/room/<?php echo htmlentities($row['room_img1']); ?>" alt="Old Image" class="rounded float-left" width="100" height="100" />
+                                                    <img src="../pimages/room/<?php echo htmlentities($row['room_img1']); ?>" alt="Old Image" class="rounded float-left" width="100" height="100" />
                                                     
                                                    <img id="preview1" alt="Image Not Selected" class="rounded float-right" width="100" height="100" />
                                                    <!--  <p class="float-right">New</p> -->
@@ -320,7 +177,7 @@ $fileName3=$_FILES['room_img3']['tmp_name'];
                                                         </div>
                                                        <!--  <p class="float-left" >Old</p> -->
                                                        
-                                                    <img src="../imgs/room/<?php echo htmlentities($row['room_img2']); ?>" alt="Old Image" class="rounded float-left" width="100" height="100" />
+                                                    <img src="../pimages/room/<?php echo htmlentities($row['room_img2']); ?>" alt="Old Image" class="rounded float-left" width="100" height="100" />
                                                     
                                                     <img id="preview2" alt="Image Not Selected" class="rounded float-right" width="100" height="100" />
                                                    <!--  <p class="float-right">New</p> -->
@@ -335,7 +192,7 @@ $fileName3=$_FILES['room_img3']['tmp_name'];
                                                     <h4  style="margin-left: 38%;">New </h4>
                                                         </div>
                                                        <!--  <p class="float-left" >Old</p> -->
-                                                    <img src="../imgs/room/<?php echo htmlentities($row['room_img3']); ?>" alt="Old Image" class="rounded float-left" width="100" height="100" />
+                                                    <img src="../pimages/room/<?php echo htmlentities($row['room_img3']); ?>" alt="Old Image" class="rounded float-left" width="100" height="100" />
                                                     
                                                     <img id="preview3" alt="Image Not Selected" class="rounded float-right" width="100" height="100" />
                                                    <!--  <p class="float-right">New</p> -->

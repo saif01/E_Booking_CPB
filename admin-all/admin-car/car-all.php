@@ -1,12 +1,12 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
+if(strlen($_SESSION['admin-all-login'])==0)
   { 
-header('location:login');
+header('location:../../admin');
 }
 else{ 
-include('../db/config.php');
+include('../../db/config.php');
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -90,7 +90,7 @@ include('../db/config.php');
 
                                                         <td>
                                         <a href="javascript:void(0);" onClick="popUpWindow('car-profile.php?car_id=<?php echo htmlentities($row['car_id']);?>');" title="View Car Info.">
-                                        <img src="p_img/carImg/<?php echo($row['car_img1']);?>" class="img-responsive" alt="Car Img" /></a>
+                                        <img src="../../pimages/car/<?php echo($row['car_img1']);?>" class="img-responsive" alt="Car Img" /></a>
                                                         </td>
 
                                                         <td class="center">

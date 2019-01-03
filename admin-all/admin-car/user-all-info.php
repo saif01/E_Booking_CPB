@@ -1,12 +1,12 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['adminName'])==0)
+if(strlen($_SESSION['admin-all-login'])==0)
   { 
-header('location:login');
+header('location:../../admin');
 }
 else{ 
-include('../db/config.php');
+include('../../db/config.php');
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -20,10 +20,7 @@ include('../db/config.php');
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
-        <!-- endinject -->
-        <!-- plugin css for this page -->
-        <!-- End plugin css for this page -->
-        <!-- inject:css -->
+        
         <link rel="stylesheet" href="css/style.css">
         <!-- endinject -->
         <link rel="shortcut icon" href="images/favicon.png" />
@@ -59,62 +56,82 @@ include('../db/config.php');
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-body">
-                                        <!--  <h4 class="card-title">All User Information </h4> -->
-                                        <button class="card-title btn btn-outline btn-block ">All User Information</button>
-                                        <div class="table-responsive">
-                                            <table id="example" class="table table-striped table-bordered table-dark" style="width:100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Image</th>
-                                                        <th>Name</th>
-                                                        <th>Department</th>
-                                                        <th>Phone</th>
-                                                       <th>Actions</th>
-                                                        
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php 
+                                       
+                          <button class="card-title btn btn-outline btn-block ">All User Information</button>
+                          <div class="table-responsive">
+                          <table id="example" class="table table-striped table-bordered table-dark" style="width:100%">
+                                  <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Dept.</th>
+                                            <th>Car Section</th>
+                                            <th>Room Section</th>
+                                            <th>Actions</th>         
+                                              </tr>
+                                    </thead>
+                                    <tbody>
+                            <?php 
 		$query=mysqli_query($con," SELECT * FROM `user`");
 		while($row=mysqli_fetch_array($query))
 		{
 
 ?>
-                                                    <tr>
+                <tr>
 
-                                                        <td>
-                                        <a href="javascript:void(0);" onClick="popUpWindow('userprofile.php?user_id=<?php echo htmlentities($row['user_id']);?>');" title="View User Info.">
-                                        <img src="p_img/userImg/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" /> </td></a>
-                                                        <td>
-                                            <a href="javascript:void(0);" onClick="popUpWindow('userprofile.php?user_id=<?php echo htmlentities($row['user_id']);?>');" title="View User Info.">
-                                                <?php echo htmlentities($row['user_name']) ; ?></a>
-                                                        </td>
+                    <td>
+  <a href="javascript:void(0);" onClick="popUpWindow('userprofile.php?user_id=<?php echo htmlentities($row['user_id']);?>');" title="View User Info.">
+<img src="../../pimages/user/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" /> 
+                    
+<?php echo htmlentities($row['user_name']) ; ?></a>
+                    </td>
                                                         
-                                                        <td class="center">
-                                                            <?php echo htmlentities($row['user_department']); ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo htmlentities($row['user_contract']); ?>
-                                                        </td>
+                  <td class="center">
+        <?php echo htmlentities($row['user_dept']); ?>
+                  </td>
 
-                                                        <td class="center">
-                                                            <?php
-                                         if($row['user_status']==1)
+                       <td>
+                                                  <?php
+          //************** Car Pool Status Show ****************//
+                                         if($row['user_car_st']==1)
                                          {?>
-                                <a href="user-status.php?h_user_id=<?php echo htmlentities($row['user_id']);?>" title="Hide" id="hide" > <i class="mdi mdi-eye text-success icon-lg"></i></a>
+  <a href="user-status.php?h_user_car_id=<?php echo htmlentities($row['user_id']);?>" id="hidecar" title="Hide"> <i class="mdi mdi-check-all text-success icon-lg"></i></a>
                                             
                                         <?php } else {?>
 
-                                    <a href="user-status.php?s_user_id=<?php echo htmlentities($row['user_id']);?>" title="Show" id="show" > <i class="mdi mdi-eye-off text-danger icon-lg"></i></a> 
+  <a href="user-status.php?s_user_car_id=<?php echo htmlentities($row['user_id']);?>" id="showcar" title="Show"> <i class="mdi mdi-close text-danger icon-lg"></i></a> 
                                             <?php } ?>
+
+                                            </td>
+
+                                          <td>
+                                          <?php
+          //************** Room Booking Status Show ****************//
+                        if($row['user_room_st']==1)
+                                         {?>
+  <a href="user-status.php?h_user_room_id=<?php echo htmlentities($row['user_id']);?>" id="hideroom" title="Hide"> <i class="mdi mdi-check-all text-success icon-lg"></i></a>
+                                            
+                <?php } else {?>
+
+  <a href="user-status.php?s_user_room_id=<?php echo htmlentities($row['user_id']);?>" id="showroom" title="Show"> <i class="mdi mdi-close text-danger icon-lg"></i></a> 
+                                            <?php } ?>
+
+                                                        </td>
+
+                  <td class="center">
+          <?php
+        if($row['user_st']==1)
+              {?>
+      <a href="user-status.php?h_user_id=<?php echo htmlentities($row['user_id']);?>" title="Hide" id="hide" > <i class="mdi mdi-eye text-success icon-lg"></i></a>
+                                            
+        <?php } else {?>
+
+    <a href="user-status.php?s_user_id=<?php echo htmlentities($row['user_id']);?>" title="Show" id="show" > <i class="mdi mdi-eye-off text-danger icon-lg"></i></a> 
+          <?php } ?>
                                           
 
-					<a href="user-edit?user_id=<?php echo htmlentities($row['user_id']);?>" title="Edit"
-                    >
-                    <i class="mdi mdi-pencil-box-outline text-warning icon-lg"></i>  
-                  </a>
+		<a href="user-edit?user_id=<?php echo htmlentities($row['user_id']);?>" title="Edit"><i class="mdi mdi-pencil-box-outline text-warning icon-lg"></i>  </a>
 									
-                        <a href="user-delete.php?user_id=<?php echo $row['user_id']?>" title="Delete" id="delete" > <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a>
+    <a href="user-delete.php?user_id=<?php echo $row['user_id']?>" title="Delete" id="delete" > <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a>
 
                                                             
                                                         </td>
@@ -158,8 +175,8 @@ include('../db/config.php');
 
  <!--********* Data Table js Link *********-->
         <!-- <script type="text/javascript" src="assets/dataTable/libry.js"></script> -->
-        <script type="text/javascript" src="../assets/dataTable/tbl.js"></script>
-        <script type="text/javascript" src="../assets/dataTable/boots.js"></script>
+        <script type="text/javascript" src="../../assets/dataTable/tbl.js"></script>
+        <script type="text/javascript" src="../../assets/dataTable/boots.js"></script>
          
         <script type="text/javascript">
             $(document).ready(function() {
@@ -168,34 +185,10 @@ include('../db/config.php');
         </script>
 
 
-        <!-- End custom js for this page-->
-        <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
-        <!-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
-
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                var table = $('#example').DataTable({
-                    // lengthChange: false,
-                    // buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
-                });
-
-                // table.buttons().container()
-                //     .appendTo( '#example_wrapper .col-md-6:eq(0)' );
-            });
-        </script> -->
+     
 
         <!-- Sweet Alert CDN Link -->
-<script src="{{asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!--**************** Start Sweet Alert Script code *******************-->
 <script>  
          $(document).on("click", "#delete", function(e){
@@ -264,7 +257,92 @@ include('../db/config.php');
             });
     </script>
 <!--**************** End Sweet Alert Script code *******************-->
+<!--**************** CAr Booking Admin Start Sweet Alert Script code *******************-->
+<script>  
+         $(document).on("click", "#showcar", function(e){
+             e.preventDefault();
+             var link = $(this).attr("href");
+                swal({
+                  title: "Are you Want to Give User CarPool Access ???",
+                  text: "If Make CarPool User !,This User Can Get CarPool Access !",
+                  icon: "success",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                       window.location.href = link;
+                  } else {
+                    swal("Safe Data!");
+                  }
+                });
+            });
+    </script>
 
+<script>  
+         $(document).on("click", "#hidecar", function(e){
+             e.preventDefault();
+             var link = $(this).attr("href");
+                swal({
+                  title: "Are you Want to Remove User CarPool Access ???",
+                  text: "If Removed !!, This User Can't Get CarPool Access  !",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                       window.location.href = link;
+                  } else {
+                    swal("Safe Data!");
+                  }
+                });
+            });
+    </script>
+<!--**************** End Sweet Alert Script code *******************-->
+<!--**************** Romm Booking Admin Start Sweet Alert Script code *******************-->
+<script>  
+         $(document).on("click", "#showroom", function(e){
+             e.preventDefault();
+             var link = $(this).attr("href");
+                swal({
+                  title: "Are you Want to Give User Room Booking Access ???",
+                  text: "If Make Room Booking User !,This User Can Get Room Booking Access !",
+                  icon: "success",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                       window.location.href = link;
+                  } else {
+                    swal("Safe Data!");
+                  }
+                });
+            });
+    </script>
+
+<script>  
+         $(document).on("click", "#hideroom", function(e){
+             e.preventDefault();
+             var link = $(this).attr("href");
+                swal({
+                  title: "Are you Want to Remove Room Booking User Access ???",
+                  text: "If Removed !!, This User Can't Get Room Booking Access !",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                       window.location.href = link;
+                  } else {
+                    swal("Safe Data!");
+                  }
+                });
+            });
+    </script>
+<!--**************** End Sweet Alert Script code *******************-->
 
     </body>
     </html>
