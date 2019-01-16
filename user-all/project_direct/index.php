@@ -18,7 +18,7 @@ else{  ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>CPB.E-Booking</title>
+    <title>CPB.IT-Portal</title>
        <!--=== Favicon ===-->
     <link rel="shortcut icon" href="img/cpb.ico" type="image/x-icon" /> 
 
@@ -43,7 +43,7 @@ else{  ?>
         <div class="row">
           <div class="col-md-12">
              <img src="img/logo.png" class="r_user" >
-          <h2   class="text-light d-inline" style="font-family: Times New Roman"> C.P.B. E-Booking </h2>
+          <h2   class="text-light d-inline" style="font-family: Times New Roman">C.P.B. IT-Portal</h2>
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@ else{  ?>
 
       <!-- Page Heading -->
       <h1 class="my-4">Page Heading
-        <small>Secondary Text</small>
+        <small></small>
       </h1>
 
       <!-- Project One -->

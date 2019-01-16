@@ -1,5 +1,20 @@
 <?php
+session_start();
+error_reporting(0);
+if(strlen($_SESSION['admin-super-login'])==0)
+  { 
+header('location:../admin');
+}
+else{ 
 include('../db/config.php');
+?>
+<!--*********start Sweet alert For Submiting data **********-->
+<script src="../assets/coustom/swwetalert/jslib.js"></script>
+<script src="../assets/coustom/swwetalert/dev.js"></script>
+<link rel="stylesheet" type="text/css" href="../assets/coustom/swwetalert/sweetalert.css">
+<!--*********end Sweet alert For Submiting data **********-->
+
+<?php
 $user_id=$_GET['user_id'];
 
 if (isset($_POST['submit'])) {
@@ -9,9 +24,9 @@ $user_office_id=$_POST['user_office_id'];
 $user_name=$_POST['user_name'];
 $user_dept=$_POST['user_dept'];
 $user_contact=$_POST['user_contact'];
-$user_st = 1;
+$user_st ='1';
 
-
+ 
 $fileName=$_FILES['user_img']['tmp_name'];
 
         if ($fileName !=="") 
@@ -35,32 +50,98 @@ $fileName=$_FILES['user_img']['tmp_name'];
 
                 $query2=mysqli_query($con,"UPDATE `user` SET `user_name`='$user_name',`user_img`='$file_name',`user_dept`='$user_dept',`user_contact`='$user_contact',`user_office_id`='$user_office_id',`user_st`='1' WHERE `user_id`='$user_id'");
 
-                ?>
-            <script>
-                alert('Update successfull. !');
-                window.open('user-all-info', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-        
+               if ($query2) 
+                        {
+                                ?>
+                            <script>
+                                setTimeout(function () { 
+                                        swal({
+                                          title: "Successfully!",
+                                          text: "User Update Completed!",
+                                          type: "success",
+                                          confirmButtonText: "OK"
+                                        },
+                                        function(isConfirm){
+                                          if (isConfirm) {
+                                            window.location.href = "user-all-info.php";
+                                          }
+                                        }); },0);
+                               
+                              </script>
+                                <?php
+                        }
+                        else
+                        {
+                                    ?>
+                               <script>
+                                    setTimeout(function () { 
+                                            swal({
+                                              title: "Error!",
+                                              text: "User Update Not Completed!",
+                                              type: "error",
+                                              confirmButtonText: "OK"
+                                            },
+                                            function(isConfirm){
+                                              if (isConfirm) {
+                                                window.location.href = "user-all-info.php";
+                                              }
+                                            }); },0);
+                                   
+                                  </script>
+                                    <?php
+                        }
         } 
-            else{
+
+        else{
 
                 
                 $query=mysqli_query($con,"UPDATE `user` SET `user_name`='$user_name',`user_dept`='$user_dept',`user_contact`='$user_contact',`user_office_id`='$user_office_id',`user_st`='1' WHERE `user_id`='$user_id'");
 
-            ?>
-            <script>
-                alert('Update successfull. !');
-                window.open('user-all-info', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
+            if ($query) 
+                        {
+                                ?>
+                            <script>
+                                setTimeout(function () { 
+                                        swal({
+                                          title: "Successfully!",
+                                          text: "User Update Completed!",
+                                          type: "success",
+                                          confirmButtonText: "OK"
+                                        },
+                                        function(isConfirm){
+                                          if (isConfirm) {
+                                            window.location.href = "user-all-info.php";
+                                          }
+                                        }); },0);
+                               
+                              </script>
+                                <?php
+                        }
+                        else
+                        {
+                                    ?>
+                               <script>
+                                    setTimeout(function () { 
+                                            swal({
+                                              title: "Error!",
+                                              text: "User Update Not Completed!",
+                                              type: "error",
+                                              confirmButtonText: "OK"
+                                            },
+                                            function(isConfirm){
+                                              if (isConfirm) {
+                                                window.location.href = "user-all-info.php";
+                                              }
+                                            }); },0);
+                                   
+                                  </script>
+                                    <?php
+                        }
             }
 
-}
+    }
 
-?>
+}?>
 
 
 

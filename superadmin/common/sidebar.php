@@ -8,14 +8,7 @@
             </a>
           </li>
 
-         <!--  <li class="nav-item">
-            <a class="nav-link" href="calendar">
-              <i class="menu-icon mdi mdi mdi-calendar-plus text-danger "></i>
-              <span class="menu-title">Calendar View</span>
-            </a>
-          </li> -->
-
-          <li class="nav-item">
+           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#calendar_section" aria-expanded="false" aria-controls="calendar_section">
               <i class="menu-icon mdi mdi mdi-calendar-plus text-danger "></i>
               <span class="menu-title">Calendar View</span>
@@ -59,7 +52,15 @@
             </div>
           </li>
 
-          <li class="nav-item">
+         <!--  <li class="nav-item">
+            <a class="nav-link" href="calendar">
+              <i class="menu-icon mdi mdi mdi-calendar-plus text-danger "></i>
+              <span class="menu-title">Calendar View</span>
+            </a>
+          </li> -->
+
+
+         <!--  <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#car_section" aria-expanded="false" aria-controls="car_section">
               <i class="menu-icon mdi mdi-car text-warning"></i>
               <span class="menu-title">Car Section</span>
@@ -73,11 +74,12 @@
                 <li class="nav-item">
                   <a class="nav-link" href="car-add"><i class="menu-icon mdi mdi-pen text-warning"></i> Car Add</a>
                 </li>
+
               </ul>
             </div>
-          </li>
+          </li> -->
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#driverSection" aria-expanded="false" aria-controls="driverSection">
               <i class="menu-icon mdi mdi-xbox-controller text-danger"></i>
               <span class="menu-title">Driver Section</span>
@@ -102,7 +104,7 @@
                 </li>
               </ul>
             </div>
-          </li>
+          </li> -->
 
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#user_section" aria-expanded="false" aria-controls="user_section">
@@ -144,10 +146,34 @@
               </ul>
             </div>
           </li>
+
+
+<!--******************** Legal Section ***************-->
+           <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#room_section" aria-expanded="false" aria-controls="room_section">
+              <i class="menu-icon mdi mdi-store text-danger"></i>
+              <span class="menu-title">Legal Section</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="room_section">
+              <ul class="nav flex-column sub-menu">
+
+                <li class="nav-item">
+                  <a class="nav-link" href="../admin-law/advisor-add"><i class="menu-icon mdi mdi-clipboard-check text-danger"></i> Advisor Add </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../admin-law/advisor-all"><i class="menu-icon mdi mdi-pen text-danger"></i> Advisor All </a>
+                </li>
+                                                
+              </ul>
+            </div>
+          </li>
+
+
 <!--******************** Room Section ***************-->
            <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#room_section" aria-expanded="false" aria-controls="room_section">
-              <i class="menu-icon mdi mdi-evernote text-danger"></i>
+              <i class="menu-icon mdi mdi-store text-danger"></i>
               <span class="menu-title">Room Section</span>
               <i class="menu-arrow"></i>
             </a>
@@ -165,12 +191,54 @@
             </div>
           </li>
 
+<!--******************** Car Pool Section ***************-->
+           
+
           <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#carpool_section" aria-expanded="false" aria-controls="carpool_section">
+              <i class="menu-icon mdi mdi-car text-warning"></i>
+              <span class="menu-title">Car Pool Section</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="carpool_section">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                  <a class="nav-link" href="car-all"><i class="menu-icon mdi mdi-clipboard-check text-warning"></i> All Cars </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="location-add"><i class="menu-icon mdi mdi-at text-success"></i> Location Add</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="car-add"><i class="menu-icon mdi mdi-pen text-warning"></i> Car Add</a>
+                </li>
+
+                 <li class="nav-item">
+                  <a class="nav-link" href="driver-all"><i class="menu-icon mdi mdi-clipboard-check text-danger"></i> All Drivers </a>
+                </li>
+                 <li class="nav-item">
+                  <a class="nav-link" href="driver-add"><i class="menu-icon mdi mdi-pen text-danger"></i> Driver Add</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="driver-report"><i class="menu-icon mdi mdi-chart-histogram text-danger"></i> Driver Report All</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="driver-report-dateWise"><i class="menu-icon mdi mdi-chart-bar text-danger"></i> Date Wise Report</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="police-requisition-report"><i class="menu-icon mdi mdi-chart-bar text-danger"></i>Police Reqisition Report</a>
+                </li>
+
+              </ul>
+            </div>
+          </li>
+
+
+          <!-- <li class="nav-item">
             <a class="nav-link" href="location-add">
               <i class="menu-icon mdi mdi-at text-success"></i>
               <span class="menu-title">Location Add</span>
             </a>
-          </li>
+          </li> -->
 
       <li class="nav-item">
             <a class="nav-link" href="login-log">

@@ -62,11 +62,11 @@ if (isset($_POST['submit'])) {
 $drivLevs=mysqli_num_rows($drivLev);      
 
 //**************** Police Requsition Status Checking ***********************//
- $police_req=mysqli_query($con,"SELECT * FROM `police_req` WHERE `car_id`='$car_id' AND `req_st`='1' AND ( `req_start` BETWEEN '$start_book' AND '$end_book' OR `req_end` BETWEEN '$start_book' AND '$end_book' OR '$start_book' BETWEEN `req_start` AND `req_end` )");
+ $police_req=mysqli_query($con,"SELECT * FROM `police_req` WHERE `car_id`='$car_id' AND `req_st`='1' AND ( `req_start` BETWEEN '$start_book' AND '$end_book' OR `req_end` BETWEEN '$start_book' AND '$end_book' OR '$start_book' BETWEEN `req_start` AND `req_end` OR '$end_book' BETWEEN `req_start` AND `req_end` )");
 $req_num=mysqli_num_rows($police_req);
              
 //************* Checking Another booking have or not ******************//
-    $sql=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND `boking_status`='1' AND ( `start_date` BETWEEN '$start_book' AND '$end_book' OR `end_date` BETWEEN '$start_book' AND '$end_book' OR '$start_book' BETWEEN `start_date` AND `end_date` )");
+    $sql=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND `boking_status`='1' AND ( `start_date` BETWEEN '$start_book' AND '$end_book' OR `end_date` BETWEEN '$start_book' AND '$end_book' OR '$start_book' BETWEEN `start_date` AND `end_date` OR '$end_book' BETWEEN `start_date` AND `end_date` )");
           $result=mysqli_num_rows($sql);
 
                 if ($result > 0) 

@@ -37,7 +37,7 @@
 
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#car_section" aria-expanded="false" aria-controls="car_section">
-              <i class="menu-icon mdi mdi-car text-warning"></i>
+              <i class="menu-icon mdi mdi-store text-warning"></i>
               <span class="menu-title">Room Section</span>
               <i class="menu-arrow"></i>
             </a>
@@ -55,7 +55,7 @@
           </li>
 
 
-          <li class="nav-item">
+         <!--  <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#user_section" aria-expanded="false" aria-controls="user_section">
               <i class="menu-icon mdi mdi-account-multiple-plus text-success"></i>
               <span class="menu-title">User Section</span>
@@ -69,12 +69,10 @@
                 <li class="nav-item">
                   <a class="nav-link" href="user-reg"><i class="menu-icon mdi mdi-pen text-success"></i> User Registration </a>
                 </li>
-                
-                
-                
+  
               </ul>
             </div>
-          </li>
+          </li> -->
 
       
 

@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 if(strlen($_SESSION['admin-super-login'])==0)
   { 
-header('location:../admin/index');
+header('location:../admin');
 }
 else{ 
 
@@ -24,7 +24,7 @@ $row=$query->fetch_assoc();
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <?php include('common/title.php'); ?>
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">

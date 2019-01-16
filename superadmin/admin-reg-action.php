@@ -26,7 +26,7 @@ $admin_contact =$_POST['admin_contact'];
 $admin_contract = $_POST['admin_contract'];
 $admin_officeId = $_POST['admin_officeId'];
 $admin_st_ch = $_POST['admin_st'];
-
+$admin_st='1';
 
 
 
@@ -37,124 +37,264 @@ $admin_st_ch = $_POST['admin_st'];
             move_uploaded_file($fileName,$storeFile);
 
 
-            if ($admin_st_ch =='carpool') {
+            if ($admin_st_ch == 'carpool') {
 
-                $admin_st='1';
+                
                 $admin_car_st='1';
                 $admin_room_st='0';
+                $admin_law_st='0';
                 $admin_super_st='0';
 
-                $queryCarpool=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admin_name`, `admin_img`, `admin_dept`, `admin_contact`, `admin_st`, `admin_car_st`, `admin_room_st`, `admin_super_st`) VALUES ('$admin_login','$admin_pass','$admin_name','$file_name','$admin_dept','$admin_contact','$admin_st','$admin_car_st','$admin_room_st','$admin_super_st')");
+                $queryCarpool=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admin_name`, `admin_img`, `admin_dept`, `admin_contact`, `admin_st`, `admin_car_st`, `admin_room_st`, `admin_law_st`, `admin_super_st`) VALUES ('$admin_login','$admin_pass','$admin_name','$file_name','$admin_dept','$admin_contact','$admin_st','$admin_car_st','$admin_room_st','$admin_law_st','$admin_super_st')");
 
-                ?>
-                <script>
-                        setTimeout(function () { 
-                                swal({
-                                  title: "Successfully!",
-                                  text: "Car Section Admin Registration Completed!",
-                                  type: "success",
-                                  confirmButtonText: "OK"
-                                },
-                                function(isConfirm){
-                                  if (isConfirm) {
-                                    window.location.href = "admin-all.php";
-                                  }
-                                }); },0);
-                       
-                      </script>
-                
-                <?php
-                exit();
+                if ($queryCarpool) 
+                  {
+                      ?>
+                        <script>
+                            setTimeout(function () { 
+                                    swal({
+                                      title: "Successfully!",
+                                      text: "Car Pool Admin Registration Completed!",
+                                      type: "success",
+                                      confirmButtonText: "OK"
+                                    },
+                                    function(isConfirm){
+                                      if (isConfirm) {
+                                        window.location.href = "admin-all.php";
+                                      }
+                                    }); },0);
+                           
+                          </script>
+                    <?php
+                  }
+                  else
+                  {
+                        ?>
+                         <script>
+                              setTimeout(function () { 
+                                      swal({
+                                        title: "Error!",
+                                        text: "Admin Registration Not Completed!",
+                                        type: "error",
+                                        confirmButtonText: "OK"
+                                      },
+                                      function(isConfirm){
+                                        if (isConfirm) {
+                                          window.location.href = "admin-all.php";
+                                        }
+                                      }); },0);
+                             
+                            </script>
+                        <?php
+                  }
                
             }
 
-             elseif ($admin_st_ch=='room') {
+             elseif ($admin_st_ch == 'room') {
 
-               $admin_st='1';
+               $admin_car_st='0';
+                $admin_room_st='1';
+                $admin_law_st='0';
+                $admin_super_st='0';
+
+                $queryroom=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admin_name`, `admin_img`, `admin_dept`, `admin_contact`, `admin_st`, `admin_car_st`, `admin_room_st`, `admin_law_st`, `admin_super_st`) VALUES ('$admin_login','$admin_pass','$admin_name','$file_name','$admin_dept','$admin_contact','$admin_st','$admin_car_st','$admin_room_st','$admin_law_st','$admin_super_st')");
+
+                if ($queryroom) 
+                  {
+                      ?>
+                        <script>
+                            setTimeout(function () { 
+                                    swal({
+                                      title: "Successfully!",
+                                      text: "Room Booking Admin Registration Completed!",
+                                      type: "success",
+                                      confirmButtonText: "OK"
+                                    },
+                                    function(isConfirm){
+                                      if (isConfirm) {
+                                        window.location.href = "admin-all.php";
+                                      }
+                                    }); },0);
+                           
+                          </script>
+                    <?php
+                  }
+                  else
+                  {
+                        ?>
+                         <script>
+                              setTimeout(function () { 
+                                      swal({
+                                        title: "Error!",
+                                        text: "Admin Registration Not Completed!",
+                                        type: "error",
+                                        confirmButtonText: "OK"
+                                      },
+                                      function(isConfirm){
+                                        if (isConfirm) {
+                                          window.location.href = "admin-all.php";
+                                        }
+                                      }); },0);
+                             
+                            </script>
+                        <?php
+                  }
+               
+            }
+
+            elseif ($admin_st_ch == 'law') {
+
                 $admin_car_st='0';
-                $admin_room_st='1';
+                $admin_room_st='0';
+                $admin_law_st='1';
                 $admin_super_st='0';
 
-                $queryCarpool=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admin_name`, `admin_img`, `admin_dept`, `admin_contact`, `admin_st`, `admin_car_st`, `admin_room_st`, `admin_super_st`) VALUES ('$admin_login','$admin_pass','$admin_name','$file_name','$admin_dept','$admin_contact','$admin_st','$admin_car_st','$admin_room_st','$admin_super_st')");
+                $querylaw=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admin_name`, `admin_img`, `admin_dept`, `admin_contact`, `admin_st`, `admin_car_st`, `admin_room_st`, `admin_law_st`, `admin_super_st`) VALUES ('$admin_login','$admin_pass','$admin_name','$file_name','$admin_dept','$admin_contact','$admin_st','$admin_car_st','$admin_room_st','$admin_law_st','$admin_super_st')");
 
-                ?>
-               <script>
-                        setTimeout(function () { 
-                                swal({
-                                  title: "Successfully!",
-                                  text: "Room Section Admin Registration Completed!",
-                                  type: "success",
-                                  confirmButtonText: "OK"
-                                },
-                                function(isConfirm){
-                                  if (isConfirm) {
-                                    window.location.href = "admin-all.php";
-                                  }
-                                }); },0);
-                       
-                      </script>
-                <?php
-                exit();
+               if ($querylaw) 
+                  {
+                      ?>
+                        <script>
+                            setTimeout(function () { 
+                                    swal({
+                                      title: "Successfully!",
+                                      text: "Legal Admin Registration Completed!",
+                                      type: "success",
+                                      confirmButtonText: "OK"
+                                    },
+                                    function(isConfirm){
+                                      if (isConfirm) {
+                                        window.location.href = "admin-all.php";
+                                      }
+                                    }); },0);
+                           
+                          </script>
+                    <?php
+                  }
+                  else
+                  {
+                        ?>
+                         <script>
+                              setTimeout(function () { 
+                                      swal({
+                                        title: "Error!",
+                                        text: "Admin Registration Not Completed!",
+                                        type: "error",
+                                        confirmButtonText: "OK"
+                                      },
+                                      function(isConfirm){
+                                        if (isConfirm) {
+                                          window.location.href = "admin-all.php";
+                                        }
+                                      }); },0);
+                             
+                            </script>
+                        <?php
+                  }
                
             }
 
-            elseif ($admin_st_ch=='car_room') {
+            elseif ($admin_st_ch=='all') {
 
-              $admin_st='1';
-                $admin_car_st='1';
+               $admin_car_st='1';
                 $admin_room_st='1';
+                $admin_law_st='1';
                 $admin_super_st='0';
 
-                $queryCarpool=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admin_name`, `admin_img`, `admin_dept`, `admin_contact`, `admin_st`, `admin_car_st`, `admin_room_st`, `admin_super_st`) VALUES ('$admin_login','$admin_pass','$admin_name','$file_name','$admin_dept','$admin_contact','$admin_st','$admin_car_st','$admin_room_st','$admin_super_st')");
+                $queryall=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admin_name`, `admin_img`, `admin_dept`, `admin_contact`, `admin_st`, `admin_car_st`, `admin_room_st`, `admin_law_st`, `admin_super_st`) VALUES ('$admin_login','$admin_pass','$admin_name','$file_name','$admin_dept','$admin_contact','$admin_st','$admin_car_st','$admin_room_st','$admin_law_st','$admin_super_st')");
 
-                ?>
-               <script>
-                        setTimeout(function () { 
-                                swal({
-                                  title: "Successfully!",
-                                  text: "Car & Room Section Admin Registration Completed!",
-                                  type: "success",
-                                  confirmButtonText: "OK"
-                                },
-                                function(isConfirm){
-                                  if (isConfirm) {
-                                    window.location.href = "admin-all.php";
-                                  }
-                                }); },0);
-                       
-                      </script>
-                <?php
-                exit();
-               
+                if ($queryall) 
+                  {
+                      ?>
+                        <script>
+                            setTimeout(function () { 
+                                    swal({
+                                      title: "Successfully!",
+                                      text: "All Section Admin Registration Completed!",
+                                      type: "success",
+                                      confirmButtonText: "OK"
+                                    },
+                                    function(isConfirm){
+                                      if (isConfirm) {
+                                        window.location.href = "admin-all.php";
+                                      }
+                                    }); },0);
+                           
+                          </script>
+                    <?php
+                  }
+                  else
+                  {
+                        ?>
+                         <script>
+                              setTimeout(function () { 
+                                      swal({
+                                        title: "Error!",
+                                        text: "Admin Registration Not Completed!",
+                                        type: "error",
+                                        confirmButtonText: "OK"
+                                      },
+                                      function(isConfirm){
+                                        if (isConfirm) {
+                                          window.location.href = "admin-all.php";
+                                        }
+                                      }); },0);
+                             
+                            </script>
+                        <?php
+                  }
             }
 
-            elseif ($admin_st_ch=='super') {
+            elseif ($admin_st_ch == 'super') {
 
-                $admin_st='1';
-                $admin_car_st='1';
+               $admin_car_st='1';
                 $admin_room_st='1';
+                $admin_law_st='1';
                 $admin_super_st='1';
 
-                $queryCarpool=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admin_name`, `admin_img`, `admin_dept`, `admin_contact`, `admin_st`, `admin_car_st`, `admin_room_st`, `admin_super_st`) VALUES ('$admin_login','$admin_pass','$admin_name','$file_name','$admin_dept','$admin_contact','$admin_st','$admin_car_st','$admin_room_st','$admin_super_st')");
+                $querysuper=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admin_name`, `admin_img`, `admin_dept`, `admin_contact`, `admin_st`, `admin_car_st`, `admin_room_st`, `admin_law_st`, `admin_super_st`) VALUES ('$admin_login','$admin_pass','$admin_name','$file_name','$admin_dept','$admin_contact','$admin_st','$admin_car_st','$admin_room_st','$admin_law_st','$admin_super_st')");
 
-                ?>
-                <script>
-                        setTimeout(function () { 
-                                swal({
-                                  title: "Successfully!",
-                                  text: "Super Admin Registration Completed!",
-                                  type: "success",
-                                  confirmButtonText: "OK"
-                                },
-                                function(isConfirm){
-                                  if (isConfirm) {
-                                    window.location.href = "admin-all.php";
-                                  }
-                                }); },0);
-                       
-                      </script>
-                <?php
-               exit();
+                if ($querysuper) 
+                  {
+                      ?>
+                        <script>
+                            setTimeout(function () { 
+                                    swal({
+                                      title: "Successfully!",
+                                      text: "Super Admin Registration Completed!",
+                                      type: "success",
+                                      confirmButtonText: "OK"
+                                    },
+                                    function(isConfirm){
+                                      if (isConfirm) {
+                                        window.location.href = "admin-all.php";
+                                      }
+                                    }); },0);
+                           
+                          </script>
+                    <?php
+                  }
+                  else
+                  {
+                        ?>
+                         <script>
+                              setTimeout(function () { 
+                                      swal({
+                                        title: "Error!",
+                                        text: "Admin Registration Not Completed!",
+                                        type: "error",
+                                        confirmButtonText: "OK"
+                                      },
+                                      function(isConfirm){
+                                        if (isConfirm) {
+                                          window.location.href = "admin-all.php";
+                                        }
+                                      }); },0);
+                             
+                            </script>
+                        <?php
+                  }
+               
             }
 
             else{

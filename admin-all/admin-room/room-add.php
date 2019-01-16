@@ -101,7 +101,7 @@ include('../../db/config.php');
                                                         <label class="col-sm-3 col-form-label">Room Details:</label>
                                                         <div class="col-sm-9">
 
-                                                            <textarea type="text" name="room_details" class="form-control" rows="3" required><?php echo $row['room_details']; ?></textarea> 
+                                                            <textarea type="text" name="room_details" class="form-control" rows="3" placeholder="Write Somthing About Room" required></textarea> 
 
                                                         </div>
                                                     </div>
@@ -120,6 +120,46 @@ include('../../db/config.php');
                                                             <div class="form-radio">
                                                                 <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="projector" id="membershipRadios2" value="0"> No
+                              </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+
+                                             <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Room Type:</label>
+                                                        <div class="col-sm-9">
+
+                                                           
+                                    <select class="form-control" name="room_type" required>
+                                                 <option value="" disabled selected>Select Room Type</option>
+                                                <option value="Meeting">Meeting Room</option>
+                                                <option value="Residential">Residential Room</option>
+                                                
+
+                                    </select>
+                                                            
+                                                        
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Publish</label>
+                                                        <div class="col-sm-4">
+                                                            <div class="form-radio">
+                                                                <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="show_st" id="membershipRadios1" value="1" checked> Yes
+                              </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-5">
+                                                            <div class="form-radio">
+                                                                <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="show_st" id="membershipRadios2" value="0"> No
                               </label>
                                                             </div>
                                                         </div>

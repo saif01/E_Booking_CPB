@@ -69,9 +69,7 @@
                 <li class="nav-item">
                   <a class="nav-link" href="user-reg"><i class="menu-icon mdi mdi-pen text-success"></i> User Registration </a>
                 </li>
-                
-                
-                
+                  
               </ul>
             </div>
           </li>

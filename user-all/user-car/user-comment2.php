@@ -212,7 +212,9 @@ $row2 = $query2->fetch_assoc();
                     </article>
                 </div>
                 <!-- Single Articles End -->
-         
+ 
+
+
 <!--Start Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

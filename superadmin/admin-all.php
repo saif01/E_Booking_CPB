@@ -15,7 +15,7 @@ include('../db/config.php');
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <?php include('common/title.php'); ?>
         <link rel="icon" type="img/png" href="img/logo.png" />
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
@@ -56,13 +56,14 @@ include('../db/config.php');
                                                 <thead>
                                                     <tr>
 
-                                                        <th>Img</th>
-                                                        <th>Name</th>
-                                                        <th>Phone</th>
-                                                        <th>Car pool</th>
-                                                        <th>Room Booking</th>
-                                                        <th>Super Admin</th>
                                                         <th>Actions</th>
+                                                        <th>Legal</th>
+                                                        <th>Car pool</th>
+                                                        <th>Room </th>
+                                                        <th>Super </th>
+                                                        <th>Img</th>
+                                                        <th>Department</th>
+                                                        
 
                                                     </tr>
                                                 </thead>
@@ -73,86 +74,105 @@ include('../db/config.php');
     {
 
 ?>
-                      <tr>
-
-                              <td> 
-                                  <img src="../pimages/admin/<?php echo($row['admin_img']);?>" class="img-responsive" alt="Image" height="42" width="42" /> 
-                              </td>
-                              <td class="center">
-                                  <?php echo htmlentities($row['admin_name']) ; ?>
-                              </td>
-                              <td class="center">
-                                  <?php echo htmlentities($row['admin_contact']); ?>
-                              </td>
-                              <td class="center">
-     <!--****************  Car Booking Admin Change Part *********************-->
-                                  <?php
-                                  if ($row['admin_car_st']=='1') 
-                                  { ?>
-                                      
-<a href="admin-status.php?h_car_ad_id=<?php echo htmlentities($row['admin_id']);?>" id="hidecar" title="Hide"> <i class="mdi mdi-check-all text-success icon-lg"></i></a>
-                                      <?php
-                                   }
-                                   else{
-                                     ?>
-<a href="admin-status.php?s_car_ad_id=<?php echo htmlentities($row['admin_id']);?>" id="showcar" title="Show"> <i class="mdi mdi-close text-danger icon-lg"></i></a>
-
-                                     <?php
-                                   }
-
-                                   ?>
-                              </td>
-
-                              <td class="center">
-  <!--****************   Room Booking Admin Change Part *********************-->
-                                  <?php
-                                  if ($row['admin_room_st']=='1') {
-                                      ?>
-<a href="admin-status.php?h_room_ad_id=<?php echo htmlentities($row['admin_id']);?>" id="hideroom" title="Hide"> <i class="mdi mdi-check-all text-success icon-lg"></i></a>
-                                     <?php
-                                   }
-                                   else{
-                                     ?>
-<a href="admin-status.php?s_room_ad_id=<?php echo htmlentities($row['admin_id']);?>" id="showroom" title="Show"> <i class="mdi mdi-close text-danger icon-lg"></i></a>
-                                     <?php
-                                   }?>
-                              </td>
-
-                               <td class="center">
-<!--****************   Super Admin Change Part *********************-->
-                                  <?php
-                                  if ($row['admin_super_st']=='1') {
-                                      ?>
-<a href="admin-status.php?h_super_ad_id=<?php echo htmlentities($row['admin_id']);?>" id="hidesuper" title="Hide"> <i class="mdi mdi-check-all text-success icon-lg"></i></a>
-                                      <?php
-                                   }
-                                   else
-                                   {?>
-<a href="admin-status.php?s_super_ad_id=<?php echo htmlentities($row['admin_id']);?>" id="showsuper" title="Show"> <i class="mdi mdi-close text-danger icon-lg"></i></a>
-                                <?php
-                              }?>
-                              </td>
-
-                            
-                <td class="center">
-
-                    <?php
-                                  if($row['admin_st']==1)
-                                         {?>
-<a href="admin-status.php?h_admin_id=<?php echo htmlentities($row['admin_id']);?>" id="hide" title="Hide"> <i class="mdi mdi-eye text-success icon-lg"></i></a>
-                                            
-                                        <?php } else {?>
-
-<a href="admin-status.php?s_admin_id=<?php echo htmlentities($row['admin_id']);?>" id="show" title="Show"> <i class="mdi mdi-eye-off text-danger icon-lg"></i></a>
-                                            <?php } ?>
+                <tr>
+                        <td>
+                          
+<a href="admin-delete.php?admin_id=<?php echo $row['admin_id']?>" id="delete" title="Delete"> <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a>
 
 <a href="admin-edit?admin_id=<?php echo htmlentities($row['admin_id']);?>" title="Edit"><i class="mdi mdi-pencil-box-outline text-warning icon-lg"></i>  </a>
 
 
+          <?php
+                        if($row['admin_st']==1)
+                               {?>
+<a href="admin-status.php?h_admin_id=<?php echo htmlentities($row['admin_id']);?>" id="hide" title="Hide"> <i class="mdi mdi-eye text-success icon-lg"></i></a>
+                                  
+                              <?php } else {?>
 
-<a href="admin-delete.php?admin_id=<?php echo $row['admin_id']?>" id="delete" title="Delete"> <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a>
-                                                                
-                                                        </td>
+<a href="admin-status.php?s_admin_id=<?php echo htmlentities($row['admin_id']);?>" id="show" title="Show"> <i class="mdi mdi-eye-off text-danger icon-lg"></i></a>
+                                  <?php } ?>
+
+
+                                                      
+                      </td>
+                      <td>
+<!--****************  Legal Admin Change Part *********************-->
+                        <?php
+                        if ($row['admin_law_st']=='1') 
+                        { ?>
+                            
+<a href="admin-status.php?h_law_ad_id=<?php echo htmlentities($row['admin_id']);?>" id="remove" title="Hide"> <i class="mdi mdi-check-all text-success icon-lg"></i></a>
+                            <?php
+                         }
+                         else{
+                           ?>
+<a href="admin-status.php?s_law_ad_id=<?php echo htmlentities($row['admin_id']);?>" id="give" title="Show"> <i class="mdi mdi-close text-danger icon-lg"></i></a>
+
+                           <?php
+                         }
+
+                         ?>
+                    </td>
+
+                    <td>
+<!--****************  Car Booking Admin Change Part *********************-->
+                        <?php
+                        if ($row['admin_car_st']=='1') 
+                        { ?>
+                            
+<a href="admin-status.php?h_car_ad_id=<?php echo htmlentities($row['admin_id']);?>" id="remove" title="Hide"> <i class="mdi mdi-check-all text-success icon-lg"></i></a>
+                            <?php
+                         }
+                         else{
+                           ?>
+<a href="admin-status.php?s_car_ad_id=<?php echo htmlentities($row['admin_id']);?>" id="give" title="Show"> <i class="mdi mdi-close text-danger icon-lg"></i></a>
+
+                           <?php
+                         }
+
+                         ?>
+                    </td>
+
+                    <td>
+<!--****************   Room Booking Admin Change Part *********************-->
+                        <?php
+                        if ($row['admin_room_st']=='1') {
+                            ?>
+<a href="admin-status.php?h_room_ad_id=<?php echo htmlentities($row['admin_id']);?>" id="remove" title="Hide"> <i class="mdi mdi-check-all text-success icon-lg"></i></a>
+                           <?php
+                         }
+                         else{
+                           ?>
+<a href="admin-status.php?s_room_ad_id=<?php echo htmlentities($row['admin_id']);?>" id="give" title="Show"> <i class="mdi mdi-close text-danger icon-lg"></i></a>
+                           <?php
+                         }?>
+                    </td>
+
+                     <td>
+<!--****************   Super Admin Change Part *********************-->
+                        <?php
+                        if ($row['admin_super_st']=='1') {
+                            ?>
+<a href="admin-status.php?h_super_ad_id=<?php echo htmlentities($row['admin_id']);?>" id="remove" title="Hide"> <i class="mdi mdi-check-all text-success icon-lg"></i></a>
+                            <?php
+                         }
+                         else
+                         {?>
+<a href="admin-status.php?s_super_ad_id=<?php echo htmlentities($row['admin_id']);?>" id="give" title="Show"> <i class="mdi mdi-close text-danger icon-lg"></i></a>
+                      <?php
+                    }?>
+                    </td>
+
+
+                    <td>
+<a href="javascript:void(0);" onClick="popUpWindow('admin-access-profile.php?admin_id=<?php echo $row['admin_id'];?>');" title="View Admin Info."><img src="../pimages/admin/<?php echo $row['admin_img'];?>" class="img-responsive" alt="Image" /> <?php echo $row['admin_name']; ?></a>
+
+                    </td>
+                   
+                    <td>
+                        <?php echo htmlentities($row['admin_dept']); ?>
+                    </td>
+
                                                     </tr>
                                                     <?php } ?>
                                                 </tbody>
@@ -201,6 +221,18 @@ include('../db/config.php');
             $(document).ready(function() {
             $('#example').DataTable();
         } );
+        </script>
+
+
+         <script language="javascript" type="text/javascript">
+            var popUpWin = 0;
+
+            function popUpWindow(URLStr, left, top, width, height) {
+                if (popUpWin) {
+                    if (!popUpWin.closed) popUpWin.close();
+                }
+                popUpWin = open(URLStr, 'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width=' + 600 + ',height=' + 580 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
+            }
         </script>
 
 
@@ -276,17 +308,14 @@ include('../db/config.php');
 <!--**************** End Sweet Alert Script code *******************-->
 
 
-
-<!-- ******************************************************************* -->
-
-<!--**************** Super Admin Start Sweet Alert Script code *******************-->
+<!--****************  Admin Start Sweet Alert Script code *******************-->
 <script>  
-         $(document).on("click", "#showsuper", function(e){
+         $(document).on("click", "#give", function(e){
              e.preventDefault();
              var link = $(this).attr("href");
                 swal({
-                  title: "Are you Want to Make Super Admin ???",
-                  text: "If Make Super Admin !!, This User Get All Kind Of Access !!",
+                  title: "Are you Want to Give This Access ???",
+                  text: "If  Give !,This User Can Get This Access !",
                   icon: "success",
                   buttons: true,
                   dangerMode: true,
@@ -302,12 +331,12 @@ include('../db/config.php');
     </script>
 
 <script>  
-         $(document).on("click", "#hidesuper", function(e){
+         $(document).on("click", "#remove", function(e){
              e.preventDefault();
              var link = $(this).attr("href");
                 swal({
-                  title: "Are you Want to Remove Super Admin Access ???",
-                  text: "If Removed !!, This User Can't Get All Access !!",
+                  title: "Are you Want to Remove This Access ???",
+                  text: "If Removed !!, This User Can't Get This Access  !",
                   icon: "warning",
                   buttons: true,
                   dangerMode: true,
@@ -324,93 +353,6 @@ include('../db/config.php');
 <!--**************** End Sweet Alert Script code *******************-->
 
 
-<!--**************** Romm Booking Admin Start Sweet Alert Script code *******************-->
-<script>  
-         $(document).on("click", "#showroom", function(e){
-             e.preventDefault();
-             var link = $(this).attr("href");
-                swal({
-                  title: "Are you Want to Make Room Booking Admin Access ???",
-                  text: "If Make Room Booking Admin !,This User Can Get Room Booking Access !",
-                  icon: "success",
-                  buttons: true,
-                  dangerMode: true,
-                })
-                .then((willDelete) => {
-                  if (willDelete) {
-                       window.location.href = link;
-                  } else {
-                    swal("Safe Data!");
-                  }
-                });
-            });
-    </script>
-
-<script>  
-         $(document).on("click", "#hideroom", function(e){
-             e.preventDefault();
-             var link = $(this).attr("href");
-                swal({
-                  title: "Are you Want to Remove Room Booking Admin Access ???",
-                  text: "If Removed !!, This User Can't Get Room Booking Access  !",
-                  icon: "warning",
-                  buttons: true,
-                  dangerMode: true,
-                })
-                .then((willDelete) => {
-                  if (willDelete) {
-                       window.location.href = link;
-                  } else {
-                    swal("Safe Data!");
-                  }
-                });
-            });
-    </script>
-<!--**************** End Sweet Alert Script code *******************-->
-
-<!--**************** CAr Booking Admin Start Sweet Alert Script code *******************-->
-<script>  
-         $(document).on("click", "#showcar", function(e){
-             e.preventDefault();
-             var link = $(this).attr("href");
-                swal({
-                  title: "Are you Want to Make CarPool Admin Access ???",
-                  text: "If Make CarPool Admin !,This User Can Get CarPool Access !",
-                  icon: "success",
-                  buttons: true,
-                  dangerMode: true,
-                })
-                .then((willDelete) => {
-                  if (willDelete) {
-                       window.location.href = link;
-                  } else {
-                    swal("Safe Data!");
-                  }
-                });
-            });
-    </script>
-
-<script>  
-         $(document).on("click", "#hidecar", function(e){
-             e.preventDefault();
-             var link = $(this).attr("href");
-                swal({
-                  title: "Are you Want to Remove CarPool Admin Access ???",
-                  text: "If Removed !!, This User Can't Get CarPool Access  !",
-                  icon: "warning",
-                  buttons: true,
-                  dangerMode: true,
-                })
-                .then((willDelete) => {
-                  if (willDelete) {
-                       window.location.href = link;
-                  } else {
-                    swal("Safe Data!");
-                  }
-                });
-            });
-    </script>
-<!--**************** End Sweet Alert Script code *******************-->
 
     </body>
 

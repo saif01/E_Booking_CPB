@@ -227,18 +227,18 @@ include('../db/config.php');
 
 
 
-        <script type="text/javascript">
-            $(document).ready(function() {
-                var table = $('#example').DataTable({
-                    lengthChange: false,
-                    buttons: [ 'excel', 'pdf', 'colvis' ]
-                });
+       <script type="text/javascript">
+    $(document).ready(function() {
+        var table = $('#example').DataTable({
+            lengthChange: false,
+            "order": [[ 0, 'DESC' ]],
+            buttons: [ 'excel', 'colvis' ]
+        });
 
-                table.buttons().container()
-                    .appendTo( '#example_wrapper .col-md-6:eq(0)' );
-            });
-        </script>
-
+        table.buttons().container()
+            .appendTo( '#example_wrapper .col-md-6:eq(0)' );
+    });
+</script>
     </body>
 
     </html>

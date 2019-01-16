@@ -111,7 +111,7 @@
             </div>
           </li>
 
-          <li class="nav-item">
+         <!--  <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#user_section" aria-expanded="false" aria-controls="user_section">
               <i class="menu-icon mdi mdi-account-multiple-plus text-success"></i>
               <span class="menu-title">User Section</span>
@@ -130,7 +130,7 @@
                 
               </ul>
             </div>
-          </li>
+          </li> -->
 
            
 

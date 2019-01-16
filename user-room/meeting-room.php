@@ -108,7 +108,8 @@ else{
                         <div class="row">
 
                             <?php
-                $allrooms=mysqli_query($con,"SELECT * FROM `room` ORDER BY `room_id` ASC");
+                  $room_type="Meeting";          
+                $allrooms=mysqli_query($con,"SELECT * FROM `room` WHERE `room_type`='$room_type' AND `show_st`='1' ORDER BY `room_name` ASC");
                 while ($row=mysqli_fetch_array($allrooms)) { 
 
                // print_r($row) ;
@@ -154,7 +155,7 @@ else{
                                             <li> <b><?php echo $row['room_capicity'];?></b> Persons</li>
                                         </ul>
                                         
-                                        <a href="booking?room_id=<?php echo $row['room_id']; ?>" class="rent-btn">Book It</a>
+                                        <a href="booking-meeting?room_id=<?php echo $row['room_id']; ?>" class="rent-btn">Book It</a>
                                     </div>
                                 </div>
                             </div>

@@ -29,6 +29,7 @@ $adminSql=mysqli_query($con,"SELECT * FROM `admin` WHERE `admin_login`='$admin_l
                     $admin_st= $row['admin_st'];
                     $admin_car_st= $row['admin_car_st'];
                     $admin_room_st= $row['admin_room_st'];
+                    $admin_law_st= $row['admin_law_st'];
                     $admin_super_st= $row['admin_super_st'];
 
 
@@ -42,10 +43,13 @@ $adminSql=mysqli_query($con,"SELECT * FROM `admin` WHERE `admin_login`='$admin_l
 
                     
 
-        // *********** Car Pool Admin Section ************//
+        // ***********Only Car Pool Admin Section ************//
 
-                    if ($admin_st=='1' && $admin_car_st=='1' && $admin_room_st=='0' && $admin_super_st=='0') 
-                    {  
+                     if($admin_st=='1' && 
+                        $admin_room_st=='0' && 
+                        $admin_car_st=='1' && 
+                        $admin_law_st=='0' && 
+                        $admin_super_st=='0') {  
 
 
                         $_SESSION['admin-car-login']=$_POST['admin_login'];
@@ -58,10 +62,13 @@ $adminSql=mysqli_query($con,"SELECT * FROM `admin` WHERE `admin_login`='$admin_l
 
                 }
 
-     // *********** Room Booking Admin Section ************//
+     // ***********Only Room Booking Admin Section ************//
 
-                elseif($admin_st=='1' && $admin_car_st=='0' && $admin_room_st=='1' && $admin_super_st=='0') 
-                    {  
+                 elseif($admin_st=='1' && 
+                        $admin_room_st=='1' && 
+                        $admin_car_st=='0' && 
+                        $admin_law_st=='0' && 
+                        $admin_super_st=='0'){  
 
 
                         $_SESSION['admin-room-login']=$_POST['admin_login'];
@@ -74,26 +81,53 @@ $adminSql=mysqli_query($con,"SELECT * FROM `admin` WHERE `admin_login`='$admin_l
 
                 }
 
-    // ***********Car And Room Booking Admin Both Section ************//
+    // ***********Only Law Section ************//
 
-                elseif($admin_st=='1' && $admin_car_st=='1' && $admin_room_st=='1' && $admin_super_st=='0') 
-                    {  
+                 elseif($admin_st=='1' && 
+                        $admin_room_st=='0' && 
+                        $admin_car_st=='0' && 
+                        $admin_law_st=='1' && 
+                        $admin_super_st=='0') {  
+
+
+                        $_SESSION['admin-law-login']=$_POST['admin_login'];
+                        $_SESSION['admin_id']=$row['admin_id'];
+                         
+                         $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`,`login_st`) VALUES ('$admin_login','$admin_name','$ip',' $os','$browser','$device','$currentTime','$admin_st')");
+                                        
+                        header("Location:../admin-law");
+                        exit();      
+
+                }
+
+    // ***********All Admin Both Section ************//
+
+                 elseif($admin_st=='1' && 
+                        $admin_room_st=='1' && 
+                        $admin_car_st=='1' && 
+                        $admin_law_st=='1' && 
+                        $admin_super_st=='0') {  
 
 
                         $_SESSION['admin-all-login']=$_POST['admin_login'];
                         $_SESSION['admin_id']=$row['admin_id'];
                          
                          $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`,`login_st`) VALUES ('$admin_login','$admin_name','$ip',' $os','$browser','$device','$currentTime','$admin_st')");
-                                        
-                         header("Location:../admin-all/project_direct");
-                        exit();      
+                         
+                    header("Location:../admin-all/project_direct");                
+                    exit();      
 
                 }
 
+
+
      // *********** Super Admin Section ************//
 
-                elseif($admin_st=='1' && $admin_car_st=='1' && $admin_room_st=='1' && $admin_super_st=='1') 
-                    {  
+                 elseif($admin_st=='1' && 
+                        $admin_room_st=='1' && 
+                        $admin_car_st=='1' && 
+                        $admin_law_st=='1' && 
+                        $admin_super_st=='1') { 
 
 
                         $_SESSION['admin-super-login']=$_POST['admin_login'];
@@ -106,7 +140,7 @@ $adminSql=mysqli_query($con,"SELECT * FROM `admin` WHERE `admin_login`='$admin_l
 
                 }
 
-            elseif($st==0)
+            elseif($admin_st=='0')
                 {
                     $_SESSION['errmsg']="Your ID Was Blocked.!!! Contract With IT Department";       
                     $_SESSION['adminName']=$_POST['adminName'];
@@ -115,21 +149,19 @@ $adminSql=mysqli_query($con,"SELECT * FROM `admin` WHERE `admin_login`='$admin_l
                                            
                      $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`,`login_st`) VALUES ('$admin_login','$admin_name','$ip',' $os','$browser','$device','$currentTime','$admin_st')");
 
-                     header("location: login");
+                     header("location: index");
                     exit();
                    
                  }
 
                  else{
 
-                    $_SESSION['errmsg']="Username Or Password Not Match.!!!";       
+                    $_SESSION['errmsg']="Somthing Going Wrong .!!! Please Contact With C.P.B. IT";      
                     $_SESSION['adminName']=$_POST['adminName'];
-                    
-                     
-                                           
+                                       
                      $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_ip`, `user_os`, `user_browser`, `user_device`) VALUES ('".$_SESSION['adminName']."','$ip','$rowcount','$browser','$device')");
 
-                     header("location: login");
+                     header("location: index");
                     exit();                   
 
                  }

@@ -3,86 +3,12 @@ session_start();
 error_reporting(0);
 if(strlen($_SESSION['admin-super-login'])==0)
   { 
-header('location:../admin/index');
+header('location:../admin');
 }
 else{ 
 
 include('../db/config.php');
-
-if (isset($_POST['submit'])) {
-
-$user_login=$_POST['user_login'];
-$user_pass=$_POST['user_pass'];
-$user_name=$_POST['user_name'];
-$user_dept=$_POST['user_dept'];
-$user_contact=$_POST['user_contact'];
-$user_office_id=$_POST['user_office_id'];
-$user_st_ch=$_POST['user_st_ch'];
-$user_st = 1;
-
-
-$file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['user_img']['name']);
-    $storeFile="../pimages/user/".$file_name;
-    $fileName=$_FILES['user_img']['tmp_name'];
-
-    move_uploaded_file($fileName,$storeFile);
-
-    if ($user_st_ch=='carpool') 
-        {   
-            $user_car_st='1';
-            $user_room_st='0';
-
-            $query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_name`, `user_img`, `user_dept`, `user_contact`, `user_office_id`, `user_st`, `user_car_st`, `user_room_st`) VALUES ('$user_login','$user_pass','$user_name','$file_name','$user_dept','$user_contact','$user_office_id','$user_st','$user_car_st','$user_room_st')");
-        ?>
-            <script>
-                alert('Update successfull.  !');
-                window.open('user-all-info', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-        }
-
-        elseif ($user_st_ch=='room') 
-        {   
-            $user_car_st='0';
-            $user_room_st='1';
-
-            $query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_name`, `user_img`, `user_dept`, `user_contact`, `user_office_id`, `user_st`, `user_car_st`, `user_room_st`) VALUES ('$user_login','$user_pass','$user_name','$file_name','$user_dept','$user_contact','$user_office_id','$user_st','$user_car_st','$user_room_st')");
-        ?>
-            <script>
-
-                
-                alert('Update successfull.  !');
-                window.open('user-all-info', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-        }
-         elseif ($user_st_ch=='car_room') 
-        {   
-            $user_car_st='1';
-            $user_room_st='1';
-
-            $query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_name`, `user_img`, `user_dept`, `user_contact`, `user_office_id`, `user_st`, `user_car_st`, `user_room_st`) VALUES ('$user_login','$user_pass','$user_name','$file_name','$user_dept','$user_contact','$user_office_id','$user_st','$user_car_st','$user_room_st')");
-        ?>
-            <script>
-                alert('Update successfull.  !');
-                window.open('user-all-info', '_self'); //for locating other page.
-                //window.location.reload(); //For reload Same page
-            </script>
-            <?php
-        }
-
-        else{
-            ?>
-            <script>
-                alert('Error Generated.!!!!!!!!!!');
-                
-            </script>
-            <?php
-        }
-
- } ?>
+?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -91,7 +17,7 @@ $file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['user_img'
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <?php include('common/title.php'); ?>
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
@@ -143,127 +69,124 @@ $file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['user_img'
                                     <div class="card-body">
                                         <!-- <h4 class="card-title">Car Add Form</h4> -->
                                         <button class="card-title btn btn-outline btn-block ">User Registration</button>
-                                        <form class="form-sample" action="" method="post" enctype="multipart/form-data">
+<form class="form-sample" action="user-reg-action.php" method="post" enctype="multipart/form-data">
 
 
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
 
-                                                        <label class="col-sm-3 col-form-label">User ID  </label>
-                                                        <div class="col-sm-9">
-                                                            
-                                                            <input type="text" id="check_value" onBlur="userAvailability()" name="user_login" class="form-control" placeholder="Enter User Name" required>
-                                                <span id="user-availability-status1" style="font-size:12px;"></span>
+                <label class="col-sm-3 col-form-label">User ID  </label>
+                <div class="col-sm-9">
+                    
+                    <input type="text" id="check_value" onBlur="userAvailability()" name="user_login" class="form-control" placeholder="Enter User Name" required>
+        <span id="user-availability-status1" style="font-size:12px;"></span>
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                 <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Password</label>
-                                                        <div class="col-sm-9">
-                                                             <input type="text" name="user_pass" class="form-control" placeholder="Default Password" value="12345">
-                                                        </div>
-                                                    </div>
-                                                </div>
+                </div>
+            </div>
+        </div>
+         <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Password</label>
+                <div class="col-sm-9">
+                     <input type="text" name="user_pass" class="form-control" placeholder="Default Password" value="12345">
+                </div>
+            </div>
+        </div>
 
-                                            </div>
+    </div>
 
-                                             <div class="row">
-                                                
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">User Name </label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" name="user_name" class="form-control" placeholder="Enter User Full Name" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">User Contact</label>
-                                                        <div class="col-sm-9">
-                                                             <input type="text" name="user_contact" class="form-control" placeholder="Enter User Phone Number" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
+     <div class="row">
+        
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">User Name </label>
+                <div class="col-sm-9">
+                    <input type="text" name="user_name" class="form-control" placeholder="Enter User Full Name" required>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">User Contact</label>
+                <div class="col-sm-9">
+                     <input type="text" name="user_contact" class="form-control" placeholder="Enter User Phone Number" required>
+                </div>
+            </div>
+        </div>
 
-                                            </div>
-                                            
+    </div>
+    
 
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Department</label>
-                                                        <div class="col-sm-9">
-                                                             <input type="text" name="user_dept" class="form-control" placeholder="Enter User Department Name" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">User Office ID </label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" name="user_office_id" class="form-control" placeholder="Enter User Office ID" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">User Image</label>
-                                                        <div class="col-sm-9">
-                                    <input name="user_img" type="file" class="form-control file-upload-info" placeholder="Upload Image" onchange="readURL(this);" required>
-                                        <p style="color:red;">Resolution 250*300 pixels</p>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Department</label>
+                <div class="col-sm-9">
+                     <input type="text" name="user_dept" class="form-control" placeholder="Enter User Department Name" required>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">User Office ID </label>
+                <div class="col-sm-9">
+                    <input type="text" name="user_office_id" class="form-control" placeholder="Enter User Office ID" required>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">User Image</label>
+                <div class="col-sm-9">
+<input name="user_img" type="file" class="form-control file-upload-info" placeholder="Upload Image" onchange="readURL(this);" required>
+<p style="color:red;">Resolution 250*300 pixels</p>
 
-                                        <img id="image" src="" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                 <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">User Define </label>
-                                                        <div class="col-sm-9">
-                                    <select class="form-control" name="user_st_ch" required>
-                                                 <option value="" disabled selected>Select Data</option>
-                                                <option value="carpool">Car Pool</option>
-                                                <option value="room" >Room Booking</option>
-                                                <option value="car_room" >Car Pool & Room Booking (Both)</option>
-                                               
+<img id="image" src="" />
+                </div>
+            </div>
+        </div>
+         <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">User Define </label>
+                <div class="col-sm-9">
+<select class="form-control" name="user_st_ch" required>
+         <option value="" disabled selected>Select Data</option>
+        <option value="carpool">Car Pool</option>
+        <option value="room" >Room Booking</option>
+        <option value="law" >Legal Section</option>
+        <option value="all" >All Sections</option>
+       
 
-                                    </select>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>    
-                                            </div>
+</select>
+                    
+                </div>
+            </div>
+        </div>    
+    </div>
 
-                                           
-                                               
+   
+       
 
-                                               
-                                            <div class="row">
-                                                <div class="col-12 text-center">
-                                                    <button type="submit" name="submit" class="btn btn-outline-success btn-block btn-rounded">User Registration </button>
+       
+    <div class="row">
+        <div class="col-12 text-center">
+            <button type="submit" name="submit" class="btn btn-outline-success btn-block btn-rounded">User Registration </button>
 
-                                                    <button class="btn btn-light btn-block btn-rounded ">Reset</button>
+            <button class="btn btn-light btn-block btn-rounded ">Reset</button>
 
-                                                   <a href="##" onClick="history.go(-1); return false;"> <button class="btn btn-light btn-block btn-rounded " style="background-color:#a08e8e; margin-top: 8px;">Cancel</button></a>
-                                                   
-                                                   
-                                                </div>
-                                            </div>
+           <a href="##" onClick="history.go(-1); return false;"> <button class="btn btn-light btn-block btn-rounded " style="background-color:#a08e8e; margin-top: 8px;">Cancel</button></a>
+           
+           
+        </div>
+    </div>
 
-                                        </form>
+</form>
                                     </div>
                                 </div>
-                        
-                                        
-
-
-                                                                                                
+                                                                        
                             <!--row end-->
                         </div>
                         <!-- content-wrapper-->

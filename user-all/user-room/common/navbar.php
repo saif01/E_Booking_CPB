@@ -17,10 +17,10 @@
                         <nav class="mainmenu alignright">
                             <ul>
                               
-                    <li><a href="../user-car">Car Section </a>    
+                   <!--  <li><a href="../user-car">Car Section </a>    
                                 </li>
-
-                          <li class="active"><a href="index">Home </a>    
+ -->
+                          <li class="active"><a href="../project_direct/index">Home </a>    
                                 </li>
                                 
                                 <li> 
@@ -42,12 +42,12 @@ $query2=mysqli_query($con,"SELECT `user_img` FROM `user` WHERE `user_id`='$user_
                                     </ul> 
                                  </li>   
 
-                                <li><a href="meeting-room"> Room List </a>
-                                    <!-- <ul>
-                                        <li><a href="car-list-reg">Regular Car</a></li>
-                                        <li><a href="car-list-temp">Temporary Car</a></li>
+                                <li><a href=""> Room List </a>
+                                    <ul>
+                                        <li><a href="meeting-room">Meeting Room</a></li>
+                                        <li><a href="residential-room">Residential Room</a></li>
                                         
-                                    </ul> -->
+                                    </ul>
                                 </li>
                                 <li><a href="logout">Log Out</a></li>
                             </ul>

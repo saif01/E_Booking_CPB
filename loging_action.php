@@ -24,18 +24,18 @@ if($num>0)
         
 
         //*********** User Login Log valus ************//
-                    $ip= UserInfo::get_ip();
-                    $os= UserInfo::get_os();
-                    $browser= UserInfo::get_browser();
-                    $device= UserInfo::get_device();
-                    $user_id=$row['user_id'];
-                    $user_name=$row['user_name'];
+            $ip= UserInfo::get_ip();
+            $os= UserInfo::get_os();
+            $browser= UserInfo::get_browser();
+            $device= UserInfo::get_device();
+            $user_id=$row['user_id'];
+            $user_name=$row['user_name'];
 
-                    $user_car_st=$row['user_car_st'];
-                    $user_room_st=$row['user_room_st'];
+            $user_car_st=$row['user_car_st'];
+            $user_room_st=$row['user_room_st'];
+            $user_law_st=$row['user_law_st'];
 
-
-                    $st=$row['user_st'];
+            $st=$row['user_st'];
 
 // ************** For Car and Room Section user **********************////
 
@@ -56,7 +56,7 @@ if($num>0)
 
 
 // ************** For Only car Section user **********************////
-                    elseif ($st=='1' && $user_car_st=='1' && $user_room_st=='0') 
+                    elseif ($st=='1' && $user_car_st=='1') 
                     { 
                          $_SESSION['user_id']=$row['user_id'];
                          //$_SESSION['car_logIn_id']=$_POST['user_login'];
@@ -73,7 +73,7 @@ if($num>0)
                         
 // ************** For Only*** ROOM BOOKING ****Section user **********************////
 
-                         elseif ($st=='1' && $user_car_st=='0' && $user_room_st=='1') 
+                    elseif ($st=='1' && $user_room_st=='1') 
                     { 
                          $_SESSION['user_id']=$row['user_id'];
                          //$_SESSION['car_logIn_id']=$_POST['user_login'];
@@ -84,6 +84,22 @@ if($num>0)
                         $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`, `login_st`) VALUES ('$user_login','$user_name','$ip','$os','$browser','$device','$currentTime','$st')");
                                                                 
                          header("Location:user-room");
+                        
+                        }
+
+// ************** For Only*** LEGAL DEPARTMENT  ****Section user **********************////
+
+                    elseif ($st=='1' &&  $user_law_st=='1') 
+                    { 
+                         $_SESSION['user_id']=$row['user_id'];
+                         //$_SESSION['car_logIn_id']=$_POST['user_login'];
+                         $_SESSION['car_law_id']=$row['user_login'];
+                         $_SESSION['user_name']=$row['user_name'];
+                                                                      
+                       
+                        $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`, `login_st`) VALUES ('$user_login','$user_name','$ip','$os','$browser','$device','$currentTime','$st')");
+                                                                
+                         header("Location:user-law");
                         
                         }
 

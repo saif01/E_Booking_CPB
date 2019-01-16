@@ -8,112 +8,7 @@ header('location:../admin/index');
 else{ 
 include('../db/config.php');
 
-if (isset($_POST['submit'])) {
-
-$admin_login = $_POST['admin_login'];
-$admin_name = $_POST['admin_name'];
-$admin_pass = $_POST['admin_pass'];
-$admin_dept = $_POST['admin_dept'];
-$admin_contact =$_POST['admin_contact'];
-$admin_contract = $_POST['admin_contract'];
-$admin_officeId = $_POST['admin_officeId'];
-$admin_st_ch = $_POST['admin_st'];
-
-
-
-
-          $file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['admin_img']['name']);
-            $storeFile="../pimages/admin/".$file_name;
-            $fileName=$_FILES['admin_img']['tmp_name'];
-
-            move_uploaded_file($fileName,$storeFile);
-
-
-            if ($admin_st_ch =='carpool') {
-
-                $admin_st='1';
-                $admin_car_st='1';
-                $admin_room_st='0';
-                $admin_super_st='0';
-
-                $queryCarpool=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admin_name`, `admin_img`, `admin_dept`, `admin_contact`, `admin_st`, `admin_car_st`, `admin_room_st`, `admin_super_st`) VALUES ('$admin_login','$admin_pass','$admin_name','$file_name','$admin_dept','$admin_contact','$admin_st','$admin_car_st','$admin_room_st','$admin_super_st')");
-
-                ?>
-                <script>
-                    alert('Update successfull. Make CarPool Admin !!!');
-                    window.open('admin-all.php', '_self'); //for locating other page.
-                    //window.location.reload(); //For reload Same page
-                </script>
-                <?php
-                exit();
-               
-            }
-
-             elseif ($admin_st_ch=='room') {
-
-               $admin_st='1';
-                $admin_car_st='1';
-                $admin_room_st='0';
-                $admin_super_st='0';
-
-                $queryCarpool=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admin_name`, `admin_img`, `admin_dept`, `admin_contact`, `admin_st`, `admin_car_st`, `admin_room_st`, `admin_super_st`) VALUES ('$admin_login','$admin_pass','$admin_name','$file_name','$admin_dept','$admin_contact','$admin_st','$admin_car_st','$admin_room_st','$admin_super_st')");
-
-                ?>
-                <script>
-                    alert('Update successfull. Make Room Booking Admin !');
-                    window.open('admin-all.php', '_self'); //for locating other page.
-                    //window.location.reload(); //For reload Same page
-                </script>
-                <?php
-                exit();
-               
-            }
-
-            elseif ($admin_st_ch=='car_room') {
-
-              $admin_st='1';
-                $admin_car_st='1';
-                $admin_room_st='0';
-                $admin_super_st='0';
-
-                $queryCarpool=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admin_name`, `admin_img`, `admin_dept`, `admin_contact`, `admin_st`, `admin_car_st`, `admin_room_st`, `admin_super_st`) VALUES ('$admin_login','$admin_pass','$admin_name','$file_name','$admin_dept','$admin_contact','$admin_st','$admin_car_st','$admin_room_st','$admin_super_st')");
-
-                ?>
-                <script>
-                    alert('Update successfull. Make CarPool And Room Booking Admin!!!');
-                    window.open('admin-all.php', '_self'); //for locating other page.
-                    //window.location.reload(); //For reload Same page
-                </script>
-                <?php
-                exit();
-               
-            }
-
-            elseif ($admin_st_ch=='super') {
-
-                $admin_st='1';
-                $admin_car_st='1';
-                $admin_room_st='1';
-                $admin_super_st='1';
-
-                $queryCarpool=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admin_name`, `admin_img`, `admin_dept`, `admin_contact`, `admin_st`, `admin_car_st`, `admin_room_st`, `admin_super_st`) VALUES ('$admin_login','$admin_pass','$admin_name','$file_name','$admin_dept','$admin_contact','$admin_st','$admin_car_st','$admin_room_st','$admin_super_st')");
-
-                ?>
-                <script>
-                    alert('Update successfull. Make a Super Admin  !');
-                    window.open('admin-all.php', '_self'); //for locating other page.
-                    //window.location.reload(); //For reload Same page
-                </script>
-                <?php
-               exit();
-            }
-
-            else{
-                echo "Error !!! Data Not Updated";
-            }
-
-
-    } ?>
+?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -122,7 +17,7 @@ $admin_st_ch = $_POST['admin_st'];
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <?php include('common/title.php'); ?>
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
@@ -236,9 +131,10 @@ $admin_st_ch = $_POST['admin_st'];
                                                         <div class="col-sm-9">
                                     <select class="form-control" name="admin_st" required>
                                                  <option value="" disabled selected>Select Data</option>
-                                                <option value="carpool" >Admin Car Pool</option>
-                                                <option value="room" >Admin Room Booking</option>
-                                                <option value="car_room" >Admin Car & Room (Both)</option>
+                                                <option value="carpool">Admin Car Pool</option>
+                                                <option value="room">Admin Room Booking</option>
+                                                <option value="law">Admin Room Booking</option>
+                                                <option value="all" >Admin All Section</option>
                                                 <option value="super">Super Admin</option>
 
                                     </select>
@@ -255,7 +151,7 @@ $admin_st_ch = $_POST['admin_st'];
                                                         <label class="col-sm-3 col-form-label">Admin Image</label>
                                                         <div class="col-sm-9">
                                     <input name="admin_img" type="file" class="form-control file-upload-info" placeholder="Upload Image" onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0])" required>
-                                        <p style="color:red;">Resolution 300*250 pixels</p>
+                                        <p style="color:red;">Resolution 250*300 pixels</p>
                                                         </div>
                                                     </div>
                                                 </div>

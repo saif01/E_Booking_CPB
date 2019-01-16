@@ -29,8 +29,8 @@
 <div class="col-lg-8 d-none d-xl-block">
                         <nav class="mainmenu alignright">
                             <ul>
- <li><a href="../user-room">Room Section </a>    
-                                </li>
+<!--  <li><a href="../user-room">Room Section </a>    
+                                </li> -->
 
                               <li>
                                  <?php
@@ -54,7 +54,7 @@ $user_id=$_SESSION['user_id'];
                                </li>
 
 
-                          <li class="active"><a href="index">Home </a>    
+                          <li class="active"><a href="../project_direct/index">Home </a>    
                                 </li>
                                 
                                 <li> 
