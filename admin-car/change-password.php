@@ -8,41 +8,6 @@ header('location:../admin');
 else{ 
 include('../db/config.php');
 
-if(isset($_POST['submit']))
-{
-
-$admin_login=$_SESSION['admin-car-login'];
-$password= $_POST['password'];
-$newpassword= $_POST['newpassword'];
-
-
-$sql=mysqli_query($con,"SELECT * FROM `admin` WHERE `admin_login`='$admin_login' AND `admin_pass`='$password'");
-$num=mysqli_num_rows($sql);
-
-//print_r($num);
-
-
-if($num>0)
-    {
-        $con=mysqli_query($con,"UPDATE `admin` SET `admin_pass` = '$newpassword'  WHERE  `admin_login`='$admin_login'");
-
-        //$smsg="Password Changed Successfully !!";
-
-        ?>
-    <script>
-        alert('Password Change successfull...!');
-        window.open('index', '_self');
-    </script>
-    <?php } 
-
-else
-    {
-        $errormsg="Old Password not match !!";
-    }
-
-
-
-}
 
  ?>
 
@@ -85,33 +50,16 @@ else
                             <div class="col-md-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-body text-center">
-                                        <button class="card-title btn btn-outline btn-block ">Change Registration</button>
+                                        <button class="card-title btn btn-outline btn-block ">Change Password</button>
                                         
 
-                        <form class="forms-sample" action="" method="post" name="chngpwd" onSubmit="return valid();">
+                        <form class="forms-sample" action="change-password-action.php" method="post" name="chngpwd" onSubmit="return valid();">
 
-                                            <?php if($smsg)
-                                                {?>
-                                            <div class="alert alert-success alert-dismissable">
-                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                                <b>Well done!</b>
-                                                <?php echo $smsg ;?>
-                                            </div>
-                                            <?php }?>
-
-                                            <?php if($errormsg)
-                                                {?>
-                                            <div class="alert alert-danger alert-dismissable">
-                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                                <b>Oh snap!</b>
-                                                <?php echo $errormsg;?>
-                                            </div>
-                                            <?php }?>
 
 
                                             <div class="form-group">
                                                 <label>Current Password </label>
-                                                <input type="Password" name="password" class="form-control" placeholder="Enter Current Password" required>
+                                                <input type="Password" name="admin_pass" class="form-control" placeholder="Enter Current Password" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputEmail3">New Password</label>
@@ -150,9 +98,9 @@ else
 
         <script type="text/javascript">
             function valid() {
-                if (document.chngpwd.password.value == "") {
+                if (document.chngpwd.admin_pass.value == "") {
                     alert("Current Password Filed is Empty !!");
-                    document.chngpwd.password.focus();
+                    document.chngpwd.admin_pass.focus();
                     return false;
                 } else if (document.chngpwd.newpassword.value == "") {
                     alert("New Password Filed is Empty !!");

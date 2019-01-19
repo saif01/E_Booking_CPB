@@ -88,10 +88,14 @@ include('../db/config.php');
                              <div class="col-md-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
+                                      <a href="advisor-add" class="btn btn-success btn-sm pull-right" >Add New</a>
                                         <h3 class="panel-title">All Legal Advisor Reports</h3>
+
                                     </div>
+
                                     <div class="panel-body">
                                         <div class="row">
+
                                             <div class="col-md-12 col-sm-12 col-xs-12 table-responsive ">
                                                 <table id="datatable" class="table table-striped table-bordered">
                                                     <thead>

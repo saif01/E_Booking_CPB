@@ -14,7 +14,7 @@ $countsatt=mysqli_num_rows($sqlcountsatt);
                     <div id="sidebar-menu">
                         <ul>
                             <li>
-                                <a href="index" class="waves-effect active"><i class="md md-home text-success"></i><span> Dashboard </span></a>
+                                <a href="index" class="waves-effect active"><i class="md md-home text-success"></i><span>Dashboard</span></a>
                             </li>
 
                              <li>

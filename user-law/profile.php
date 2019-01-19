@@ -3,14 +3,14 @@ session_start();
 error_reporting(0);
 date_default_timezone_set('Asia/Dhaka');// change according timezone
 $currentTime = date( 'Y-m-d H:i:s', time () );// h=12 hours H=24 hours
-if(strlen($_SESSION['car_law_id'])==0)
+if(strlen($_SESSION['law_login_id'])==0)
   { 
 header('location:../index');
 }
 else{ 
  require('../db/config.php');
 
- $user_login=$_SESSION['car_law_id'];
+ $user_login=$_SESSION['law_login_id'];
  ?>
 
 <!DOCTYPE html>

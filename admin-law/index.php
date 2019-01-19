@@ -107,7 +107,7 @@ $cases=mysqli_num_rows($sql4);
                         <div class="row">
                             <div class="col-md-6 col-sm-6 col-lg-4">
                                 <div class="mini-stat clearfix bx-shadow">
-                                    <span class="mini-stat-icon bg-info" style="background-color: ;"><i class="ion-connection-bars text-danger"></i></span>
+                                    <span class="mini-stat-icon bg-info" style="background-color: ;"><i class="ion-connection-bars"></i></span>
                                     <div class="mini-stat-info text-right text-muted">
                                         <span class="counter"><?php echo $cases; ?></span>
                                         Total Cases
@@ -131,7 +131,7 @@ $cases=mysqli_num_rows($sql4);
                             </div>
                             <div class="col-md-6 col-sm-6 col-lg-4">
                                 <div class="mini-stat clearfix bx-shadow">
-                                    <a href="">
+                                    
                                     <span class="mini-stat-icon bg-success"><i class="md-assignment-ind"></i></span>
                                     <div class="mini-stat-info text-right text-muted">
                                         <span class="counter"><?php echo $users; ?></span>
@@ -141,7 +141,7 @@ $cases=mysqli_num_rows($sql4);
                                        
                                     </div>
                                 </div>
-                                </a>
+                                
                             </div>
 
                             

@@ -90,6 +90,7 @@ include('../db/config.php');
                              <div class="col-md-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
+                                        <a href="report_add" class="btn btn-success btn-sm pull-right" >Add New</a>
                                         <h3 class="panel-title">All Legal Reports</h3>
                                     </div>
                                     <div class="panel-body">
@@ -108,6 +109,7 @@ include('../db/config.php');
                                                         <th>Last Hearing</th>
                                                         <th>Previous</th>
                                                         <th>Present</th>
+                                                        <th>Fees</th>
                                                         <th>Department</th>
                                                         <th>Remarks</th>
 
@@ -138,8 +140,8 @@ include('../db/config.php');
 
                                  <td><?php echo $row['pre_balance']; ?></td>
                                  <td><?php echo $row['pr_balance']; ?></td>
+                                 <td><?php echo $row['law_fees']; ?></td> 
                                  <td><?php echo $row['case_dept']; ?></td>
-                                 
                                  <td><?php echo $row['remarks']; ?></td>
 
 

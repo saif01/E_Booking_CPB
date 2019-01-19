@@ -3,14 +3,14 @@ session_start();
 error_reporting(0);
 date_default_timezone_set('Asia/Dhaka');// change according timezone
 $currentTime = date( 'Y-m-d H:i:s', time () ); // h=12 hours H=24 hours
-if(strlen($_SESSION['car_room_id'])==0)
+if(strlen($_SESSION['room_login_id'])==0)
   { 
 header('location:index');
 }
 else{   
  include('../db/config.php');
 
-$user_login= $_SESSION['car_room_id'];
+$user_login= $_SESSION['room_login_id'];
 $user_id= $_SESSION['user_id'];
 
 
@@ -104,7 +104,7 @@ $user_id= $_SESSION['user_id'];
                   <th>Booking Starts</th>
                   <th>Booking Ends</th>
                   <th>Purpose</th>
-                  <th>Hours</th>
+                  <th>Time</th>
                   <th>Status</th>
  
                 </tr>
@@ -121,13 +121,28 @@ $user_id= $_SESSION['user_id'];
        
                 <td> <img src="../pimages/room/<?php echo $row['room_img1'] ?>" height="80px;" width="80px;" ></td>
                 
-                <td class="center"><?php echo htmlentities($row['room_name']); ?></td>
+                <td class="center"><?php echo ($row['room_name']); ?></td>
                 <td class="center"><?php echo date("F j, Y, g:i a", strtotime($row['booking_start'])); ?></td>
 
                 <td class="center"><?php echo date("F j, Y, g:i a", strtotime($row['booking_end'])); ?></td>
 
-                <td class="center"><?php echo htmlentities($row['purpose']); ?></td>
-                <td class="center"><?php echo htmlentities($row['hours']); ?></td>
+                <td class="center"><?php echo ($row['purpose']); ?></td>
+
+                <td class="center">
+                    <?php 
+                $time=$row['hours'];
+
+                if ($time>24) {
+                     $day=$time/24;
+                     echo (round($day))." Days";
+                 }
+                 else{
+                    echo $time." Hours";
+                 } 
+
+                ?>
+                    
+                </td>
                 
                  <td class="center">
                   <?php

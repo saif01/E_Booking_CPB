@@ -1,1 +1,0 @@
-<title>CPB.RoomBooking</title>

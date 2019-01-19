@@ -30,11 +30,12 @@ if (isset($_POST['submit'])) {
 	$pr_balance=$_POST['pr_balance'];
 	$status=$_POST['status'];
 	$show_st=$_POST['show_st'];
+	$law_fees=$_POST['law_fees'];
 
 
-$legal=mysqli_query($con,"INSERT INTO `law_report`(`case_no`, `customer`, `complaint`, `case_dept`, `filling`, `hearing`, `last_hearing`, `pre_balance`, `pr_balance`, `remarks`, `status`, `show_st`) VALUES ('$case_no','$customer','$complaint','$case_dept','$filling','$hearing','$last_hearing','$pre_balance','$pr_balance','$remarks','$status','$show_st')");
+$legal=mysqli_query($con,"INSERT INTO `law_report`(`case_no`, `customer`, `complaint`, `case_dept`, `filling`, `hearing`, `last_hearing`, `pre_balance`, `pr_balance`, `law_fees`, `remarks`, `status`, `show_st`) VALUES ('$case_no','$customer','$complaint','$case_dept','$filling','$hearing','$last_hearing','$pre_balance','$pr_balance','$law_fees','$remarks','$status','$show_st')");
 
-$legalRemark=mysqli_query($con,"INSERT INTO `case_remarks`(`case_number`, `filling`, `hearing`, `last_hearing`, `remarks`, `status`) VALUES ('$case_no','$filling','$hearing','$last_hearing','$remarks','$status')");
+$legalRemark=mysqli_query($con,"INSERT INTO `case_remarks`(`case_number`, `filling`, `hearing` , `law_fees`, `last_hearing`, `remarks`, `status`) VALUES ('$case_no','$filling','$hearing','$law_fees','$last_hearing','$remarks','$status')");
 
 
 

@@ -1,7 +1,8 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['user_all'])==0)
+//if(strlen($_SESSION['user_all'])==0)
+if(strlen($_SESSION['admin-room-login'] && $_SESSION['admin-car-login'])==0)
   { 
 header('location:index');
 }
@@ -66,7 +67,7 @@ include('db/config.php');
 
       <!-- Page Heading -->
       <h1 class="my-4">Page Heading
-        <small>Secondary Text</small>
+        <small></small>
       </h1>
 
       <!-- Project One -->

@@ -227,6 +227,7 @@ if(isset($_POST['submit']))
         <script type="text/javascript">
             $(document).ready(function() {
                 var table = $('#example').DataTable({
+                     "order": [],
                     lengthChange: false,
                     buttons: [ 'excel', 'pdf', 'colvis' ]
                 });

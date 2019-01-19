@@ -45,7 +45,7 @@
             </a>
           </li>
 
-
+<!-- Report Section -->
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#report_section" aria-expanded="false" aria-controls="report_section">
               <i class="menu-icon mdi mdi-file text-info"></i>
@@ -64,7 +64,7 @@
               </ul>
             </div>
           </li>
-
+<!-- Car Section -->
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#car_section" aria-expanded="false" aria-controls="car_section">
               <i class="menu-icon mdi mdi-car text-warning"></i>
@@ -83,7 +83,7 @@
               </ul>
             </div>
           </li>
-
+<!-- Driver Section -->
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#driverSection" aria-expanded="false" aria-controls="driverSection">
               <i class="menu-icon mdi mdi-xbox-controller text-danger"></i>
@@ -111,7 +111,7 @@
             </div>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#user_section" aria-expanded="false" aria-controls="user_section">
               <i class="menu-icon mdi mdi-account-multiple-plus text-success"></i>
               <span class="menu-title">User Section</span>
@@ -125,12 +125,10 @@
                 <li class="nav-item">
                   <a class="nav-link" href="user-reg"><i class="menu-icon mdi mdi-pen text-success"></i> User Registration </a>
                 </li>
-                
-                
-                
+  
               </ul>
             </div>
-          </li>
+          </li> -->
 
            
 

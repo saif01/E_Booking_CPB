@@ -181,32 +181,24 @@ $row=$query->fetch_assoc();
 
     	<div class="form-group">
                 <label class="col-sm-3 control-label">Photo Priview</label>
-                <div class="col-sm-9">
-                  <!-- <img id="preview1" alt="Image Not Selected" class="rounded mx-auto d-block" width="100" height="80" /> -->
-
+                <div class="col-sm-9">                
                   <table class="table table-bordered ">
                     <thead>
                         <tr>
                             <th>Old</th>
                             <th>New</th>
                         </tr>
-                        
                     </thead>
                     <tbody>
-
                         <td>
                             <img src="../pimages/advisor/<?php echo($row['photo']);?>" width="120" height="120" class="img-responsive center-block" alt="Image">
                         </td>
                           <td><img id="preview1" alt="Image Not Selected" class="img-responsive center-block" width="120" height="120" >
                           </td>
-                        
                     </tbody>
-                      
-
                   </table>
-                   
                 </div>
-            </div>
+        </div>
            
 
     </div>

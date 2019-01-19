@@ -6,7 +6,7 @@ if(strlen($_SESSION['admin-law-login'])==0)
 header('location:../admin');
 }
 else{ 
-include('../db/config.php');
+include('../db/config.php'); 
 
 if(isset($_POST['submit']))
 {
@@ -149,7 +149,7 @@ else
                                                 <input type="Password" name="newpassword" class="form-control" placeholder="Enter New Password">
                                             </div>
                                             <div class="form-group">
-                                                <label>User Contract</label>
+                                                <label>Cnform Password</label>
                                                 <input type="password" name="confirmpassword" class="form-control" placeholder=" Retype New Password" required>
                                             </div>
 

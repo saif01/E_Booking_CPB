@@ -1,0 +1,31 @@
+@import url(../pluagins/vegus/vegas.css);
+
+body{
+	height:100vh; 	
+}
+/*nav css*/
+#waraper{
+	background-color:rgba(0, 0, 0, 0.37);
+	color:white;
+}
+.navbar a{
+	text-transform: uppercase;
+	font-size: 20px;
+	color: gold;
+	font-family: Times New Roman;
+}
+.navbar a:hover{
+	color: lime;
+}
+.navbar ul li:hover{
+	border:1px solid gold;
+}
+/*end navbar*/
+
+/*home pagae design*/
+.home h1{
+	font-family:Times New Roman; 
+}
+.home h2{
+	font-family:Lucida Calligraphy; 
+}

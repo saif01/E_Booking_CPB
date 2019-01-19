@@ -3,10 +3,10 @@ session_start();
 error_reporting(0);
 if(strlen($_SESSION['admin-super-login'])==0)
   { 
-header('location:../admin/index');
+header('location:../admin');
 }
-else{ 
-
+else{  
+ 
 include('../db/config.php');
 
 
@@ -28,94 +28,105 @@ while ($cal_row = $calenderSql->fetch_assoc())
 //***********End Calendar Data Show ************//
 
 
-
 ?>
-    <!DOCTYPE html>
-    <html lang="en">
 
+<!DOCTYPE html>
+<html>
     <head>
-        <!-- Required meta tags -->
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="syful.cse.bd@gmail.com">
+        <meta name="author" content="Saif">
+
+        <link rel="shortcut icon" href="images/cpb.png">
+
         <?php include('common/title.php'); ?>
-        <!-- plugins:css -->
-        <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
-        <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
-        <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
-        <!-- endinject -->
-        <!-- plugin css for this page -->
-        <!-- End plugin css for this page -->
-        <!-- inject:css -->
-        <link rel="stylesheet" href="css/style.css">
-        <!-- endinject -->
-        <link rel="shortcut icon" href="images/favicon.png" />
 
+        <!-- Base Css Files -->
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
 
+        <!-- Font Icons -->
+        <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="assets/ionicon/css/ionicons.min.css" rel="stylesheet" />
+        <link href="css/material-design-iconic-font.min.css" rel="stylesheet">
 
+        <!-- animate css -->
+        <link href="css/animate.css" rel="stylesheet" />
 
+        <!-- Waves-effect --> 
+        <link href="css/waves-effect.css" rel="stylesheet">
+
+        <!-- sweet alerts -->
+        <link href="assets/sweet-alert/sweet-alert.min.css" rel="stylesheet">
+
+        <!-- Custom Files -->
+        <link href="css/helper.css" rel="stylesheet" type="text/css" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+        <script src="js/modernizr.min.js"></script>
+        
     </head>
+ 
 
-    <body>
-        <div class="container-scroller">
-            <!-- partial:../../partials/_navbar.html -->
+
+    <body class="fixed-left">
+        
+        <!-- Begin page -->
+        <div id="wrapper">
+        
+            <!-- Top Bar Start -->
             <?php include('common/navbar.php'); ?>
-            <!-- partial -->
-            <div class="container-fluid page-body-wrapper">
-
-                <!-- partial:partials/_sidebar.html -->
-                <?php include('common/sidebar.php'); ?>
-                <!-- partial -->
-                <!-- partial -->
-                <div class="main-panel">
-                    <div class="content-wrapper">
-                        <div class="row">
+            <!-- Top Bar End -->
 
 
-                            <div class="col-lg-12 grid-margin stretch-card">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <!-- <h4 class="card-title">All Booked Information </h4> -->
-                                        <button class="card-title btn btn-outline btn-block ">All Booked Information Show By Calendar</button>
-                                        <!--     <div class="table-responsive"> -->
+           <!-- Left Sidebar Start --> 
+
+            <?php include('common/sidebar.php'); ?>
+            <!-- Left Sidebar End --> 
 
 
-                                        <div id='calendar'></div>
 
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->                      
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container">
 
-                                        <!-- </div> -->
+                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">All Room Booked Information Show By Calendar</h3>
                                     </div>
-                                </div>
-                            </div>
+                                    <div class="panel-body">
+                                       
+                                    	<div id='calendar'></div>
 
+                                    </div> <!-- Panel-body -->
+                                    
+                                </div> <!-- Panel -->
+                            </div> <!-- col-->
+                            
+                        </div> <!-- End row -->
 
+                    </div> <!-- container -->
+                               
+                </div> <!-- content -->
 
-                        </div>
-                    </div>
-                    <!-- content-wrapper ends -->
-                    <!-- partial:../../partials/_footer.html -->
-                    <footer class="footer">
-                        <?php include('common/footer.php') ?>
-                    </footer>
-                    <!-- partial -->
-                </div>
-                <!-- main-panel ends -->
+                <footer class="footer text-right">
+                    <?php include('common/footer.php') ?>
+                </footer>
+
             </div>
-            <!-- page-body-wrapper ends -->
-        </div>
-        <!-- container-scroller -->
-        <!-- plugins:js -->
-        <script src="vendors/js/vendor.bundle.base.js"></script>
-        <script src="vendors/js/vendor.bundle.addons.js"></script>
-        <!-- endinject -->
-        <!-- Plugin js for this page-->
-        <!-- End plugin js for this page-->
-        <!-- inject:js -->
-        <script src="js/off-canvas.js"></script>
-        <script src="js/misc.js"></script>
-        <!-- endinject -->
-        <!-- Custom js for this page-->
-        <!-- End custom js for this page-->
+          
 
+
+            
+
+        </div>
+        <!-- END wrapper -->
 
         <!-- For Calendar Load Links -->
         <link href='../admin-room/cal/fullcalendar.min.css' rel='stylesheet' />
@@ -149,10 +160,33 @@ while ($cal_row = $calenderSql->fetch_assoc())
     });    
   });
 </script>
+    
+       
+
+        <!-- jQuery  -->
+        <!-- <script src="js/jquery.min.js"></script> -->
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/waves.js"></script>
+        <script src="js/wow.min.js"></script>
+        <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+        <script src="js/jquery.scrollTo.min.js"></script>
+        <script src="assets/chat/moment-2.2.1.js"></script>
+        <script src="assets/jquery-sparkline/jquery.sparkline.min.js"></script>
+        <script src="assets/jquery-detectmobile/detect.js"></script>
+        <script src="assets/fastclick/fastclick.js"></script>
+        <script src="assets/jquery-slimscroll/jquery.slimscroll.js"></script>
+        <script src="assets/jquery-blockui/jquery.blockUI.js"></script>
+
+        
+        <!-- CUSTOM JS -->
+        <script src="js/jquery.app.js"></script>
 
 
+
+
+   
+    
     </body>
+</html>
 
-    </html>
-
-    <?php } ?>
+<?php } ?>

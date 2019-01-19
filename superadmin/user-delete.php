@@ -47,7 +47,7 @@ while($row=mysqli_fetch_array($query2))
 		                                },
 		                                function(isConfirm){
 		                                  if (isConfirm) {
-		                                    window.location.href = "user-all-info.php";
+		                                    window.location.href = "user-all.php";
 		                                  }
 		                                }); },0);
 		                       
@@ -67,7 +67,7 @@ while($row=mysqli_fetch_array($query2))
 			                                },
 			                                function(isConfirm){
 			                                  if (isConfirm) {
-			                                    window.location.href = "user-all-info.php";
+			                                    window.location.href = "user-all.php";
 			                                  }
 			                                }); },0);
 			                       

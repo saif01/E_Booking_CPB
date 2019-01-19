@@ -23,7 +23,11 @@
 
 <div class="col-lg-8 d-none d-xl-block">
                         <nav class="mainmenu alignright">
+
+
                             <ul>
+
+
                               <li>
                                  <?php
 $user_id=$_SESSION['user_id'];
@@ -45,7 +49,11 @@ $user_id=$_SESSION['user_id'];
                                </li>
 
 
-                          <li class="active"><a href="index">Home </a>    
+<?php if (strlen($_SESSION['user_redirect']) !=0 ) 
+{?>
+ <li><a href="../user-all/">Go Another</a></li>
+<?php }?>                       <li class="active">
+                                <a href="index">Home </a>
                                 </li>
                                 
                                 <li> 

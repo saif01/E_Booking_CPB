@@ -1,253 +1,148 @@
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
-        
-          <li class="nav-item">
-            <a class="nav-link" href="index">
-              <i class="menu-icon mdi mdi-television text-warning"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-
-           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#calendar_section" aria-expanded="false" aria-controls="calendar_section">
-              <i class="menu-icon mdi mdi mdi-calendar-plus text-danger "></i>
-              <span class="menu-title">Calendar View</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="calendar_section">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-
-                  <a class="nav-link" href="calendar-car"> <i class="menu-icon mdi mdi mdi-calendar-plus text-info"> </i>Car Pool Calendar </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="calendar-room"><i class="menu-icon mdi mdi mdi-calendar-plus text-info"> </i>M. Room Calendar</a>
-                </li>
-              </ul>
-            </div>
-          </li>
 
 
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#report_section" aria-expanded="false" aria-controls="report_section">
-              <i class="menu-icon mdi mdi-file text-info"></i>
-              <span class="menu-title">Report Section</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="report_section">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="report-all-car"> <i class="menu-icon mdi mdi-book-multiple-variant text-info"> </i>Car Pool Report </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="report-all-room"> <i class="menu-icon mdi mdi-book-multiple-variant text-info"> </i>M. Room Report </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="report-byDate-car"><i class="menu-icon mdi mdi-book-variant text-info"> </i>Car Report By Date</a>
-                </li>
-                 <li class="nav-item">
-                  <a class="nav-link" href="report-byDate-room"><i class="menu-icon mdi mdi-book-variant text-info"> </i>Room Report By Date</a>
-                </li>
-              </ul>
-            </div>
-          </li>
+<div class="left side-menu">
+                <div class="sidebar-inner slimscrollleft">
+                    
+                    <!--- Divider -->
+                    <div id="sidebar-menu">
+                        <ul>
+                            <li>
+                                <a href="index" class="waves-effect active"><i class="md md-home text-success"></i><span> Dashboard </span></a>
+                            </li>
 
-         <!--  <li class="nav-item">
-            <a class="nav-link" href="calendar">
-              <i class="menu-icon mdi mdi mdi-calendar-plus text-danger "></i>
-              <span class="menu-title">Calendar View</span>
-            </a>
-          </li> -->
+                            <!--  <li>
+                                <a href="inprocess-case" class="waves-effect">
+                                    <i class="md md-repeat text-danger"></i>
+                                    <span>In Process Cases</span>
+                                    <span class="badge badge-danger">2</span>
+                                </a>
+                            </li>
 
+                             <li>
+                                <a href="sattaled-case" class="waves-effect">
+                                    <i class="md md-repeat-one text-warning"></i>
+                                    <span>Sattaled Cases</span>
+                                    <span class="badge badge-warning">3</span>
+                                </a>
+                            </li>
 
-         <!--  <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#car_section" aria-expanded="false" aria-controls="car_section">
-              <i class="menu-icon mdi mdi-car text-warning"></i>
-              <span class="menu-title">Car Section</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="car_section">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="car-all"><i class="menu-icon mdi mdi-clipboard-check text-warning"></i> All Cars </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="car-add"><i class="menu-icon mdi mdi-pen text-warning"></i> Car Add</a>
-                </li>
+                             <li>
+                                <a href="closed-case" class="waves-effect">
+                                    <i class="md md-repeat text-success"></i>
+                                    <span>Closed Cases</span>
+                                    
+                                </a>
+                            </li>
 
-              </ul>
-            </div>
-          </li> -->
+                            <li>
+                                <a href="report-all" class="waves-effect">
+                                    <i class="md md-folder-open text-danger"></i>
+                                    <span>Report All</span>
+                                    
+                                </a>
+                            </li>
 
-          <!-- <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#driverSection" aria-expanded="false" aria-controls="driverSection">
-              <i class="menu-icon mdi mdi-xbox-controller text-danger"></i>
-              <span class="menu-title">Driver Section</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="driverSection">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="driver-all"><i class="menu-icon mdi mdi-clipboard-check text-danger"></i> All Drivers </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="driver-add"><i class="menu-icon mdi mdi-pen text-danger"></i> Driver Add</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="driver-report"><i class="menu-icon mdi mdi-chart-histogram text-danger"></i> Driver Report All</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="driver-report-dateWise"><i class="menu-icon mdi mdi-chart-bar text-danger"></i> Date Wise Report</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="police-requisition-report"><i class="menu-icon mdi mdi-chart-bar text-danger"></i>Police Reqisition Report</a>
-                </li>
-              </ul>
-            </div>
-          </li> -->
+                            <li>
+                                <a href="report_add" class="waves-effect">
+                                    <i class="md md-edit text-success"></i>
+                                    <span>Report Add</span>
+                                    
+                                </a>
+                            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#user_section" aria-expanded="false" aria-controls="user_section">
-              <i class="menu-icon mdi mdi-account-multiple-plus text-success"></i>
-              <span class="menu-title">User Section</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="user_section">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="user-all-info"><i class="menu-icon mdi mdi-clipboard-check text-success"></i> All User Info </a>
+ -->
+
+<!-- Calendar Report Section -->
+        <li class="has_sub">
+            <a href="#" class="waves-effect"><i class="md md-event text-success"></i><span>Calendar Section </span><span class="pull-right"><i class="md md-add"></i></span></a>
+            <ul class="list-unstyled">
+
+                <li><a href="calendar-car">
+                    <i class="md md-event text-warning"></i>
+                        <span>Car Pool </span></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="user-reg"><i class="menu-icon mdi mdi-pen text-success"></i> User Registration </a>
+                <li><a href="calendar-room">
+                    <i class="md md-event text-info"></i>
+                        <span>Room Booking </span></a>
                 </li>
                 
+            </ul>
+        </li>
+<!-- Report Section -->
+        <li class="has_sub">
+            <a href="#" class="waves-effect"><i class="md  md-assessment text-danger"></i><span>Report Section</span><span class="pull-right"><i class="md md-add"></i></span></a>
+            <ul class="list-unstyled">
+
+                <li><a href="report-all-car">
+                    <i class="md md-description text-warning"></i>
+                        <span>Car Pool Report</span></a>
+                </li>
+                <li><a href="report-all-room"> 
+                    <i class="md md-description text-info"></i>
+                        <span>Room B. Report</span></a>
+                </li>
+                <li><a href="report-byDate-car"> 
+                    <i class="md md-description text-warning"></i>
+                        <span>Car Report By Date</span></a>
+                </li>
+                <li><a href="report-byDate-room"> 
+                    <i class="md md-description text-info"></i>
+                        <span>Room R. By Date</span></a>
+                </li>
+            </ul>
+        </li>
+
+<!-- User Section   -->         
+        <li class="has_sub">
+            <a href="#" class="waves-effect"><i class="md md-account-box text-success"></i><span>Users Section</span><span class="pull-right"><i class="md md-add"></i></span></a>
+            <ul class="list-unstyled">
+
+                <li><a href="user-all">
+                    <i class="md  md-account-circle text-danger"></i>
+                        <span>All User Info</span></a>
+                </li>
+                <li><a href="user-reg"> 
+                    <i class="md md-edit text-success"></i>
+                        <span>User Add</span></a>
+                </li>
                 
+            </ul>
+        </li>
+
+<!-- Admin Section   -->         
+        <li class="has_sub">
+            <a href="#" class="waves-effect"><i class="md md-group text-danger"></i><span>Admin Section</span><span class="pull-right"><i class="md md-add"></i></span></a>
+            <ul class="list-unstyled">
+
+                <li><a href="admin-all">
+                    <i class="md md-person-add text-danger"></i>
+                        <span>All Admin Info</span></a>
+                </li>
+                <li><a href="admin-reg"> 
+                    <i class="md md-edit text-success"></i>
+                        <span>Admin Add</span></a>
+                </li>
                 
-              </ul>
+            </ul>
+        </li>
+
+                            <li> 
+                                <a href="login-log" class="waves-effect">
+                                    <i class="md md-dehaze text-danger"></i>
+                                    <span>Login Log</span>
+                                    
+                                </a>
+                            </li>
+
+                           
+                            
+
+                            
+
+
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
             </div>
-          </li>
-
-           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#admin_section" aria-expanded="false" aria-controls="admin_section">
-              <i class="menu-icon mdi mdi-evernote text-danger"></i>
-              <span class="menu-title">Admin Section</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="admin_section">
-              <ul class="nav flex-column sub-menu">
-
-                <li class="nav-item">
-                  <a class="nav-link" href="admin-all"><i class="menu-icon mdi mdi-clipboard-check text-danger"></i> All Admin Info </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="admin-reg"><i class="menu-icon mdi mdi-pen text-danger"></i> Admin Registration </a>
-                </li>
-                                                
-              </ul>
-            </div>
-          </li>
-
-
-<!--******************** Legal Section ***************-->
-           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#room_section" aria-expanded="false" aria-controls="room_section">
-              <i class="menu-icon mdi mdi-store text-danger"></i>
-              <span class="menu-title">Legal Section</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="room_section">
-              <ul class="nav flex-column sub-menu">
-
-                <li class="nav-item">
-                  <a class="nav-link" href="../admin-law/advisor-add"><i class="menu-icon mdi mdi-clipboard-check text-danger"></i> Advisor Add </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../admin-law/advisor-all"><i class="menu-icon mdi mdi-pen text-danger"></i> Advisor All </a>
-                </li>
-                                                
-              </ul>
-            </div>
-          </li>
-
-
-<!--******************** Room Section ***************-->
-           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#room_section" aria-expanded="false" aria-controls="room_section">
-              <i class="menu-icon mdi mdi-store text-danger"></i>
-              <span class="menu-title">Room Section</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="room_section">
-              <ul class="nav flex-column sub-menu">
-
-                <li class="nav-item">
-                  <a class="nav-link" href="room-add"><i class="menu-icon mdi mdi-clipboard-check text-danger"></i> Room Add </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="room-all"><i class="menu-icon mdi mdi-pen text-danger"></i> All Rooms </a>
-                </li>
-                                                
-              </ul>
-            </div>
-          </li>
-
-<!--******************** Car Pool Section ***************-->
-           
-
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#carpool_section" aria-expanded="false" aria-controls="carpool_section">
-              <i class="menu-icon mdi mdi-car text-warning"></i>
-              <span class="menu-title">Car Pool Section</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="carpool_section">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="car-all"><i class="menu-icon mdi mdi-clipboard-check text-warning"></i> All Cars </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="location-add"><i class="menu-icon mdi mdi-at text-success"></i> Location Add</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="car-add"><i class="menu-icon mdi mdi-pen text-warning"></i> Car Add</a>
-                </li>
-
-                 <li class="nav-item">
-                  <a class="nav-link" href="driver-all"><i class="menu-icon mdi mdi-clipboard-check text-danger"></i> All Drivers </a>
-                </li>
-                 <li class="nav-item">
-                  <a class="nav-link" href="driver-add"><i class="menu-icon mdi mdi-pen text-danger"></i> Driver Add</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="driver-report"><i class="menu-icon mdi mdi-chart-histogram text-danger"></i> Driver Report All</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="driver-report-dateWise"><i class="menu-icon mdi mdi-chart-bar text-danger"></i> Date Wise Report</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="police-requisition-report"><i class="menu-icon mdi mdi-chart-bar text-danger"></i>Police Reqisition Report</a>
-                </li>
-
-              </ul>
-            </div>
-          </li>
-
-
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="location-add">
-              <i class="menu-icon mdi mdi-at text-success"></i>
-              <span class="menu-title">Location Add</span>
-            </a>
-          </li> -->
-
-      <li class="nav-item">
-            <a class="nav-link" href="login-log">
-              <i class="menu-icon mdi mdi-clipboard-account text-success"></i>
-              <span class="menu-title">User Login Log</span>
-            </a>
-          </li>
-
-
-
-        </ul>
-      </nav>

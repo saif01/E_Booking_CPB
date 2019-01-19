@@ -3,57 +3,13 @@ session_start();
 error_reporting(0);
 date_default_timezone_set('Asia/Dhaka');// change according timezone
 $currentTime = date( 'Y-m-d H:i:s', time () );// h=12 hours H=24 hours
-if(strlen($_SESSION['car_law_id'])==0)
+if(strlen($_SESSION['law_login_id'])==0)
   { 
 header('location:../index');
 }
 else{  
 require('../db/config.php');
 
-if(isset($_POST['submit']))
-{
-
-$user_id=$_SESSION['user_id'];
-$password= $_POST['password'];
-$newpassword= $_POST['newpassword'];
-
-$sql=mysqli_query($con,"SELECT * FROM `user` WHERE `user_id`='$user_id' AND `user_pass`='$password'");
-$num=mysqli_fetch_array($sql);
-
-//print_r($num);
-
-
-if($num>0)
-    {
-        $con=mysqli_query($con,"UPDATE `user` SET `user_pass`='$newpassword'  WHERE `user_id`='$user_id' ");
-
-                //**********Start Sweet Alert and redirect other Page ***********// 
-                      ?>
-                      <script type="text/javascript">
-                        setTimeout(function () { 
-                                swal({
-                                  title: "Successfully!",
-                                  text: "Your Password Changed!",
-                                  type: "success",
-                                  confirmButtonText: "OK"
-                                },
-                                function(isConfirm){
-                                  if (isConfirm) {
-                                    window.location.href = "index.php";
-                                  }
-                                }); }, 1000);
-                      </script>
-                      <?php
-          //**********End Sweet Alert and redirect other Page ***********// 
-                       
-    }
-else
-    {
-
-        $errormsg="Old Password not match !!";
-    }
-
-}
 
 
     ?>
@@ -73,6 +29,13 @@ else
     
     <?php require('common/title.php'); ?> 
     <?php require('common/allcss.php'); ?> 
+
+<style type="text/css">
+    .input{
+        color: black;
+    }
+</style>
+
 
 </head>
 
@@ -110,6 +73,7 @@ else
             </div>
         </div>
         <!--== Header Bottom End ==-->
+
     </header>
     <!--==************************* Header Area End ****************************************************************************************************************************==-->
 
@@ -142,25 +106,7 @@ else
                         <div class="login-form">
                             <h3>Change Password</h3>
 
-                        <?php if($successmsg)
-                                    {?>
-                                <div class="alert alert-success alert-dismissable">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    <b>Well done!</b>
-                                    <?php echo htmlentities($successmsg);?>
-                                </div>
-                                <?php }?>
-
-                                <?php if($errormsg)
-                                    {?>
-                                <div class="alert alert-danger alert-dismissable">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    <b>Oh snap!</b>
-                                    <?php echo htmlentities($errormsg);?>
-                                </div>
-                                <?php }?>
-
-
+                      
                             <form action="" method="post" name="chngpwd" onSubmit="return valid();"  >
                                 
                                 <div class="password">

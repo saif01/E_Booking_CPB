@@ -104,6 +104,7 @@ $row2=$lawreport->fetch_assoc();
                                                         <th>Filling</th>
                                                         <th>Hearing</th>
                                                         <th>Previous</th>
+                                                        <th>Fees</th>
                                                         <th>Department</th>
                                                         
 
@@ -112,7 +113,7 @@ $row2=$lawreport->fetch_assoc();
                                                 </thead>
                                                 <tbody>
           <?php 
-    $query=mysqli_query($con,"SELECT case_remarks.case_number, case_remarks.filling, case_remarks.hearing, case_remarks.last_hearing, case_remarks.remarks, case_remarks.status, law_report.customer, law_report.complaint, law_report.case_dept, law_report.pre_balance, law_report.pr_balance FROM case_remarks INNER JOIN law_report ON case_remarks.case_number=law_report.case_no WHERE case_remarks.case_number='$case_no' ORDER BY case_remarks.case_id DESC");
+    $query=mysqli_query($con,"SELECT case_remarks.case_number, case_remarks.filling, case_remarks.hearing, case_remarks.law_fees, case_remarks.last_hearing, case_remarks.remarks, case_remarks.status, law_report.customer, law_report.complaint, law_report.case_dept, law_report.pre_balance, law_report.pr_balance FROM case_remarks INNER JOIN law_report ON case_remarks.case_number=law_report.case_no WHERE case_remarks.case_number='$case_no' ORDER BY case_remarks.case_id DESC");
 
     while($row=mysqli_fetch_array($query))
     {
@@ -129,12 +130,9 @@ $row2=$lawreport->fetch_assoc();
          <td><?php echo date("M j, Y", strtotime($row['last_hearing'])); ?></td>
           
                                  <td><?php echo $row['pre_balance']; ?></td>
+                                 <td><?php echo $row['law_fees']; ?></td> 
                                  <td><?php echo $row['case_dept']; ?></td>
                                  
-                                 
-
-
-                                                        
                                                     </tr>
                                                     <?php } ?>
 
@@ -165,9 +163,10 @@ $row2=$lawreport->fetch_assoc();
 
 
 <form class="form-horizontal" 
-        action="law-process-action.php?case_number=<?php echo $case_no; ?>
+        action="law-sattaled-action.php?case_number=<?php echo $case_no; ?>
         &filling=<?php echo $row2['filling']; ?>
-        &hearing=<?php echo $row2['hearing']; ?>" 
+        &hearing=<?php echo $row2['hearing']; ?>
+        &p_law_fees=<?php echo $row2['law_fees']; ?>" 
         method="post">
 
     <div class="col-md-6"> 
@@ -194,8 +193,8 @@ $row2=$lawreport->fetch_assoc();
                 <label  class="col-sm-3 control-label">Case Status</label>
                 <div class="col-sm-9">
                       <select name="status" class="form-control" required>
+                        <option value="Sattaled">Sattaled</option>
                             <option value="In Process">In Process</option>
-                            <option value="Sattaled">Sattaled</option>
                             <option value="Closed">Closed</option>
                         </select>
                 </div>
@@ -207,9 +206,19 @@ $row2=$lawreport->fetch_assoc();
                             <textarea type="text" class="form-control" name="remarks" rows="3" required><?php echo $row2['remarks']; ?></textarea>
                 </div>
             </div>
-            
+       
+    </div>
+     <div class="col-md-6">
 
-        
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Legal Fees</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" name="law_fees"  placeholder="Enter Case Running Fees" required>
+                             <span class="badge badge-pill badge-success"><?php echo $row2['law_fees']; ?> /= Tk</span>
+                </div>
+            </div>
+    
     </div>
     
 

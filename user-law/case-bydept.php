@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 date_default_timezone_set('Asia/Dhaka');// change according timezone
 $currentTime = date( 'Y-m-d H:i:s', time () ); // h=12 hours H=24 hours
-if(strlen($_SESSION['car_law_id'])==0)
+if(strlen($_SESSION['law_login_id'])==0)
   { 
 header('location:index');
 }
@@ -92,7 +92,7 @@ include('../db/config.php');
         <div class="container" style="margin-top: 20px;">
            
               
-          <table id="example" class="table table-striped table-bordered table-dark" style="width:100%">
+          <table id="example" class="table table-striped table-bordered table-dark text-center" style="width:100%">
 
               <thead style="background-color: #912CEE;">
                 <tr>
@@ -103,6 +103,7 @@ include('../db/config.php');
                   <th>Last Hearing Date</th>
                   <th>B.L. Balace</th>
                   <th>Present Balace</th>
+                  <th>Legal Fees</th>
                    
                 </tr>
               </thead>   
@@ -129,6 +130,7 @@ include('../db/config.php');
 
                 <td ><?php echo $row['pre_balance']; ?></td>
                 <td ><?php echo $row['pr_balance']; ?></td>
+                <td ><?php echo $row['law_fees']; ?></td>
                 
                 
                 

@@ -5,131 +5,150 @@ if(strlen($_SESSION['admin-super-login'])==0)
   { 
 header('location:../admin');
 }
-else{ 
-
+else{  
+ 
 include('../db/config.php');
-
 $user_id=$_GET['user_id'];
-
 
 $query=mysqli_query($con,"SELECT * FROM `user` WHERE `user_id`='$user_id' ");
 
 $row=$query->fetch_assoc();
 ?>
 
-    <!DOCTYPE html>
-    <html lang="en">
 
+<!DOCTYPE html>
+<html>
     <head>
-        <!-- Required meta tags -->
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="syful.cse.bd@gmail.com">
+        <meta name="author" content="Saif">
+
+        <link rel="shortcut icon" href="images/cpb.png">
+
         <?php include('common/title.php'); ?>
-        <!-- plugins:css -->
-        <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
-        <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
-        <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
-        <!-- endinject -->
-        <!-- plugin css for this page -->
-        <!-- End plugin css for this page -->
-        <!-- inject:css -->
-        <link rel="stylesheet" href="css/style.css">
-        <!-- endinject -->
-        <link rel="shortcut icon" href="images/favicon.png" />
+
+        <!-- Base Css Files -->
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+        <!-- Font Icons -->
+        <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="assets/ionicon/css/ionicons.min.css" rel="stylesheet" />
+        <link href="css/material-design-iconic-font.min.css" rel="stylesheet">
+
+        <!-- animate css -->
+        <link href="css/animate.css" rel="stylesheet" />
+
+        <!-- Waves-effect --> 
+        <link href="css/waves-effect.css" rel="stylesheet">
+
+        <!-- sweet alerts -->
+        <link href="assets/sweet-alert/sweet-alert.min.css" rel="stylesheet">
+
+        <!-- Custom Files -->
+        <link href="css/helper.css" rel="stylesheet" type="text/css" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+        <script src="js/modernizr.min.js"></script>
+
         <style type="text/css">
             .user-s {
                 width: 120px;
                 height: 120px;
-                border-radius: 50%;
+                border-radius: 20%;
                 overflow: hidden;
                 position: absolute;
-                top: calc(20px/2);
+                top: calc(90px/2);
                 left: calc(50% - 50px);
                 margin-top: -90px;
             }
         </style>
-
-
+        
     </head>
-
     <body>
-        <div class="container-scroller">
-            <div class="container-fluid page-body-wrapper full-page-wrapper auth-page">
-                <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
-                    <div class="row w-100">
-                        <div class="col-lg-4 mx-auto">
-                            <div class="auto-form-wrapper">
-
-                                <img class="user-s" src="../pimages/user/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" />
-                                <table>
-
-                                    <td>
-                                        <h4>User Detail's: </h4>
-                                    </td>
 
 
-
-                                    <tr>
-                                        <td> User Name:</td>
-                                        <th> <strong><?php echo $row['user_name'];?></strong> </th>
-                                    </tr>
-
-                                     <tr>
-                                        <td> User Department:</td>
-                                        <th> <strong><?php echo $row['user_dept'];?></strong> </th>
-                                    </tr>
-
-                                    <tr>
-                                        <td> User Contract:</td>
-                                        <th> <strong><?php echo $row['user_contact'];?></strong> </th>
-                                    </tr>
+        <div class="wrapper-page">
+            <div class="panel panel-color panel-primary panel-pages">
+                <div class="panel-heading text-center"> 
+                    <!-- <div class="bg-overlay"></div> -->
+                  <!--  <h3 class="text-center m-t-10 text-white">Profile Information</h3> -->
+                   <img src="../pimages/user/<?php echo($row['user_img']);?>" alt="Image" class="user-s">
+                </div> 
 
 
-                                    <tr>
-                                        <td> User Office ID:</td>
-                                        <th> <strong><?php echo $row['user_office_id'];?></strong> </th>
-                                    </tr>
+                <div class="panel-body">
+                 <table class="table text-center table-striped">
+                 	
+                    <tr>
+                        <th>ID</th>
+                        <td><?php echo $row['user_login'];?></td>
+                        
+                    </tr>
+                 	<tr>
+                 		<th>Name</th>
+                 		<td><?php echo $row['user_name'];?></td>
+                		
+                 	</tr>
+                    <tr>
+                        <th>E-mail</th>
+                        <td><?php echo $row['user_mail'];?></td>
+                        
+                    </tr>
+                 	<tr>
+                 		<th>Department</th>
+                 		<td><?php echo $row['user_dept'];?></td>
+                		
+                 	</tr>
+                 	<tr>
+                 		<th>Contract</th>
+                 		<td><?php echo $row['user_contact'];?></td>
+                		
+                 	</tr>
+                 	<tr>
+                 		<th>Office ID</th>
+                 		<td><?php echo $row['user_office_id'];?></td>
+                		
+                 	</tr>
+                 	<tr>
+                 		<th>Status</th>
+                 		<td><?php $st =$row['user_st'];
 
-                                    <tr>
-                                        <td> User Status:</td>
-                                        <th> <strong><?php $st =$row['user_st'];
-
-          if ($st==1) {
-            echo "Active";
-          }
-          else{
-            echo "Deactive";
-          }?>
-            
-          </strong> </th>
-                                    </tr>
-
-
-                                </table>
-
-
-
-                            </div>
-
-                            <?php include('common/footer.php') ?>
-                        </div>
-                    </div>
-                </div>
-                <!-- content-wrapper ends -->
+				          if ($st==1) {
+				            echo "Active";
+				          }
+				          else{
+				            echo "Deactive";
+				          }?></td>
+                		
+                 	</tr>
+                 	
+                 </table>
+                </div>                                 
+                
             </div>
-            <!-- page-body-wrapper ends -->
         </div>
-        <!-- container-scroller -->
-        <!-- plugins:js -->
-        <script src="vendors/js/vendor.bundle.base.js"></script>
-        <script src="vendors/js/vendor.bundle.addons.js"></script>
-        <!-- endinject -->
-        <!-- inject:js -->
-        <script src="js/off-canvas.js"></script>
-        <script src="js/misc.js"></script>
-        <!-- endinject -->
-    </body>
 
-    </html>
+        
+    	<script>
+            var resizefunc = [];
+        </script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/waves.js"></script>
+        <script src="js/wow.min.js"></script>
+        <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+        <script src="js/jquery.scrollTo.min.js"></script>
+        <script src="assets/jquery-detectmobile/detect.js"></script>
+        <script src="assets/fastclick/fastclick.js"></script>
+        <script src="assets/jquery-slimscroll/jquery.slimscroll.js"></script>
+        <script src="assets/jquery-blockui/jquery.blockUI.js"></script>
 
-    <?php } ?>
+
+        <!-- CUSTOM JS -->
+        <script src="js/jquery.app.js"></script>
+	
+	</body>
+</html>
+
+<?php } ?>

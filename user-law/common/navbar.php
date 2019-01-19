@@ -15,7 +15,10 @@
                         <nav class="mainmenu alignright">
                             <ul>
                                
-                
+<?php if (strlen($_SESSION['user_redirect']) !=0 ) 
+{?>
+ <li><a href="../user-all/">Go Another</a></li>
+<?php }?> 
                           <li class="active"><a href="index">Home </a>    
                                 </li>
                                 

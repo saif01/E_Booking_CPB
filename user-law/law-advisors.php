@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 date_default_timezone_set('Asia/Dhaka');// change according timezone
 $currentTime = date( 'Y-m-d H:i:s', time () );// h=12 hours H=24 hours
-if(strlen($_SESSION['car_law_id'])==0)
+if(strlen($_SESSION['law_login_id'])==0)
   { 
 header('location:../index');
 }
@@ -103,7 +103,8 @@ else{
                             <div class="about-content " >
                             	<ul class="package-list">
                             	<li> <h3>Full Name : <?php echo $row['name']; ?></h3> </li>
-                            	<li> Contact Number : <?php echo $row['contact']; ?> </li>
+                            	<li> Contact Number :<a  href="tel:+88<?php echo htmlentities($row['contact']) ; ?>"> <?php echo $row['contact']; ?> </a> </li>
+
                                 <li> Area : <?php echo $row['court']; ?> </li>
                             	<li> <?php echo $row['details']; ?> </li>
                             

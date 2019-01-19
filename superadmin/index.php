@@ -7,7 +7,6 @@ header('location:../admin/index');
 }
 else{  
  
-
 include('../db/config.php');
 
 //********** For Car Booking Chart *************//
@@ -37,220 +36,417 @@ $cars=mysqli_num_rows($sql3);
 // Count Total Booking
 $sql4=mysqli_query($con,"SELECT * FROM `car_booking`");
 $booking=mysqli_num_rows($sql4);
-
-
+// Count Total Room Booking
+$sql5=mysqli_query($con,"SELECT * FROM `room_booking`");
+$room_booking=mysqli_num_rows($sql5);
+// Count Total RoomS
+$sql6=mysqli_query($con,"SELECT * FROM `room`");
+$room_count=mysqli_num_rows($sql6);
+// Count Total Legal Reports
+$sql7=mysqli_query($con,"SELECT * FROM `law_report`");
+$legal_report=mysqli_num_rows($sql7);
+// Count Total Legal Notice
+$sql8=mysqli_query($con,"SELECT * FROM `legal_notice`");
+$legal_notice=mysqli_num_rows($sql8);
 ?>
 
-    <!DOCTYPE html>
-    <html lang="en">
-
+<!DOCTYPE html>
+<html>
     <head>
-        <!-- Required meta tags -->
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="syful.cse.bd@gmail.com">
+        <meta name="author" content="Saif">
+
+        <link rel="shortcut icon" href="images/cpb.png">
+
         <?php include('common/title.php'); ?>
 
-        <!-- plugins:css -->
-        <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
-        <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
-        <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
-        <!-- endinject -->
-        <!-- plugin css for this page -->
-        <!-- End plugin css for this page -->
-        <!-- inject:css -->
-        <link rel="stylesheet" href="css/style.css">
-        <!-- endinject -->
-        <link rel="shortcut icon" href="images/favicon.png" />
+        <!-- Base Css Files -->
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+        <!-- Font Icons -->
+        <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="assets/ionicon/css/ionicons.min.css" rel="stylesheet" />
+        <link href="css/material-design-iconic-font.min.css" rel="stylesheet">
+
+        <!-- animate css -->
+        <link href="css/animate.css" rel="stylesheet" />
+
+        <!-- Waves-effect --> 
+        <link href="css/waves-effect.css" rel="stylesheet">
+
+        <!-- sweet alerts -->
+        <link href="assets/sweet-alert/sweet-alert.min.css" rel="stylesheet">
+
+        <!-- Custom Files -->
+        <link href="css/helper.css" rel="stylesheet" type="text/css" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="js/modernizr.min.js"></script>
+        
     </head>
 
-    <body>
-        <div class="container-scroller">
-            <!-- partial:partials/_navbar.html -->
+
+
+    <body class="fixed-left">
+        
+        <!-- Begin page -->
+        <div id="wrapper">
+        
+            <!-- Top Bar Start -->
             <?php include('common/navbar.php'); ?>
-            <!-- partial -->
-            <div class="container-fluid page-body-wrapper">
-                <!-- partial:partials/_sidebar.html -->
-                <?php include('common/sidebar.php'); ?>
-                <!-- partial -->
-                <div class="main-panel">
-                    <div class="content-wrapper">
+            <!-- Top Bar End -->
 
+
+           <!-- Left Sidebar Start --> 
+
+            <?php include('common/sidebar.php'); ?>
+            <!-- Left Sidebar End --> 
+
+
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->                      
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container">
+
+                        <!-- Start Widget -->
                         <div class="row">
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-                                <div class="card card-statistics">
-                                    <a href="report-all">
-                                        <div class="card-body">
-                                            <div class="clearfix">
-                                                <div class="float-left">
-                                                    <i class="mdi mdi-poll-box text-danger icon-lg"></i>
-                                                </div>
-                                                <div class="float-right">
-                                                    <p class="mb-0 text-right">Total Booking</p>
-                                                    <div class="fluid-container">
-                                                        <h3 class="font-weight-medium text-right mb-0">
-                                                            <?php echo $booking; ?>
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <p class="text-muted mt-3 mb-0">
-                                                <i class="mdi mdi-cursor-pointer mr-1" aria-hidden="true"></i> Click To Show Report
-                                            </p>
-
-                                        </div>
-                                    </a>
+                            <div class="col-md-6 col-sm-6 col-lg-3">
+                                <div class="mini-stat clearfix bx-shadow">
+                                    <span class="mini-stat-icon bg-warning" style="background-color: ;"><i class="ion-connection-bars"></i></span>
+                                    <div class="mini-stat-info text-right text-muted">
+                                        <span class="counter"><?php echo $booking; ?></span>
+                                       Total Car Bookings
+                                    </div>
+                                    <div class="tiles-progress">
+                                       
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-                                <div class="card card-statistics">
-                                    <a href="car-all">
-                                        <div class="card-body">
-                                            <div class="clearfix">
-                                                <div class="float-left">
-                                                    <i class="mdi mdi-car text-warning icon-lg"></i>
-                                                </div>
-                                                <div class="float-right">
-                                                    <p class="mb-0 text-right">Total Cars</p>
-                                                    <div class="fluid-container">
-                                                        <h3 class="font-weight-medium text-right mb-0">
-                                                            <?php echo $cars; ?>
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p class="text-muted mt-3 mb-0">
-                                                <i class="mdi mdi-cursor-pointer mr-1" aria-hidden="true"></i> Click To Show Report
-                                            </p>
-                                        </div>
-                                    </a>
+                            <div class="col-md-6 col-sm-6 col-lg-3">
+                                <div class="mini-stat clearfix bx-shadow">
+                                    <span class="mini-stat-icon bg-warning"><i class="ion-model-s"></i></span>
+                                    <div class="mini-stat-info text-right text-muted">
+                                        <span class="counter"><?php echo $cars; ?></span>
+                                        Total Cars
+                                    </div>
+                                    <div class="tiles-progress">
+                                       
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-                                <div class="card card-statistics">
-                                    <a href="driver-all">
-                                        <div class="card-body">
-                                            <div class="clearfix">
-                                                <div class="float-left">
-                                                    <i class="mdi mdi-radioactive text-success icon-lg"></i>
-                                                </div>
-                                                <div class="float-right">
-                                                    <p class="mb-0 text-right">All Drivers</p>
-                                                    <div class="fluid-container">
-                                                        <h3 class="font-weight-medium text-right mb-0">
-                                                            <?php echo $drivers; ?>
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p class="text-muted mt-3 mb-0">
-                                                <i class="mdi mdi-cursor-pointer mr-1" aria-hidden="true"></i> Click To Show Report
-                                            </p>
-                                        </div>
-                                    </a>
+                           
+                            <div class="col-md-6 col-sm-6 col-lg-3">
+                                <div class="mini-stat clearfix bx-shadow">
+                                    <span class="mini-stat-icon bg-warning"><i class="ion-nuclear"></i></span>
+                                    <div class="mini-stat-info text-right text-muted">
+                                        <span class="counter"><?php echo $drivers; ?></span>
+                                        Total Drivers
+                                    </div>
+                                    <div class="tiles-progress">
+                                       
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-                                <div class="card card-statistics">
-                                    <a href="user-all-info">
-                                        <div class="card-body">
-                                            <div class="clearfix">
-                                                <div class="float-left">
-                                                    <i class="mdi mdi-account-location text-info icon-lg"></i>
-                                                </div>
-                                                <div class="float-right">
-                                                    <p class="mb-0 text-right">All Users</p>
-                                                    <div class="fluid-container">
-                                                        <h3 class="font-weight-medium text-right mb-0">
-                                                            <?php echo $users; ?>
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p class="text-muted mt-3 mb-0">
-                                                <i class="mdi mdi-cursor-pointer mr-1" aria-hidden="true"></i> Click To Show Report
-                                            </p>
-                                        </div>
-                                    </a>
+                             <div class="col-md-6 col-sm-6 col-lg-3">
+                                <div class="mini-stat clearfix bx-shadow">
+                                    
+                                    <span class="mini-stat-icon bg-success"><i class="md-assignment-ind"></i></span>
+                                    <div class="mini-stat-info text-right text-muted">
+                                        <span class="counter"><?php echo $users; ?></span>
+                                        Total Users
+                                    </div>
+                                    <div class="tiles-progress">
+                                       
+                                    </div>
                                 </div>
+                                
                             </div>
-                        </div>
+                            
+                        </div> 
+                        <!-- End row-->
 
-
+                        <!-- Start Widget -->
                         <div class="row">
-                            <div class="col-lg-6 grid-margin stretch-card">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Car Pool Booking Chart</h4>
-                                        <div id="carChart" style="height:300px;"></div>
-                                        
-
-                                        <div id="chart_wrap">
-                                        <div id="chart_div"></div>
-                                            </div>
-
-
+                            <div class="col-md-6 col-sm-6 col-lg-3">
+                                <div class="mini-stat clearfix bx-shadow">
+                                    <span class="mini-stat-icon bg-info" style="background-color: ;"><i class="ion-pie-graph"></i></span>
+                                    <div class="mini-stat-info text-right text-muted">
+                                        <span class="counter"><?php echo $room_booking; ?></span>
+                                       Total Room Bookings
+                                    </div>
+                                    <div class="tiles-progress">
+                                       
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-lg-3">
+                                <div class="mini-stat clearfix bx-shadow">
+                                    <span class="mini-stat-icon bg-info"><i class="ion-home"></i></span>
+                                    <div class="mini-stat-info text-right text-muted">
+                                        <span class="counter"><?php echo $room_count; ?></span>
+                                        Total Rooms
+                                    </div>
+                                    <div class="tiles-progress">
+                                       
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 grid-margin stretch-card">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Car Pool User Chart</h4>
-                                        <div id="userChart" style="height:300px;"></div>
+                            <div class="col-md-6 col-sm-6 col-lg-3">
+                                <div class="mini-stat clearfix bx-shadow">
+                                    <a href="">
+                                    <span class="mini-stat-icon" style="background-color: #912CEE;" ><i class="ion-stats-bars"></i></span>
+                                    <div class="mini-stat-info text-right text-muted">
+                                        <span class="counter"><?php echo $legal_report; ?></span>
+                                        Total Legal Reports
+                                    </div>
+                                    <div class="tiles-progress">
+                                       
+                                    </div>
+                                </div>
+                                </a>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-lg-3">
+                                <div class="mini-stat clearfix bx-shadow">
+                                    <span class="mini-stat-icon" style="background-color: #912CEE;"  ><i class="ion-hammer"></i></span>
+                                    <div class="mini-stat-info text-right text-muted">
+                                        <span class="counter"><?php echo $legal_notice; ?></span>
+                                        Total Legal Notice
+                                    </div>
+                                    <div class="tiles-progress">
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div> 
+                        <!-- End row-->
+
+
+
+            <div class="row">
+                 
+                <div class="col-lg-6">
+                    <div class="portlet"><!-- /portlet heading -->
+                        <div class="portlet-heading">
+                            <h3 class="portlet-title text-dark text-uppercase">
+                                Car Pool Booking Chart
+                            </h3>
+                            <div class="portlet-widgets">
+                                <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                                <span class="divider"></span>
+                                <a data-toggle="collapse" data-parent="#accordion1" href="#portlet2"><i class="ion-minus-round"></i></a>
+                                <span class="divider"></span>
+                                <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="portlet2" class="panel-collapse collapse in">
+                            <div class="portlet-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="pie-chart">
+                                            <div id="carChart" style="height:300px;"></div>
+                                        </div>
+
                                         
                                     </div>
                                 </div>
                             </div>
                         </div>
-                                                <div class="row">
-                            <div class="col-lg-6 grid-margin stretch-card">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Room Booking Chart</h4>
-                                        <div id="roomChart" style="height:300px;"></div>
-                                        
-
-                                        <div id="chart_wrap">
-                                        <div id="chart_div"></div>
-                                            </div>
+                    </div> <!-- /Portlet -->
+                </div> <!-- end col -->
 
 
+                <div class="col-lg-6">
+                    <div class="portlet"><!-- /portlet heading -->
+                        <div class="portlet-heading">
+                            <h3 class="portlet-title text-dark text-uppercase">
+                               Car Pool User Chart
+                            </h3>
+                            <div class="portlet-widgets">
+                                <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                                <span class="divider"></span>
+                                <a data-toggle="collapse" data-parent="#accordion2" href="#portlet3"><i class="ion-minus-round"></i></a>
+                                <span class="divider"></span>
+                                <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="portlet3" class="panel-collapse collapse in">
+                            <div class="portlet-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="pie-chart">
+                                             <div id="userChart" style="height:300px;"></div>
+                                        </div>
+
+                                      
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 grid-margin stretch-card">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Room Booking User Chart</h4>
-                                        <div id="room_userChart" style="height:300px;"></div>
+                        </div>
+                    </div> <!-- /Portlet -->
+                </div> <!-- end col -->
+
+            </div> <!-- End row -->
+
+            <div class="row">
+                 
+                <div class="col-lg-6">
+                    <div class="portlet"><!-- /portlet heading -->
+                        <div class="portlet-heading">
+                            <h3 class="portlet-title text-dark text-uppercase">
+                                Room Booking Chart
+                            </h3>
+                            <div class="portlet-widgets">
+                                <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                                <span class="divider"></span>
+                                <a data-toggle="collapse" data-parent="#accordion1" href="#portlet2"><i class="ion-minus-round"></i></a>
+                                <span class="divider"></span>
+                                <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="portlet2" class="panel-collapse collapse in">
+                            <div class="portlet-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="pie-chart">
+                                            <div id="roomChart" style="height:300px;"></div>
+                                        </div>
+
                                         
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div> <!-- /Portlet -->
+                </div> <!-- end col -->
 
 
-                    
+                <div class="col-lg-6">
+                    <div class="portlet"><!-- /portlet heading -->
+                        <div class="portlet-heading">
+                            <h3 class="portlet-title text-dark text-uppercase">
+                              Room Booking User Chart
+                            </h3>
+                            <div class="portlet-widgets">
+                                <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                                <span class="divider"></span>
+                                <a data-toggle="collapse" data-parent="#accordion2" href="#portlet3"><i class="ion-minus-round"></i></a>
+                                <span class="divider"></span>
+                                <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="portlet3" class="panel-collapse collapse in">
+                            <div class="portlet-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="pie-chart">
+                                             <div id="room_userChart" style="height:300px;"></div>
+                                        </div>
 
-                </div>
-                <!-- content-wrapper ends -->
-                <!-- partial:partials/_footer.html -->
-                <footer class="footer">
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- /Portlet -->
+                </div> <!-- end col -->
+
+            </div> <!-- End row -->
+
+
+                            
+                        </div> <!-- end row -->
+
+                    </div> <!-- container -->
+                               
+                </div> <!-- content -->
+
+                <footer class="footer text-right">
                     <?php include('common/footer.php') ?>
                 </footer>
-                <!-- partial -->
-            </div>
-            <!-- main-panel ends -->
-        </div>
-        <!-- page-body-wrapper ends -->
-        </div>
-        <!-- container-scroller -->
 
-<!--************* Google Pai Chart Link *****************-->
-    <script type="text/javascript" src="../assets/js/g_pi_chart/chart.js" ></script>
-    <script type="text/javascript" src="../assets/js/g_pi_chart/jquery-1.12.4.js" ></script>
-    <script type="text/javascript" src="../assets/js/g_pi_chart/loader.js" ></script>
+            </div>
+          
+
+
+            
+
+        </div>
+        <!-- END wrapper -->
+
+
+    
+        <script>
+            var resizefunc = [];
+        </script>
+
+        <!-- jQuery  -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/waves.js"></script>
+        <script src="js/wow.min.js"></script>
+        <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+        <script src="js/jquery.scrollTo.min.js"></script>
+        <script src="assets/chat/moment-2.2.1.js"></script>
+        <script src="assets/jquery-sparkline/jquery.sparkline.min.js"></script>
+        <script src="assets/jquery-detectmobile/detect.js"></script>
+        <script src="assets/fastclick/fastclick.js"></script>
+        <script src="assets/jquery-slimscroll/jquery.slimscroll.js"></script>
+        <script src="assets/jquery-blockui/jquery.blockUI.js"></script>
+
+
+       
+
+        <!-- Counter-up -->
+        <script src="assets/counterup/waypoints.min.js" type="text/javascript"></script>
+        <script src="assets/counterup/jquery.counterup.min.js" type="text/javascript"></script>
+        
+        <!-- CUSTOM JS -->
+        <script src="js/jquery.app.js"></script>
+
+        <!-- Dashboard -->
+        <script src="js/jquery.dashboard.js"></script>
+
+        <!-- Chat -->
+        <script src="js/jquery.chat.js"></script>
+
+        <!-- Todo -->
+        <script src="js/jquery.todo.js"></script>
+
+        <script type="text/javascript">
+            /* ==============================================
+            Counter Up
+            =============================================== */
+            jQuery(document).ready(function($) {
+                $('.counter').counterUp({
+                    delay: 100,
+                    time: 1200
+                });
+            });
+        </script>
+
+
+        <!--************* Google Pai Chart Link *****************-->
+    <script  src="../assets/js/g_pi_chart/chart.js" ></script>
+    <!-- <script  src="../assets/js/g_pi_chart/jquery-1.12.4.js" ></script> -->
+    <script  src="../assets/js/g_pi_chart/loader.js" ></script>
 
  <script type="text/javascript">
             google.charts.load('current', {
@@ -361,20 +557,9 @@ $booking=mysqli_num_rows($sql4);
 
 
 
-        <!-- plugins:js -->
-        <script src="vendors/js/vendor.bundle.base.js"></script>
-        <script src="vendors/js/vendor.bundle.addons.js"></script>
-        <!-- endinject -->
-        <!-- Plugin js for this page-->
-        <!-- End plugin js for this page-->
-        <!-- inject:js -->
-        <script src="js/off-canvas.js"></script>
-        <script src="js/misc.js"></script>
-        <!-- endinject -->
-        <!-- Custom js for this page-->
-        <script src="js/dashboard.js"></script>
-        <!-- End custom js for this page-->
-    </body>
 
-    </html>
-    <?php } ?>
+    
+    </body>
+</html>
+
+<?php } ?>

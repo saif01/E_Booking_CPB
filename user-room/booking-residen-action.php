@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 date_default_timezone_set('Asia/Dhaka');// change according timezone
 $currentTime = date( 'Y-m-d H:i:s', time () );//H=24 hours and h=12 hours
-if(strlen($_SESSION['car_room_id'])==0)
+if(strlen($_SESSION['room_login_id'])==0)
   { 
 header('location:../index');
 }

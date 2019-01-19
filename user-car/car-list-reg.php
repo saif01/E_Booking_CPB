@@ -252,7 +252,7 @@ else{
                         <p><i class="fas fa-mobile-alt"></i> <a  href="tel:+88<?php echo htmlentities($row['driver_phone']) ; ?>"> <?php echo htmlentities($row['driver_phone']) ; ?> </a> 
                                     </p>                                
                                   
-                                </div>
+                                </div> 
 
 
                 <?php } ?>

@@ -1,10 +1,10 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['admin-super-login'])==0)
+if(strlen($_SESSION['admin-law-login'])==0)
   { 
 header('location:../admin');
-}
+  }
 else{ 
 include('../db/config.php');
 ?>
@@ -13,7 +13,6 @@ include('../db/config.php');
 <script src="../assets/coustom/swwetalert/dev.js"></script>
 <link rel="stylesheet" type="text/css" href="../assets/coustom/swwetalert/sweetalert.css">
 <!--*********end Sweet alert For Submiting data **********-->
-
 <?php
 
 if (isset($_POST['submit'])) {
@@ -21,246 +20,79 @@ if (isset($_POST['submit'])) {
 $user_login=$_POST['user_login'];
 $user_pass=$_POST['user_pass'];
 $user_name=$_POST['user_name'];
+$user_mail=$_POST['user_mail'];
 $user_dept=$_POST['user_dept'];
 $user_contact=$_POST['user_contact'];
 $user_office_id=$_POST['user_office_id'];
-$user_st_ch=$_POST['user_st_ch'];
-$user_st = 1;
+$user_st=$_POST['show_st'];
+$user_car_st=$_POST['user_car_st'];
+$user_room_st=$_POST['user_room_st'];
+$user_law_st=$_POST['user_law_st'];
 
 
-$file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['user_img']['name']);
+
+$file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['photo']['name']);
     $storeFile="../pimages/user/".$file_name;
-    $fileName=$_FILES['user_img']['tmp_name'];
-
-    move_uploaded_file($fileName,$storeFile);
-
-//Data Insert For Car Pool Booking Section
-    if ($user_st_ch=='carpool') 
-        {   
-            $user_car_st='1';
-            $user_room_st='0';
-            $user_law_st='0';
-
-            $query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_name`, `user_img`, `user_dept`, `user_contact`, `user_office_id`, `user_st`, `user_car_st`, `user_room_st`, `user_law_st`) VALUES ('$user_login','$user_pass','$user_name','$file_name','$user_dept','$user_contact','$user_office_id','$user_st','$user_car_st','$user_room_st','$user_law_st')");
-			            if ($query) 
-			            {
-			            		?>
-		                  	<script>
-		                        setTimeout(function () { 
-		                                swal({
-		                                  title: "Successfully!",
-		                                  text: "Car Pool User Registration Completed!",
-		                                  type: "success",
-		                                  confirmButtonText: "OK"
-		                                },
-		                                function(isConfirm){
-		                                  if (isConfirm) {
-		                                    window.location.href = "user-all-info.php";
-		                                  }
-		                                }); },0);
-		                       
-		                      </script>
-		        				<?php
-			            }
-			            else
-			            {
-			            			?>
-			                   <script>
-			                        setTimeout(function () { 
-			                                swal({
-			                                  title: "Error!",
-			                                  text: "User Registration Not Completed!",
-			                                  type: "error",
-			                                  confirmButtonText: "OK"
-			                                },
-			                                function(isConfirm){
-			                                  if (isConfirm) {
-			                                    window.location.href = "user-all-info.php";
-			                                  }
-			                                }); },0);
-			                       
-			                      </script>
-	            					<?php
-			            }
-        		
-        }
-//Data Insert For Room Booking Section
-        elseif ($user_st_ch=='room') 
-        {   
-        	$user_car_st='0';
-            $user_room_st='1';
-            $user_law_st='0';
-
-            $query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_name`, `user_img`, `user_dept`, `user_contact`, `user_office_id`, `user_st`, `user_car_st`, `user_room_st`, `user_law_st`) VALUES ('$user_login','$user_pass','$user_name','$file_name','$user_dept','$user_contact','$user_office_id','$user_st','$user_car_st','$user_room_st','$user_law_st')");
-
-            		if ($query) 
-			            {
-			            		?>
-		                  	<script>
-		                        setTimeout(function () { 
-		                                swal({
-		                                  title: "Successfully!",
-		                                  text: "Room Booking User Registration Completed!",
-		                                  type: "success",
-		                                  confirmButtonText: "OK"
-		                                },
-		                                function(isConfirm){
-		                                  if (isConfirm) {
-		                                    window.location.href = "user-all-info.php";
-		                                  }
-		                                }); },0);
-		                       
-		                      </script>
-		        				<?php
-			            }
-			            else
-			            {
-			            			?>
-			                   <script>
-			                        setTimeout(function () { 
-			                                swal({
-			                                  title: "Error!",
-			                                  text: "User Registration Not Completed!",
-			                                  type: "error",
-			                                  confirmButtonText: "OK"
-			                                },
-			                                function(isConfirm){
-			                                  if (isConfirm) {
-			                                    window.location.href = "user-all-info.php";
-			                                  }
-			                                }); },0);
-			                       
-			                      </script>
-	            					<?php
-			            }
+    $fileunq=$_FILES['photo']['tmp_name'];
+    move_uploaded_file($fileunq,$storeFile);
 
 
-        }
 
-//Data Insert For All Section
-         elseif ($user_st_ch=='all') 
-        {   
-            $user_car_st='1';
-            $user_room_st='1';
-            $user_law_st='1';
+$query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_name`, `user_mail`, `user_img`, `user_dept`, `user_contact`, `user_office_id`, `user_st`, `user_car_st`, `user_room_st`, `user_law_st`) VALUES ('$user_login','$user_pass','$user_name','$user_mail','$file_name','$user_dept','$user_contact','$user_office_id','$user_st','$user_car_st','$user_room_st','$user_law_st')");
 
-            $query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_name`, `user_img`, `user_dept`, `user_contact`, `user_office_id`, `user_st`, `user_car_st`, `user_room_st`, `user_law_st`) VALUES ('$user_login','$user_pass','$user_name','$file_name','$user_dept','$user_contact','$user_office_id','$user_st','$user_car_st','$user_room_st','$user_law_st')");
 
-             		if ($query) 
-			            {
-			            		?>
-		                  	<script>
-		                        setTimeout(function () { 
-		                                swal({
-		                                  title: "Successfully!",
-		                                  text: "All Section User Registration Completed!",
-		                                  type: "success",
-		                                  confirmButtonText: "OK"
-		                                },
-		                                function(isConfirm){
-		                                  if (isConfirm) {
-		                                    window.location.href = "user-all-info.php";
-		                                  }
-		                                }); },0);
-		                       
-		                      </script>
-		        				<?php
-			            }
-			            else
-			            {
-			            			?>
-			                   <script>
-			                        setTimeout(function () { 
-			                                swal({
-			                                  title: "Error!",
-			                                  text: "User Registration Not Completed!",
-			                                  type: "error",
-			                                  confirmButtonText: "OK"
-			                                },
-			                                function(isConfirm){
-			                                  if (isConfirm) {
-			                                    window.location.href = "user-all-info.php";
-			                                  }
-			                                }); },0);
-			                       
-			                      </script>
-	            					<?php
-			            }
+		if ($query) 
+		{
+			?>		
+			<script>
+			setTimeout(function () { 
+			        swal({
+			          title: "Successfully!",
+			          text: "User Add Completed!",
+			          type: "success",
+			          confirmButtonText: "OK"
+			        },
+			        function(isConfirm){
+			          if (isConfirm) {
+			          	//history.back();
+			            window.location.href = "user-all.php";
+			          }
+			        }); },0);
 
-        }
+			</script>
 
-        //Data Insert For Law Or Legal Section
-         elseif ($user_st_ch=='law') 
-        {   
-            $user_car_st='0';
-            $user_room_st='0';
-            $user_law_st='1';
+		    <?php
+		}
 
-            $query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_name`, `user_img`, `user_dept`, `user_contact`, `user_office_id`, `user_st`, `user_car_st`, `user_room_st`, `user_law_st`) VALUES ('$user_login','$user_pass','$user_name','$file_name','$user_dept','$user_contact','$user_office_id','$user_st','$user_car_st','$user_room_st','$user_law_st')");
-               		if ($query) 
-			            {
-			            		?>
-		                  	<script>
-		                        setTimeout(function () { 
-		                                swal({
-		                                  title: "Successfully!",
-		                                  text: "Only Legal User Registration Completed!",
-		                                  type: "success",
-		                                  confirmButtonText: "OK"
-		                                },
-		                                function(isConfirm){
-		                                  if (isConfirm) {
-		                                    window.location.href = "user-all-info.php";
-		                                  }
-		                                }); },0);
-		                       
-		                      </script>
-		        				<?php
-			            }
-			            else
-			            {
-			            			?>
-			                   <script>
-			                        setTimeout(function () { 
-			                                swal({
-			                                  title: "Error!",
-			                                  text: "User Registration Not Completed!",
-			                                  type: "error",
-			                                  confirmButtonText: "OK"
-			                                },
-			                                function(isConfirm){
-			                                  if (isConfirm) {
-			                                    window.location.href = "user-all-info.php";
-			                                  }
-			                                }); },0);
-			                       
-			                      </script>
-	            					<?php
-			            }
-        
-        }
+		else
+		{
+			//echo '<script language="javascript">';
+			//echo 'alert("Error !!!!.. Data Not Inserted")';
+			//echo '</script>';
 
-        else{
-            ?>
-                   <script>
-                        setTimeout(function () { 
-                                swal({
-                                  title: "Error!",
-                                  text: "User Registration Not Completed!",
-                                  type: "error",
-                                  confirmButtonText: "OK"
-                                },
-                                function(isConfirm){
-                                  if (isConfirm) {
-                                    window.location.href = "user-all-info.php";
-                                  }
-                                }); },0);
-                       
-                      </script>
-            <?php
-        }
+			?>		
+			<script>
+			setTimeout(function () { 
+			        swal({
+			          title: "Error Genareted!",
+			          text: "User Not Added Properly!",
+			          type: "error",
+			          confirmButtonText: "OK"
+			        },
+			        function(isConfirm){
+			          if (isConfirm) {
+			          	history.back();
+			            //window.location.href = "advisor-all.php";
+			          }
+			        }); },0);
 
- }
+			</script>
 
-             
-}?>
+		    <?php
+		}
+
+
+	} 
+
+
+ }?>

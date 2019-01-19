@@ -13,6 +13,7 @@ else{
 $case_number=$_GET['case_number'];
 $filling=$_GET['filling'];
 $hearing=$_GET['hearing'];
+$p_law_fees=$_GET['p_law_fees'];
 
 include('../db/config.php');
 ?>
@@ -30,11 +31,14 @@ if (isset($_POST['submit'])) {
 	$pr_balance=$_POST['pr_balance'];
 	$status=$_POST['status'];
 
+	$law_fees=$_POST['law_fees'];
+	$final_law_fees=$p_law_fees+$law_fees;
 
 
-$legal=mysqli_query($con,"UPDATE `law_report` SET `last_hearing`='$last_hearing',`pr_balance`='$pr_balance',`remarks`='$remarks',`status`='$status',`last_up`='$currDate' WHERE `case_no`='$case_number'");
 
-$legalRemark=mysqli_query($con,"INSERT INTO `case_remarks`(`case_number`, `filling`, `hearing`, `last_hearing`, `remarks`, `status`) VALUES ('$case_number','$filling','$hearing','$last_hearing','$remarks','$status')");
+$legal=mysqli_query($con,"UPDATE `law_report` SET `last_hearing`='$last_hearing',`pr_balance`='$pr_balance',`law_fees`='$final_law_fees',`remarks`='$remarks',`status`='$status',`last_up`='$currDate' WHERE `case_no`='$case_number'");
+
+$legalRemark=mysqli_query($con,"INSERT INTO `case_remarks`(`case_number`, `filling`, `hearing`, `law_fees`, `last_hearing`, `remarks`, `status`) VALUES ('$case_number','$filling','$hearing','$law_fees','$last_hearing','$remarks','$status')");
 
 
 
@@ -52,7 +56,7 @@ $legalRemark=mysqli_query($con,"INSERT INTO `case_remarks`(`case_number`, `filli
 		        },
 		        function(isConfirm){
 		          if (isConfirm) {
-		            window.location.href = "report-all.php";
+		            window.location.href = "inprocess-case";
 		          }
 		        }); },0);
 

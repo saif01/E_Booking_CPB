@@ -12,11 +12,25 @@
 
 
       <div class="navbar-menu-wrapper d-flex align-items-center">
-        
-        <span class="profile-text">Hello, <b style="color: dimgray; text-transform: capitalize;"> <?php echo $_SESSION['admin-car-login']; ?> </b> </span>
+  <?php 
+$admin_id= $_SESSION['admin_id'];
+$query=mysqli_query($con,"SELECT `admin_name`, `admin_img` FROM `admin` WHERE `admin_id`='$admin_id'");
+$row=$query->fetch_assoc();
+ ?>
+  <span class="profile-text">Hello, <b style="color: dimgray; text-transform: capitalize;"> <?php echo $row['admin_name']; ?> </b> </span>
+
+
+
         <ul class="navbar-nav navbar-nav-right">
-          
-          
+
+
+<?php if (strlen($_SESSION['admin-redirect']) !=0 ) 
+{?>
+ <a href="../admin/project_direct/"><button class="btn btn-danger">Home</button></a>
+<?php }?>
+
+
+
           <li class="nav-item dropdown d-none d-xl-inline-block">
 
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -34,7 +48,7 @@
                 Change Password
               </a>
               
-              <a href="logout-admin" class="dropdown-item"><i class="menu-icon mdi mdi-close-network text-danger"></i>
+              <a href="logout" class="dropdown-item"><i class="menu-icon mdi mdi-close-network text-danger"></i>
                 Sign Out
               </a>
             </div>

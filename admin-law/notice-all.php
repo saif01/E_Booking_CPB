@@ -93,6 +93,7 @@ include('../db/config.php');
                              <div class="col-md-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
+                                      <a href="notice-add" class="btn btn-success btn-sm pull-right" >Add New</a>
                                         <h3 class="panel-title">All Legal Notice Information</h3>
 
                                     </div>

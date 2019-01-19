@@ -107,7 +107,7 @@ include('../db/config.php');
                                                         <th>Last Hearing</th>
                                                         <th>Previous</th>
                                                         <th>Present</th>
-                                                        <th>Improve</th>
+                                                        <th>Fees</th>
                                                         <th>Department</th>
                                                         <th>Remarks</th>
 
@@ -138,7 +138,7 @@ include('../db/config.php');
 
                                  <td><?php echo $row['pre_balance']; ?></td>
                                  <td><?php echo $row['pr_balance']; ?></td>
-                                 <td><?php echo $row['case_dept']; ?></td>
+                                 <td><?php echo $row['law_fees']; ?></td> 
                                  <td><?php echo $row['case_dept']; ?></td>
                                  <td><?php echo $row['remarks']; ?></td>
 

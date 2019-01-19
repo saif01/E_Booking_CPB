@@ -13,16 +13,23 @@
 
 
       <div class="navbar-menu-wrapper d-flex align-items-center">
-        <?php 
-              $admin_id= $_SESSION['admin_id'];
-              $query=mysqli_query($con,"SELECT `admin_name`, `admin_img` FROM `admin` WHERE `admin_id`='$admin_id'");
-             $row=$query->fetch_assoc();
-               ?>
-        
-        <span class="profile-text">Hello, <b style="color: dimgray; text-transform: capitalize;"> <?php echo $row['admin_name']; ?> </b> </span>
+    <?php 
+    $admin_id= $_SESSION['admin_id'];
+    $query=mysqli_query($con,"SELECT `admin_name`, `admin_img` FROM `admin` WHERE `admin_id`='$admin_id'");
+   $row=$query->fetch_assoc();
+     ?>     
+    <span class="profile-text">Hello, <b style="color: dimgray; text-transform: capitalize;"> <?php echo $row['admin_name']; ?> </b> </span>
+
+
+
         <ul class="navbar-nav navbar-nav-right">
           
-          
+ <!-- Admin Redirect Index Page -->         
+<?php if (strlen($_SESSION['admin-redirect']) !=0 ) 
+{?>
+ <a href="../admin/project_direct/"><button class="btn btn-danger">Home</button></a>
+<?php }?> 
+
           <li class="nav-item dropdown d-none d-xl-inline-block">
 
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">

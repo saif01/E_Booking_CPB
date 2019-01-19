@@ -1,1 +1,1 @@
- <title>CPB-IT</title>
+<title>CPB.SuperAdmin</title>

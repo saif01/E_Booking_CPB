@@ -1,6 +1,1 @@
-		
-  copyright © 2018. <b style="color: green;"> Car Pool System </b> @Powered By CPB-IT.
-       
-
-
-                 
+ <p class="footer-text text-center">Copyright &copy; C.P.Bangladesh IT-Portal Powered by <strong>CPB-IT</strong> </p>

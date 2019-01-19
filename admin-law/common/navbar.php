@@ -21,8 +21,15 @@
                                 <span class="clearfix"></span>
                             </div>
 
-                           
+
+                    
                             <ul class="nav navbar-nav navbar-right pull-right">
+                                <li>
+
+                    <?php if (strlen($_SESSION['admin-redirect']) !=0 ) 
+                    {?>
+                     <a href="../admin/project_direct/"><button class="btn btn-danger">Home</button></a>
+                    <?php }?> </li>
                                  
                                 <li class="dropdown">
                                     <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="../pimages/admin/<?php echo $row['admin_img']; ?>" alt="user-img" class="img-circle"> </a>
@@ -32,6 +39,10 @@
                                         <li><a href="logout"><i class="md md-settings-power"></i> Logout</a></li>
                                     </ul>
                                 </li>
+
+
+
+
                             </ul>
                         </div>
                         <!--/.nav-collapse -->

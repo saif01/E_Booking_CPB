@@ -211,9 +211,22 @@ include('../db/config.php');
             </div> 
 
             <div class="form-group">
+
+                <label  class="col-sm-3 control-label">Legal Fees</label>
+                <div class="col-sm-9">
+                     <input type="number" name="law_fees" class="form-control" placeholder="Balance After legal Action" required />
+                </div>
+            </div> 
+
+           
+            		
+    </div>
+
+    <div class="col-md-12 text-center"> 
+         <div class="form-group">
                 <label class="col-sm-3 control-label">Publish</label>
                         <div class="col-sm-9">
-                        	 <div class="radio radio-info radio-inline">
+                             <div class="radio radio-info radio-inline">
                                 <input type="radio" id="inlineRadio1" value="1" name="show_st" checked>
                                 <label for="inlineRadio1"> Yes </label>
                             </div>
@@ -223,8 +236,8 @@ include('../db/config.php');
                             </div>
                 </div>
             </div>
-            		
     </div>
+
     
 
     <div class="col-md-12">         

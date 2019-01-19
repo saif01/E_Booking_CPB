@@ -14,7 +14,6 @@ include('../db/config.php');
  $booking_id=$_GET['booking_id'];
  $driver_id=$_GET['driver_id'];
 
-}
 					
 ?>
 
