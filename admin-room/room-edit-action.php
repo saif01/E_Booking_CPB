@@ -23,6 +23,8 @@ if (isset($_POST['submit'])) {
 $room_capicity=$_POST['room_capicity'];
 $room_details=$_POST['room_details'];
 $projector=$_POST['projector'];
+$room_type=$_POST['room_type'];
+$show_st=$_POST['show_st'];
 
 $fileName1=$_FILES['room_img1']['tmp_name'];
 $fileName2=$_FILES['room_img2']['tmp_name'];
@@ -60,7 +62,7 @@ $fileName3=$_FILES['room_img3']['tmp_name'];
                 move_uploaded_file($fileName3,$storeFile3);
 
                            
-                $query2=mysqli_query($con,"UPDATE `room` SET `room_img1`='$file_name1',`room_img2`='$file_name2',`room_img3`='$file_name3',`room_capicity`='$room_capicity',`room_details`='$room_details',`projector`='$projector' WHERE `room_id`='$room_id' ");
+                $query2=mysqli_query($con,"UPDATE `room` SET `room_type`='$room_type', `room_img1`='$file_name1',`room_img2`='$file_name2',`room_img3`='$file_name3',`room_capicity`='$room_capicity',`room_details`='$room_details',`projector`='$projector' WHERE `room_id`='$room_id' ");
 
                 ?>
                 	<script>
@@ -101,7 +103,7 @@ $fileName3=$_FILES['room_img3']['tmp_name'];
 
                            
 
-                $query2=mysqli_query($con,"UPDATE `room` SET `room_img1`='$file_name1',`room_capicity`='$room_capicity',`room_details`='$room_details',`projector`='$projector' WHERE `room_id`='$room_id' ");
+                $query2=mysqli_query($con,"UPDATE `room` SET `room_type`='$room_type', `room_img1`='$file_name1',`room_capicity`='$room_capicity',`room_details`='$room_details',`projector`='$projector' WHERE `room_id`='$room_id' ");
 
                 ?>
             		<script>
@@ -140,7 +142,7 @@ $fileName3=$_FILES['room_img3']['tmp_name'];
 
                            
 
-                $query2=mysqli_query($con,"UPDATE `room` SET `room_img2`='$file_name2',`room_capicity`='$room_capicity',`room_details`='$room_details',`projector`='$projector' WHERE `room_id`='$room_id' ");
+                $query2=mysqli_query($con,"UPDATE `room` SET `room_type`='$room_type', `room_img2`='$file_name2',`room_capicity`='$room_capicity',`room_details`='$room_details',`projector`='$projector' WHERE `room_id`='$room_id' ");
 
                 ?>
             		<script>
@@ -179,7 +181,7 @@ $fileName3=$_FILES['room_img3']['tmp_name'];
                 move_uploaded_file($fileName3,$storeFile3);
                            
 
-                $query2=mysqli_query($con,"UPDATE `room` SET `room_img3`='$file_name3',`room_capicity`='$room_capicity',`room_details`='$room_details',`projector`='$projector' WHERE `room_id`='$room_id'");
+                $query2=mysqli_query($con,"UPDATE `room` SET `room_type`='$room_type', `room_img3`='$file_name3',`room_capicity`='$room_capicity',`room_details`='$room_details',`projector`='$projector' WHERE `room_id`='$room_id'");
 
                 ?>
             		<script>
@@ -203,7 +205,7 @@ $fileName3=$_FILES['room_img3']['tmp_name'];
 
             else{
   
-                $query=mysqli_query($con,"UPDATE `room` SET `room_capicity`='$room_capicity',`room_details`='$room_details',`projector`='$projector' WHERE `room_id`='$room_id'");
+                $query=mysqli_query($con,"UPDATE `room` SET `room_type`='$room_type', `room_capicity`='$room_capicity',`room_details`='$room_details',`projector`='$projector' WHERE `room_id`='$room_id'");
 
             ?>
             	<script>

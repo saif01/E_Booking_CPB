@@ -81,6 +81,10 @@
                     <i class="md md-description text-info"></i>
                         <span>Room B. Report</span></a>
                 </li>
+                <li><a href="report-all-legal"> 
+                    <i class="md md-description text-danger"></i>
+                        <span>Legal Report</span></a>
+                </li>
                 <li><a href="report-byDate-car"> 
                     <i class="md md-description text-warning"></i>
                         <span>Car Report By Date</span></a>

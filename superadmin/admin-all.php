@@ -120,6 +120,8 @@ include('../db/config.php');
                     <th>Legal</th>
                     <th>Car </th>
                     <th>Room </th>
+                    <th>Hard.</th>
+                    <th>App.</th>
                     <th>Super </th>                    
                     <th>Image</th>
                     <th>Name</th>
@@ -139,7 +141,7 @@ include('../db/config.php');
 
                 <td>
 
-  <a href="user-delete.php?admin_id=<?php echo $row['admin_id']?>" id="delete" title="Delete"> <i class="fa fa-trash text-danger" ></i></a>
+  <a href="admin-delete.php?admin_id=<?php echo $row['admin_id']?>" id="delete" title="Delete"> <i class="fa fa-trash text-danger" ></i></a>
 
   <a href="admin-edit?admin_id=<?php echo ($row['admin_id']);?>" title="Edit"
 ><i class="fa fa-edit text-warning"></i> </a>
@@ -198,8 +200,37 @@ include('../db/config.php');
 <a href="admin-status.php?s_admin_room_id=<?php echo ($row['admin_id']);?>" id="give" title="Show"> <i class="fa fa-times-circle text-danger" ></i></a> 
             <?php } ?>
 
+                      </td>
+                       <td>
+                  <?php
+//************** Hardware Admin Status Show ****************//
+         if($row['admin_hard_st']==1)
+         {?>
+<a href="admin-status.php?h_admin_hard_id=<?php echo ($row['admin_id']);?>" id="remove" title="Hide"><i class="fa  fa-check-square-o text-success" ></i></a>
+            
+        <?php } else {?>
+
+<a href="admin-status.php?s_admin_hard_id=<?php echo ($row['admin_id']);?>" id="give" title="Show"> <i class="fa fa-times-circle text-danger" ></i></a> 
+            <?php } ?>
+
                         </td>
- 						<td>
+
+                         <td>
+                  <?php
+//************** Application Admin Status Show ****************//
+         if($row['admin_app_st']==1)
+         {?>
+<a href="admin-status.php?h_admin_app_id=<?php echo ($row['admin_id']);?>" id="remove" title="Hide"><i class="fa  fa-check-square-o text-success" ></i></a>
+            
+        <?php } else {?>
+
+<a href="admin-status.php?s_admin_app_id=<?php echo ($row['admin_id']);?>" id="give" title="Show"> <i class="fa fa-times-circle text-danger" ></i></a> 
+            <?php } ?>
+
+                        </td> 
+
+
+   						         <td>
                   <?php
 //************** Super Admin Status Show ****************//
          if($row['admin_super_st']==1)

@@ -28,7 +28,7 @@ $user_st=$_POST['show_st'];
 $user_car_st=$_POST['user_car_st'];
 $user_room_st=$_POST['user_room_st'];
 $user_law_st=$_POST['user_law_st'];
-
+$user_cms_st=$_POST['user_cms_st'];
 
 
 $file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['photo']['name']);
@@ -38,7 +38,7 @@ $file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['photo']['
 
 
 
-$query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_name`, `user_mail`, `user_img`, `user_dept`, `user_contact`, `user_office_id`, `user_st`, `user_car_st`, `user_room_st`, `user_law_st`) VALUES ('$user_login','$user_pass','$user_name','$user_mail','$file_name','$user_dept','$user_contact','$user_office_id','$user_st','$user_car_st','$user_room_st','$user_law_st')");
+$query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_name`, `user_mail`, `user_img`, `user_dept`, `user_contact`, `user_office_id`, `user_st`, `user_car_st`, `user_room_st`, `user_law_st`, `user_cms_st`) VALUES ('$user_login','$user_pass','$user_name','$user_mail','$file_name','$user_dept','$user_contact','$user_office_id','$user_st','$user_car_st','$user_room_st','$user_law_st','$user_cms_st')");
 
 
 		if ($query) 

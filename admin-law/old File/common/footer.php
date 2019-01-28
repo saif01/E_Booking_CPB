@@ -1,1 +1,0 @@
- <p class="footer-text text-center">Copyright &copy; C.P.Bangladesh Legal Info. Management Powered by <strong>CPB-IT</strong> </p>

@@ -71,9 +71,10 @@ include('../db/config.php');
                                                     <tr>
                                                     	<th>Image</th>
                                                         <th>Room</th>
+                                                        <th>Type</th>
                                                         <th>Capacity</th>
                                                         <th>Details</th>
-                                                        <th>Status</th>
+                                                        <th>Projector</th>
                                                         <th>Actions</th>
                                                         
                                                     </tr>
@@ -87,48 +88,59 @@ include('../db/config.php');
 ?>
                                                     <tr>
 
-                                                        <td>
-                                       
-                                        <img src="../pimages/room/<?php echo($row['room_img1']);?>" class="img-responsive" alt="Car Img" />
-                                                        </td>
+                            <td>
+           
+            <img src="../pimages/room/<?php echo($row['room_img1']);?>" class="img-responsive" alt="Car Img" />
+                            </td>
 
-                                                        <td class="center">
+                            <td class="center">
 
-                                         <?php echo htmlentities($row['room_name']) ; ?> 
-                                                        </td>
-                                                        <td class="center">
-                                         <?php echo htmlentities($row['room_capicity']); ?>
-                                                        </td>
-                                                        
-                                                        <td class="center">
-                                         <?php echo htmlentities($row['room_details']); ?>
-                                                        </td>
-                                                        
+             <?php echo ($row['room_name']) ; ?> 
+                            </td>
+                            <td class="center">
 
-                                                        <td class="center">
-                                                            <?php
-                                         if($row['show_st']==1)
-                                         {?>
-                                            <a href="room-status.php?h_room_id=<?php echo htmlentities($row['room_id']);?>" title="Hide" id="hide"> <i class="mdi mdi-eye text-success icon-lg"></i></a>
+             <?php echo ($row['room_type']) ; ?> 
+                            </td>
+                            <td class="center">
+             <?php echo ($row['room_capicity']); ?>
+                            </td>
+                            
+                            <td class="center">
+             <?php echo ($row['room_details']); ?>
+                            </td>
+                            <td class="center">
+             <?php $p_st= ($row['projector']);
 
-                                            
-                                        <?php } else {?>
+             if ($p_st=='1') {
+               echo "Yes";
+             }
+             else{
+              echo "No";
+             }
+            ?>
+        </td>
+        
 
-                                            <a href="room-status.php?s_room_id=<?php echo htmlentities($row['room_id']);?>" title="Show" id="show"> <i class="mdi mdi-eye-off text-danger icon-lg"></i></a> 
-                                            <?php } ?>
-                                          
-                  									</td>
-                  									<td>
-                  
+        <td class="center">
+                        <?php
+     if($row['show_st']==1)
+     {?>
+        <a href="room-status.php?h_room_id=<?php echo ($row['room_id']);?>" title="Hide" id="hide"> <i class="mdi mdi-eye text-success icon-lg"></i></a>
 
-                  <a href="room-edit?room_id=<?php echo htmlentities($row['room_id']);?>" title="Edit"
-                    >
-                    <i class="mdi mdi-pencil-box-outline text-warning icon-lg"></i>  
-                  </a>
+        
+    <?php } else {?>
 
-                <a href="room-delete.php?room_id=<?php echo $row['room_id']?>" title="Delete" id="delete" > <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a>
+        <a href="room-status.php?s_room_id=<?php echo ($row['room_id']);?>" title="Show" id="show"> <i class="mdi mdi-eye-off text-danger icon-lg"></i></a> 
+        <?php } ?>
+
+        <a href="room-edit?room_id=<?php echo ($row['room_id']);?>" title="Edit"
+          >
+          <i class="mdi mdi-pencil-box-outline text-warning icon-lg"></i>  
+        </a>
+
+      <a href="room-delete.php?room_id=<?php echo $row['room_id']?>" title="Delete" id="delete" > <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a>
                                                                 
-                                                        </td>
+              </td>
                                                     </tr>
                                                     <?php } ?>
 

@@ -81,7 +81,7 @@ else{
                     <div class="section-title  text-center">
 
                        <h2>All Notice History</h2>
-                        <span class="title-line"><i class="fa fa-gavel" aria-hidden="true"></i></span>
+                        <span class="title-line"><i class="fa fa-balance-scale" aria-hidden="true"></i></span>
                         
                     </div>
                 </div>
@@ -199,7 +199,7 @@ else{
 <script type="text/javascript"> 
   $(document).ready(function() {
     $('#example').dataTable( {
-        "order": [[ 0, 'DESC' ]]
+        "order": []
     } );
 } );
 </script>

@@ -74,7 +74,7 @@ else{
 
                        <h2> 
                         Legal Advisor Profile Info.</h2>
-                        <span class="title-line"><i class="fa fa-gavel" aria-hidden="true"></i></span>
+                        <span class="title-line"><i class="fa fa-balance-scale" aria-hidden="true"></i></span>
                         
                     </div>
                 </div>

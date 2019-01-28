@@ -24,6 +24,37 @@ $result5 = mysqli_query($con, $query5);
 // Two table Join For pie Chart of *****User by Room Booking
 $query6="SELECT user.user_name, COUNT(room_booking.user_id) as number FROM room_booking LEFT JOIN user ON room_booking.user_id= user.user_id WHERE room_booking.booking_st='1' GROUP BY user_name";
 $result6 = mysqli_query($con, $query6);
+
+// For pie Chart of ******Legal 
+$quer8="SELECT `status` , COUNT(*) as number FROM `law_report` WHERE `show_st`='1' GROUP BY `status`";
+$regal_report = mysqli_query($con, $quer8);
+ 
+
+//  pie Chart of *****Legal department
+$quer9="SELECT `case_dept` , COUNT(*) as number FROM `law_report` WHERE `show_st`='1' GROUP BY `case_dept`";
+$legal_dept = mysqli_query($con, $quer9);
+
+
+// For pie Chart of ******Application Complains 
+$query11="SELECT `status`, COUNT(*) AS number FROM `cms_app_complain` GROUP BY `status`";
+$cmsAppC = mysqli_query($con, $query11);
+ 
+
+//  pie Chart of *****Application user
+$query12="SELECT user.user_name, COUNT(cms_app_complain.app_id) AS number FROM `cms_app_complain` LEFT JOIN user ON cms_app_complain.user_id=user.user_id GROUP BY user.user_name ";
+$cmsAppU = mysqli_query($con, $query12);
+
+
+// For pie Chart of ******CMS Hardware Complains 
+$query13="SELECT `status`, COUNT(*) AS number FROM `cms_hard_complain` GROUP BY `status`";
+$cmsHardC= mysqli_query($con, $query13);
+ 
+
+//  pie Chart of *****CMS Hardware user
+$query14="SELECT user.user_name, COUNT(cms_hard_complain.hard_id) AS number FROM `cms_hard_complain` LEFT JOIN user ON cms_hard_complain.user_id=user.user_id GROUP BY user.user_name";
+$cmsHardU= mysqli_query($con, $query14);
+
+
 // Count Total User
 $sql=mysqli_query($con,"SELECT * FROM `user`");
 $users=mysqli_num_rows($sql);
@@ -48,6 +79,20 @@ $legal_report=mysqli_num_rows($sql7);
 // Count Total Legal Notice
 $sql8=mysqli_query($con,"SELECT * FROM `legal_notice`");
 $legal_notice=mysqli_num_rows($sql8);
+
+
+//Total CMS Hardware Complains 
+$sql9=mysqli_query($con,"SELECT * FROM `cms_hard_complain`");
+$CMShadrComp=mysqli_num_rows($sql9);
+//Total CMS Hardware Closed Complains 
+$sql10=mysqli_query($con,"SELECT * FROM `cms_hard_complain` WHERE `status`='Closed'");
+$CMShadrCompClos=mysqli_num_rows($sql10);
+//Total CMS Application Complains 
+$sql11=mysqli_query($con,"SELECT * FROM `cms_hard_complain`");
+$CMSappComp=mysqli_num_rows($sql11);
+//Total CMS Application Closed Complains 
+$sql12=mysqli_query($con,"SELECT * FROM `cms_app_complain` WHERE `status`='Closed'");
+$CMSappCompClos=mysqli_num_rows($sql12);
 ?>
 
 <!DOCTYPE html>
@@ -235,7 +280,64 @@ $legal_notice=mysqli_num_rows($sql8);
                         <!-- End row-->
 
 
+                        <!-- Start Widget -->
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-lg-3">
+                                <div class="mini-stat clearfix bx-shadow">
+                                    <span class="mini-stat-icon bg-info" style="background-color:#228B22 ;"><i class="ion-pie-graph"></i></span>
+                                    <div class="mini-stat-info text-right text-muted">
+                                        <span class="counter"><?php echo $CMShadrComp; ?></span>
+                                       Total Hard. Comp.
+                                    </div>
+                                    <div class="tiles-progress">
+                                       
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-lg-3">
+                                <div class="mini-stat clearfix bx-shadow">
+                                    <span class="mini-stat-icon bg-info" style="background-color:#228B22 ;"><i class="ion-home"></i></span>
+                                    <div class="mini-stat-info text-right text-muted">
+                                        <span class="counter"><?php echo $CMShadrCompClos; ?></span>
+                                        Closed Hard. Comp.
+                                    </div>
+                                    <div class="tiles-progress">
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-lg-3">
+                                <div class="mini-stat clearfix bx-shadow">
+                                    <a href="">
+                                    <span class="mini-stat-icon" style="background-color: #0000CD;" ><i class="ion-stats-bars"></i></span>
+                                    <div class="mini-stat-info text-right text-muted">
+                                        <span class="counter"><?php echo $CMSappComp; ?></span>
+                                        Total App. Comp.
+                                    </div>
+                                    <div class="tiles-progress">
+                                       
+                                    </div>
+                                </div>
+                                </a>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-lg-3">
+                                <div class="mini-stat clearfix bx-shadow">
+                                    <span class="mini-stat-icon" style="background-color: #0000CD;"  ><i class="ion-hammer"></i></span>
+                                    <div class="mini-stat-info text-right text-muted">
+                                        <span class="counter"><?php echo $CMSappCompClos; ?></span>
+                                        Closed App. Copm.
+                                    </div>
+                                    <div class="tiles-progress">
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div> 
+                        <!-- End row-->
 
+
+<!-- Car Pool Chart -->
             <div class="row">
                  
                 <div class="col-lg-6">
@@ -302,7 +404,9 @@ $legal_notice=mysqli_num_rows($sql8);
                 </div> <!-- end col -->
 
             </div> <!-- End row -->
+<!--End Car Booking Chart -->
 
+<!-- Room Booking Chart -->
             <div class="row">
                  
                 <div class="col-lg-6">
@@ -314,13 +418,13 @@ $legal_notice=mysqli_num_rows($sql8);
                             <div class="portlet-widgets">
                                 <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
                                 <span class="divider"></span>
-                                <a data-toggle="collapse" data-parent="#accordion1" href="#portlet2"><i class="ion-minus-round"></i></a>
+                                <a data-toggle="collapse" data-parent="#accordion3" href="#portlet4"><i class="ion-minus-round"></i></a>
                                 <span class="divider"></span>
                                 <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <div id="portlet2" class="panel-collapse collapse in">
+                        <div id="portlet4" class="panel-collapse collapse in">
                             <div class="portlet-body">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -346,13 +450,13 @@ $legal_notice=mysqli_num_rows($sql8);
                             <div class="portlet-widgets">
                                 <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
                                 <span class="divider"></span>
-                                <a data-toggle="collapse" data-parent="#accordion2" href="#portlet3"><i class="ion-minus-round"></i></a>
+                                <a data-toggle="collapse" data-parent="#accordion4" href="#portlet5"><i class="ion-minus-round"></i></a>
                                 <span class="divider"></span>
                                 <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <div id="portlet3" class="panel-collapse collapse in">
+                        <div id="portlet5" class="panel-collapse collapse in">
                             <div class="portlet-body">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -369,8 +473,216 @@ $legal_notice=mysqli_num_rows($sql8);
                 </div> <!-- end col -->
 
             </div> <!-- End row -->
+<!--End Room Booking Chart -->
 
 
+<!-- Legal Chart -->
+            <div class="row">
+                 
+                <div class="col-lg-6">
+                    <div class="portlet"><!-- /portlet heading -->
+                        <div class="portlet-heading">
+                            <h3 class="portlet-title text-dark text-uppercase">
+                                Case Chart
+                            </h3>
+                            <div class="portlet-widgets">
+                                <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                                <span class="divider"></span>
+                                <a data-toggle="collapse" data-parent="#accordion5" href="#portlet6"><i class="ion-minus-round"></i></a>
+                                <span class="divider"></span>
+                                <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="portlet6" class="panel-collapse collapse in">
+                            <div class="portlet-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="pie-chart">
+                                            <div id="legal_statusChart" style="height:300px;"></div>
+                                        </div>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- /Portlet -->
+                </div> <!-- end col -->
+
+
+                <div class="col-lg-6">
+                    <div class="portlet"><!-- /portlet heading -->
+                        <div class="portlet-heading">
+                            <h3 class="portlet-title text-dark text-uppercase">
+                              Department Chart
+                            </h3>
+                            <div class="portlet-widgets">
+                                <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                                <span class="divider"></span>
+                                <a data-toggle="collapse" data-parent="#accordion6" href="#portlet7"><i class="ion-minus-round"></i></a>
+                                <span class="divider"></span>
+                                <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="portlet7" class="panel-collapse collapse in">
+                            <div class="portlet-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="pie-chart">
+                                             <div id="legal_deptChart" style="height:300px;"></div>
+                                        </div>
+
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- /Portlet -->
+                </div> <!-- end col -->
+
+            </div> <!-- End row -->
+<!--End Legal  Chart -->
+
+<!--CMS Application Chart -->
+            <div class="row">
+                 
+                <div class="col-lg-6">
+                    <div class="portlet"><!-- /portlet heading -->
+                        <div class="portlet-heading">
+                            <h3 class="portlet-title text-dark text-uppercase">
+                               CMS Application Chart
+                            </h3>
+                            <div class="portlet-widgets">
+                                <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                                <span class="divider"></span>
+                                <a data-toggle="collapse" data-parent="#accordion8" href="#portlet9"><i class="ion-minus-round"></i></a>
+                                <span class="divider"></span>
+                                <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="portlet9" class="panel-collapse collapse in">
+                            <div class="portlet-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="pie-chart">
+                                            <div id="CMSappChartC" style="height:300px;"></div>
+                                        </div>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- /Portlet -->
+                </div> <!-- end col -->
+
+
+                <div class="col-lg-6">
+                    <div class="portlet"><!-- /portlet heading -->
+                        <div class="portlet-heading">
+                            <h3 class="portlet-title text-dark text-uppercase">
+                              CMS Application User Chart
+                            </h3>
+                            <div class="portlet-widgets">
+                                <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                                <span class="divider"></span>
+                                <a data-toggle="collapse" data-parent="#accordion10" href="#portlet11"><i class="ion-minus-round"></i></a>
+                                <span class="divider"></span>
+                                <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="portlet11" class="panel-collapse collapse in">
+                            <div class="portlet-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="pie-chart">
+                                             <div id="CMSappUserChart" style="height:300px;"></div>
+                                        </div>
+
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- /Portlet -->
+                </div> <!-- end col -->
+
+            </div> <!-- End row -->
+<!--End CMS Application  Chart -->
+
+
+<!--CMS Hardware Chart -->
+            <div class="row">
+                 
+                <div class="col-lg-6">
+                    <div class="portlet"><!-- /portlet heading -->
+                        <div class="portlet-heading">
+                            <h3 class="portlet-title text-dark text-uppercase">
+                               CMS Hardware Chart
+                            </h3>
+                            <div class="portlet-widgets">
+                                <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                                <span class="divider"></span>
+                                <a data-toggle="collapse" data-parent="#accordion13" href="#portlet14"><i class="ion-minus-round"></i></a>
+                                <span class="divider"></span>
+                                <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="portlet14" class="panel-collapse collapse in">
+                            <div class="portlet-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="pie-chart">
+                                            <div id="CMShardChartC" style="height:300px;"></div>
+                                        </div>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- /Portlet -->
+                </div> <!-- end col -->
+
+
+                <div class="col-lg-6">
+                    <div class="portlet"><!-- /portlet heading -->
+                        <div class="portlet-heading">
+                            <h3 class="portlet-title text-dark text-uppercase">
+                              CMS Hardware User Chart
+                            </h3>
+                            <div class="portlet-widgets">
+                                <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
+                                <span class="divider"></span>
+                                <a data-toggle="collapse" data-parent="#accordion15" href="#portlet16"><i class="ion-minus-round"></i></a>
+                                <span class="divider"></span>
+                                <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="portlet16" class="panel-collapse collapse in">
+                            <div class="portlet-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="pie-chart">
+                                             <div id="CMShardUserChart" style="height:300px;"></div>
+                                        </div>
+
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- /Portlet -->
+                </div> <!-- end col -->
+
+            </div> <!-- End row -->
+<!--End CMS Hardware  Chart -->
                             
                         </div> <!-- end row -->
 
@@ -424,11 +736,7 @@ $legal_notice=mysqli_num_rows($sql8);
         <!-- Dashboard -->
         <script src="js/jquery.dashboard.js"></script>
 
-        <!-- Chat -->
-        <script src="js/jquery.chat.js"></script>
-
-        <!-- Todo -->
-        <script src="js/jquery.todo.js"></script>
+       
 
         <script type="text/javascript">
             /* ==============================================
@@ -443,11 +751,11 @@ $legal_notice=mysqli_num_rows($sql8);
         </script>
 
 
-        <!--************* Google Pai Chart Link *****************-->
+        <!--*************  Google Pai Chart Link *****************-->
     <script  src="../assets/js/g_pi_chart/chart.js" ></script>
     <!-- <script  src="../assets/js/g_pi_chart/jquery-1.12.4.js" ></script> -->
     <script  src="../assets/js/g_pi_chart/loader.js" ></script>
-
+<!--*************  Car Pool Chart Link *****************-->
  <script type="text/javascript">
             google.charts.load('current', {
                 'packages': ['corechart']
@@ -554,6 +862,173 @@ $legal_notice=mysqli_num_rows($sql8);
                 chart.draw(data, options);
             }
         </script>
+
+<!-- Legal Chart -->
+
+ <script type="text/javascript">
+            google.charts.load('current', {
+                'packages': ['corechart']
+            });
+            google.charts.setOnLoadCallback(carChart);
+
+            function carChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['status', 'Number'],  
+                          <?php  
+                          while($row9 = mysqli_fetch_array($regal_report))  
+                          {  
+                               echo "['".$row9["status"]."', ".$row9["number"]."],";  
+                          }  
+                          ?>  
+                ]);
+                var options = {
+
+                    title: 'Percentage of Case Processing', 'width':'auto', 'height':'auto',
+                    is3D: true,
+                    //pieHole: 0.5  
+                };
+                var chart = new google.visualization.PieChart(document.getElementById('legal_statusChart'));
+                chart.draw(data, options);
+            }
+        </script>
+
+        <script type="text/javascript">
+            google.charts.load('current', {
+                'packages': ['corechart']
+            });
+            google.charts.setOnLoadCallback(userChart);
+
+            function userChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['case_dept', 'Number'],  
+                          <?php  
+                          while($row99 = mysqli_fetch_array($legal_dept))  
+                          {  
+                               echo "['".$row99["case_dept"]."', ".$row99["number"]."],";  
+                          }  
+                          ?>  
+                ]);
+                var options = {
+                    title: 'Percentage of Department By Cases', 'width':'auto', 'height':'auto',
+                    //is3D:true,  
+                    pieHole: 0.4
+                };
+                var chart = new google.visualization.PieChart(document.getElementById('legal_deptChart'));
+                chart.draw(data, options);
+            }
+
+
+
+// CMS Application Complain Chart
+
+  google.charts.load('current', {
+                'packages': ['corechart']
+            });
+            google.charts.setOnLoadCallback(CMSappChartC);
+
+            function CMSappChartC() {
+                var data = google.visualization.arrayToDataTable([
+                    ['status', 'Number'],  
+                          <?php  
+                          while($row11 = mysqli_fetch_array($cmsAppC))  
+                          {  
+                               echo "['".$row11["status"]."', ".$row11["number"]."],";  
+                          }  
+                          ?>  
+                ]);
+                var options = {
+
+                    title: 'Percentage of Complain Processing', 'width':'auto', 'height':'auto',
+                    is3D: true,
+                    //pieHole: 0.5  
+                };
+                var chart = new google.visualization.PieChart(document.getElementById('CMSappChartC'));
+                chart.draw(data, options);
+            }
+
+google.charts.load('current', {
+                'packages': ['corechart']
+            });
+            google.charts.setOnLoadCallback(CMSappUserChart);
+
+            function CMSappUserChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['user_name', 'Number'],  
+                          <?php  
+                          while($row12 = mysqli_fetch_array($cmsAppU))  
+                          {  
+                               echo "['".$row12["user_name"]."', ".$row12["number"]."],";  
+                          }  
+                          ?>  
+                ]);
+                var options = {
+                    title: 'Percentage of User By Complain', 'width':'auto', 'height':'auto',
+                    //is3D:true,  
+                    pieHole: 0.4
+                };
+                var chart = new google.visualization.PieChart(document.getElementById('CMSappUserChart'));
+                chart.draw(data, options);
+            }
+
+
+
+
+// CMS Hardware Complain Chart
+
+  google.charts.load('current', {
+                'packages': ['corechart']
+            });
+            google.charts.setOnLoadCallback(CMShardChartC);
+
+            function CMShardChartC() {
+                var data = google.visualization.arrayToDataTable([
+                    ['status', 'Number'],  
+                          <?php  
+                          while($row13 = mysqli_fetch_array($cmsHardC))  
+                          {  
+                               echo "['".$row13["status"]."', ".$row13["number"]."],";  
+                          }  
+                          ?>  
+                ]);
+                var options = {
+
+                    title: 'Percentage of Complain Processing', 'width':'auto', 'height':'auto',
+                    is3D: true,
+                    //pieHole: 0.5  
+                };
+                var chart = new google.visualization.PieChart(document.getElementById('CMShardChartC'));
+                chart.draw(data, options);
+            }
+
+google.charts.load('current', {
+                'packages': ['corechart']
+            });
+            google.charts.setOnLoadCallback(CMShardUserChart);
+
+            function CMShardUserChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['user_name', 'Number'],  
+                          <?php  
+                          while($row14 = mysqli_fetch_array($cmsHardU))  
+                          {  
+                               echo "['".$row14["user_name"]."', ".$row14["number"]."],";  
+                          }  
+                          ?>  
+                ]);
+                var options = {
+                    title: 'Percentage of User By Complain', 'width':'auto', 'height':'auto',
+                    //is3D:true,  
+                    pieHole: 0.4
+                };
+                var chart = new google.visualization.PieChart(document.getElementById('CMShardUserChart'));
+                chart.draw(data, options);
+            }
+
+
+
+
+        </script>
+
 
 
 

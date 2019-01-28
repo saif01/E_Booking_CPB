@@ -12,6 +12,11 @@ include('../db/config.php');
 $user_id=$_GET['user_id'];
 
 
+include('../db/config.php');
+
+$user_id=$_GET['user_id'];
+
+
 $query=mysqli_query($con,"SELECT * FROM `user` WHERE `user_id`='$user_id' ");
 
 $row=$query->fetch_assoc();
@@ -61,7 +66,7 @@ $row=$query->fetch_assoc();
                             <div class="auto-form-wrapper">
 
                                 <img class="user-s" src="../pimages/user/<?php echo($row['user_img']);?>" class="img-responsive" alt="Image" />
-                                <table>
+                                <table >
 
                                     <td>
                                         <h4>User Detail's: </h4>
@@ -73,34 +78,38 @@ $row=$query->fetch_assoc();
                                         <td> User Name:</td>
                                         <th> <strong><?php echo $row['user_name'];?></strong> </th>
                                     </tr>
+                                    <tr>
+                                        <td> User Email:</td>
+                                        <th> <strong><?php echo $row['user_mail'];?></strong> </th>
+                                    </tr>
 
                                     <tr>
                                         <td> User Department:</td>
-                                        <th> <strong><?php echo $row['user_department'];?></strong> </th>
+                                        <th> <strong><?php echo $row['user_dept'];?></strong> </th>
                                     </tr>
                                     <tr>
                                         <td> User Contract:</td>
-                                        <th> <strong><?php echo $row['user_contract'];?></strong> </th>
+                                        <th> <strong><?php echo $row['user_contact'];?></strong> </th>
                                     </tr>
 
 
                                     <tr>
                                         <td> User Office ID:</td>
-                                        <th> <strong><?php echo $row['user_officeId'];?></strong> </th>
+                                        <th> <strong><?php echo $row['user_office_id'];?></strong> </th>
                                     </tr>
 
                                     <tr>
                                         <td> User Status:</td>
-                                        <th> <strong><?php $st =$row['user_status'];
+                                        <th> <strong><?php $st =$row['user_st'];
 
-          if ($st==1) {
-            echo "Active";
-          }
-          else{
-            echo "Deactive";
-          }?>
-            
-          </strong> </th>
+                                      if ($st==1) {
+                                        echo "Active";
+                                      }
+                                      else{
+                                        echo "Deactive";
+                                      }?>
+                                        
+                                      </strong> </th>
                                     </tr>
 
 

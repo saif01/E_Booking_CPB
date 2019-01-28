@@ -198,6 +198,10 @@ include('../db/config.php');
 	                    <input type="checkbox" name="user_law_st"  value="1">
 	                    <label for="inlineCheckbox3"> Legal </label>
 	                </div>
+                    <div class="checkbox checkbox-success checkbox-inline">
+                        <input type="checkbox" name="user_cms_st"  value="1">
+                        <label for="inlineCheckbox3"> CMS </label>
+                    </div>
 
 	                
 	                

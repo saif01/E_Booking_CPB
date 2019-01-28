@@ -78,7 +78,7 @@ include('../db/config.php');
                     <div class="section-title  text-center">
 
                        <h2><?php echo $_GET['dept']; ?> -Department's  Case  History</h2>
-                        <span class="title-line"><i class="fa fa-gavel" aria-hidden="true"></i></span>
+                        <span class="title-line"><i class="fa fa-balance-scale" aria-hidden="true"></i></span>
                         
                     </div>
                 </div>
@@ -104,6 +104,7 @@ include('../db/config.php');
                   <th>B.L. Balace</th>
                   <th>Present Balace</th>
                   <th>Legal Fees</th>
+                  <th>Remarks</th>
                    
                 </tr>
               </thead>   
@@ -131,6 +132,7 @@ include('../db/config.php');
                 <td ><?php echo $row['pre_balance']; ?></td>
                 <td ><?php echo $row['pr_balance']; ?></td>
                 <td ><?php echo $row['law_fees']; ?></td>
+                 <td ><?php echo $row['remarks']; ?></td>
                 
                 
                 
@@ -176,7 +178,7 @@ include('../db/config.php');
   
   $(document).ready(function() {
     $('#example').dataTable( {
-        "order": [[ 0, 'DESC' ]]
+        "order": []
     } );
 } );
 </script>

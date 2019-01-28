@@ -118,8 +118,9 @@ include('../db/config.php');
                     <tr>
                     <th>Actions</th>                                                        
                     <th>Legal</th>
-                    <th>Car </th>
-                    <th>Room </th>
+                    <th>Car</th>
+                    <th>Room</th>
+                    <th>CMS</th>
                     <th>Image</th>
                     <th>Name</th>
                     <th>Department</th>
@@ -197,6 +198,20 @@ include('../db/config.php');
         <?php } else {?>
 
 <a href="user-status.php?s_user_room_id=<?php echo ($row['user_id']);?>" id="give" title="Show"> <i class="fa fa-times-circle text-danger" ></i></a> 
+            <?php } ?>
+
+                        </td>
+
+                        <td>
+                  <?php
+//************** CMS Status Show ****************//
+         if($row['user_cms_st']==1)
+         {?>
+<a href="user-status.php?h_user_cms_id=<?php echo ($row['user_id']);?>" id="remove" title="Hide"><i class="fa  fa-check-square-o text-success" ></i></a>
+            
+        <?php } else {?>
+
+<a href="user-status.php?s_user_cms_id=<?php echo ($row['user_id']);?>" id="give" title="Show"> <i class="fa fa-times-circle text-danger" ></i></a> 
             <?php } ?>
 
                         </td>

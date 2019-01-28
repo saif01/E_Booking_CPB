@@ -113,14 +113,18 @@ include('../db/config.php');
                                              
                                                     <tbody>
    <?php 
-    $query=mysqli_query($con,"SELECT room_booking.r_booking_id, room_booking.booking_start, room_booking.booking_end, room_booking.purpose, room_booking.hours, room_booking.booking_st, room_booking.user_id, room.room_name, user.user_name, user.user_dept FROM room_booking INNER JOIN room ON room_booking.room_id=room.room_id INNER JOIN user ON room_booking.user_id=user.user_id");
+    $query=mysqli_query($con,"SELECT room_booking.room_id,room_booking.r_booking_id, room_booking.booking_start, room_booking.booking_end, room_booking.purpose, room_booking.hours, room_booking.booking_st, room_booking.user_id, room.room_name, user.user_name, user.user_dept FROM room_booking INNER JOIN room ON room_booking.room_id=room.room_id INNER JOIN user ON room_booking.user_id=user.user_id");
 
     while($row=mysqli_fetch_array($query))
     { ?>
                                                     <tr>
                                 
 
-     <td><?php echo $row['room_name']; ?></td>          
+     <td>
+        <a href="javascript:void(0);" onClick="popUpWindow('room-profile.php?room_id=<?php echo ($row['room_id']);?>');" title="View Room Info.">
+        <?php echo $row['room_name']; ?></a>
+            
+        </td>          
      <td><?php echo date("M j, Y", strtotime($row['booking_start'])); ?></td>
      <td><?php echo $row['purpose']; ?></td>
      <td><?php echo $row['hours']; ?></td>

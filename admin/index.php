@@ -11,7 +11,7 @@ error_reporting(0);
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>CPB</title>
+    <title>CPB-IT</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../admin-car/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../admin-car/vendors/css/vendor.bundle.base.css">
@@ -22,7 +22,7 @@ error_reporting(0);
     <!-- inject:css -->
     <link rel="stylesheet" href="../admin-car/css/style.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="../admin-car/images/favicon.png" />
+    <link rel="shortcut icon" href="../admin-car/images/favicon.png" /> 
 </head>
 
 <body>

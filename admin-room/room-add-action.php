@@ -22,7 +22,8 @@ $room_name=$_POST['room_name'];
 $room_capicity=$_POST['room_capicity'];
 $room_details=$_POST['room_details'];
 $projector=$_POST['projector'];
-$show_st=1;
+$room_type=$_POST['room_type'];
+$show_st=$_POST['show_st'];
 
 
     $file_name1=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['room_img1']['name']);
@@ -41,26 +42,49 @@ $show_st=1;
     move_uploaded_file($fileName3,$storeFile3);
 
 
-$query=mysqli_query($con,"INSERT INTO `room`(`room_name`, `room_img1`, `room_img2`, `room_img3`, `room_capicity`, `projector`, `room_details`, `show_st`) VALUES ('$room_name','$file_name1','$file_name2','$file_name3','$room_capicity','$projector','$room_details','$show_st')");
+$query=mysqli_query($con,"INSERT INTO `room`(`room_name`, `room_type`, `room_img1`, `room_img2`, `room_img3`, `room_capicity`, `projector`, `room_details`, `show_st`) VALUES ('$room_name','$room_type','$file_name1','$file_name2','$file_name3','$room_capicity','$projector','$room_details','$show_st')");
 
-?>		
-		<script>
-                        setTimeout(function () { 
-                                swal({
-                                  title: "Successfully!",
-                                  text: "Room Registration Completed!",
-                                  type: "success",
-                                  confirmButtonText: "OK"
-                                },
-                                function(isConfirm){
-                                  if (isConfirm) {
-                                    window.location.href = "room-all.php";
-                                  }
-                                }); },0);
-                       
-                      </script>
-    
+      
+          if ($query) {
+       
+                      ?>		
+      		                <script>
+                              setTimeout(function () { 
+                                      swal({
+                                        title: "Successfully!",
+                                        text: "Room Registration Completed!",
+                                        type: "success",
+                                        confirmButtonText: "OK"
+                                      },
+                                      function(isConfirm){
+                                        if (isConfirm) {
+                                          window.location.href = "room-all.php";
+                                        }
+                                      }); },0);
+                             
+                            </script>
+                      <?php
+                    }
+                  else{
+                    ?>    
+                          <script>
+                              setTimeout(function () { 
+                                      swal({
+                                        title: "Error!",
+                                        text: "Room Registration Not Completed!",
+                                        type: "error",
+                                        confirmButtonText: "OK"
+                                      },
+                                      function(isConfirm){
+                                        if (isConfirm) {
+                                          history.back();
+                                        }
+                                      }); },0);
+                             
+                            </script>
+                      <?php
 
-    <?php } 
+                  }
+     } 
 
 }?>

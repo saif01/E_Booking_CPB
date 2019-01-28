@@ -45,167 +45,36 @@ $adminSql=mysqli_query($con,"SELECT * FROM `admin` WHERE `admin_login`='$admin_l
 
         // ***********Only Car Pool Admin Section ************//
 
-                     if($admin_st=='1' && 
-                        $admin_room_st=='0' && 
-                        $admin_car_st=='1' && 
-                        $admin_law_st=='0' && 
-                        $admin_super_st=='0') {  
+                     if($admin_st=='1' && $admin_super_st=='0') {  
 
 
-                        $_SESSION['admin-car-login']=$_POST['admin_login'];
+                        $_SESSION['admin-redirect']=$_POST['admin_login'];
                         $_SESSION['admin_id']=$row['admin_id'];
                          
                         $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`,`login_st`) VALUES ('$admin_login','$admin_name','$ip',' $os','$browser','$device','$currentTime','$admin_st')");
                                         
-                         header("Location:../admin-car");
+                         header("Location:project_direct");
                         exit(); 
 
                 }
 
-     // ***********Only Room Booking Admin Section ************//
-
-                 elseif($admin_st=='1' && 
-                        $admin_room_st=='1' && 
-                        $admin_car_st=='0' && 
-                        $admin_law_st=='0' && 
-                        $admin_super_st=='0'){  
-
-
-                        $_SESSION['admin-room-login']=$_POST['admin_login'];
-                        $_SESSION['admin_id']=$row['admin_id'];
-                         
-                         $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`,`login_st`) VALUES ('$admin_login','$admin_name','$ip',' $os','$browser','$device','$currentTime','$admin_st')");
-                                        
-                         header("Location:../admin-room");
-                        exit();      
-
-                }
-
-    // ***********Only Law Section ************//
-
-                 elseif($admin_st=='1' && 
-                        $admin_room_st=='0' && 
-                        $admin_car_st=='0' && 
-                        $admin_law_st=='1' && 
-                        $admin_super_st=='0') {  
-
-
-                        $_SESSION['admin-law-login']=$_POST['admin_login'];
-                        $_SESSION['admin_id']=$row['admin_id'];
-                         
-                         $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`,`login_st`) VALUES ('$admin_login','$admin_name','$ip',' $os','$browser','$device','$currentTime','$admin_st')");
-                                        
-                        header("Location:../admin-law");
-                        exit();      
-
-                }
-
-    // ***********Car And Room Both Section ************//
-
-                 elseif($admin_st=='1' && 
-                        $admin_room_st=='1' && 
-                        $admin_car_st=='1' && 
-                        $admin_law_st=='0' && 
-                        $admin_super_st=='0') {
-
-                     $_SESSION['admin-redirect']=$_POST['admin_login'];
-                     $_SESSION['admin-room-login']=$_POST['admin_login'];
-                     $_SESSION['admin-car-login']=$_POST['admin_login'];
-                     
-                       
-                        $_SESSION['admin_id']=$row['admin_id'];
-                         
-                         $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`,`login_st`) VALUES ('$admin_login','$admin_name','$ip',' $os','$browser','$device','$currentTime','$admin_st')");
-                         
-                    //header("Location:../admin-all/project_direct"); 
-                     header("Location:project_direct/");                
-                    exit();      
-
-                }
-
-    // ***********Car And Legal Both Section ************//
-
-                 elseif($admin_st=='1' && 
-                        $admin_room_st=='0' && 
-                        $admin_car_st=='1' && 
-                        $admin_law_st=='1' && 
-                        $admin_super_st=='0') {  
-
-                     $_SESSION['admin-redirect']=$_POST['admin_login'];
-                     $_SESSION['admin-law-login']=$_POST['admin_login'];
-                     $_SESSION['admin-car-login']=$_POST['admin_login'];
-                     
-                       
-                        $_SESSION['admin_id']=$row['admin_id'];
-                         
-                         $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`,`login_st`) VALUES ('$admin_login','$admin_name','$ip',' $os','$browser','$device','$currentTime','$admin_st')");
-                         
-                     header("Location:project_direct/");                
-                    exit();      
-
-                }
-
-    // ***********Room And Legal Both Section ************//
-
-                 elseif($admin_st=='1' && 
-                        $admin_room_st=='1' && 
-                        $admin_car_st=='0' && 
-                        $admin_law_st=='1' && 
-                        $admin_super_st=='0') { 
-
-                     $_SESSION['admin-redirect']=$_POST['admin_login'];
-                     $_SESSION['admin-law-login']=$_POST['admin_login'];
-                     $_SESSION['admin-car-login']=$_POST['admin_login'];
-                     
-                       
-                        $_SESSION['admin_id']=$row['admin_id'];
-                         
-                         $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`,`login_st`) VALUES ('$admin_login','$admin_name','$ip',' $os','$browser','$device','$currentTime','$admin_st')");
-                         
-                     header("Location:project_direct/");                
-                    exit();      
-
-                }
-
-    // ***********All Admin Both Section ************//
-
-                 elseif($admin_st=='1' && 
-                        $admin_room_st=='1' && 
-                        $admin_car_st=='1' && 
-                        $admin_law_st=='1' && 
-                        $admin_super_st=='0') { 
-
-                     $_SESSION['admin-redirect']=$_POST['admin_login'];
-                     $_SESSION['admin-room-login']=$_POST['admin_login'];
-                     $_SESSION['admin-car-login']=$_POST['admin_login'];
-                     $_SESSION['admin-law-login']=$_POST['admin_login'];
-                    
-                        $_SESSION['admin_id']=$row['admin_id'];
-                         
-                         $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`,`login_st`) VALUES ('$admin_login','$admin_name','$ip',' $os','$browser','$device','$currentTime','$admin_st')");
-                         
-                    //header("Location:../admin-all/project_direct"); 
-                     header("Location:project_direct/");                
-                    exit();      
-
-                }
-
+     
 
 
      // *********** Super Admin Section ************//
 
-                 elseif($admin_st=='1' && 
-                        $admin_room_st=='1' && 
-                        $admin_car_st=='1' && 
-                        $admin_law_st=='1' && 
-                        $admin_super_st=='1') { 
+                 elseif($admin_st=='1' && $admin_super_st=='1') { 
 
+                        $_SESSION['admin_id']=$row['admin_id'];
                         $_SESSION['admin-redirect']=$_POST['admin_login'];
                         $_SESSION['admin-room-login']=$_POST['admin_login'];
                         $_SESSION['admin-car-login']=$_POST['admin_login'];
                         $_SESSION['admin-law-login']=$_POST['admin_login'];
                         $_SESSION['admin-super-login']=$_POST['admin_login'];
-                        $_SESSION['admin_id']=$row['admin_id'];
+                        $_SESSION['admin_hard_login']=$_POST['admin_login'];
+                        $_SESSION['admin_app_login']=$_POST['admin_login'];
+
+                        
                          
                          $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`,`login_st`) VALUES ('$admin_login','$admin_name','$ip',' $os','$browser','$device','$currentTime','$admin_st')");
                                         

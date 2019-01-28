@@ -231,3 +231,25 @@
 
 
 
+
+
+/*Text Effect*/
+.header_saif {
+  text-align: center;
+  font-weight:  100;
+  font-size: 6rem;
+  color: red;
+  background: -webkit-linear-gradient(92deg, #000000, #FF1493);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: hue 10s infinite linear;
+}
+
+@-webkit-keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}

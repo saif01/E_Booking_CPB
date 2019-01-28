@@ -6,7 +6,6 @@ require('assets/coustom/UserInfo.php');
 date_default_timezone_set('Asia/Dhaka');// change according timezone
 $currentTime = date( 'Y-m-d H:i:s', time () ); // h=12 hours H=24 hours
 
-
 if(isset($_POST['submit']))
 {
     $user_login=$_POST['user_login'];
@@ -34,150 +33,39 @@ if($num>0)
             $user_car_st=$row['user_car_st'];
             $user_room_st=$row['user_room_st'];
             $user_law_st=$row['user_law_st'];
-
+            $user_cms_st=$row['user_cms_st'];
             $st=$row['user_st'];
 
 // ************** For All Section user **********************////
 
-                    if ($st=='1' && $user_car_st=='1' && $user_room_st=='1' && $user_law_st=='1') 
-                    {  
-            //*********** Store Session Value ************//
-                    $_SESSION['user_redirect']=$row['user_login'];
-                    $_SESSION['user_id']=$row['user_id'];
-
-                    $_SESSION['law_login_id']=$row['user_login'];
-                    $_SESSION['car_logIn_id']=$row['user_login'];
-                    $_SESSION['room_login_id']=$row['user_login'];
-                    $_SESSION['user_name']=$row['user_name'];
-                                                                
-                        $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`, `login_st`) VALUES ('$user_login','$user_name','$ip','$os','$browser','$device','$currentTime','$st')");                        
-                                                                
-                         header("Location:user-all/");
-                       
-                        }
-
-// ************** For Car And Room Section user **********************////
-
-                    elseif ($st=='1' && $user_car_st=='1' && $user_room_st=='1' && $user_law_st=='0') 
-                    {  
-            //*********** Store Session Value ************//
-                    $_SESSION['user_redirect']=$row['user_login'];
-                    $_SESSION['user_id']=$row['user_id'];
-
-                    $_SESSION['car_logIn_id']=$row['user_login'];
-                    $_SESSION['room_login_id']=$row['user_login'];
-                    $_SESSION['user_name']=$row['user_name'];
-                                                                
-                        $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`, `login_st`) VALUES ('$user_login','$user_name','$ip','$os','$browser','$device','$currentTime','$st')");                        
-                                                                
-                         header("Location:user-all/");
-                       
-                        }
-
-// ************** For Car And Legal Section user **********************////
-
-                    elseif ($st=='1' && $user_car_st=='1' && $user_room_st=='0' && $user_law_st=='1') 
-                    {  
-            //*********** Store Session Value ************//
-                    $_SESSION['user_redirect']=$row['user_login'];
-                    $_SESSION['user_id']=$row['user_id'];
-
-                    $_SESSION['law_login_id']=$row['user_login'];
-                    $_SESSION['car_logIn_id']=$row['user_login'];
-                    
-                    $_SESSION['user_name']=$row['user_name'];
-                                                                
-                        $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`, `login_st`) VALUES ('$user_login','$user_name','$ip','$os','$browser','$device','$currentTime','$st')");                        
-                                                                
-                         header("Location:user-all/");
-                       
-                        }
-
-// ************** For Room And Legal Section user **********************////
-
-                    elseif ($st=='1' && $user_car_st=='0' && $user_room_st=='1' && $user_law_st=='1') 
-                    {  
-            //*********** Store Session Value ************//
-                    $_SESSION['user_redirect']=$row['user_login'];
-                    $_SESSION['user_id']=$row['user_id'];
-
-                    $_SESSION['law_login_id']=$row['user_login'];
-                    $_SESSION['room_login_id']=$row['user_login'];
-                    $_SESSION['user_name']=$row['user_name'];
-                                                                
-                        $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`, `login_st`) VALUES ('$user_login','$user_name','$ip','$os','$browser','$device','$currentTime','$st')");                        
-                                                                
-                         header("Location:user-all/");
-                       
-                        }
-// ************** For Only car Section user **********************////
-                    elseif ($st=='1' && $user_car_st=='1' && $user_room_st=='0' && $user_law_st=='0') 
+                if ($st=='1') 
                     { 
-                         $_SESSION['user_id']=$row['user_id'];
-                         $_SESSION['car_logIn_id']=$row['user_login'];
-                         $_SESSION['user_name']=$row['user_name'];
-                                                                      
-                       
-                        $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`, `login_st`) VALUES ('$user_login','$user_name','$ip','$os','$browser','$device','$currentTime','$st')");
+
+            //*********** Store Session Value ************//
+                    $_SESSION['user_redirect']=$row['user_login'];
+                    $_SESSION['user_id']=$row['user_id'];
+
+                    $_SESSION['user_name']=$row['user_name'];
                                                                 
-                         header("Location:user-car");
-                        
+                        $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`, `login_st`) VALUES ('$user_login','$user_name','$ip','$os','$browser','$device','$currentTime','$st')");                        
+                                                                
+                         header("Location:user-all");
+                       
                         }
 
-                        
-// ************** For Only*** ROOM BOOKING ****Section user **********************////
 
-                    elseif ($st=='1' && $user_car_st=='0' && $user_room_st=='1' && $user_law_st=='0') 
-                    { 
-                         $_SESSION['user_id']=$row['user_id'];
-                         $_SESSION['room_login_id']=$row['user_login'];
-                         $_SESSION['user_name']=$row['user_name'];
-                                                                      
-                       
-                        $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`, `login_st`) VALUES ('$user_login','$user_name','$ip','$os','$browser','$device','$currentTime','$st')");
-                                                                
-                         header("Location:user-room");
-                        
-                        }
-
-// ************** For Only*** LEGAL DEPARTMENT  ****Section user **********************////
-
-                    elseif ($st=='1' && $user_car_st=='0' && $user_room_st=='0' && $user_law_st=='1') 
-                    { 
-                         $_SESSION['user_id']=$row['user_id'];
-                         $_SESSION['law_login_id']=$row['user_login'];
-                         $_SESSION['user_name']=$row['user_name'];
-                                                                      
-                       
-                        $log=mysqli_query($con,"INSERT INTO `login_log`(`login_id`, `login_name`, `login_ip`, `login_os`, `login_browser`, `login_device`, `login_time`, `login_st`) VALUES ('$user_login','$user_name','$ip','$os','$browser','$device','$currentTime','$st')");
-                                                                
-                         header("Location:user-law");
-                        
-                        }
-
-                    elseif ($st=='0')
-                    {   
-                   
-                        $c_u_stB=0;
-
-                       $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_id`, `user_ip`, `user_os`, `user_browser`, `user_device`, `user_status`) VALUES ('$user_name','$user_id','$ip','$os','$browser','$device','$st')");
-
-                        echo "<script>
-                        alert('Your Account Has been blocked .Please contact IT  !!!');
-                        window.open('index','_self'); </script>";
-                        exit();
-                    }
                     else
                     {   
-                   
-
+                       $_SESSION['errmsg']="Your Account Has been blocked .Please contact IT  !!!";
                        $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_id`, `user_ip`, `user_os`, `user_browser`, `user_device`, `user_status`) VALUES ('$user_name','$user_id','$ip','$os','$browser','$device','$st')");
 
-                        echo "<script>
-                        alert('Your Account Has been Problem .Please contact IT   !!!');
-                        window.open('index','_self'); </script>";
+                        // echo "<script>
+                        // alert('Your Account Has been blocked .Please contact IT  !!!');
+                        // window.open('index','_self'); </script>";
+                       header("location:index");
                         exit();
                     }
+                    
 
                 }
 

@@ -9,11 +9,11 @@ error_reporting(0);
 		<meta charset="utf-8">
 		<title>CPB</title>
 		    <!--=== Favicon ===-->
-    	<link rel="shortcut icon" href="loginAssets/cpb.ico" type="image/x-icon" />
+    	<link rel="shortcut icon" href="admin-car/images/favicon.png" type="image/x-icon" />
 
-		<link rel="stylesheet" href="loginAssets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="login/css/bootstrap.min.css">
 		<link href="assets/css/font-awesome.css" rel="stylesheet">
-		<link rel="stylesheet" href="loginAssets/css/style.css">
+		<link rel="stylesheet" href="login/css/style.css">
 		<!--*************** Font Awesome v.5. ****************-->
 		<link href="assets/fontawesom/css/all.css" rel="stylesheet">
 
@@ -21,7 +21,7 @@ error_reporting(0);
 	<body>
 		<div id="loader"></div>
 		<div class="loginBox" id="content">
-			<img src="loginAssets/img/logo.png" class="user" >
+			<img src="login/img/logo.png" class="user" >
 			<h2 class="text-center">Log In Here</h2>
 
 			
@@ -49,9 +49,9 @@ error_reporting(0);
 				</div>
 			</form>
 		</div>
-	<script src="js/jquery-slim.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="login/js/jquery-slim.min.js"></script>
+	<script src="login/js/popper.min.js"></script>
+	<script src="login/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 	var loader;
 	function load(opacity){

@@ -96,6 +96,50 @@ header('location:admin-all');
 }
 
 
+
+// ********** Harware Admin status change ************************//
+if(isset($_GET['h_admin_hard_id']))
+{
+$id=$_GET['h_admin_hard_id'];
+
+$que=mysqli_query($con,"UPDATE `admin` SET `admin_hard_st`='0' WHERE `admin_id`='$id' ");
+
+header('Location: ' . $_SERVER['HTTP_REFERER']);
+}
+// For Show
+if(isset($_GET['s_admin_hard_id']))
+{
+$id=$_GET['s_admin_hard_id'];
+
+$que=mysqli_query($con,"UPDATE `admin` SET `admin_hard_st`='1' WHERE `admin_id`='$id' ");
+
+header('Location: ' . $_SERVER['HTTP_REFERER']);
+}
+
+
+// ********** Application Admin status change ************************//
+if(isset($_GET['h_admin_app_id']))
+{
+$id=$_GET['h_admin_app_id'];
+
+$que=mysqli_query($con,"UPDATE `admin` SET `admin_app_st`='0' WHERE `admin_id`='$id' ");
+
+header('Location: ' . $_SERVER['HTTP_REFERER']);
+}
+// For Show
+if(isset($_GET['s_admin_app_id']))
+{
+$id=$_GET['s_admin_app_id'];
+
+$que=mysqli_query($con,"UPDATE `admin` SET `admin_app_st`='1' WHERE `admin_id`='$id' ");
+
+header('Location: ' . $_SERVER['HTTP_REFERER']);
+}
+
+
+
+
+
 // ********** Super Admin status change ************************//
 if(isset($_GET['h_admin_super_id']))
 {
@@ -110,12 +154,10 @@ if(isset($_GET['s_admin_super_id']))
 {
 $id=$_GET['s_admin_super_id'];
 
-$que=mysqli_query($con,"UPDATE `admin` SET  `admin_car_st`='1',`admin_room_st`='1',`admin_law_st`='1',`admin_super_st`='1' WHERE `admin_id`='$id' ");
+$que=mysqli_query($con,"UPDATE `admin` SET  `admin_car_st`='1',`admin_room_st`='1',`admin_law_st`='1',`admin_super_st`='1',`admin_hard_st`='1',`admin_app_st`='1' WHERE `admin_id`='$id' ");
 
 header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
-
-
 
 }?>
 

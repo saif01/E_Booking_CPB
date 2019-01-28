@@ -96,6 +96,24 @@ $que=mysqli_query($con,"UPDATE `user` SET `user_law_st`='1'WHERE `user_id`='$id'
  header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
 
+// ********** CMS status change ************************//
+if(isset($_GET['h_user_cms_id']))
+{
+$id=$_GET['h_user_cms_id'];
+
+$que=mysqli_query($con,"UPDATE `user` SET `user_cms_st`='0' WHERE `user_id`='$id' ");
+
+ header('Location: ' . $_SERVER['HTTP_REFERER']);
+}
+// For Show
+if(isset($_GET['s_user_cms_id']))
+{
+$id=$_GET['s_user_cms_id'];
+
+$que=mysqli_query($con,"UPDATE `user` SET `user_cms_st`='1'WHERE `user_id`='$id' ");
+
+ header('Location: ' . $_SERVER['HTTP_REFERER']);
+}
 
 
 

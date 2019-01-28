@@ -28,6 +28,8 @@ $admin_st = $_POST['admin_st'];
 $admin_car_st=$_POST['admin_car_st'];
 $admin_room_st=$_POST['admin_room_st'];
 $admin_law_st=$_POST['admin_law_st'];
+$admin_hard_st=$_POST['admin_hard_st'];
+$admin_app_st=$_POST['admin_app_st'];
 $admin_super_st=$_POST['admin_super_st'];
 
 
@@ -38,7 +40,7 @@ $file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['photo']['
     move_uploaded_file($fileunq,$storeFile);
 
 
-$query=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admin_name`, `admin_mail`, `admin_img`, `admin_dept`, `admin_contact`, `admin_office_id`, `admin_st`, `admin_car_st`, `admin_room_st`, `admin_law_st`, `admin_super_st`) VALUES ('$admin_login','$admin_pass','$admin_name','$admin_mail','$file_name','$admin_dept','$admin_contact','$admin_office_id','$admin_st','$admin_car_st','$admin_room_st','$admin_law_st','$admin_super_st')");
+$query=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admin_name`, `admin_mail`, `admin_img`, `admin_dept`, `admin_contact`, `admin_office_id`, `admin_st`, `admin_car_st`, `admin_room_st`, `admin_law_st`, `admin_app_st`, `admin_hard_st`, `admin_super_st`) VALUES ('$admin_login','$admin_pass','$admin_name','$admin_mail','$file_name','$admin_dept','$admin_contact','$admin_office_id','$admin_st','$admin_car_st','$admin_room_st','$admin_law_st','$admin_app_st','$admin_hard_st','$admin_super_st')");
 
 
 		if ($query) 

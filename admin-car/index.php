@@ -16,7 +16,7 @@ $result2 = mysqli_query($con, $query2);
 $query3="SELECT user.user_name, COUNT(car_booking.user_id) as number FROM car_booking LEFT JOIN user ON car_booking.user_id= user.user_id WHERE car_booking.boking_status='1' GROUP BY user_name";
 $result3 = mysqli_query($con, $query3);
 // Count Total User
-$sql=mysqli_query($con,"SELECT * FROM `user`");
+$sql=mysqli_query($con,"SELECT * FROM `user` WHERE `user_car_st`='1'");
 $users=mysqli_num_rows($sql);
 // Count Total Driver
 $sql2=mysqli_query($con,"SELECT * FROM `car_driver`");
@@ -67,7 +67,7 @@ $booking=mysqli_num_rows($sql4);
                         <div class="row">
                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
                                 <div class="card card-statistics">
-                                    <a href="report-all">
+                                    
                                         <div class="card-body">
                                             <div class="clearfix">
                                                 <div class="float-left">
@@ -83,17 +83,13 @@ $booking=mysqli_num_rows($sql4);
                                                 </div>
                                             </div>
 
-                                            <p class="text-muted mt-3 mb-0">
-                                                <i class="mdi mdi-cursor-pointer mr-1" aria-hidden="true"></i> Click To Show Report
-                                            </p>
-
                                         </div>
-                                    </a>
+                                 
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
                                 <div class="card card-statistics">
-                                    <a href="car-all">
+                                    
                                         <div class="card-body">
                                             <div class="clearfix">
                                                 <div class="float-left">
@@ -108,16 +104,14 @@ $booking=mysqli_num_rows($sql4);
                                                     </div>
                                                 </div>
                                             </div>
-                                            <p class="text-muted mt-3 mb-0">
-                                                <i class="mdi mdi-cursor-pointer mr-1" aria-hidden="true"></i> Click To Show Report
-                                            </p>
+                                            
                                         </div>
-                                    </a>
+                                    
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
                                 <div class="card card-statistics">
-                                    <a href="driver-all">
+                                    
                                         <div class="card-body">
                                             <div class="clearfix">
                                                 <div class="float-left">
@@ -132,16 +126,14 @@ $booking=mysqli_num_rows($sql4);
                                                     </div>
                                                 </div>
                                             </div>
-                                            <p class="text-muted mt-3 mb-0">
-                                                <i class="mdi mdi-cursor-pointer mr-1" aria-hidden="true"></i> Click To Show Report
-                                            </p>
+                                            
                                         </div>
-                                    </a>
+                                   
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
                                 <div class="card card-statistics">
-                                    <a href="user-all-info">
+                                   
                                         <div class="card-body">
                                             <div class="clearfix">
                                                 <div class="float-left">
@@ -156,11 +148,9 @@ $booking=mysqli_num_rows($sql4);
                                                     </div>
                                                 </div>
                                             </div>
-                                            <p class="text-muted mt-3 mb-0">
-                                                <i class="mdi mdi-cursor-pointer mr-1" aria-hidden="true"></i> Click To Show Report
-                                            </p>
+                                            
                                         </div>
-                                    </a>
+                                    
                                 </div>
                             </div>
                         </div>

@@ -20,7 +20,9 @@ else{
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--=== Favicon ===-->
     <link rel="shortcut icon" href="assets/img/cpb.ico" type="image/x-icon" />
-
+    <!-- Text Animated CSS --> 
+    <link href="../assets/coustom/animate.css" rel="stylesheet">
+ 
     
     <?php require('common/title.php'); ?> 
     <?php require('common/allcss.php'); ?> 
@@ -72,10 +74,11 @@ else{
                     <div class="slideshowcontent">
                         <div class="display-table">
                             <div class="display-table-cell">
-                               <a href="meeting-room" > <h1>BOOK A ROOM!</h1> </a>
+                               <a href="meeting-room" > 
 
-                                 
+                <h1 class="animated infinite bounce delay-2s">BOOK A ROOM!</h1> </a>
 
+               
                             </div>
                         </div>
                     </div>

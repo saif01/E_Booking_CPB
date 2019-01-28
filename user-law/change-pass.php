@@ -87,7 +87,7 @@ require('../db/config.php');
                 <div class="col-lg-12">
                     <div class="section-title  text-center">
                         <h2>Change Your Password</h2>
-                        <span class="title-line"><i class="fa fa-gavel" aria-hidden="true"></i></span>
+                        <span class="title-line"><i class="fa fa-balance-scale" aria-hidden="true"></i></span>
                        <!--  <p>C.P. Bangladesh Car List.. </p> -->
                     </div>
                 </div>
