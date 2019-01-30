@@ -458,7 +458,7 @@ while ($cal_row = $calenderSql->fetch_assoc())
 
 </script>
 
-</script>
+
 
 </body>
 

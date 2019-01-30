@@ -198,7 +198,9 @@ $edate2=$date2->format('d-m-Y h:i:s A');
             $booked_Date = date($endDate);
 
                 if ($booked_Date > $currentTime && $booking_status==1) {?>                   
-                    <a href="cancle-booking?booking_id=<?php echo htmlentities($row['booking_id']); ?>" class="rent-btn">Cancel Booking</a>
+<a href="cancle-booking?booking_id=<?php echo ($row['booking_id']); ?>" class="rent-btn">Cancel Booking</a>
+<!-- Modify Booking End Time -->
+ <a href="javascript:void(0);" onClick="popUpWindow('booking-modify.php?booking_id=<?php echo ($row['booking_id']);?>');" class="rent-btn" title="Modify Info.">Modify Booking</a>
                <?php
                 }
                 elseif($booking_status==0){
@@ -258,6 +260,7 @@ if($comit_st=='' && $row['boking_status']=='1' && $Onlydate == $currentDate)
 
 
 
+
     <!--== Footer Area Start ==-->
     <section id="footer-area">           
         <?php require('common/footer.php'); ?>     
@@ -273,6 +276,17 @@ if($comit_st=='' && $row['boking_status']=='1' && $Onlydate == $currentDate)
     <!--=======================Javascript============================-->
     <?php require('common/alljs.php'); ?>
     
+
+    <script language="javascript" type="text/javascript">
+    var popUpWin = 0;
+
+    function popUpWindow(URLStr, left, top, width, height) {
+        if (popUpWin) {
+            if (!popUpWin.closed) popUpWin.close();
+        }
+        popUpWin = open(URLStr, 'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width=' + 600 + ',height=' + 780 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
+    }
+    </script>  
 
 </body>
 
