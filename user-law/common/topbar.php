@@ -9,7 +9,7 @@
 
                     <!--== Single HeaderTop Start ==-->
                     <div class="col-lg-4 text-center">
-                        <i class="fa fa-mobile"></i> +88 01708 80 90 62 (Billal)
+                        <i class="fa fa-mobile"></i> +88 01708 45 76 30 (Legal)
                     </div>
                     <!--== Single HeaderTop End ==-->
 

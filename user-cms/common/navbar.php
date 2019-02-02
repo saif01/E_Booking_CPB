@@ -48,7 +48,7 @@ $query2=mysqli_query($con,"SELECT `user_img` FROM `user` WHERE `user_id`='$user_
 
                                 
                                 <li>
-                                  <a href="">History</a> 
+                                  <a href="#">History</a> 
                                   <ul>
                                     <li><a href="hard-history">Hardware Complains</a></li>
                                     <li><a href="app-history">Application Complains</a></li>

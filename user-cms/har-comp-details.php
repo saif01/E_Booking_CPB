@@ -12,7 +12,7 @@ include('../db/config.php');
 
 $hard_id=$_GET['hard_id'];
 
-$query=mysqli_query($con,"SELECT cms_hard_complain.hard_id, cms_hard_complain.tools, cms_hard_complain.details, cms_hard_complain.documents, cms_hard_complain.status, cms_hard_complain.warrenty, cms_hard_complain.delivery, cms_hard_complain.last_up, cms_hard_complain.reg, cms_hard_type.hard_name, cms_hard_module.mod_name FROM cms_hard_complain INNER JOIN cms_hard_type ON cms_hard_complain.type_id=cms_hard_type.type_id INNER JOIN cms_hard_module ON cms_hard_complain.mod_id=cms_hard_module.mod_id WHERE cms_hard_complain.hard_id='$hard_id' ");
+$query=mysqli_query($con,"SELECT cms_hard_complain.hard_id, cms_hard_complain.tools, cms_hard_complain.details, cms_hard_complain.documents, cms_hard_complain.status, cms_hard_complain.warrenty, cms_hard_complain.delivery, cms_hard_complain.last_up, cms_hard_complain.reg, cms_hard_category.category, cms_hard_subcategory.subcategory FROM cms_hard_complain INNER JOIN cms_hard_category ON cms_hard_complain.cat_id=cms_hard_category.cat_id INNER JOIN cms_hard_subcategory ON cms_hard_complain.sub_id=cms_hard_subcategory.sub_id  WHERE cms_hard_complain.hard_id='$hard_id' ");
 
 
 $row=$query->fetch_assoc();
@@ -43,12 +43,12 @@ $row=$query->fetch_assoc();
 
 
 	<tr>
-		<th>Type</th>
-		<td><?php echo ($row['hard_name']); ?></td>
+		<th>Category</th>
+		<td><?php echo ($row['category']); ?></td>
 	</tr>
 	<tr>
-		<th>Module</th>
-		<td><?php echo ($row['mod_name']); ?></td>
+		<th>SubCategory</th>
+		<td><?php echo ($row['subcategory']); ?></td>
 	</tr>
 	<tr>
 		<th>Status</th>

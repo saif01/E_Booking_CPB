@@ -50,7 +50,7 @@ $damage_status='Damaged';// For damage Product
 									<script>
 									setTimeout(function () { 
 									        swal({
-									          title: "Successfully! if",
+									          title: "Successfully!",
 									          text: "Remarks Uddated Completed!",
 									          type: "success",
 									          confirmButtonText: "OK"
@@ -117,7 +117,7 @@ $damage_status='Damaged';// For damage Product
 										<script>
 										setTimeout(function () { 
 										        swal({
-										          title: "Successfully! else",
+										          title: "Successfully!",
 										          text: "Remarks Uddated Completed!",
 										          type: "success",
 										          confirmButtonText: "OK"

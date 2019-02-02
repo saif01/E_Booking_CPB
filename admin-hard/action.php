@@ -172,6 +172,10 @@ $row=$query->fetch_assoc();
             if ($row['status']=='Damaged') {
                 echo "Product Damaged";
              }
+
+            elseif ($row['status']=='Closed') {
+                echo "Product Closed";
+             }
             elseif ($d_st=='') {
               echo "Not Closed";
             }

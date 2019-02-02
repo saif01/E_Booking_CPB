@@ -126,8 +126,30 @@ $row2=$lawreport->fetch_assoc();
                                  <td><?php echo $row['customer']; ?></td>
                                  <td><?php echo $row['complaint']; ?></td>
           
-        <td><?php echo date("M j, Y", strtotime($row['filling'])); ?></td>
-         <td><?php echo date("M j, Y", strtotime($row['last_hearing'])); ?></td>
+                                 <td>
+                                    <?php            
+                                if ($row['hearing']=='') 
+                                {
+                                    echo "No Data";
+                                }
+                                else
+                                {
+                                  echo date("M j, Y", strtotime($row['hearing']));    
+                                 }?>
+                                </td>
+                                  <td>
+                                     <?php            
+                                if ($row['last_hearing']=='') 
+                                {
+                                    echo "No Data";
+                                }
+                                else
+                                {
+                                  echo date("M j, Y", strtotime($row['last_hearing']));    
+                                 }?>
+
+                                </td>
+
           
                                  <td><?php echo $row['pre_balance']; ?></td> 
                                  <td><?php echo $row['law_fees']; ?></td> 
@@ -178,7 +200,15 @@ $row2=$lawreport->fetch_assoc();
                 <label class="col-sm-3 control-label">Last Hearing Date</label>
                 <div class="col-sm-9">
                   <input type="date" name="last_hearing" class="form-control" required />
-                   <span class="badge badge-pill badge-primary"> <?php echo date("F j, Y", strtotime($row2['last_hearing'])); ?></span>
+                   <span class="badge badge-pill badge-primary">  <?php            
+                                if ($row['last_hearing']=='') 
+                                {
+                                    echo "No Data";
+                                }
+                                else
+                                {
+                                  echo date("M j, Y", strtotime($row2['last_hearing']));    
+                                 }?></span>
                 </div>
             </div>
             <div class="form-group">

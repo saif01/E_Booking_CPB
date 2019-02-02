@@ -152,14 +152,14 @@ include('../db/config.php');
             <div class="form-group">
                 <label class="col-sm-3 control-label">Filling Date</label>
                 <div class="col-sm-9">
-                  <input type="date" name="filling" class="form-control" required />
+                  <input type="date" name="filling" class="form-control" />
                    
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Hearing Date</label>
                 <div class="col-sm-9">
-                   <input type="date" name="hearing" class="form-control"  required />
+                   <input type="date" name="hearing" class="form-control"  />
                 </div>
             </div>
     </div>
@@ -167,7 +167,7 @@ include('../db/config.php');
             <div class="form-group">
                 <label class="col-sm-3 control-label">Last Hearing</label>
                 <div class="col-sm-9">
-                  <input type="date" name="last_hearing" class="form-control" required />
+                  <input type="date" name="last_hearing" class="form-control"  />
                    
                 </div>
             </div>

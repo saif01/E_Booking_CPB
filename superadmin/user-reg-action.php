@@ -7,6 +7,9 @@ header('location:../admin');
   }
 else{ 
 include('../db/config.php');
+//mail send
+require('../mail/sendmail.php');
+require('../mail/address.php');
 ?>
 <!--*********start Sweet alert For Submiting data **********-->
 <script src="../assets/coustom/swwetalert/jslib.js"></script>
@@ -90,6 +93,24 @@ $query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_na
 
 		    <?php
 		}
+
+// Send Mail User Id And Password
+		$sub="C.P.B. It-Portal";
+		$to=$user_mail;
+		$msg=" 
+        <html>
+        <body>
+            <font size='5' color='green'>Dear $user_name, This Is Your C.P. BAngladesh It-Portal User Account Details.</font><br><br><hr>
+		  <font size='4' color='blue'>Your LogIn ID : <b>$user_login</b>, </font><br>
+		  <font size='3' color='red'>Your Password :  <b>$user_pass </b>.</font><br>
+
+		 <hr><br><br>
+
+         
+            </body>
+        </html>";
+
+        send_mail($sub,$msg,$to);
 
 
 	} 

@@ -125,9 +125,25 @@ else{
                 <td><?php echo $row['complaint']; ?> </td>
                 
        
-                <td><?php echo date("M j, Y", strtotime($row['filling'])); ?></td>
+                <td> <?php            
+                                if ($row['filling']=='') 
+                                {
+                                    echo "No Data";
+                                }
+                                else
+                                {
+                                  echo date("M j, Y", strtotime($row['filling']));    
+                                 }?></td>
 
-                <td><?php echo date("F j, Y", strtotime($row['last_hearing'])); ?></td>
+                <td><?php            
+                                if ($row['last_hearing']=='') 
+                                {
+                                    echo "No Data";
+                                }
+                                else
+                                {
+                                  echo date("M j, Y", strtotime($row['last_hearing']));    
+                                 }?></td>
 
                 <td ><?php echo $row['pre_balance']; ?></td>
                 <td ><?php echo $row['pr_balance']; ?></td>

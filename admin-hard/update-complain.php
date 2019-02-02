@@ -155,7 +155,7 @@ $row=$query->fetch_assoc();
             <label>Select Warranty Status:</label>
             <select class="form-control" name="warranty_st" >
               <option value="s_w">Sent To Warranty </option>
-              <option value="b_w">Back From Warranty </option>
+              <!-- <option value="b_w">Back From Warranty </option> -->
             </select>
           </div>
 				  
