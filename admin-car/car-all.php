@@ -15,7 +15,7 @@ include('../db/config.php');
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <?php include('common/title.php'); ?>
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
@@ -81,7 +81,7 @@ include('../db/config.php');
                                                 </thead>
                                                 <tbody>
                                                     <?php 
-	$query=mysqli_query($con," SELECT * FROM `tbl_car`");
+	$query=mysqli_query($con," SELECT * FROM `tbl_car` ORDER BY `car_id` DESC");
     while($row=mysqli_fetch_array($query))
     {
 
@@ -196,7 +196,10 @@ include('../db/config.php');
          
         <script type="text/javascript">
             $(document).ready(function() {
-            $('#example').DataTable();
+            $('#example').DataTable(
+              {
+                "order": []
+              });
         } );
         </script>
 

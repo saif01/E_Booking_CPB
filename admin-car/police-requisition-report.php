@@ -16,7 +16,7 @@ include('../db/config.php');
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <?php include('common/title.php'); ?>
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
@@ -70,7 +70,7 @@ include('../db/config.php');
             <table id="example" class="table table-striped table-bordered table-dark">
                                                 <thead>
                                                     <tr>
-                                                        <th>ID</th>
+                                                        
                                                         <th>Driver</th>
                                                         <th>Car</th>              
                                                         <th>Req. Start</th>
@@ -85,27 +85,29 @@ include('../db/config.php');
 
     while($row=mysqli_fetch_array($query))
     {
-
+ 
 ?>
                                                     <tr>
 
-                                <td><?php echo $row['req_id']; ?> </td>
+                                
                                  <td><?php echo $row['driver_name']; ?></td>
                                  <td><?php echo $row['car_name']."||".$row['car_namePlate'] ; ?></td>
-                                 <td><?php echo date("M j, Y", strtotime($row['req_start'])); ?></td>
-                                 <td><?php echo date("M j, Y", strtotime($row['req_end'])); ?></td>
+                                 <td><?php echo date("M j, Y, g:i a", strtotime($row['req_start'])); ?></td>
+                                 <td><?php echo date("M j, Y, g:i a", strtotime($row['req_end'])); ?></td>
                                  
 
-                                <td class="center">
-                                        <?php
-                                            if ($row['req_st']=='1') {
-                                                echo "Ok";
-                                                }
-                                            else{
-                                                echo "Canceled";
-                                                    }?>
+                                <td>
+        <?php
+            if ($row['req_st']=='1') {?>
+    
+<a href="police-req-status.php?h_req_id=<?php echo ($row['req_id']);?>" title="Cancel" id="hide" > <i class="mdi mdi-check-all text-success icon-lg"></i></a>
+
+<?php } else {?>
+
+ <i class="mdi mdi-close-box text-danger icon-lg"> </i>
+<?php } ?>
                                                              
-                                                        </td>
+                                </td>
                                                         
                                                     </tr>
                                                     <?php } ?>
@@ -162,6 +164,7 @@ include('../db/config.php');
         <script type="text/javascript">
             $(document).ready(function() {
                 var table = $('#example').DataTable({
+                    "order": [],
                     lengthChange: false,
                     buttons: [ 'excel', 'pdf', 'colvis' ]
                 });
@@ -170,6 +173,32 @@ include('../db/config.php');
                     .appendTo( '#example_wrapper .col-md-6:eq(0)' );
             });
         </script>
+
+
+<!--**************** Start Sweet Alert Script code *******************-->
+<script>  
+         $(document).on("click", "#hide", function(e){
+             e.preventDefault();
+             var link = $(this).attr("href");
+                swal({
+                  title: "Are you Want to Cancel Police Requisition?",
+                  text: "If Cancel !!, It Will Be Canceled Permanently !",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                       window.location.href = link;
+                  } else {
+                    swal("Safe Data!");
+                  }
+                });
+            });
+    </script>
+<!--**************** End Sweet Alert Script code *******************-->
+
+
 
     </body>
 

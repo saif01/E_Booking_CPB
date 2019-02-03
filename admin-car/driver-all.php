@@ -16,7 +16,8 @@ include('../db/config.php');
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <?php include('common/title.php'); ?>
+        
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
@@ -83,99 +84,95 @@ include('../db/config.php');
                                                         </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php 
-		$query=mysqli_query($con," SELECT * FROM `car_driver` ORDER BY `driver_id`");
+        <?php 
+		$query=mysqli_query($con," SELECT * FROM `car_driver` ORDER BY `driver_id` DESC");
     while($row=mysqli_fetch_array($query))
     {
 
 ?>
-                                                    <tr>
+            <tr>
 
-                                                        <td>
-                                                            <a href="javascript:void(0);" onClick="popUpWindow('driver-profile.php?driver_id=<?php echo htmlentities($row['driver_id']);?>');" title="View Driver Info.">
-                  <img src="../pimages/driver/<?php echo($row['driver_img']);?>" class="img-responsive" alt="Image" height="42" width="42"/>  
-
-<?php echo htmlentities($row['driver_name']) ; ?>
+                <td>
+<a href="javascript:void(0);" onClick="popUpWindow('driver-profile.php?driver_id=<?php echo ($row['driver_id']);?>');" title="View Driver Info.">
+<img src="../pimages/driver/<?php echo($row['driver_img']);?>" class="img-responsive" alt="Image" height="42" width="42"/> <?php echo ($row['driver_name']) ; ?></a>
 
 
-              </td> </a>
+              </td> 
 
-                                                            
-                                                            <td>
-                                                                <?php 
+                
+                <td>
+                    <?php 
                 $car_id = $row['car_id'];
                 $query2=mysqli_query($con,"SELECT `car_name`, `car_namePlate`, `car_img1` FROM `tbl_car` WHERE `car_id` ='$car_id' ");
                 $row2=$query2->fetch_assoc();   
 
                 ?>
-                    <a href="javascript:void(0);" onClick="popUpWindow('car-profile.php?car_id=<?php echo htmlentities($row['car_id']);?>');" title="View Car Info.">
+                    <a href="javascript:void(0);" onClick="popUpWindow('car-profile.php?car_id=<?php echo ($row['car_id']);?>');" title="View Car Info.">
                  <img src="../pimages/car/<?php echo($row2['car_img1']);?>" class="img-responsive" alt="Not Assign" height="42" width="70"/>
-                <?php echo htmlentities($row2['car_name'].'--'.$row2['car_namePlate']); ?>
+                <?php echo ($row2['car_name'].'--'.$row2['car_namePlate']); ?>
 
                   </a>
 
-                                                            </td>
-                                                            
-
-
-
-                                                            <td>
-                                                                <?php echo htmlentities($row['driver_phone']); ?>
-                                                            </td>
-
-                                                           
-
-                                                            <td>
-<a href="javascript:void(0);" onClick="popUpWindow('driver-leave.php?driver_id=<?php echo $row['driver_id'];?>&car_id=<?php echo $row['car_id'];?> ');" title="Hide"> <button class="btn btn-info">Leave</button></a>    
-
-
-                                                            </td>
-                                                            <td>
-                                                  <?php              
-                                    if($row['driver_status']==1)
-                                         {?>
-                                    <a href="driver-status.php?h_user_id=<?php echo htmlentities($row['driver_id']);?>" title="Hide" id="hide" > <i class="mdi mdi-eye text-success icon-lg"></i></a>
-                                            
-                                        <?php } else {?>
-
-                                            <a href="driver-status.php?s_user_id=<?php echo htmlentities($row['driver_id']);?>" title="Show" id="show" > <i class="mdi mdi-eye-off text-danger icon-lg"></i></a> 
-                                            <?php } ?>
-                  <a href="driver-edit?driver_id=<?php echo htmlentities($row['driver_id']);?>" title="Edit"
-                    >
-                    <i class="mdi mdi-pencil-box-outline text-warning icon-lg"></i>  
-                  </a>
-                  
+                    </td>
                     
-                   <a href="driver-delete.php?driver_id=<?php echo $row['driver_id']?>" title="Delete" id="delete" > <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a>
-
-                                                            </td>
-                                                            <td>
-                                                                <?php
-                                                                if ($row['leave_start']=='') {
-                                                                    echo "No Data"; 
-                                                                }
-                                                                else{
-                                                                    echo date("M j, Y", strtotime($row['leave_start'])); 
-                                                                }
-
-                                                                ?>
-
-                                                            </td>
-
-                                                            <td>
-                                                                <?php
-                                                                if ($row['leave_end']=='') {
-                                                                    echo "No Data"; 
-                                                                }
-                                                                else{
-                                                                    echo date("M j, Y", strtotime($row['leave_end'])); 
-                                                                }
-
-                                                                ?>
-
-                                                            </td>
 
 
+
+                    <td>
+                        <?php echo ($row['driver_phone']); ?>
+                    </td>
+
+                   
+
+                    <td>
+<a href="javascript:void(0);" onClick="popUpWindow('driver-leave.php?driver_id=<?php echo $row['driver_id'];?>&car_id=<?php echo $row['car_id'];?> ');" title="Hide"> <button class="btn btn-info">Action</button></a>    
+
+
+                    </td>
+                    <td>
+                    <?php              
+if($row['driver_status']==1)
+     {?>
+<a href="driver-status.php?h_user_id=<?php echo ($row['driver_id']);?>" title="Hide" id="hide" > <i class="mdi mdi-eye text-success icon-lg"></i></a>
+        
+    <?php } else {?>
+
+<a href="driver-status.php?s_user_id=<?php echo ($row['driver_id']);?>" title="Show" id="show" > <i class="mdi mdi-eye-off text-danger icon-lg"></i></a> 
+<?php } ?>
+<a href="driver-edit?driver_id=<?php echo ($row['driver_id']);?>" title="Edit"
+>
+<i class="mdi mdi-pencil-box-outline text-warning icon-lg"></i>  
+</a>
+
+
+<a href="driver-delete.php?driver_id=<?php echo $row['driver_id']?>" title="Delete" id="delete" > <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a>
+
+                </td>
+                <td>
+                    <?php
+                    if ($row['leave_start']=='') {
+                        echo "No Data"; 
+                    }
+                    else{
+                        echo date("M j, Y", strtotime($row['leave_start'])); 
+                    }
+
+                    ?>
+
+                </td>
+
+                <td>
+                    <?php
+                    if ($row['leave_end']=='') {
+                        echo "No Data"; 
+                    }
+                    else{
+                        echo date("M j, Y", strtotime($row['leave_end'])); 
+                    }
+
+                    ?>
+
+                </td>
 
 
                                                     </tr>
@@ -192,7 +189,7 @@ include('../db/config.php');
                         </div>
                     </div>
                     <!-- content-wrapper ends -->
-                    <!-- partial:../../partials/_footer.html -->
+                    
                     <footer class="footer">
                         <?php include('common/footer.php') ?>
                     </footer>
@@ -202,19 +199,13 @@ include('../db/config.php');
             </div>
             <!-- page-body-wrapper ends -->
         </div>
-        <!-- container-scroller -->
-        <!-- plugins:js -->
+        
         <script src="vendors/js/vendor.bundle.base.js"></script>
         <script src="vendors/js/vendor.bundle.addons.js"></script>
-        <!-- endinject -->
-        <!-- Plugin js for this page-->
-        <!-- End plugin js for this page-->
-        <!-- inject:js -->
+       
         <script src="js/off-canvas.js"></script>
         <script src="js/misc.js"></script>
-        <!-- endinject -->
-        <!-- Custom js for this page-->
-        <!-- End custom js for this page-->
+       
 
  <!--********* Data Table js Link *********-->
         <!-- <script type="text/javascript" src="assets/dataTable/libry.js"></script> -->
@@ -223,36 +214,16 @@ include('../db/config.php');
          
         <script type="text/javascript">
             $(document).ready(function() {
-            $('#example').DataTable();
+            $('#example').DataTable(
+              {
+                "order": []
+              });
         } );
         </script>
 
 
 
-        <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
-        <!-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
 
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                var table = $('#example').DataTable({
-                    // lengthChange: false,
-                    // buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
-                });
-
-                // table.buttons().container()
-                //     .appendTo( '#example_wrapper .col-md-6:eq(0)' );
-            });
-        </script> -->
 
 
         <!-- Sweet Alert CDN Link -->

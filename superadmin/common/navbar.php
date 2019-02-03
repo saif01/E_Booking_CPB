@@ -7,7 +7,7 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <a href="index" class="logo"> <span style="font-size: 200%;">C.P.B.-IT</span></a>
+                        <a href="index" class="logo"> <span style="font-size: 200%;">C.P.B.-IT</span><span class="text-warning" >(Super)</span></a>
                     </div>
                 </div>
                 <!-- Button mobile view to collapse sidebar menu -->

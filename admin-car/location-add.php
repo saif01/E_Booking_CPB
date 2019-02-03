@@ -31,7 +31,7 @@ $query=mysqli_query($con,"INSERT INTO `location`(`location`) VALUES ('$location'
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <?php include('common/title.php'); ?>
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
@@ -127,7 +127,7 @@ $query=mysqli_query($con,"INSERT INTO `location`(`location`) VALUES ('$location'
                                             <table id="example" class="table table-striped table-bordered table-responsive-md table-dark col-lg-12">
                                                 <thead>
                                                     <tr>
-                                                        <th>ID</th>
+                                                    
                                                         <th>Location</th>
                                                         <th>Reg. date</th>
                                                         <th>Action</th>
@@ -143,9 +143,7 @@ $query=mysqli_query($con,"INSERT INTO `location`(`location`) VALUES ('$location'
 ?>
                                                     <tr>
 
-                                                    <td>
-                                                 <?php echo htmlentities($row['location_id']); ?>
-                                                    </td>
+                                                   
                                                     <td>
                                                  <?php echo htmlentities($row['location']); ?>
                                                     </td>
@@ -154,7 +152,7 @@ $query=mysqli_query($con,"INSERT INTO `location`(`location`) VALUES ('$location'
                                                     </td>
 
                                                     <td>
-                                                    <a href="location-delete?location_id=<?php echo $row['location_id']?>" onClick="return confirm('Are you sure you want to delete???')" title="Delete"> <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a></td>
+<a href="location-delete?location_id=<?php echo $row['location_id']?>" onClick="return confirm('Are you sure you want to delete???')" title="Delete"> <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a></td>
 
                                                     </tr>
                                                     <?php } ?>
@@ -202,9 +200,12 @@ $query=mysqli_query($con,"INSERT INTO `location`(`location`) VALUES ('$location'
         <script type="text/javascript" src="../assets/dataTable/tbl.js"></script>
         <script type="text/javascript" src="../assets/dataTable/boots.js"></script>
          
-        <script type="text/javascript">
+       <script type="text/javascript">
             $(document).ready(function() {
-            $('#example').DataTable();
+            $('#example').DataTable(
+              {
+                "order": []
+              });
         } );
         </script>
 

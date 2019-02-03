@@ -130,7 +130,7 @@ $police_row=$police_req ->fetch_assoc();
                                     }
                                     else{
 
-                    echo date("F j, Y", strtotime($police_row['req_start'])) ." -- To -- ".date("F j, Y", strtotime($police_row['req_end']));
+                    echo date("F j, Y, g:i a", strtotime($police_row['req_start'])) ." -- To -- ".date("F j, Y, g:i a", strtotime($police_row['req_end']));
                                     }
 
                                     ?> 

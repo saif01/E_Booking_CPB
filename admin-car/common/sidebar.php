@@ -105,32 +105,12 @@
                   <a class="nav-link" href="driver-report-dateWise"><i class="menu-icon mdi mdi-chart-bar text-danger"></i> Date Wise Report</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="police-requisition-report"><i class="menu-icon mdi mdi-chart-bar text-danger"></i>Police Reqisition Report</a>
+                  <a class="nav-link" href="police-requisition-report"><i class="menu-icon mdi mdi-chart-bar text-danger"></i>Reqisition Report</a>
                 </li>
               </ul>
             </div>
           </li>
 
-          <!-- <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#user_section" aria-expanded="false" aria-controls="user_section">
-              <i class="menu-icon mdi mdi-account-multiple-plus text-success"></i>
-              <span class="menu-title">User Section</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="user_section">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="user-all-info"><i class="menu-icon mdi mdi-clipboard-check text-success"></i> All User Info </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="user-reg"><i class="menu-icon mdi mdi-pen text-success"></i> User Registration </a>
-                </li>
-  
-              </ul>
-            </div>
-          </li> -->
-
-           
 
           <li class="nav-item">
             <a class="nav-link" href="location-add">

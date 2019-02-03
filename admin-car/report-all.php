@@ -16,7 +16,7 @@ include('../db/config.php');
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <?php include('common/title.php'); ?>
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
@@ -70,7 +70,7 @@ include('../db/config.php');
                                             <table id="example" class="table table-striped table-bordered table-responsive-md table-dark col-lg-12">
                                                 <thead>
                                                     <tr>
-                                                        <th>ID</th>
+                                                        
                                                         <th>Car</th>
                                                         <th>Booking Start</th>
                                                         <th>Booking Ends</th>
@@ -97,13 +97,12 @@ include('../db/config.php');
 ?>
                                                     <tr>
 
-                                                        <td>
-                                                            <?php echo htmlentities($row['booking_id']); ?> </td>
+                                                        
 
                                                         <td>
-                                                            <a href="javascript:void(0);" onClick="popUpWindow('car-profile.php?car_id=<?php echo htmlentities($row['car_id']);?>');" title="View Driver Info.">
+                                                            <a href="javascript:void(0);" onClick="popUpWindow('car-profile.php?car_id=<?php echo ($row['car_id']);?>');" title="View Driver Info.">
 
-                                                                <?php echo htmlentities($row['car_name']. '- '.$row['car_number'] ) ; ?>
+                                                                <?php echo ($row['car_name']. '- '.$row['car_number'] ) ; ?>
                                                             </a>
 
                                                         </td>
@@ -118,18 +117,18 @@ include('../db/config.php');
 
 
                                                         <td class="center">
-                                                            <?php echo htmlentities($row['location']); ?>
+                                                            <?php echo ($row['location']); ?>
                                                         </td>
                                                         
                                                         <td class="center">
-                                                            <?php echo htmlentities($row['purpose']); ?>
+                                                            <?php echo ($row['purpose']); ?>
                                                         </td>
 
 
                                                         <td class="center">
-                                                            <a href="javascript:void(0);" onClick="popUpWindow('userprofile.php?user_id=<?php echo htmlentities($row['user_id']);?>');" title="View User Info.">
+                                                            <a href="javascript:void(0);" onClick="popUpWindow('userprofile.php?user_id=<?php echo ($row['user_id']);?>');" title="View User Info.">
 
-                                                                <?php echo htmlentities($row['user_name']); ?> </a>
+                                                                <?php echo ($row['user_name']); ?> </a>
 
                                                         </td>
                                                         <td class="center">
@@ -142,7 +141,7 @@ include('../db/config.php');
                   ?>
                                                                 <a href="javascript:void(0);" onClick="popUpWindow('driver-profile.php?driver_id=<?php echo $driver_id;?>');" title="View Driver Info.">
 
-                                                                    <?php echo htmlentities($row2['driver_name']); ?> </a>
+                                                                    <?php echo ($row2['driver_name']); ?> </a>
 
                                                         </td>
 
@@ -150,7 +149,7 @@ include('../db/config.php');
 
 
                                                         <td class="center">
-                                                            <?php echo htmlentities($row['day_count']); ?>
+                                                            <?php echo ($row['day_count']); ?>
                                                         </td>
                                                         <td class="center">
 
@@ -164,15 +163,15 @@ include('../db/config.php');
 
                                                         </td>
                                                         <td class="center">
-                                                            <?php echo htmlentities($row['booking_cost']); ?>
+                                                            <?php echo ($row['booking_cost']); ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo htmlentities($row['start_mileage']. '- '.$row['end_mileage'] ) ; ?> </td>
+                                                            <?php echo ($row['start_mileage']. '- '.$row['end_mileage'] ) ; ?> </td>
 
 
 
                                                         <td class="center">
-                                                            <?php echo htmlentities($row['driver_rating']); ?>
+                                                            <?php echo ($row['driver_rating']); ?>
                                                         </td>
 
                                                     </tr>
@@ -231,7 +230,7 @@ include('../db/config.php');
     $(document).ready(function() {
         var table = $('#example').DataTable({
             lengthChange: false,
-            "order": [[ 0, 'DESC' ]],
+            "order": [],
             buttons: [ 'excel', 'colvis' ]
         });
 

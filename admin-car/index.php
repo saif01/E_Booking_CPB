@@ -37,16 +37,13 @@ $booking=mysqli_num_rows($sql4);
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <?php include('common/title.php'); ?>
 
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
-        <!-- endinject -->
-        <!-- plugin css for this page -->
-        <!-- End plugin css for this page -->
-        <!-- inject:css -->
+        
         <link rel="stylesheet" href="css/style.css">
         <!-- endinject -->
         <link rel="shortcut icon" href="images/favicon.png" />
@@ -54,7 +51,7 @@ $booking=mysqli_num_rows($sql4);
 
     <body>
         <div class="container-scroller">
-            <!-- partial:partials/_navbar.html -->
+          
             <?php include('common/navbar.php'); ?>
             <!-- partial -->
             <div class="container-fluid page-body-wrapper">

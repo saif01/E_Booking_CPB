@@ -16,7 +16,7 @@ include('../db/config.php');
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>CPB.CarPool</title>
+        <?php include('common/title.php'); ?>
         <!-- plugins:css -->
         <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
@@ -144,7 +144,7 @@ if(isset($_POST['submit']))
                                             <table id="example" class="table table-striped table-bordered table-responsive-md col-lg-12">
                                                 <thead>
                                                     <tr>
-                                                        <th>ID</th>
+                                                       
                                                         <th>Car</th>
                                                         <th>Booking Start</th>
                                                         <th>Booking Ends</th>
@@ -171,8 +171,7 @@ if(isset($_POST['submit']))
 ?>
                                                     <tr>
 
-                                                        <td>
-                                                            <?php echo htmlentities($row['booking_id']); ?> </td>
+                                                        
 
                                                         <td>
                                                             <a href="javascript:void(0);" onClick="popUpWindow('car-profile.php?car_id=<?php echo htmlentities($row['car_id']);?>');" title="View Driver Info.">
@@ -297,6 +296,7 @@ if(isset($_POST['submit']))
         <script type="text/javascript">
             $(document).ready(function() {
                 var table = $('#example').DataTable({
+                    "order": [],
                     lengthChange: false,
                     buttons: ['copy', 'excel', 'pdf', 'colvis']
                 });
