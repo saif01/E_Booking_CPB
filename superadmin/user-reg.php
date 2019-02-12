@@ -6,8 +6,17 @@ if(strlen($_SESSION['admin-super-login'])==0)
 header('location:../admin');
 }
 else{ 
-
 include('../db/config.php');
+
+// For User Location
+$location = '';
+$query = "SELECT * FROM `bu_location` ORDER BY `location_name`";
+$result = mysqli_query($con, $query);
+while($row = mysqli_fetch_array($result))
+{
+ $location .= '<option value="'.$row["bul_id"].'">'.$row["location_name"].'</option>';
+}
+
 ?>
 
 
@@ -19,7 +28,7 @@ include('../db/config.php');
         <meta name="description" content="syful.cse.bd@gmail.com">
         <meta name="author" content="Saif">
 
-        <link rel="shortcut icon" href="images/cpb.png">
+       <?php include('common/icon.php'); ?>
 
         <?php include('common/title.php'); ?>
 
@@ -100,7 +109,7 @@ include('../db/config.php');
             <div class="panel-body">
 
 
-<form class="form-horizontal" action="user-reg-action.php" method="post" enctype="multipart/form-data">
+<form id="yourFormId" class="form-horizontal" action="user-reg-action.php" method="post" enctype="multipart/form-data">
 <div class="row"> 
 	<div class="col-md-6"> 
             <div class="form-group">
@@ -144,11 +153,12 @@ include('../db/config.php');
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">Department</label>
+                <label class="col-sm-3 control-label">B.U. Email</label>
                 <div class="col-sm-9">
-                   <input type="text" name="user_dept" class="form-control" placeholder="Enter User Department Name" required>
+                   <input type="text" name="bu_mail" class="form-control" placeholder="Enter User B.U. Head Email Address" required>
                 </div>
-            </div>            
+            </div>
+                      
     </div>
 
    <div class="col-md-6"> 
@@ -159,17 +169,28 @@ include('../db/config.php');
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">User Image</label>
-                        <div class="col-sm-9">
-                        <input name="photo" type="file" class="form-control file-upload-info" onchange="document.getElementById('preview1').src = window.URL.createObjectURL(this.files[0])" required>
-    					<p style="color:red;">Resolution 250*300 pixels</p>	 
+                <label class="col-sm-3 control-label">User Location</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="user_location" required="required">
+                      <option value="" disabled selected>Select Location Name</option>
+                          <?php echo $location; ?>
+                  </select>
                 </div>
-            </div>        
+            </div>
+                
     </div>
 </div>
 <div class="row">
 
     <div class="col-md-6"> 
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Department</label>
+                    <div class="col-sm-9">
+                       <input type="text" name="user_dept" class="form-control" placeholder="Enter User Department Name" required>
+                    </div>
+                </div>  
+
+        
     		   <div class="form-group">
                 <label class="col-sm-3 control-label">Active</label>
                         <div class="col-sm-9">
@@ -212,29 +233,39 @@ include('../db/config.php');
 
    
 
-
-                                      
-
-   <div class="col-md-6"> 
-    		
+ <div class="col-md-6"> 
+            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">User Image</label>
+                        <div class="col-sm-9">
+                        <input name="photo" id="target1" type="file" class="form-control file-upload-info" onchange="document.getElementById('preview1').src = window.URL.createObjectURL(this.files[0])" required>
+                        
+                             
+                </div>
+            </div>     
            
             <div class="form-group">
-                <label class="col-sm-3 control-label">Photo Priview</label>
+                <label class="col-sm-3 control-label">Photo Preview</label>
                 <div class="col-sm-9">
                   <img id="preview1" alt="Image Not Selected" class="rounded mx-auto d-block" width="100" height="100" />
                    
                 </div>
             </div>
 
+
+
     </div>
+                                      
+
 
 </div> 
 
 
 
+
     <div class="col-md-12">         
        <div class="form-group m-b-0">    
-<button type="submit" name="submit"  class="btn btn-block btn-rounded btn-custom  btn-lg btn-primary waves-effect waves-light">Hit For Register User</button>
+<button id="btnSubmit" type="submit" name="submit"  class="btn btn-block btn-rounded btn-custom  btn-lg btn-primary waves-effect waves-light">Submit </button>
 
 <a href="##" onClick="history.go(-1); return false;"> <button class="btn btn-light btn-block btn-rounded " style="background-color:#a08e8e; margin-top: 8px;">Cancel</button></a>
            </div>
@@ -273,7 +304,7 @@ include('../db/config.php');
 
 
         <!-- jQuery  -->
-        <script src="js/jquery.min.js"></script>
+       <!--  <script src="js/jquery.min.js"></script> -->
         <script src="js/bootstrap.min.js"></script>
         <script src="js/waves.js"></script>
         <script src="js/wow.min.js"></script>
@@ -289,8 +320,20 @@ include('../db/config.php');
         
         <!-- CUSTOM JS -->
         <script src="js/jquery.app.js"></script>
+        
+<script src="../assets/coustom/ajax/3.3.1_jquery.min.js"></script>
+<!-- Bubmit Button Disable After submit form -->
+<script type="text/javascript">
+    $(document).ready(function () {
+    $('form').submit(function () {
+        setTimeout(function () { disableButton(); },0);
+    });
 
-
+    function disableButton() {
+        $("#btnSubmit").prop('disabled', true);
+    }
+});
+</script>
 
 
    

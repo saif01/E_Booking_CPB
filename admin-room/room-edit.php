@@ -30,7 +30,7 @@ $room_id=$_GET['room_id'];
         <!-- inject:css -->
         <link rel="stylesheet" href="css/style.css">
         <!-- endinject -->
-        <link rel="shortcut icon" href="images/favicon.png" />
+        <?php include('common/icon.php'); ?>
 
          
     </head>

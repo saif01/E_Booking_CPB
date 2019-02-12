@@ -27,7 +27,7 @@ $row=$query->fetch_assoc();
         <meta name="description" content="syful.cse.bd@gmail.com">
         <meta name="author" content="Saif">
 
-        <link rel="shortcut icon" href="images/cpb.png">
+        <?php include('common/icon.php'); ?>
 
         <?php include('common/title.php'); ?>
 
@@ -97,7 +97,7 @@ $row=$query->fetch_assoc();
 				    <label>Remarks</label>
 				    <textarea class="form-control" type="text" name="remarks" rows="3" required></textarea>
 				  </div>
-				  <input type="submit" name="submit" value="Hit To Update" class="btn btn-block btn-rounded btn-success">
+				  <input id="btnSubmit" type="submit" name="submit" value="Hit To Update" class="btn btn-block btn-rounded btn-success">
 				</form>
                  		
 
@@ -106,6 +106,19 @@ $row=$query->fetch_assoc();
            
         </div>
 
+<script src="../assets/coustom/ajax/3.3.1_jquery.min.js"></script>
+<!-- Bubmit Button Disable After submit form -->
+<script type="text/javascript">
+    $(document).ready(function () {
+    $('form').submit(function () {
+        setTimeout(function () { disableButton(); },0);
+    });
+
+    function disableButton() {
+        $("#btnSubmit").prop('disabled', true);
+    }
+});
+</script>
        
 	
 	</body>

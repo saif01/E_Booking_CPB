@@ -28,7 +28,7 @@ $row=$query->fetch_assoc();
         <meta name="description" content="syful.cse.bd@gmail.com">
         <meta name="author" content="Saif">
 
-        <link rel="shortcut icon" href="images/cpb.png">
+        <?php include('common/icon.php'); ?>
 
         <?php include('common/title.php'); ?>
 
@@ -93,7 +93,7 @@ $row=$query->fetch_assoc();
 				    <label>Remarks</label>
 				    <textarea class="form-control" type="text" name="remarks" rows="3" placeholder="Write Somthing about this problem...... Like How Many days require to solve this issue." required="required"></textarea>
 				  </div>
-				  <input type="submit" name="submit" value="Hit To Update" class="btn btn-block btn-rounded btn-success">
+				  <input id="btnSubmit" type="submit" name="submit" value="Hit To Update" class="btn btn-block btn-rounded btn-success">
 				</form>
                  		
 
@@ -108,7 +108,7 @@ $row=$query->fetch_assoc();
         </script>
 
         <!-- jQuery  -->
-        <script src="js/jquery.min.js"></script>
+        <!-- <script src="js/jquery.min.js"></script> -->
         <script src="js/bootstrap.min.js"></script>
         <script src="js/waves.js"></script>
         <script src="js/wow.min.js"></script>
@@ -121,7 +121,19 @@ $row=$query->fetch_assoc();
         <script src="assets/jquery-slimscroll/jquery.slimscroll.js"></script>
         <script src="assets/jquery-blockui/jquery.blockUI.js"></script>
 
-      
+ <script src="../assets/coustom/ajax/3.3.1_jquery.min.js"></script>
+<!-- Bubmit Button Disable After submit form -->
+<script type="text/javascript">
+    $(document).ready(function () {
+    $('form').submit(function () {
+        setTimeout(function () { disableButton(); },0);
+    });
+
+    function disableButton() {
+        $("#btnSubmit").prop('disabled', true);
+    }
+});
+</script>     
                
 
 	</body>

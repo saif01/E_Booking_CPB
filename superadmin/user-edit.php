@@ -11,6 +11,16 @@ include('../db/config.php');
 
 $user_id=$_GET['user_id'];
 
+// For User Location
+$location = '';
+$query = "SELECT * FROM `bu_location` ORDER BY `location_name`";
+$result = mysqli_query($con, $query);
+while($row = mysqli_fetch_array($result))
+{
+ $location .= '<option value="'.$row["bul_id"].'">'.$row["location_name"].'</option>';
+}
+
+
 ?>
 
 
@@ -22,7 +32,7 @@ $user_id=$_GET['user_id'];
         <meta name="description" content="syful.cse.bd@gmail.com">
         <meta name="author" content="Saif">
 
-        <link rel="shortcut icon" href="images/cpb.png">
+       <?php include('common/icon.php'); ?>
 
         <?php include('common/title.php'); ?>
 
@@ -98,7 +108,7 @@ $user_id=$_GET['user_id'];
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Legal Advisor Registration</h3>
+                <h3 class="panel-title">User Information Update</h3>
             </div>
             <div class="panel-body">
 
@@ -148,21 +158,122 @@ $row=$query->fetch_assoc();
 </div>
 <div class="row">
     <div class="col-md-6"> 
-    		<div class="form-group">
-                <label class="col-sm-3 control-label">User Office ID</label>
+             <div class="form-group">
+                <label class="col-sm-3 control-label">B.U. Email</label>
                 <div class="col-sm-9">
-                   <input type="text" name="user_office_id" class="form-control" value="<?php echo($row['user_office_id']); ?>" required>
+                   <input type="text" name="bu_mail" class="form-control" value="<?php echo($row['bu_mail']); ?>" required>
                 </div>
             </div>
+
+    		
             <div class="form-group">
                 <label class="col-sm-3 control-label">Department</label>
                 <div class="col-sm-9">
                    <input type="text" name="user_dept" class="form-control" value="<?php echo($row['user_dept']); ?>" required>
                 </div>
-            </div>            
-    </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">User Location</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="user_location" required="required">
+
+                      <option value="<?php echo($row['user_location']); ?>" ><?php
+                      // Show User Location name by ID
+                      $user_location= $row['user_location'];
+                      $locsql=mysqli_query($con,"SELECT `location_name` FROM `bu_location` WHERE `bul_id`='$user_location'");
+                      $rowloc=$locsql->fetch_assoc();
+                       echo ($rowloc['location_name']); ?></option>
+
+                          <?php echo $location; ?>
+                  </select>
+                </div>
+            </div>
+
+
+
+        
+               <div class="form-group">
+                <label class="col-sm-3 control-label">Active</label>
+                        <div class="col-sm-9">
+                             <div class="radio radio-info radio-inline">
+                                <input type="radio" value="1" name="show_st"
+                                <?php 
+                                if ($row['user_st']=='1') {
+                                    echo "checked";
+                                }?>
+                                 >
+                                <label for="inlineRadio1"> Yes </label>
+                            </div>
+                            <div class="radio radio-inline">
+                                <input type="radio"  value="0" name="show_st"
+                                <?php 
+                                if ($row['user_st']=='0') {
+                                    echo "checked";
+                                }?>
+                                >
+                                <label for="inlineRadio2"> No </label>
+                            </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">User Access</label>
+                <div class="col-sm-9">
+                   <div class="checkbox checkbox-success checkbox-inline">
+                    <input type="checkbox" name="user_car_st" value="1"
+                    <?php 
+                    if ($row['user_car_st']=='1') {
+                        echo "checked";
+                    }?>         >
+                    <label> Car </label>
+                    </div>
+
+                    <div class="checkbox checkbox-success checkbox-inline">
+                        <input type="checkbox" name="user_room_st" value="1"
+                        <?php 
+                        if ($row['user_room_st']=='1') {
+                            echo "checked";
+                        }?>  >
+                        <label> Room </label>
+                    </div>
+
+                    <div class="checkbox checkbox-success checkbox-inline">
+                        <input type="checkbox" name="user_law_st"  value="1"
+                        <?php 
+                        if ($row['user_law_st']=='1') {
+                            echo "checked";
+                        }?>  
+                        >
+                        <label> Legal </label>
+                    </div>
+
+                    <div class="checkbox checkbox-success checkbox-inline">
+                        <input type="checkbox" name="user_cms_st"  value="1"
+                        <?php 
+                        if ($row['user_cms_st']=='1') {
+                            echo "checked";
+                        }?>
+                        >
+                        <label> CMS </label>
+                    </div>
+
+                    
+                    
+                </div>
+            </div>
+         
+    </div>            
+    
 
    <div class="col-md-6"> 
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">User Office ID</label>
+                <div class="col-sm-9">
+                   <input type="text" name="user_office_id" class="form-control" value="<?php echo($row['user_office_id']); ?>" required>
+                </div>
+            </div>
+
     		
             <div class="form-group">
                 <label class="col-sm-3 control-label">User Image</label>
@@ -199,7 +310,7 @@ $row=$query->fetch_assoc();
 
     <div class="col-md-12">         
        <div class="form-group m-b-0">    
-<button type="submit" name="submit"  class="btn btn-block btn-rounded btn-custom  btn-lg btn-primary waves-effect waves-light">Hit For Update User Info.</button>
+<button type="submit" name="submit"  class="btn btn-block btn-rounded btn-custom  btn-lg btn-primary waves-effect waves-light" >Hit For Update User Info.</button>
 
 <a href="##" onClick="history.go(-1); return false;"> <button class="btn btn-light btn-block btn-rounded " style="background-color:#a08e8e; margin-top: 8px;">Cancel</button></a>
            </div>

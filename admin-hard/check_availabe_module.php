@@ -4,7 +4,7 @@ if(!empty($_POST["check_value"]))
 {
 	$check_value= $_POST["check_value"];
 	
-		$result =mysqli_query($con,"SELECT `mod_name` FROM `cms_app_module` WHERE `mod_name`='$check_value'");
+		$result =mysqli_query($con,"SELECT `subcategory` FROM `cms_hard_subcategory` WHERE `subcategory`='$check_value'");
 		$count=mysqli_num_rows($result);
 		if($count>0)
 		{

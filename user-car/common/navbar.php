@@ -49,10 +49,7 @@ $user_id=$_SESSION['user_id'];
                                </li>
 
 
-<?php if (strlen($_SESSION['user_redirect']) !=0 ) 
-{?>
- <li><a href="../user-all/">Go Another</a></li>
-<?php }?>                       <li class="active">
+                      <li class="active">
                                 <a href="index">Home </a>
                                 </li>
                                 
@@ -83,6 +80,16 @@ $query2=mysqli_query($con,"SELECT `user_img` FROM `user` WHERE `user_id`='$user_
                                     </ul>
                                 </li>
                                 <li><a href="logout">Log Out</a></li>
+                                <li>
+       <!--  <a data-toggle="modal" href="index"  data-target="#advanceSearch"><i class="fas fa-search" style="font-size:32px;"></i></a> -->
+       <a href="advance-search"><i class="fas fa-search" style="font-size:32px;"></i></a>
+                                
+                              </li>
                             </ul>
                         </nav>
                     </div>
+
+
+
+
+

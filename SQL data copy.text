@@ -1,0 +1,4 @@
+INSERT INTO cpb.user(`user_login`, `user_pass`, `user_name`, `user_img`, `user_dept`,
+ `user_contact`, `user_office_id`)
+ SELECT `logIn_id`,`user_pass`,`user_name`,`user_img`,`user_department`,
+ `user_contract`,`user_officeId` FROM carpool.user

@@ -28,7 +28,8 @@ $value = $query->fetch_assoc();
     <!--  Developer Signature -->
     <meta name="author" content="Md. Syful Islam">
     <meta name="author_Email" content="syful.cse.bd@gmail.com">
-  
+   <?php require('common/icon.php'); ?> 
+   
     <?php require('common/title.php'); ?> 
     <?php require('common/allcss.php'); ?> 
 

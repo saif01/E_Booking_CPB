@@ -42,7 +42,7 @@ while ($cal_row = $calenderSql->fetch_assoc())
         <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
         <link rel="stylesheet" href="css/style.css">
         <!-- endinject -->
-        <link rel="shortcut icon" href="images/favicon.png" />
+        <?php include('common/icon.php'); ?>
 
 
     </head>

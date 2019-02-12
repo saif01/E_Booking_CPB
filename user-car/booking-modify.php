@@ -15,45 +15,6 @@ include('../db/config.php');
 
  
 
-
-if (isset($_POST['submit'])) 
-{
-
-	$end_book= $_POST['end_date'] . ' ' . $_POST['return_time'];
-
-	if ($start > $end_book) {
-		 $_SESSION['error']="sameTime";
-	}
-
-	else{
-						?>
-						<script>
-                        setTimeout(function () { 
-                                swal({
-                                  title: "Successfully!",
-                                  text: "Your End Booking Time Changed!",
-                                  type: "success",
-                                  confirmButtonText: "OK"
-                                },
-                                function(isConfirm){
-                                  if (isConfirm) {
-                                   window.opener.location.reload();
-				          		   window.close();
-                                  }
-                                }); },0);
-                         
-                      </script>
-                      <?php
-
-	}
-
-	
-	
-}
-
-
-
-
 $booking_id=$_GET['booking_id'];
 
 $sql=mysqli_query($con,"SELECT car_booking.start_date, car_booking.end_date, tbl_car.car_name, tbl_car.car_namePlate, tbl_car.temp_car, car_driver.driver_name FROM car_booking INNER JOIN car_driver ON car_booking.car_id=car_driver.car_id INNER JOIN tbl_car ON car_booking.car_id=tbl_car.car_id WHERE booking_id='$booking_id'"); 
@@ -70,43 +31,14 @@ $row=$sql->fetch_assoc();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--=== Favicon ===-->
-    <link rel="shortcut icon" href="assets/img/cpb.ico" type="image/x-icon" />
+    <?php require('common/icon.php'); ?> 
 
     
     <?php require('common/title.php'); ?> 
     <?php require('common/allcss.php'); ?> 
 
 
-    <script type="text/javascript">
-
-        function Validate(objForm) {
-
-      //   	var value1 = document.getElementById('Input1').value;
-		    // var value2 = document.getElementById('Input2').value;
-		    // var end = value1 + " " + value2;
-      //   	var start =<?php// echo $row['start_date']; ?>;
-
-        	// var end =3 ;
-        	// var start =5;
-            if( 5 > 3)
-            {
-
-            	alert("Hello! Error box!!");
-   
-      //       swal({
-      //             title: "Invalid Input",
-      //             text: "You Can't Input Same Time !!",
-      //             type: "warning",
-      //             buttons: true,
-      //             dangerMode: true,
-      //           });
-    		return false;
-            }
-
-            return true;
-        }
-
-</script>
+    
 
 </head>
 
@@ -134,20 +66,36 @@ $row=$sql->fetch_assoc();
 
 
 		<?php 
-                      if ($_SESSION['error']=="") 
-                      {
-          						  echo htmlentities($_SESSION['error']="");
+          if ($_SESSION['error']=="") 
+          {
+					  echo htmlentities($_SESSION['error']="");
 
-          						}
-                      if($_SESSION['error']=="dateError")
-                        {?>
-          						<div class="alert">
-          						  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-          						  <strong>Sorry!</strong> Select Correct Date And time!!!.
-          						</div>
-          						<?php
-          						echo htmlentities($_SESSION['error']="");
-          						 }?>
+					}
+
+
+  //If End Time lower Than Start Time             
+          if($_SESSION['error']=="dateError")
+            {?>
+					<div class="alert">
+					  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+					  <strong>Sorry!</strong> Select Correct Date And time!!!.
+					</div>
+					<?php
+					echo htmlentities($_SESSION['error']="");
+            }
+   // If End Time Biger Than Previous End Time         
+          if($_SESSION['error']=="endError")
+            {?>
+          <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+            <strong>Sorry!</strong>You Can't Increase End Time!!!.
+          </div>
+          <?php
+          echo htmlentities($_SESSION['error']="");
+           }?>
+				
+
+
 
 		<form method="post" action="booking-modify-action.php?booking_id=<?php echo($booking_id); ?>" >
 			<div class="row">

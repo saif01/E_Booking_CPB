@@ -21,7 +21,7 @@ $advisor_id=$_GET['advisor_id'];
         <meta name="description" content="syful.cse.bd@gmail.com">
         <meta name="author" content="Saif">
 
-        <link rel="shortcut icon" href="images/cpb.png">
+        <?php include('common/icon.php'); ?>
 
         <?php include('common/title.php'); ?>
 

@@ -161,7 +161,7 @@ $fileName1=$_FILES['document']['tmp_name'];
 
 //Start Mail Send code
 
-	$mailSQL=mysqli_query($con,"SELECT cms_app_complain.app_id,cms_app_complain.com_details, cms_app_soft.soft_name, cms_app_module.mod_name, user.user_name, user.user_dept FROM cms_app_complain INNER JOIN cms_app_soft ON cms_app_complain.soft_id= cms_app_soft.soft_id INNER JOIN cms_app_module ON cms_app_complain.mod_id=cms_app_module.mod_id INNER JOIN user ON cms_app_complain.user_id=user.user_id WHERE cms_app_complain.app_id='$cmpn'");
+	$mailSQL=mysqli_query($con,"SELECT cms_app_complain.app_id,cms_app_complain.com_details, cms_app_soft.soft_name, cms_app_module.mod_name, user.user_name, user.user_dept, user.bu_mail, bu_location.location_name FROM cms_app_complain INNER JOIN cms_app_soft ON cms_app_complain.soft_id= cms_app_soft.soft_id INNER JOIN cms_app_module ON cms_app_complain.mod_id=cms_app_module.mod_id INNER JOIN user ON cms_app_complain.user_id=user.user_id INNER JOIN bu_location ON bu_location.bul_id=user.user_location WHERE cms_app_complain.app_id='$cmpn'");
 
 	$mailrow=$mailSQL->fetch_assoc();
 	$soft_name=$mailrow['soft_name'];
@@ -169,7 +169,9 @@ $fileName1=$_FILES['document']['tmp_name'];
 	$user_name=$mailrow['user_name'];
 	$user_dept=$mailrow['user_dept'];
 	$com_details=$mailrow['com_details'];
+	$user_location=$mailrow['location_name'];
 
+  		$cc=$mailrow['bu_mail'];
 
 	 	$to="syful.cse.bd@gmail.com";
         $sub="Application Complain no: $cmpn";
@@ -180,7 +182,8 @@ $fileName1=$_FILES['document']['tmp_name'];
 
             <font size='4' color='blue'>Take action, Please. </font><br>
             <font size='4' color='#307221'>Problem in : **<b> $soft_name  ** of ** $mod_name **. </b></font><br>
-            <font size='3' color='#307221'>Complaint Name : **<b> $user_name   ** of ** $user_dept  ** </b></font>
+            <font size='3' color='#307221'>Complaint Name : **<b> $user_name   ** of ** $user_dept  ** </b></font><br>
+         <font size='3' color='#307221'>User Location : **<b> $user_location. </b></font>
             
              <hr>
             <font size='3' color='#778899'>Complain Details : <b> $com_details   </b></font>
@@ -191,7 +194,9 @@ $fileName1=$_FILES['document']['tmp_name'];
             </body>
         </html> ";
 
-        send_mail($sub,$msg,$to);
+        //send_mail($sub,$msg,$to);
+
+        send_mail_withCC($sub,$msg,$to,$cc);
 // End Mail Code
 
   } 

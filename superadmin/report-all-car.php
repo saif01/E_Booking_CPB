@@ -20,7 +20,7 @@ include('../db/config.php');
         <meta name="description" content="syful.cse.bd@gmail.com">
         <meta name="author" content="Saif">
 
-        <link rel="shortcut icon" href="images/cpb.png">
+       <?php include('common/icon.php'); ?>
 
         <?php include('common/title.php'); ?>
 
@@ -257,15 +257,7 @@ $row2=$sql->fetch_assoc();
        <!-- CUSTOM JS -->
         <script src="js/jquery.app.js"></script>
 
-        <!-- <script src="assets/datatables/jquery.dataTables.min.js"></script> -->
-        <!-- <script src="assets/datatables/dataTables.bootstrap.js"></script>
-
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#datatable').dataTable();
-            } );
-        </script> -->
+      
 
         <!--*************** For Data Table  EXcel JS ****************--> 
         <script src="assets/datatables/excel/jquery.dataTables.min.js"></script>

@@ -28,7 +28,7 @@ include('../db/config.php');
         <!-- inject:css -->
         <link rel="stylesheet" href="css/style.css">
         <!-- endinject -->
-        <link rel="shortcut icon" href="images/favicon.png" />
+        <?php include('common/icon.php'); ?>
 
         <script language="javascript" type="text/javascript">
             var popUpWin = 0;
@@ -37,7 +37,7 @@ include('../db/config.php');
                 if (popUpWin) {
                     if (!popUpWin.closed) popUpWin.close();
                 }
-                popUpWin = open(URLStr, 'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width=' + 600 + ',height=' + 680 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
+                popUpWin = open(URLStr, 'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width=' + 700 + ',height=' + 680 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
             }
         </script>
 

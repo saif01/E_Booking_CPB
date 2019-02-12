@@ -103,8 +103,8 @@ $CMSappCompClos=mysqli_num_rows($sql12);
         <meta name="description" content="syful.cse.bd@gmail.com">
         <meta name="author" content="Saif">
 
-        <link rel="shortcut icon" href="images/cpb.png">
-
+       <?php include('common/icon.php'); ?>
+      
         <?php include('common/title.php'); ?>
 
         <!-- Base Css Files -->
@@ -322,7 +322,7 @@ $CMSappCompClos=mysqli_num_rows($sql12);
                             </div>
                             <div class="col-md-6 col-sm-6 col-lg-3">
                                 <div class="mini-stat clearfix bx-shadow">
-                                    <span class="mini-stat-icon" style="background-color: #0000CD;"  ><i class="ion-hammer"></i></span>
+                                    <span class="mini-stat-icon" style="background-color: #0000CD;"  ><i class="ion-clipboard"></i></span>
                                     <div class="mini-stat-info text-right text-muted">
                                         <span class="counter"><?php echo $CMSappCompClos; ?></span>
                                         Closed App. Copm.

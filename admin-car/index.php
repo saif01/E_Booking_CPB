@@ -46,7 +46,7 @@ $booking=mysqli_num_rows($sql4);
         
         <link rel="stylesheet" href="css/style.css">
         <!-- endinject -->
-        <link rel="shortcut icon" href="images/favicon.png" />
+        <?php include('common/icon.php'); ?>
     </head>
 
     <body>

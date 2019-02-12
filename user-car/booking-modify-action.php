@@ -22,11 +22,12 @@ include('../db/config.php');
 
 $booking_id=$_GET['booking_id'];
 
-$SQL=mysqli_query($con,"SELECT `start_date` FROM `car_booking` WHERE `booking_id`='$booking_id'");
+$SQL=mysqli_query($con,"SELECT `start_date`, `end_date` FROM `car_booking` WHERE `booking_id`='$booking_id'");
 
 $row=$SQL->fetch_assoc();
 
 $start=$row['start_date'];
+$end=$row['end_date'];
 
 
 if (isset($_POST['submit'])) 
@@ -38,6 +39,11 @@ if (isset($_POST['submit']))
 	{
 		 $_SESSION['error']="dateError";
 		  header('Location: ' . $_SERVER['HTTP_REFERER']);
+	}
+
+	elseif ($end < $end_books ) {
+		$_SESSION['error']="endError";
+		header('Location: ' . $_SERVER['HTTP_REFERER']);
 	}
 
 	else

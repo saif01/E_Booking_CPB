@@ -10,47 +10,6 @@
                                 <a href="index" class="waves-effect active"><i class="md md-home text-success"></i><span> Dashboard </span></a>
                             </li>
 
-                            <!--  <li>
-                                <a href="inprocess-case" class="waves-effect">
-                                    <i class="md md-repeat text-danger"></i>
-                                    <span>In Process Cases</span>
-                                    <span class="badge badge-danger">2</span>
-                                </a>
-                            </li>
-
-                             <li>
-                                <a href="sattaled-case" class="waves-effect">
-                                    <i class="md md-repeat-one text-warning"></i>
-                                    <span>Sattaled Cases</span>
-                                    <span class="badge badge-warning">3</span>
-                                </a>
-                            </li>
-
-                             <li>
-                                <a href="closed-case" class="waves-effect">
-                                    <i class="md md-repeat text-success"></i>
-                                    <span>Closed Cases</span>
-                                    
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="report-all" class="waves-effect">
-                                    <i class="md md-folder-open text-danger"></i>
-                                    <span>Report All</span>
-                                    
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="report_add" class="waves-effect">
-                                    <i class="md md-edit text-success"></i>
-                                    <span>Report Add</span>
-                                    
-                                </a>
-                            </li>
-
- -->
 
 <!-- Calendar Report Section -->
         <li class="has_sub">
@@ -130,13 +89,23 @@
             </ul>
         </li>
 
-                            <li> 
-                                <a href="login-log" class="waves-effect">
-                                    <i class="md md-dehaze text-danger"></i>
-                                    <span>Login Log</span>
-                                    
-                                </a>
-                            </li>
+         <li> 
+            <a href="bu-location" class="waves-effect">
+                <i class="md md-dehaze text-info"></i>
+                <span>B.U. Locations</span>
+                
+            </a>
+        </li>
+
+        <li> 
+            <a href="login-log" class="waves-effect">
+                <i class="md md-dehaze text-danger"></i>
+                <span>Login Log</span>
+                
+            </a>
+        </li>
+
+        
 
                            
                             

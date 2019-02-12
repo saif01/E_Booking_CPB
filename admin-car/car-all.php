@@ -26,7 +26,7 @@ include('../db/config.php');
         <!-- inject:css -->
         <link rel="stylesheet" href="css/style.css">
         <!-- endinject -->
-        <link rel="shortcut icon" href="images/favicon.png" />
+        <?php include('common/icon.php'); ?>
 
         <script language="javascript" type="text/javascript">
             var popUpWin = 0;

@@ -165,25 +165,15 @@ if($_POST['warranty'] =='1')
 					 
 	}
 
-// 	else{
-
-// 		echo "<script>alert('You Make Mistake, Make Sure Choose Right Option'),
-// window.onunload = refreshParent;
-
-//     function refreshParent() {
-//         window.opener.location.reload();
-//     }
- 
-// window.close(); </script>";
-// 	}
 
 
 //SQL For Mail Sending
-$mailSQL=mysqli_query($con,"SELECT  user.user_name, user.user_mail FROM user INNER JOIN cms_hard_complain ON user.user_id=cms_hard_complain.user_id WHERE cms_hard_complain.hard_id='$hard_id'");
+$mailSQL=mysqli_query($con,"SELECT  user.user_name, user.user_mail, user.bu_mail FROM user INNER JOIN cms_hard_complain ON user.user_id=cms_hard_complain.user_id WHERE cms_hard_complain.hard_id='$hard_id'");
 	$mailrow=$mailSQL->fetch_assoc();
 
 	$user_name=$mailrow['user_name'];
 	$to=$mailrow['user_mail'];
+	$cc=$mailrow['bu_mail'];
     $sub="Hardware Complain no: $hard_id";
 
 // IF tools not have but warranty have then send this mail
@@ -202,7 +192,7 @@ $mailSQL=mysqli_query($con,"SELECT  user.user_name, user.user_mail FROM user INN
             </body>
         </html> ";
 
-        send_mail($sub,$msg,$to);
+        send_mail_withCC($sub,$msg,$to,$cc);
     	
     }
 // IF tools have but warranty not have then send this mail
@@ -224,7 +214,7 @@ $mailSQL=mysqli_query($con,"SELECT  user.user_name, user.user_mail FROM user INN
             </body>
         </html> ";
 
-        send_mail($sub,$msg,$to);
+        send_mail_withCC($sub,$msg,$to,$cc);
     	
     }
 
@@ -244,7 +234,7 @@ elseif ($toolsall =='' && $_POST['warranty']=='0' ) {
             </body>
         </html>";
 
-        send_mail($sub,$msg,$to);
+       send_mail_withCC($sub,$msg,$to,$cc);
     	
     }
 
@@ -266,7 +256,7 @@ elseif ($toolsall !='' && $_POST['warranty']=='1' ) {
             </body>
         </html>";
 
-        send_mail($sub,$msg,$to);
+       send_mail_withCC($sub,$msg,$to,$cc);
     	
     }
 

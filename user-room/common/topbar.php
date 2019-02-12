@@ -18,7 +18,6 @@
                         <i class="fa fa-clock-o"></i> Sat-Thu 09.00 AM - 6.00 PM
                     </div>
                     <!--== Single HeaderTop End ==-->
-
                    
                 </div>
             </div>

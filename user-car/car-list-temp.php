@@ -2,7 +2,8 @@
 session_start();
 error_reporting(0);
 date_default_timezone_set('Asia/Dhaka');// change according timezone
-// $currentTime = date( 'Y-m-d H:i:s', time () ); 
+$currentTime = date( 'Y-m-d H:i:s', time () );
+$currentdate = date( 'Y-m-d' ); 
 
 if(strlen($_SESSION['car_logIn_id'])==0)
   { 
@@ -20,7 +21,7 @@ else{
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--=== Favicon ===-->
-    <link rel="shortcut icon" href="assets/img/cpb.ico" type="image/x-icon" />
+    <?php require('common/icon.php'); ?> 
 
     
     <?php require('common/title.php'); ?> 
@@ -117,14 +118,14 @@ else{
 
                                     <?php
                              $driver_id=$row['driver_id'];
-                             $currTime = date('Y-m-d H:i:s');
+                             //$currentTime = date('Y-m-d H:i:s');
                              $car_id=$row['car_id'];
 
-                             $query3=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND `boking_status`='1' AND '$currTime' BETWEEN `start_date` AND `end_date`");
+                             $query3=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND `boking_status`='1' AND '$currentTime' BETWEEN `start_date` AND `end_date`");
 //********* Driver Leave status checkinig by Current Date *****************//
-                             $drivLev=mysqli_query($con,"SELECT * FROM `driver_leave` WHERE `leave_status`='1' AND `driver_id`='$driver_id' AND '$currTime' BETWEEN `driver_leave_start` AND `driver_leave_end`");
+                             $drivLev=mysqli_query($con,"SELECT * FROM `driver_leave` WHERE `leave_status`='1' AND `driver_id`='$driver_id' AND '$currentTime' BETWEEN `driver_leave_start` AND `driver_leave_end`");
 //********* Police Requisition status checkinig by Current Date *****************//
-                             $polic_req=mysqli_query($con,"SELECT * FROM `police_req` WHERE `car_id`='$car_id' AND `req_st`='1' AND '$currTime' BETWEEN `req_start` AND `req_end`");                             
+                             $polic_req=mysqli_query($con,"SELECT * FROM `police_req` WHERE `car_id`='$car_id' AND `req_st`='1' AND '$currentTime' BETWEEN `req_start` AND `req_end`");                             
 
                              //$row3=$query3->fetch_assoc();
                              $row3=mysqli_num_rows($query3);
@@ -146,25 +147,39 @@ else{
                             }
                                  ?>   
          
-                                            </div>
+                                </div>
 
-                                            <div class="text-center">
-                                            <table class="table ">
+    <div class="text-center">
+    <table class="table">
 
-                                                <tr>
-                                                    <th>Name :</th>
-                                                    <td> <?php echo $row['car_name']; ?></td>
-                                                </tr>
-                                                
-                                                <tr>
-                                                    <th>Car Number :</th>
-                                                    <td><?php echo $row['car_namePlate'];?></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Capacity :</th>
-                                                    <td><?php echo $row['car_capacity'];?></td>
-                                                
-                                                </tr>
+<?php
+//Driver Leave Date Show....
+$driver_id=$row['driver_id'];
+$driverLevsql=mysqli_query($con,"SELECT * FROM `driver_leave` WHERE `leave_status`='1' AND `driver_id`='$driver_id' ORDER BY `driver_leave_id` DESC LIMIT 1");
+$driver_lev=$driverLevsql->fetch_assoc();
+
+$driver_leave_start=$driver_lev['driver_leave_start'];
+$driver_leave_end=$driver_lev['driver_leave_end'];
+
+if ( $driver_leave_end >= $currentTime) {
+
+echo '<h5><span class="badge badge-warning"> Driver Leave :'.date("M j, Y", strtotime($driver_leave_start)).' To '.date("M j, Y", strtotime($driver_leave_end)).'</span></h5>' ;
+}?>
+
+    <tr>
+        <th>Name :</th>
+        <td> <?php echo $row['car_name']; ?></td>
+    </tr>
+    
+    <tr>
+        <th>Car Number :</th>
+        <td><?php echo $row['car_namePlate'];?></td>
+    </tr>
+    <tr>
+        <th>Capacity :</th>
+        <td><?php echo $row['car_capacity'];?></td>
+    
+    </tr>
                                                
                                                
                                             </table>
@@ -185,7 +200,7 @@ else{
 
                         <?php    
 
-                                     $currentdate = date( 'Y-m-d' );
+                                     
                                     $st= $row['driver_status'];
 
                                     $l_Stst=$row['leave_start'];
@@ -199,7 +214,7 @@ else{
 
                                    
 
-                         $driver_id=$row['driver_id'];
+                         
                          $sql4=mysqli_query($con,"SELECT * FROM `car_driver` WHERE `driver_id`='$driver_id' AND '$currentdate' BETWEEN date(`leave_start`) AND date(`leave_end`)");
 
                          $rowNum=mysqli_num_rows($sql4);

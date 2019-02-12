@@ -19,7 +19,7 @@ else{
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--=== Favicon ===-->
-    <link rel="shortcut icon" href="assets/img/cpb.ico" type="image/x-icon" />
+    <?php require('common/icon.php'); ?> 
 
     
     <?php require('common/title.php'); ?> 
@@ -138,24 +138,7 @@ else{
     </section>
     <!--== SlideshowBg Area End ==-->
 
-<!-- Default Model Modal  -->
-<!-- <div  class="modal fade">  
-      <div class="modal-dialog">  
-           <div class="modal-content">  
-                <div class="modal-header text-center">
-                    <h5 class="modal-title text-info" >Notice Detail</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>  
-                <div class="modal-body text-center" id="notice_detail">  
-                </div>  
-                <div class="modal-footer">  
-                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>  
-                </div>  
-           </div>  
-      </div>  
- </div>   -->
+
 
 <!-- Large Model Modal  -->
 <div id="dataModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -170,12 +153,13 @@ else{
     </div>
   </div>
 </div>
+</div>
 
 
 
 <!-- ajax cdn -->
  <script src="../assets/coustom/ajax_3.2.1-jquery.min.js"></script>
- <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+ 
  <script>  
  $(document).ready(function(){  
       $('.view_data').click(function(){  
@@ -194,7 +178,7 @@ else{
  </script>
 
 
-    <!--== Footer Area Start ==-->
+     <!--== Footer Area Start ==-->
     <section id="footer-area">           
         <?php require('common/footer.php'); ?>     
     </section>

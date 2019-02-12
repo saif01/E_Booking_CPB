@@ -67,7 +67,7 @@ while ($cal_row = $calenderSql->fetch_assoc())
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--=== Favicon ===-->
-    <link rel="shortcut icon" href="assets/img/cpb.ico" type="image/x-icon" />
+    <?php require('common/icon.php'); ?> 
     <link rel="stylesheet" type="text/css" href="assets/coustom/myCoustom.css">
     
     <?php require('common/title.php'); ?> 
@@ -138,6 +138,20 @@ while ($cal_row = $calenderSql->fetch_assoc())
 
                        <h2><?php echo $car_number;?> || <?php echo $dariver_name;?></h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
+      <?php
+//Driver Leave Date Show....
+$driverLevsql=mysqli_query($con,"SELECT * FROM `driver_leave` WHERE `leave_status`='1' AND `driver_id`='$driver_id' ORDER BY `driver_leave_id` DESC LIMIT 1");
+$driver_lev=$driverLevsql->fetch_assoc();
+
+$driver_leave_start=$driver_lev['driver_leave_start'];
+$driver_leave_end=$driver_lev['driver_leave_end'];
+
+if ( $driver_leave_end >= $currentTime) {
+
+echo '<h5><p class="badge-warning text-dark"> Driver Leave :'.date("M j, Y", strtotime($driver_leave_start)).' To '.date("M j, Y", strtotime($driver_leave_end)).'</p></h5>' ;
+}
+
+ ?>
                         
                     </div>
                 </div>
@@ -331,7 +345,7 @@ while ($cal_row = $calenderSql->fetch_assoc())
 
                 <div class="log-btn">
                   
-                  <button type="submit"  name="submit" class="fa fa-check-square"> Book Car</button>
+                  <button id="btnSubmit" type="submit"  name="submit" class="fa fa-check-square"> Book Car</button>
                 </div>
               </form>
                     </div>
@@ -456,6 +470,19 @@ while ($cal_row = $calenderSql->fetch_assoc())
             return true;
         }
 
+</script>
+
+<!-- Bubmit Button Disable After submit form -->
+<script type="text/javascript">
+    $(document).ready(function () {
+    $('form').submit(function () {
+        setTimeout(function () { disableButton(); },0);
+    });
+
+    function disableButton() {
+        $("#btnSubmit").prop('disabled', true);
+    }
+});
 </script>
 
 

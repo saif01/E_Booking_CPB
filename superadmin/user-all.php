@@ -20,7 +20,7 @@ include('../db/config.php');
         <meta name="description" content="syful.cse.bd@gmail.com">
         <meta name="author" content="Saif">
 
-        <link rel="shortcut icon" href="images/cpb.png">
+       <?php include('common/icon.php'); ?>
 
         <?php include('common/title.php'); ?>
 
@@ -107,8 +107,10 @@ include('../db/config.php');
 
                              <div class="col-md-12">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">
+                                    <div class="panel-heading"> 
+                                       <a href="user-reg" class="btn btn-sm btn-info" style="float: right;">Add New</a>
                                         <h3 class="panel-title">All User Information</h3>
+
                                     </div>
                                     <div class="panel-body">
                                         <div class="row">
@@ -122,6 +124,7 @@ include('../db/config.php');
                     <th>Room</th>
                     <th>CMS</th>
                     <th>Image</th>
+                    <th>LogIn Id</th>
                     <th>Name</th>
                     <th>Department</th>
                                
@@ -220,7 +223,10 @@ include('../db/config.php');
                         
 
                         <td>
-<a href="javascript:void(0);" onClick="popUpWindow('userprofile.php?user_id=<?php echo $row['user_id'];?>');" title="View User Info."><img src="../pimages/user/<?php echo $row['user_img'];?>" class="img-responsive" alt="Image" /> </a>
+<a href="javascript:void(0);" onClick="popUpWindow('userprofile.php?user_id=<?php echo $row['user_id'];?>');" title="View User Info."><img src="../pimages/user/<?php echo $row['user_img'];?>" class="img-responsive" alt="Image" style=" max-width:60%;" /> </a>
+                        </td>
+                        <td>
+                            <?php echo ($row['user_login']); ?>
                         </td>
                        <td>
                             <?php echo ($row['user_name']); ?>

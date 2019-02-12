@@ -42,7 +42,7 @@ $query=mysqli_query($con,"INSERT INTO `location`(`location`) VALUES ('$location'
         <!-- inject:css -->
         <link rel="stylesheet" href="css/style.css">
         <!-- endinject -->
-        <link rel="shortcut icon" href="images/favicon.png" />
+        <?php include('common/icon.php'); ?>
 
         <script>
             function userAvailability() {
@@ -57,6 +57,18 @@ $query=mysqli_query($con,"INSERT INTO `location`(`location`) VALUES ('$location'
                     },
                     error: function() {}
                 });
+            }
+        </script>
+
+
+         <script language="javascript" type="text/javascript">
+            var popUpWin = 0;
+
+            function popUpWindow(URLStr, left, top, width, height) {
+                if (popUpWin) {
+                    if (!popUpWin.closed) popUpWin.close();
+                }
+                popUpWin = open(URLStr, 'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width=' + 600 + ',height=' + 480 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
             }
         </script>
 
@@ -78,33 +90,34 @@ $query=mysqli_query($con,"INSERT INTO `location`(`location`) VALUES ('$location'
 
 
   <div class="col-12 grid-margin">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <!-- <h4 class="card-title">Car Add Form</h4> -->
-                                        <button class="card-title btn btn-outline btn-block ">Location Add</button>
-                                        <form class="form-sample" action="" method="post" >
+<div class="card">
+<div class="card-body">
+<!-- <h4 class="card-title">Car Add Form</h4> -->
+<button class="card-title btn btn-outline btn-block ">Location Add</button>
+<form class="form-sample" action="" method="post" >
 
 
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
 
-                                                        <label class="col-sm-3 col-form-label">Location </label>
-                                                        <div class="col-sm-9">
+                <label class="col-sm-3 col-form-label">Location </label>
+                <div class="col-sm-9">
 
-                                                            <input type="text" id="check_value" onBlur="userAvailability()" name="location" class="form-control" placeholder="Enter User Name" required>
-                                                <span id="user-availability-status1" style="font-size:12px;"></span>
+                    <input type="text" id="check_value" onBlur="userAvailability()" name="location" class="form-control" placeholder="Enter User Name" required>
+        <span id="user-availability-status1" style="font-size:12px;"></span>
+        <span class="btn btn-info btn-sm" style="float: right; margin-top: 1%;" >Check</span>
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                 <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <button type="submit" name="submit" class="btn btn-outline-success btn-block btn-rounded">Add Location </button> 
-                                                    </div>
-                                                </div>
+                </div>
+            </div>
+        </div>
+         <div class="col-md-6">
+            <div class="form-group row">
+                <button type="submit" name="submit" class="btn btn-outline-success btn-block btn-rounded">Add Location </button> 
+            </div>
+        </div>
 
-                                            </div>
+    </div>
 
                                         </form>
 
@@ -152,7 +165,10 @@ $query=mysqli_query($con,"INSERT INTO `location`(`location`) VALUES ('$location'
                                                     </td>
 
                                                     <td>
-<a href="location-delete?location_id=<?php echo $row['location_id']?>" onClick="return confirm('Are you sure you want to delete???')" title="Delete"> <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a></td>
+<a href="location-delete?location_id=<?php echo $row['location_id']?>" onClick="return confirm('Are you sure you want to delete???')" title="Delete"> <i class="mdi mdi-close-box-outline text-danger icon-lg"></i></a>
+<!-- Edit Location -->
+<a href="javascript:void(0);" onClick="popUpWindow('edit-location.php?location_id=<?php echo $row['location_id']?>')" title="Edit"><i class="mdi mdi-pencil-box-outline text-warning icon-lg" style="font-size: 40px;"></i> </a>
+                                                     </td>
 
                                                     </tr>
                                                     <?php } ?>
@@ -171,9 +187,7 @@ $query=mysqli_query($con,"INSERT INTO `location`(`location`) VALUES ('$location'
 
                         <!-- content-wrapper-->
                     </div>
-                    <!-- content-wrapper ends -->
-                    <!-- content-wrapper ends -->
-                    <!-- partial:../../partials/_footer.html -->
+                   
                     <footer class="footer">
                         <?php include('common/footer.php') ?>
                     </footer>
@@ -208,6 +222,7 @@ $query=mysqli_query($con,"INSERT INTO `location`(`location`) VALUES ('$location'
               });
         } );
         </script>
+
 
     </body>
 

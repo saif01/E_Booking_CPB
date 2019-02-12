@@ -28,7 +28,7 @@ while($row = mysqli_fetch_array($result))
         <meta name="description" content="syful.cse.bd@gmail.com">
         <meta name="author" content="Saif">
 
-        <link rel="shortcut icon" href="images/cpb.png">
+        <?php include('common/icon.php'); ?>
 
         <?php include('common/title.php'); ?>
 
@@ -121,8 +121,10 @@ while($row = mysqli_fetch_array($result))
                 <div class="col-sm-9">
                   <input type="text" id="check_value" onBlur="userAvailability()" name="subcategory" class="form-control"  placeholder="Enter CPB Hardware Subcategory Name" required>
             	  <span id="user-availability-status1" style="font-size:12px;"></span>
+                  <span class="btn btn-sm btn-warning btn-custom" style="float: right; margin: 3px;">Check</span>
                 </div>
             </div>
+
 
     </div>
 	<div class="col-md-6"> 
@@ -204,6 +206,8 @@ while($row = mysqli_fetch_array($result))
                     <td>
              <a href="delete-subcategory?Id=<?php echo $row['sub_id']?>"
            title="Delete" id="delete" > <i class="fa fa-trash text-danger" style="font-size: 40px;"></i></a>
+
+           <a href="javascript:void(0);" onClick="popUpWindow('edit-subcategory.php?sub_id=<?php echo ($row['sub_id']);?>');" title="Edit"><i class="fa fa-edit text-warning" style="font-size: 40px;"></i> </a>
                     </td>
 
                 </tr>
@@ -276,6 +280,18 @@ while($row = mysqli_fetch_array($result))
                 });
             } );
         </script>
+
+
+        <script language="javascript" type="text/javascript">
+    var popUpWin = 0;
+
+    function popUpWindow(URLStr, left, top, width, height) {
+        if (popUpWin) {
+            if (!popUpWin.closed) popUpWin.close();
+        }
+        popUpWin = open(URLStr, 'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width=' + 600 + ',height=' + 600 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
+    }
+    </script>  
 
   <!-- Sweet Alert CDN Link -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

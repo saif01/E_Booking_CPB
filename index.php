@@ -7,22 +7,35 @@ error_reporting(0);
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>CPB</title>
+		<title>CPB-IT</title>
 		    <!--=== Favicon ===-->
-    	<link rel="shortcut icon" href="admin-car/images/favicon.png" type="image/x-icon" />
+    	<link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon" />
 
 		<link rel="stylesheet" href="login/css/bootstrap.min.css">
 		<link href="assets/css/font-awesome.css" rel="stylesheet">
 		<link rel="stylesheet" href="login/css/style.css">
 		<!--*************** Font Awesome v.5. ****************-->
 		<link href="assets/fontawesom/css/all.css" rel="stylesheet">
+<!-- PreLoader Js -->
+		<script type="text/javascript">
+			window.addEventListener("load", function () {
+		    const loader = document.querySelector(".loader");
+		    loader.className += " hidden"; // class "loader hidden"
+		});
+		</script>
 
 	</head>
 	<body>
-		<div id="loader"></div>
+		<!-- Preloader -->
+		<div class="loader">
+		    <img src="login/img/preloader.gif" alt="Loading..." />
+		</div>
+		
+		<div style="background-color: black;">
+
 		<div class="loginBox" id="content">
-			<img src="login/img/logo.png" class="user" >
-			<h2 class="text-center">Log In Here</h2>
+			<img src="assets/img/logo.png" class="user" >
+			<h2 class="text-center">CPB-IT Portal Login</h2>
 
 			
 
@@ -49,30 +62,12 @@ error_reporting(0);
 				</div>
 			</form>
 		</div>
+
+	</div>
 	<script src="login/js/jquery-slim.min.js"></script>
 	<script src="login/js/popper.min.js"></script>
 	<script src="login/js/bootstrap.min.js"></script>
-	<script type="text/javascript">
-	var loader;
-	function load(opacity){
-		if (opacity <= 0) {
-			displayContent();
-		}
-		else{
-			loader.style.opacity=opacity;
-			window.setTimeout(function(){
-				load(opacity - 0.05)
-			},100);
-		}
-	} 
-	function displayContent(){
-		loader.style.display='none';
-		document.getElementById('content').style.display='block';
-	}
-	document.addEventListener("DOMContentLoaded",function(){
-		loader=document.getElementById('loader');
-		load(1);
-	})
-</script>
+	
+
 	</body>
 </html>

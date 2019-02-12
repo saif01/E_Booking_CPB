@@ -166,7 +166,7 @@ $fileName1=$_FILES['document']['tmp_name'];
 
 //Start Mail Send code
 
-	$mailSQL=mysqli_query($con,"SELECT cms_hard_complain.hard_id, cms_hard_complain.details, cms_hard_category.category, cms_hard_subcategory.subcategory, user.user_name, user.user_dept FROM cms_hard_complain INNER JOIN cms_hard_subcategory ON cms_hard_complain.sub_id=cms_hard_subcategory.sub_id INNER JOIN cms_hard_category ON cms_hard_complain.cat_id=cms_hard_category.cat_id INNER JOIN user ON cms_hard_complain.user_id=user.user_id WHERE cms_hard_complain.hard_id='$cmpn'");
+	$mailSQL=mysqli_query($con,"SELECT cms_hard_complain.hard_id, cms_hard_complain.details, cms_hard_category.category, cms_hard_subcategory.subcategory, user.user_name, user.user_dept, user.bu_mail, bu_location.location_name FROM cms_hard_complain INNER JOIN cms_hard_subcategory ON cms_hard_complain.sub_id=cms_hard_subcategory.sub_id INNER JOIN cms_hard_category ON cms_hard_complain.cat_id=cms_hard_category.cat_id INNER JOIN user ON cms_hard_complain.user_id=user.user_id INNER JOIN bu_location ON bu_location.bul_id=user.user_location WHERE cms_hard_complain.hard_id='$cmpn'");
 
 	$mailrow=$mailSQL->fetch_assoc();
 	$category=$mailrow['category'];
@@ -174,28 +174,34 @@ $fileName1=$_FILES['document']['tmp_name'];
 	$user_name=$mailrow['user_name'];
 	$user_dept=$mailrow['user_dept'];
 	$details=$mailrow['details'];
+	$user_location=$mailrow['location_name'];
 
+	$cc=$mailrow['bu_mail'];
 
-	 	$to="syful.cse.bd@gmail.com";
-        $sub="Hardware Complain no: $cmpn";
-        $msg=" 
-        <html>
-        <body>
-            <font size='5' color='green'>This is a Hardware Problems.</font><br><br><hr>
+	 $to="syful.cse.bd@gmail.com";
 
-            <font size='4' color='blue'>Take action, Please. </font><br>
-            <font size='4' color='#307221'>Problem in : **<b> $category  ** of ** $subcategory **. </b></font><br>
-            <font size='3' color='#307221'>Complaint Name : **<b> $user_name   ** of ** $user_dept  ** </b></font>
-            
-             <hr>
-            <font size='3' color='#778899'>Complain Details : <b> $details </b></font>
+    $sub="Hardware Complain no: $cmpn";
+    $msg=" 
+    <html>
+    <body>
+        <font size='5' color='green'>This is a Hardware Problems.</font><br><br><hr>
 
-             <br><br><br>
-             $ADDRESS
-            </body>
-        </html> ";
+        <font size='4' color='blue'>Take action, Please. </font><br>
+        <font size='4' color='#307221'>Problem in : **<b> $category  ** of ** $subcategory **. </b></font><br>
+        <font size='3' color='#307221'>Complaint Name : **<b> $user_name   ** of ** $user_dept  ** </b></font><br>
+         <font size='3' color='#307221'>User Location : **<b> $user_location. </b></font>
+        
+         <hr>
+        <font size='3' color='#778899'>Complain Details : <b> $details </b></font>
 
-        send_mail($sub,$msg,$to);
+         <br><br><br>
+         $ADDRESS
+        </body>
+    </html> "; 
+
+        //send_mail($sub,$msg,$to);
+
+        send_mail_withCC($sub,$msg,$to,$cc);
 // End Mail Code
 
 

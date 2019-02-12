@@ -20,7 +20,7 @@ include('../db/config.php');
         <meta name="description" content="syful.cse.bd@gmail.com">
         <meta name="author" content="Saif">
 
-        <link rel="shortcut icon" href="images/cpb.png">
+       <?php include('common/icon.php'); ?>
 
         <?php include('common/title.php'); ?>
 
@@ -108,6 +108,7 @@ include('../db/config.php');
                              <div class="col-md-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
+                                      <a href="admin-reg" class="btn btn-sm btn-info" style="float: right;">Add New</a>
                                         <h3 class="panel-title">All Admin Information</h3>
                                     </div>
                                     <div class="panel-body">
@@ -124,6 +125,7 @@ include('../db/config.php');
                     <th>App.</th>
                     <th>Super </th>                    
                     <th>Image</th>
+                    <th>LogIn Id</th>
                     <th>Name</th>
                     <th>Department</th>
                                
@@ -247,7 +249,11 @@ include('../db/config.php');
                         
 
                         <td>
-<a href="javascript:void(0);" onClick="popUpWindow('admin-profile.php?admin_id=<?php echo $row['admin_id'];?>');" title="View User Info."><img src="../pimages/admin/<?php echo $row['admin_img'];?>" class="img-responsive" alt="Image" /> </a>
+<a href="javascript:void(0);" onClick="popUpWindow('admin-profile.php?admin_id=<?php echo $row['admin_id'];?>');" title="View User Info."><img src="../pimages/admin/<?php echo $row['admin_img'];?>" class="img-responsive" alt="Image" style=" max-width:60%;" /> </a>
+                        </td>
+
+                         <td>
+                            <?php echo ($row['admin_login']); ?>
                         </td>
 
                         <td>

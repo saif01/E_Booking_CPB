@@ -9,7 +9,7 @@
      }
 </style>
 					<div class="col-lg-4">
-                        <a href="index" class="logo">
-                            <img src="assets/img/logo.png" class="roundSaif" alt="CPB">
+                        <a href="../user-all/" class="logo">
+                            <img src="../assets/img/logo.png" class="roundSaif" alt="CPB-IT">
                         </a>
                     </div>

@@ -27,7 +27,7 @@ include('../db/config.php');
         <!-- inject:css -->
         <link rel="stylesheet" href="css/style.css">
         <!-- endinject -->
-        <link rel="shortcut icon" href="images/favicon.png" />
+        <?php include('common/icon.php'); ?>
 
 
     </head>
@@ -66,7 +66,7 @@ include('../db/config.php');
                                                 <input type="Password" name="newpassword" class="form-control" placeholder="Enter New Password">
                                             </div>
                                             <div class="form-group">
-                                                <label>User Contract</label>
+                                                <label>Retype Password</label>
                                                 <input type="password" name="confirmpassword" class="form-control" placeholder=" Retype New Password" required>
                                             </div>
 

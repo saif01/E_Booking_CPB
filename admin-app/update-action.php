@@ -90,11 +90,12 @@ $sql2=mysqli_query($con,"UPDATE `cms_app_complain` SET `status`='$status',`last_
 			}
 
 //SQL For Mail Sending
-$mailSQL=mysqli_query($con,"SELECT user.user_name, user.user_mail FROM user INNER JOIN cms_app_complain ON user.user_id=cms_app_complain.user_id  WHERE cms_app_complain.app_id='$app_id'");
+$mailSQL=mysqli_query($con,"SELECT user.user_name, user.user_mail, user.bu_mail FROM user INNER JOIN cms_app_complain ON user.user_id=cms_app_complain.user_id  WHERE cms_app_complain.app_id='$app_id'");
 	$mailrow=$mailSQL->fetch_assoc();
 
 	$user_name=$mailrow['user_name'];
 	$to=$mailrow['user_mail'];
+	$cc=$mailrow['bu_mail'];
     $sub="Application Complain no: $app_id";
 
     $msg=" 
@@ -108,7 +109,7 @@ $mailSQL=mysqli_query($con,"SELECT user.user_name, user.user_mail FROM user INNE
             </body>
         </html> ";
 
-        send_mail($sub,$msg,$to);
+        send_mail_withCC($sub,$msg,$to,$cc);
 // End Mail Code
 
 

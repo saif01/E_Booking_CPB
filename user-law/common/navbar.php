@@ -15,10 +15,7 @@
                         <nav class="mainmenu alignright">
                             <ul>
                                
-<?php if (strlen($_SESSION['user_redirect']) !=0 ) 
-{?>
- <li><a href="../user-all/">Go Another</a></li>
-<?php }?> 
+
                           <li class="active"><a href="index">Home </a>    
                                 </li>
                                 
@@ -60,7 +57,7 @@ $query2=mysqli_query($con,"SELECT `user_img` FROM `user` WHERE `user_id`='$user_
                                         
                                     </ul>
                                 </li>
-                                <li><a href="">Others</a>
+                                <li><a href="#">Others</a>
                                     <ul>
                                         <li><a href="law-advisors">Advisor</a></li>
                                         <li><a href="notice-all">All Notice</a></li>

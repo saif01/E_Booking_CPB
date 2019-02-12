@@ -24,11 +24,12 @@ else{
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--=== Favicon ===-->
-    <link rel="shortcut icon" href="assets/img/cpb.ico" type="image/x-icon" />
+    <?php require('common/icon.php'); ?> 
 
     
     <?php require('common/title.php'); ?> 
     <?php require('common/allcss.php'); ?> 
+
 
 </head>
 
@@ -77,7 +78,7 @@ else{
                     <div class="section-title  text-center">
 
                        <h2> 
-                        <?php echo htmlentities($_SESSION['car_logIn_id']) ?>'s Booked car</h2>
+                        <?php echo ($_SESSION['car_logIn_id']) ?>'s Booked car</h2>
                         <span class="title-line"><i class="fa fa-car"></i></span>
                         
                     </div>
@@ -138,7 +139,7 @@ $edate2=$date2->format('d-m-Y h:i:s A');
                                         <div class="card">
                                             <div class="card-header" >
                                                 <h5 class="mb-0">
-                                                <span><?php echo htmlentities($sdate); ?> ---- to ---- <?php echo htmlentities($edate); ?></span>  
+                                                <span><?php echo ($sdate); ?> ---- to ---- <?php echo ($edate); ?></span>  
 
                                              <b style="margin-left: 20%"><?php
                                              if ($days=='0') {
@@ -160,7 +161,7 @@ $edate2=$date2->format('d-m-Y h:i:s A');
                                                             <!-- Single Car Thumbnail -->
                                                             <div class="col-lg-4">
                                                                 <div class="car-list-thumb-s">
-<a href="car-details?car_id=<?php echo htmlentities($row['car_id']);?> ">  <img src="../pimages/car/<?php echo($row['car_img']);?>" class="rounded mx-auto d-block" alt="Image" /></a>
+<a href="car-details?car_id=<?php echo ($row['car_id']);?> ">  <img src="../pimages/car/<?php echo($row['car_img']);?>" class="rounded mx-auto d-block" alt="Image" /></a>
                                                                 </div>
                                                             </div>
                                                             <!-- Single Car Thumbnail -->
@@ -172,7 +173,7 @@ $edate2=$date2->format('d-m-Y h:i:s A');
                                                 <div class="car-list-info text-center">
                                                     <h2>
                                                 
-                                            <?php echo htmlentities($row['car_name']); ?> --: <?php echo htmlentities($row['car_number']); ?> 
+                                            <?php echo ($row['car_name']); ?> --: <?php echo ($row['car_number']); ?> 
 
                                                         
                                                     </h2>
@@ -180,15 +181,15 @@ $edate2=$date2->format('d-m-Y h:i:s A');
 
 
                                             <ul class="car-info-list">
-                                                <li> Destination :<b> <?php echo htmlentities($row['location']); ?></b></li>
+                                                <li> Destination :<b> <?php echo ($row['location']); ?></b></li>
                                             </ul>
                                             <ul class="car-info-list">
-                                                <li>Purpose :<b> <?php echo htmlentities($row['purpose']); ?></b>
+                                                <li>Purpose :<b> <?php echo ($row['purpose']); ?></b>
                                                   
                                                 </li>
                                             </ul>
                                             <ul class="car-info-list">
-                                                <li><b><?php echo htmlentities($sdate2); ?></b> --To-- <b> <?php echo htmlentities($edate2); ?></b>
+                                                <li><b><?php echo ($sdate2); ?></b> --To-- <b> <?php echo ($edate2); ?></b>
                                                   
                                                 </li>
                                             </ul>
@@ -198,7 +199,7 @@ $edate2=$date2->format('d-m-Y h:i:s A');
             $booked_Date = date($endDate);
 
                 if ($booked_Date > $currentTime && $booking_status==1) {?>                   
-<a href="cancle-booking?booking_id=<?php echo ($row['booking_id']); ?>" class="rent-btn">Cancel Booking</a>
+<a href="cancle-booking?booking_id=<?php echo ($row['booking_id']); ?>" class="rent-btn" onclick="this.style.display = 'none'">Cancel Booking</a>
 <!-- Modify Booking End Time -->
  <a href="javascript:void(0);" onClick="popUpWindow('booking-modify.php?booking_id=<?php echo ($row['booking_id']);?>');" class="rent-btn" title="Modify Info.">Modify Booking</a>
                <?php
@@ -228,7 +229,7 @@ if($comit_st=='' && $row['boking_status']=='1' && $Onlydate == $currentDate)
      $query2=mysqli_query($con,"SELECT `driver_id` FROM `car_driver` WHERE `car_id`='$car_id' ");
     $row2=$query2->fetch_assoc();
                         
-?><a href="user-comment?booking_id=<?php echo htmlentities($row['booking_id']); ?> &driver_id=<?php echo htmlentities($row2['driver_id']); ?>" class="rent-btn">Comment</a> 
+?><a href="user-comment?booking_id=<?php echo ($row['booking_id']); ?> &driver_id=<?php echo ($row2['driver_id']); ?>" class="rent-btn">Comment</a> 
 <?php }?>
 
                      
@@ -286,7 +287,9 @@ if($comit_st=='' && $row['boking_status']=='1' && $Onlydate == $currentDate)
         }
         popUpWin = open(URLStr, 'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width=' + 600 + ',height=' + 780 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
     }
-    </script>  
+    </script>
+
+     
 
 </body>
 

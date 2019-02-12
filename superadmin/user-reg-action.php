@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['admin-law-login'])==0)
+if(strlen($_SESSION['admin-super-login'])==0)
   { 
 header('location:../admin');
   }
@@ -24,7 +24,9 @@ $user_login=$_POST['user_login'];
 $user_pass=$_POST['user_pass'];
 $user_name=$_POST['user_name'];
 $user_mail=$_POST['user_mail'];
+$bu_mail=$_POST['bu_mail'];
 $user_dept=$_POST['user_dept'];
+$user_location=$_POST['user_location'];
 $user_contact=$_POST['user_contact'];
 $user_office_id=$_POST['user_office_id'];
 $user_st=$_POST['show_st'];
@@ -41,7 +43,7 @@ $file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['photo']['
 
 
 
-$query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_name`, `user_mail`, `user_img`, `user_dept`, `user_contact`, `user_office_id`, `user_st`, `user_car_st`, `user_room_st`, `user_law_st`, `user_cms_st`) VALUES ('$user_login','$user_pass','$user_name','$user_mail','$file_name','$user_dept','$user_contact','$user_office_id','$user_st','$user_car_st','$user_room_st','$user_law_st','$user_cms_st')");
+$query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_name`, `user_mail`, `bu_mail`, `user_img`, `user_dept`, `user_location`, `user_contact`, `user_office_id`, `user_st`, `user_car_st`, `user_room_st`, `user_law_st`, `user_cms_st`) VALUES ('$user_login','$user_pass','$user_name','$user_mail','$bu_mail','$file_name','$user_dept','$user_location','$user_contact','$user_office_id','$user_st','$user_car_st','$user_room_st','$user_law_st','$user_cms_st')");
 
 
 		if ($query) 
@@ -95,17 +97,33 @@ $query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_na
 		}
 
 // Send Mail User Id And Password
-		$sub="C.P.B. It-Portal";
+		$sub="Welcome To CPB-IT Portal";
 		$to=$user_mail;
 		$msg=" 
         <html>
         <body>
-            <font size='5' color='green'>Dear $user_name, This Is Your C.P. BAngladesh It-Portal User Account Details.</font><br><br><hr>
+            <font size='2' color='green'>Dear $user_name,<br><br> 
+            This Is Your C.P. Bangladesh IT-Portal User Account Details.</font><br><br><hr>
+
 		  <font size='4' color='blue'>Your LogIn ID : <b>$user_login</b>, </font><br>
-		  <font size='3' color='red'>Your Password :  <b>$user_pass </b>.</font><br>
+		  <font size='4' color='red'>Your Password :  <b>$user_pass </b>.</font><br>
 
 		 <hr><br><br>
 
+		 <font color='#FF6347'>
+		 <i>**It's a auto generated email. Don't replay at this e-mail**</i>
+		 </font><br><br>
+
+		 
+		 <a href='http://202.51.191.2/cpbit/' <button style='
+		 background-color: #4CAF50;
+		  border: none;
+		  color: white;
+		  padding: 15px 32px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 16px;'>Click Here For LogIn</button>
          
             </body>
         </html>";

@@ -40,7 +40,7 @@ while ($cal_row = $calenderSql->fetch_assoc())
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--=== Favicon ===-->
-    <link rel="shortcut icon" href="assets/img/cpb.ico" type="image/x-icon" />
+    <?php require('common/icon.php'); ?> 
 
      <!-- For Calendar Load Links -->
     <link href='cal/fullcalendar.min.css' rel='stylesheet' />

@@ -11,18 +11,33 @@ error_reporting(0);
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>CPB-IT</title>
+    <title>CPB-IT-Admin</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../admin-car/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../admin-car/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="../admin-car/vendors/css/vendor.bundle.addons.css">
-    <!-- endinject -->
-    <!-- plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
+    
     <link rel="stylesheet" href="../admin-car/css/style.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="../admin-car/images/favicon.png" /> 
+    <link rel="shortcut icon" href="../assets/img/logo.png" /> 
+    <style type="text/css">
+        .login_logo
+        {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: absolute;
+            top: calc(-100px/2);
+            left: calc(50% - 50px);
+            border-radius: 10px;
+            border: 2px solid #1E90FF;
+            padding: 1px;
+
+        }
+       
+    </style>
+
 </head>
 
 <body>
@@ -32,6 +47,10 @@ error_reporting(0);
                 <div class="row w-100">
                     <div class="col-lg-4 mx-auto">
                         <div class="auto-form-wrapper">
+
+                            <img src="../assets/img/logo.png" alt="CPB-IT" class="login_logo">
+
+                            <h3 class="text-center text-muted" style="margin: 7px;">Admin Login</h3>
 
 
                             <form action="admin-login-action.php" method="post">
@@ -80,8 +99,7 @@ error_reporting(0);
     <!-- plugins:js -->
     <script src="../admin-car/vendors/js/vendor.bundle.base.js"></script>
     <script src="../admin-car/vendors/js/vendor.bundle.addons.js"></script>
-    <!-- endinject -->
-    <!-- inject:js -->
+    
     <script src="../admin-car/js/off-canvas.js"></script>
     <script src="../admin-car/js/misc.js"></script>
     <!-- endinject -->

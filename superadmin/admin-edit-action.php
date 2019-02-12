@@ -29,6 +29,14 @@ $admin_contact=$_POST['admin_contact'];
 $admin_office_id=$_POST['admin_office_id'];
 $admin_dept=$_POST['admin_dept'];
 
+$admin_st = $_POST['admin_st'];
+$admin_car_st=$_POST['admin_car_st'];
+$admin_room_st=$_POST['admin_room_st'];
+$admin_law_st=$_POST['admin_law_st'];
+$admin_hard_st=$_POST['admin_hard_st'];
+$admin_app_st=$_POST['admin_app_st'];
+$admin_super_st=$_POST['admin_super_st'];
+
 
 $file=$_FILES['photo']['tmp_name'];
 
@@ -53,7 +61,7 @@ $file=$_FILES['photo']['tmp_name'];
 
 
 
-			$query=mysqli_query($con,"UPDATE `admin` SET `admin_name`='$admin_name',`admin_mail`='$admin_mail',`admin_img`='$file_name',`admin_dept`='$admin_dept',`admin_contact`='$admin_contact',`admin_office_id`='$admin_office_id',`last_up`='$currentTime' WHERE `admin_id`='$admin_id'");
+			$query=mysqli_query($con,"UPDATE `admin` SET `admin_name`='$admin_name',`admin_mail`='$admin_mail',`admin_img`='$file_name',`admin_dept`='$admin_dept',`admin_contact`='$admin_contact',`admin_office_id`='$admin_office_id',`admin_st`='$admin_st',`admin_car_st`='$admin_car_st',`admin_room_st`='$admin_room_st',`admin_law_st`='$admin_law_st',`admin_hard_st`='$admin_hard_st',`admin_app_st`='$admin_app_st',`admin_super_st`='$admin_super_st',`last_up`='$currentTime' WHERE `admin_id`='$admin_id'");
 
 					if ($query) 
 					{
@@ -105,7 +113,7 @@ $file=$_FILES['photo']['tmp_name'];
 
 			else
 			{
-			$query=mysqli_query($con,"UPDATE `admin` SET `admin_name`='$admin_name',`admin_mail`='$admin_mail',`admin_dept`='$admin_dept',`admin_contact`='$admin_contact',`admin_office_id`='$admin_office_id',`last_up`='$currentTime' WHERE `admin_id`='$admin_id'");
+			$query=mysqli_query($con,"UPDATE `admin` SET `admin_name`='$admin_name',`admin_mail`='$admin_mail',`admin_dept`='$admin_dept',`admin_contact`='$admin_contact',`admin_office_id`='$admin_office_id',`admin_st`='$admin_st',`admin_car_st`='$admin_car_st',`admin_room_st`='$admin_room_st',`admin_law_st`='$admin_law_st',`admin_hard_st`='$admin_hard_st',`admin_app_st`='$admin_app_st',`admin_super_st`='$admin_super_st',`last_up`='$currentTime' WHERE `admin_id`='$admin_id'");
 
 					if ($query) 
 					{

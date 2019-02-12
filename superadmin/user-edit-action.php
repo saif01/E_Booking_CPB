@@ -25,9 +25,18 @@ if (isset($_POST['submit'])) {
 
 $user_name=$_POST['user_name'];
 $user_mail=$_POST['user_mail'];
+$bu_mail=$_POST['bu_mail'];
 $user_dept=$_POST['user_dept'];
+$user_location=$_POST['user_location'];
 $user_contact=$_POST['user_contact'];
 $user_office_id=$_POST['user_office_id'];
+
+$user_st=$_POST['show_st'];
+$user_car_st=$_POST['user_car_st'];
+$user_room_st=$_POST['user_room_st'];
+$user_law_st=$_POST['user_law_st'];
+$user_cms_st=$_POST['user_cms_st'];
+
 
 $file=$_FILES['photo']['tmp_name'];
 
@@ -52,7 +61,7 @@ $file=$_FILES['photo']['tmp_name'];
 
 
 
-			$query=mysqli_query($con,"UPDATE `user` SET `user_name`='$user_name',`user_mail`='$user_mail',`user_img`='$file_name',`user_dept`='$user_dept',`user_contact`='$user_contact',`user_office_id`='$user_office_id',`last_update`='$currentTime' WHERE `user_id`='$user_id'");
+			$query=mysqli_query($con,"UPDATE `user` SET `user_name`='$user_name',`user_mail`='$user_mail',`bu_mail`='$bu_mail',`user_img`='$file_name',`user_dept`='$user_dept',`user_location`='$user_location',`user_contact`='$user_contact',`user_office_id`='$user_office_id',`user_st`='$user_st',`user_car_st`='$user_car_st',`user_room_st`='$user_room_st',`user_law_st`='$user_law_st',`user_cms_st`='$user_cms_st',`last_update`='$currentTime' WHERE `user_id`='$user_id'");
 
 
 			
@@ -107,7 +116,7 @@ $file=$_FILES['photo']['tmp_name'];
 
 			else
 			{
-				$query=mysqli_query($con,"UPDATE `user` SET `user_name`='$user_name',`user_mail`='$user_mail',`user_dept`='$user_dept',`user_contact`='$user_contact',`user_office_id`='$user_office_id',`last_update`='$currentTime' WHERE `user_id`='$user_id'");
+				$query=mysqli_query($con,"UPDATE `user` SET `user_name`='$user_name',`user_mail`='$user_mail',`bu_mail`='$bu_mail',`user_dept`='$user_dept',`user_location`='$user_location',`user_contact`='$user_contact',`user_office_id`='$user_office_id',`user_st`='$user_st',`user_car_st`='$user_car_st',`user_room_st`='$user_room_st',`user_law_st`='$user_law_st',`user_cms_st`='$user_cms_st',`last_update`='$currentTime' WHERE `user_id`='$user_id'");
 
 
 					if ($query) 

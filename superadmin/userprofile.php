@@ -24,7 +24,7 @@ $row=$query->fetch_assoc();
         <meta name="description" content="syful.cse.bd@gmail.com">
         <meta name="author" content="Saif">
 
-        <link rel="shortcut icon" href="images/cpb.png">
+       <?php include('common/icon.php'); ?>
 
         <?php include('common/title.php'); ?>
 
@@ -91,8 +91,13 @@ $row=$query->fetch_assoc();
                 		
                  	</tr>
                     <tr>
-                        <th>E-mail</th>
+                        <th>User E-mail</th>
                         <td><?php echo $row['user_mail'];?></td>
+                        
+                    </tr>
+                    <tr>
+                        <th>B.U. E-mail</th>
+                        <td><?php echo $row['bu_mail'];?></td>
                         
                     </tr>
                  	<tr>

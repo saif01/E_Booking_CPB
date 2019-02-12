@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
-if(strlen($_SESSION['admin-law-login'])==0)
+if(strlen($_SESSION['admin-super-login'])==0)
   { 
 header('location:../admin');
   }
@@ -93,16 +93,33 @@ $query=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admi
 		}
 
 // Send Mail User Id And Password
-		$sub="C.P.B. It-Portal";
+		$sub="Welcome To CPB-IT Portal";
 		$to=$admin_mail;
 		$msg=" 
         <html>
         <body>
-            <font size='5' color='green'>Dear $admin_name, This Is Your C.P. BAngladesh It-Portal Admin Account Details.</font><br><br><hr>
+            <font size='2' color='green'>Dear $admin_name,<br><br>
+             This Is Your C.P. BAngladesh It-Portal Admin Account Details.</font><br><br><hr>
 		  <font size='4' color='blue'>Your LogIn ID : <b>$admin_login</b>, </font><br>
-		  <font size='3' color='red'>Your Password :  <b>$admin_pass </b>.</font><br>
+		  <font size='4' color='red'>Your Password :  <b>$admin_pass </b>.</font><br>
 
 		 <hr><br><br>
+
+
+		 <font color='#FF6347'>
+		 <i>**It's a auto generated email. Don't replay at this e-mail**</i>
+		 </font><br><br>
+
+		 
+		 <a href='http://202.51.191.2/cpbit/admin/' <button style='
+		 background-color: #4CAF50;
+		  border: none;
+		  color: white;
+		  padding: 15px 32px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 16px;'>Click Here For LogIn</button>
 
          
             </body>

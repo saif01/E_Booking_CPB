@@ -19,7 +19,7 @@ include('../db/config.php');
         <meta name="description" content="syful.cse.bd@gmail.com">
         <meta name="author" content="Saif">
 
-        <link rel="shortcut icon" href="images/cpb.png">
+       <?php include('common/icon.php'); ?>
 
         <?php include('common/title.php'); ?>
 
@@ -242,7 +242,7 @@ include('../db/config.php');
 
     <div class="col-md-12">         
        <div class="form-group m-b-0">    
-<button type="submit" name="submit"  class="btn btn-block btn-rounded btn-custom  btn-lg btn-primary waves-effect waves-light">Hit For Register Admin</button>
+<button id="btnSubmit" type="submit" name="submit"  class="btn btn-block btn-rounded btn-custom  btn-lg btn-primary waves-effect waves-light">Hit For Register Admin</button>
 
 <a href="##" onClick="history.go(-1); return false;"> <button class="btn btn-light btn-block btn-rounded " style="background-color:#a08e8e; margin-top: 8px;">Cancel</button></a>
            </div>
@@ -281,7 +281,7 @@ include('../db/config.php');
 
 
         <!-- jQuery  -->
-        <script src="js/jquery.min.js"></script>
+        <!-- <script src="js/jquery.min.js"></script> -->
         <script src="js/bootstrap.min.js"></script>
         <script src="js/waves.js"></script>
         <script src="js/wow.min.js"></script>
@@ -298,6 +298,19 @@ include('../db/config.php');
         <!-- CUSTOM JS -->
         <script src="js/jquery.app.js"></script>
 
+<script src="../assets/coustom/ajax/3.3.1_jquery.min.js"></script>
+<!-- Bubmit Button Disable After submit form -->
+<script type="text/javascript">
+    $(document).ready(function () {
+    $('form').submit(function () {
+        setTimeout(function () { disableButton(); },0);
+    });
+
+    function disableButton() {
+        $("#btnSubmit").prop('disabled', true);
+    }
+});
+</script>
 
 
 

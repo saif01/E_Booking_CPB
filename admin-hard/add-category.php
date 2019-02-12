@@ -21,7 +21,7 @@ include('../db/config.php');
         <meta name="description" content="syful.cse.bd@gmail.com">
         <meta name="author" content="Saif">
 
-        <link rel="shortcut icon" href="images/cpb.png">
+        <?php include('common/icon.php'); ?>
 
         <?php include('common/title.php'); ?>
 
@@ -119,7 +119,9 @@ include('../db/config.php');
             
     </div>
     <div class="col-md-6">
-    	<label class="col-sm-3 control-label"></label>
+    	<div class="col-sm-3 control-label">
+            
+        </div>
                 <div class="col-sm-9">
 
     	   
@@ -128,8 +130,9 @@ include('../db/config.php');
            </div>
 		
     </div>
-    
+    <span class="btn btn-sm btn-warning btn-custom">Check</span>
                     </form>
+                    
 
 			</div> <!-- Panel-body -->
             
@@ -152,7 +155,7 @@ include('../db/config.php');
 
 
  <div class="col-md-12 col-sm-12 col-xs-12 table-responsive ">
-       <table id="datatable" class="table table-striped table-bordered">
+       <table id="datatable" class="table table-striped table-bordered text-center">
                         <thead>
                             <tr>
                               
@@ -179,7 +182,11 @@ include('../db/config.php');
 
                     <td>
              <a href="delete-category?Id=<?php echo $row['cat_id']?>"
-           title="Delete" id="delete" > <i class="fa fa-trash text-danger" style="font-size: 40px;"></i></a></td>
+           title="Delete" id="delete" > <i class="fa fa-trash text-danger" style="font-size: 40px;"></i></a>
+
+<a href="javascript:void(0);" onClick="popUpWindow('edit-category.php?cat_id=<?php echo ($row['cat_id']);?>');" title="Edit"><i class="fa fa-edit text-warning" style="font-size: 40px;"></i> </a>
+
+                    </td>
 
                     </tr>
                     <?php } ?>
@@ -251,6 +258,18 @@ include('../db/config.php');
                 });
             } );
         </script>
+
+<script language="javascript" type="text/javascript">
+    var popUpWin = 0;
+
+    function popUpWindow(URLStr, left, top, width, height) {
+        if (popUpWin) {
+            if (!popUpWin.closed) popUpWin.close();
+        }
+        popUpWin = open(URLStr, 'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width=' + 600 + ',height=' + 780 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
+    }
+</script>  
+
 
   <!-- Sweet Alert CDN Link -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

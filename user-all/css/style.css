@@ -1,8 +1,84 @@
+/*Start Preloader*/
+.loader {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-body{
-	background:url(../img/ay.jpg);
-	margin:0px;
-	padding: 0px;
+.loader > img {
+    width: 20%;
+}
+
+.loader.hidden {
+    animation: fadeOut 3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* End Start Preloader*/
+
+
+
+
+
+#grad1 {
+  margin: 3%;
+  background-color: rgba(255,0,0,0);
+
+
+}
+
+.navbar_grad{
+	/*background-image: linear-gradient(to right, rgba(255,0,0,0), #FF6347);*/
+	background-image: radial-gradient( green 15%, rgba(255,0,0,0) 60%);
+	
+
+}
+
+.footer_grad{
+	background-image: linear-gradient(to right, rgba(255,0,0,0), #1E90FF);
 }
 
 
+.r_user {
+    border-radius:20%;
+    border: 2px solid #ffd000;   
+}
+
+.saif{
+  background-color: white;
+  margin: 2%; 
+}
+
+
+
+
+.img_size{
+ width:150px;
+  height:150px;
+}
+
+.zoom {
+  padding: 50px;
+  transition: transform .2s; /* Animation */
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  transform: scale(1.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}

@@ -6,7 +6,6 @@ if ($_GET['Id']) {
 $id=$_GET['Id'];
 
 
-
 // For delete database record
 	$delsql=mysqli_query($con,"DELETE FROM `cms_hard_category` WHERE `cat_id`='$id' ");
 
@@ -18,9 +17,9 @@ $id=$_GET['Id'];
 
 	else
 	{
-			echo '<script language="javascript">';
-			echo 'alert("Error !!!!..All Data Not Deleted")';
-			echo '</script>';
+		echo '<script language="javascript">';
+		echo 'alert("Error !!!!..All Data Not Deleted")';
+		echo '</script>';
 	}	
 
 }

@@ -21,7 +21,7 @@ include('../db/config.php');
         <meta name="description" content="syful.cse.bd@gmail.com">
         <meta name="author" content="Saif">
 
-        <link rel="shortcut icon" href="images/cpb.png">
+       <?php include('common/icon.php'); ?>
 
         <?php include('common/title.php'); ?>
 
@@ -161,15 +161,118 @@ $row=$query->fetch_assoc();
             </div>            
     </div>
 
+    <div class="col-md-6">
+
+     <div class="form-group">
+                <label class="col-sm-3 control-label">Admin Image</label>
+                        <div class="col-sm-9">
+                        <input name="photo" type="file" class="form-control file-upload-info" onchange="document.getElementById('preview1').src = window.URL.createObjectURL(this.files[0])" >
+                        <p style="color:red;">Resolution 250*300 pixels</p>  
+                </div>
+            </div> 
+        </div>
+ </div>
+ 
+ <div class="row"> 
+
+ <div class="col-md-6"> 
+               <div class="form-group">
+                <label class="col-sm-3 control-label">Active</label>
+                        <div class="col-sm-9">
+                             <div class="radio radio-info radio-inline">
+                                <input type="radio" id="inlineRadio1" value="1" name="admin_st" 
+                                 <?php 
+                                if ($row['admin_st']=='1') {
+                                    echo "checked";
+                                }?>
+                                >
+                                <label> Yes </label>
+                            </div>
+                            <div class="radio radio-inline">
+                                <input type="radio" id="inlineRadio2" value="0" name="admin_st"
+                                 <?php 
+                                if ($row['admin_st']=='0') {
+                                    echo "checked";
+                                }?>
+                                >
+                                <label> No </label>
+                            </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Admin Access</label>
+                <div class="col-sm-9">
+                   <div class="checkbox checkbox-success checkbox-inline">
+                    <input type="checkbox" name="admin_car_st" value="1"
+                     <?php 
+                        if ($row['admin_car_st']=='1') {
+                            echo "checked";
+                        }?>
+                        >
+                    <label> Car </label>
+                    </div>
+                    <div class="checkbox checkbox-success checkbox-inline">
+                        <input type="checkbox" name="admin_room_st" value="1"
+                         <?php 
+                        if ($row['admin_room_st']=='1') {
+                            echo "checked";
+                        }?>
+                        >
+                        <label> Room </label>
+                    </div>
+                    <div class="checkbox checkbox-success checkbox-inline">
+                        <input type="checkbox" name="admin_law_st"  value="1"
+                        <?php 
+                        if ($row['admin_law_st']=='1') {
+                            echo "checked";
+                        }?>
+                        >
+                        <label> Legal </label>
+                    </div>
+                     <div class="checkbox checkbox-success checkbox-inline">
+                        <input type="checkbox" name="admin_app_st"  value="1"
+                        <?php 
+                        if ($row['admin_app_st']=='1') {
+                            echo "checked";
+                        }?>
+                        >
+                        <label> Application </label>
+                    </div>
+                     <div class="checkbox checkbox-success checkbox-inline">
+                        <input type="checkbox" name="admin_hard_st"  value="1"
+                        <?php 
+                        if ($row['admin_hard_st']=='1') {
+                            echo "checked";
+                        }?>
+                        >
+                        <label> Hardware </label>
+                    </div>
+                     <div class="checkbox checkbox-success checkbox-inline">
+                        <input type="checkbox" name="admin_super_st"  value="1"
+                        <?php 
+                        if ($row['admin_super_st']=='1') {
+                            echo "checked";
+                        }?>
+                        >
+                        <label for="inlineCheckbox4"> Super </label>
+                    </div>
+
+                    
+                    
+                </div>
+            </div>
+         
+    </div>  
+
    <div class="col-md-6"> 
     		
-            <div class="form-group">
+           <!--  <div class="form-group">
                 <label class="col-sm-3 control-label">Admin Image</label>
                         <div class="col-sm-9">
                         <input name="photo" type="file" class="form-control file-upload-info" onchange="document.getElementById('preview1').src = window.URL.createObjectURL(this.files[0])" >
     					<p style="color:red;">Resolution 250*300 pixels</p>	 
                 </div>
-            </div> 
+            </div>  -->
             <div class="form-group">
                 <label class="col-sm-3 control-label">Photo Priview</label>
                 <div class="col-sm-9">                

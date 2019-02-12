@@ -39,7 +39,7 @@ while($row = mysqli_fetch_array($result))
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--=== Favicon ===-->
-    <link rel="shortcut icon" href="assets/img/cpb.ico" type="image/x-icon" />
+    <?php require('common/icon.php'); ?> 
 
     
     <?php require('common/title.php'); ?> 
@@ -187,14 +187,14 @@ while($row = mysqli_fetch_array($result))
 
 					<div class="form-group">
 				    
-				    <input type="submit" name="submit" class="btn btn-success btn-block" value=" Hit To Hardware Complain Register">
+				    <input id="btnSubmit" type="submit" name="submit" class="btn btn-success btn-block" value=" Hit To Hardware Complain Register">
 				  </div>
 
 </form>
         </div>
 
     <div class="modal-footer">  
-     <button type="button" onclick="pagerefresh()" class="btn btn-danger" data-dismiss="modal">Close</button>  
+     <button  type="button" onclick="pagerefresh()" class="btn btn-danger" data-dismiss="modal">Close</button>  
     </div>
   </div>
 </div>  	
@@ -244,7 +244,7 @@ while($row = mysqli_fetch_array($result))
 				  </div>
 				  <div class="form-group">
 				    
-				     <input type="submit" name="submit" class="btn btn-info btn-block" value=" Hit To Application Complain Register">
+				     <input id="btnSubmit" type="submit" name="submit" class="btn btn-info btn-block" value=" Hit To Application Complain Register">
 				  </div>
 				</form>
         </div>
@@ -348,6 +348,21 @@ function pagerefresh() {
 }
 
 
+</script>
+
+
+<!-- <script src="../assets/coustom/ajax/3.3.1_jquery.min.js"></script> -->
+<!-- Bubmit Button Disable After submit form -->
+<script type="text/javascript">
+    $(document).ready(function () {
+    $('form').submit(function () {
+        setTimeout(function () { disableButton(); },0);
+    });
+
+    function disableButton() {
+        $("#btnSubmit").prop('disabled', true);
+    }
+});
 </script>
 
 

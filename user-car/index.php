@@ -24,7 +24,8 @@ $number2=mysqli_num_rows($notify2);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--=== Favicon ===-->
-    <link rel="shortcut icon" href="assets/img/cpb.ico" type="image/x-icon" />
+    
+    <?php require('common/icon.php'); ?> 
 
     
     <?php require('common/title.php'); ?> 
@@ -181,6 +182,9 @@ $number2=mysqli_num_rows($notify2);
   </div>
 </div>
 <!--End Modal -->
+
+
+<div id="tmpModel"></div>
    
 
 
@@ -198,6 +202,20 @@ $number2=mysqli_num_rows($notify2);
 
     <!--=======================Javascript============================-->
     <?php require('common/alljs.php'); ?>
+
+   
+
+<!-- <script>
+    $(document).ready(function(e){
+        $('$ad_search').click(function(){
+            $.post('modal.php',function(xx){
+                $('#tmpModel').html(xx)
+                $('#advanceSearch').modal('show');
+            })
+        })
+    });
+    
+</script> -->
     
 
 </body>

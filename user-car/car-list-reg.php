@@ -2,7 +2,8 @@
 session_start();
 error_reporting(0);
 date_default_timezone_set('Asia/Dhaka');// change according timezone
-// $currentTime = date( 'Y-m-d H:i:s', time () ); 
+$currentTime = date('Y-m-d H:i:s', time () ); 
+$currentdate = date('Y-m-d');
 
 if(strlen($_SESSION['car_logIn_id'])==0)
   { 
@@ -20,7 +21,7 @@ else{
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--=== Favicon ===-->
-    <link rel="shortcut icon" href="assets/img/cpb.ico" type="image/x-icon" />
+    <?php require('common/icon.php'); ?> 
 
     
     <?php require('common/title.php'); ?> 
@@ -102,7 +103,7 @@ else{
                             <!-- Articles Thumbnail Start -->
                             <div class="col-lg-5">
                                 <div class="article-thumb">
-                                    <a href="car-details.php?car_id=<?php echo htmlentities($row['car_id']);?> ">  <img src="../pimages/car/<?php echo($row['car_img1']);?>" class="img-responsive" alt="Image" /></a>
+                                    <a href="car-details.php?car_id=<?php echo ($row['car_id']);?> ">  <img src="../pimages/car/<?php echo($row['car_img1']);?>" class="img-responsive" alt="Image" /></a>
                                 </div>
                             </div>
                             <!-- Articles Thumbnail End -->
@@ -117,14 +118,13 @@ else{
 
                                     <?php
                              $driver_id=$row['driver_id'];
-                             $currTime = date('Y-m-d H:i:s');
                              $car_id=$row['car_id'];
 //********* Booking status checkinig by Current Date *****************//
-                             $query3=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND `boking_status`='1' AND '$currTime' BETWEEN `start_date` AND `end_date`");
+                             $query3=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND `boking_status`='1' AND '$currentTime' BETWEEN `start_date` AND `end_date`");
 //********* Driver Leave status checkinig by Current Date *****************//
-                             $drivLev=mysqli_query($con,"SELECT * FROM `driver_leave` WHERE `leave_status`='1' AND `driver_id`='$driver_id' AND '$currTime' BETWEEN `driver_leave_start` AND `driver_leave_end`");
+                             $drivLev=mysqli_query($con,"SELECT * FROM `driver_leave` WHERE `leave_status`='1' AND `driver_id`='$driver_id' AND '$currentTime' BETWEEN `driver_leave_start` AND `driver_leave_end`");
 //********* Police Requisition status checkinig by Current Date *****************//
-                             $polic_req=mysqli_query($con,"SELECT * FROM `police_req` WHERE `car_id`='$car_id' AND `req_st`='1' AND '$currTime' BETWEEN `req_start` AND `req_end`");
+                             $polic_req=mysqli_query($con,"SELECT * FROM `police_req` WHERE `car_id`='$car_id' AND `req_st`='1' AND '$currentTime' BETWEEN `req_start` AND `req_end`");
 
                              //$row3=$query3->fetch_assoc();
                              $row3=mysqli_num_rows($query3);
@@ -149,27 +149,44 @@ else{
                                             </div>
 
                                             <div class="text-center">
-                                            <table class="table ">
+                <table class="table ">
+<?php
+//Driver Leave Date Show....
+$driver_id=$row['driver_id'];
+$driverLevsql=mysqli_query($con,"SELECT * FROM `driver_leave` WHERE `leave_status`='1' AND `driver_id`='$driver_id' ORDER BY `driver_leave_id` DESC LIMIT 1");
+$driver_lev=$driverLevsql->fetch_assoc();
 
-                                                <tr>
-                                                    <th>Name :</th>
-                                                    <td> <?php echo $row['car_name']; ?></td>
-                                                </tr>
-                                                
-                                                <tr>
-                                                    <th>Car Number :</th>
-                                                    <td><?php echo $row['car_namePlate'];?></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Capacity :</th>
-                                                    <td><?php echo $row['car_capacity'];?></td>
-                                                
-                                                </tr>
-                                               
-                                               
-                                            </table>
+$driver_leave_start=$driver_lev['driver_leave_start'];
+$driver_leave_end=$driver_lev['driver_leave_end'];
 
-                                             <a href="booking-car-reg?car_id=<?php echo htmlentities($row['car_id']);?>" class="readmore-btn">Book  <i class="far fa-arrow-alt-circle-right"></i></a>
+if ( $driver_leave_end >= $currentTime) {
+
+echo '<h5><span class="badge badge-warning"> Driver Leave :'.date("M j, Y", strtotime($driver_leave_start)).' To '.date("M j, Y", strtotime($driver_leave_end)).'</span></h5>' ;
+}
+
+ ?>
+
+                 
+
+                    <tr>
+                        <th>Name :</th>
+                        <td> <?php echo $row['car_name']; ?></td>
+                    </tr>
+                    
+                    <tr>
+                        <th>Car Number :</th>
+                        <td><?php echo $row['car_namePlate'];?></td>
+                    </tr>
+                    <tr>
+                        <th>Capacity :</th>
+                        <td><?php echo $row['car_capacity'];?></td>
+                    
+                    </tr>
+                   
+                   
+                </table>
+
+<a href="booking-car-reg?car_id=<?php echo ($row['car_id']);?>" class="readmore-btn">Book  <i class="far fa-arrow-alt-circle-right"></i></a>
 
                                             
                                         </div>
@@ -184,18 +201,16 @@ else{
                    <div class="col-lg-2">
 
                         <?php    
-
-                                    $currentdate = date( 'Y-m-d' );
-                                    $st= $row['driver_status'];
+                $st= $row['driver_status'];
 //************** Driver leave day counting ******************// 
-                                    $l_Stst=$row['leave_start'];
-                                    $l_Sted=$row['leave_end'];
+                $l_Stst=$row['leave_start'];
+                $l_Sted=$row['leave_end'];
 
-                                    //Start Time Subtraction and convert to days.
-                                    $ts1    =   strtotime($l_Stst);
-                                    $ts2    =   strtotime($l_Sted);
-                                    $seconds    = abs($ts2 - $ts1); # difference will always be positive
-                                    $leavedays = round($seconds/(60*60*24));
+                //Start Time Subtraction and convert to days.
+                $ts1    =   strtotime($l_Stst);
+                $ts2    =   strtotime($l_Sted);
+                $seconds    = abs($ts2 - $ts1); # difference will always be positive
+                $leavedays = round($seconds/(60*60*24));
 
                                    
 
@@ -209,10 +224,10 @@ else{
 
                                 <div class="article-thumb-s" >
                                                                       
-                                    <a href="driver-details.php?driver_id=<?php echo htmlentities($row['driver_id']);?>" > <img src="../pimages/driver/<?php echo($row['driver_img']);?>" class="img-responsive mx-auto d-block"  alt="Image" /> </a>
+                                    <a href="driver-details.php?driver_id=<?php echo ($row['driver_id']);?>" > <img src="../pimages/driver/<?php echo ($row['driver_img']);?>" class="img-responsive mx-auto d-block"  alt="Image" /> </a>
 
                                 
-                                    <p><?php echo htmlentities($row['driver_name']) ; ?> </p> 
+                                    <p><?php echo ($row['driver_name']) ; ?> </p> 
                                     <p style="background-color: red;  color: white; ">On Leave</p>                                                                    
                                 </div>
 
@@ -222,9 +237,9 @@ else{
 
                                 <div class="article-thumb-s" >
                                                                       
-                                    <a href="driver-details.php?driver_id=<?php echo htmlentities($row['driver_id']);?>" > <img src="../pimages/driver/<?php echo($row['driver_img']);?>" class="img-responsive mx-auto d-block"  alt="Image" /> </a>
+                                    <a href="driver-details.php?driver_id=<?php echo ($row['driver_id']);?>" > <img src="../pimages/driver/<?php echo($row['driver_img']);?>" class="img-responsive mx-auto d-block"  alt="Image" /> </a>
                                 
-                                    <p><?php echo htmlentities($row['driver_name']) ; ?> </p> 
+                                    <p><?php echo ($row['driver_name']) ; ?> </p> 
                                     <p style="background-color: red;  color: white; ">Police REQ.</p>                                                                    
                                 </div>
 
@@ -234,7 +249,7 @@ else{
                                 <div class="article-thumb-s"> 
                                     <a> <img src="../pimages/driver/def/absence.jpg" class="img-responsive mx-auto d-block" alt="Image" /> </a>
 
-                                    <p ><?php echo htmlentities($row['driver_name']) ; ?> </p> 
+                                    <p ><?php echo ($row['driver_name']) ; ?> </p> 
                                     <p style="background-color: red; color: white; "> Emergency Leave </p>       
                                 </div>
 
@@ -245,11 +260,11 @@ else{
 
                                 <div class="article-thumb-s" >
                                                                       
-                                    <a href="driver-details.php?driver_id=<?php echo htmlentities($row['driver_id']);?>" > <img src="../pimages/driver/<?php echo($row['driver_img']);?>" class="img-responsive mx-auto d-block"  alt="Image" /> </a>
+                                    <a href="driver-details.php?driver_id=<?php echo ($row['driver_id']);?>" > <img src="../pimages/driver/<?php echo($row['driver_img']);?>" class="img-responsive mx-auto d-block"  alt="Image" /> </a>
 
                                 
-                                    <p><?php echo htmlentities($row['driver_name']) ; ?> </p> 
-                        <p><i class="fas fa-mobile-alt"></i> <a  href="tel:+88<?php echo htmlentities($row['driver_phone']) ; ?>"> <?php echo htmlentities($row['driver_phone']) ; ?> </a> 
+                                    <p><?php echo ($row['driver_name']) ; ?> </p> 
+                        <p><i class="fas fa-mobile-alt"></i> <a  href="tel:+88<?php echo ($row['driver_phone']) ; ?>"> <?php echo ($row['driver_phone']) ; ?> </a> 
                                     </p>                                
                                   
                                 </div> 
