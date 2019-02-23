@@ -11,8 +11,8 @@ include('../line/line_Car_Msg.php');
 
 $booking_id= $_GET['booking_id'];
 
-if (isset($_POST['cancel_booking'])) {
- 
+
+  
 
 
 $query=mysqli_query($con,"UPDATE `car_booking` SET `boking_status`= '0' WHERE `booking_id`='$booking_id' ");
@@ -65,4 +65,4 @@ while ($row=mysqli_fetch_array($sql)) {
                          
 <!-- //****************** End Sweet Alert ********************///
  -->
-<?php } }?>
+<?php  }?>

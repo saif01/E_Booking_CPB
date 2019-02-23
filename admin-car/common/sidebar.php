@@ -107,6 +107,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="police-requisition-report"><i class="menu-icon mdi mdi-chart-bar text-danger"></i>Reqisition Report</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="maintenance-report"><i class="menu-icon mdi mdi-chart-bar text-danger"></i>Maintenance Report</a>
+                </li>
               </ul>
             </div>
           </li>

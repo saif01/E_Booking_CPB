@@ -112,143 +112,145 @@ $row=$query->fetch_assoc();
 
     <form action="driver-leave-action.php?driver_id=<?php echo $driver_id;?>&car_id=<?php echo $car_id;?>" method="post">
 
-                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-4 col-form-label">Leave Start :</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="date" name="leave_satart" class="form-control" required>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-4 col-form-label">Leave End :</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="date" name="leave_end" class="form-control" required />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-4 col-form-label">Leave Type :</label>
-                                                            <div class="col-sm-6">
-                                <select  name="leaveType" class="form-control" required>
-                                <option value="" disabled selected >Select Type </option>
-                                            <option value="personal">Personal Leave</option>
-                                            <option value="police">Police Requsition</option>
-
-                                                        </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                              
-    
-                                                    <div class="col-md-6">
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-4 col-form-label"> Leave Time :</label>
-                                                            <div class="col-sm-6">
-        <select id="time_show" class="form-control" onChange="return show();" >
-                                <option value="">Full Day</option>
-                                <option value="manual_input">Manual Input</option>
-
-                                                        </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                <div id="manual_input_show" style="display:none;"> 
-                                                    <div class="col-md-6">
-                                                <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Start Time:</label>
-                                            <div class="col-sm-6">
-                                    <select  name="start_time" class="form-control"> 
-                                        <option value="01:01:01">Default Time </option>
-                                            <option value="09:00:00">9.00 AM </option>
-                                            <option value="10:00:00">10.00 AM </option>
-                                            <option value="11:00:00">11.00 AM </option>
-                                            <option value="12:00:00">12.00 PM (Noon)</option>
-                                            <option value="13:00:00">01.00 PM </option>
-                                            <option value="14:00:00">02.00 PM </option>
-                                            <option value="15:00:00">03.00 PM </option>
-                                            <option value="16:00:00">04.00 PM </option>
-                                            <option value="17:00:00">05.00 PM </option>
-                                            <option value="18:00:00">06.00 PM </option>
-                                            <option value="19:00:00">07.00 PM </option>
-                                            <option value="20:00:00">08.00 PM </option>
-                                            <option value="21:00:00">09.00 PM </option>
-                                            <option value="22:30:00">10.00 PM </option>
-                                            <option value="23:00:00">11.00 PM </option>
-
-                                            <option value="23:59:00">12.00 AM (Night) </option>
-                                            <option value="01:00:00">01.00 AM </option>
-                                            <option value="02:00:00">02.00 AM </option>
-                                            <option value="03:00:00">03.00 AM </option>
-                                            <option value="04:00:00">04.00 AM </option>
-                                            <option value="05:00:00">05.00 AM </option>
-                                            <option value="06:00:00">06.00 AM </option>
-                                            <option value="07:00:00">07.00 AM </option>
-                                            <option value="08:00:00">08.00 AM </option>
-                                                                                  
-                                         </select>
-                                                            
-                                                    </div>
-                                                </div>
-                                             </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">End Time:</label>
-                                    <div class="col-sm-6">
-                                        <select  name="return_time" class="form-control"> 
-                                        <option value="23:59:01">Default Time </option>
-                                            <option value="09:00:00">9.00 AM </option>
-                                            <option value="10:00:00">10.00 AM </option>
-                                            <option value="11:00:00">11.00 AM </option>
-                                            <option value="12:00:00">12.00 PM (Noon)</option>
-                                            <option value="13:00:00">01.00 PM </option>
-                                            <option value="14:00:00">02.00 PM </option>
-                                            <option value="15:00:00">03.00 PM </option>
-                                            <option value="16:00:00">04.00 PM </option>
-                                            <option value="17:00:00">05.00 PM </option>
-                                            <option value="18:00:00">06.00 PM </option>
-                                            <option value="19:00:00">07.00 PM </option>
-                                            <option value="20:00:00">08.00 PM </option>
-                                            <option value="21:00:00">09.00 PM </option>
-                                            <option value="22:30:00">10.00 PM </option>
-                                            <option value="23:00:00">11.00 PM </option>
-
-                                            <option value="23:59:00">12.00 AM (Night) </option>
-                                            <option value="01:00:00">01.00 AM </option>
-                                            <option value="02:00:00">02.00 AM </option>
-                                            <option value="03:00:00">03.00 AM </option>
-                                            <option value="04:00:00">04.00 AM </option>
-                                            <option value="05:00:00">05.00 AM </option>
-                                            <option value="06:00:00">06.00 AM </option>
-                                            <option value="07:00:00">07.00 AM </option>
-                                            <option value="08:00:00">08.00 AM </option>
-                                                                                  
-                                         </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+<div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Leave Start :</label>
+                        <div class="col-sm-6">
+                            <input type="date" name="leave_satart" class="form-control" required>
                         </div>
-                                
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Leave End :</label>
+                        <div class="col-sm-6">
+                            <input type="date" name="leave_end" class="form-control" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Leave Type :</label>
+                        <div class="col-sm-6">
+<select  name="leaveType" class="form-control" required>
+<option value="" disabled selected >Select Type </option>
+        <option value="personal">Personal Leave</option>
+        <option value="police">Police Requsition</option>
+        <option value="maintenance">Car Maintenance</option>
 
-                                                <div class="row">
-                                                    <div class="col-12 text-center">
-                                                        <button type="submit" name="submit" class="btn btn-outline-success btn-block btn-rounded">Update Status</button>
-                                                        
-                                                    </div>
-                                                </div>
+
+                    </select>
+                        </div>
+                    </div>
+                </div>
+          
+
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label"> Leave Time :</label>
+                        <div class="col-sm-6">
+<select id="time_show" class="form-control" onChange="return show();" >
+<option value="">Full Day</option>
+<option value="manual_input">Manual Input</option>
+
+                    </select>
+                        </div>
+                    </div>
+                </div>
 
 
-                                            </form>
+            <div id="manual_input_show" style="display:none;"> 
+                <div class="col-md-6">
+            <div class="form-group row">
+<label class="col-sm-4 col-form-label">Start Time:</label>
+        <div class="col-sm-6">
+<select  name="start_time" class="form-control"> 
+    <option value="01:01:01">Default Time </option>
+        <option value="09:00:00">9.00 AM </option>
+        <option value="10:00:00">10.00 AM </option>
+        <option value="11:00:00">11.00 AM </option>
+        <option value="12:00:00">12.00 PM (Noon)</option>
+        <option value="13:00:00">01.00 PM </option>
+        <option value="14:00:00">02.00 PM </option>
+        <option value="15:00:00">03.00 PM </option>
+        <option value="16:00:00">04.00 PM </option>
+        <option value="17:00:00">05.00 PM </option>
+        <option value="18:00:00">06.00 PM </option>
+        <option value="19:00:00">07.00 PM </option>
+        <option value="20:00:00">08.00 PM </option>
+        <option value="21:00:00">09.00 PM </option>
+        <option value="22:30:00">10.00 PM </option>
+        <option value="23:00:00">11.00 PM </option>
 
-                                        </div>
-                                    </div>
-                                </div>
+        <option value="23:59:00">12.00 AM (Night) </option>
+        <option value="01:00:00">01.00 AM </option>
+        <option value="02:00:00">02.00 AM </option>
+        <option value="03:00:00">03.00 AM </option>
+        <option value="04:00:00">04.00 AM </option>
+        <option value="05:00:00">05.00 AM </option>
+        <option value="06:00:00">06.00 AM </option>
+        <option value="07:00:00">07.00 AM </option>
+        <option value="08:00:00">08.00 AM </option>
+                                              
+     </select>
+                        
+                </div>
+            </div>
+         </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+<label class="col-sm-4 col-form-label">End Time:</label>
+<div class="col-sm-6">
+    <select  name="return_time" class="form-control"> 
+    <option value="23:59:01">Default Time </option>
+        <option value="09:00:00">9.00 AM </option>
+        <option value="10:00:00">10.00 AM </option>
+        <option value="11:00:00">11.00 AM </option>
+        <option value="12:00:00">12.00 PM (Noon)</option>
+        <option value="13:00:00">01.00 PM </option>
+        <option value="14:00:00">02.00 PM </option>
+        <option value="15:00:00">03.00 PM </option>
+        <option value="16:00:00">04.00 PM </option>
+        <option value="17:00:00">05.00 PM </option>
+        <option value="18:00:00">06.00 PM </option>
+        <option value="19:00:00">07.00 PM </option>
+        <option value="20:00:00">08.00 PM </option>
+        <option value="21:00:00">09.00 PM </option>
+        <option value="22:30:00">10.00 PM </option>
+        <option value="23:00:00">11.00 PM </option>
+
+        <option value="23:59:00">12.00 AM (Night) </option>
+        <option value="01:00:00">01.00 AM </option>
+        <option value="02:00:00">02.00 AM </option>
+        <option value="03:00:00">03.00 AM </option>
+        <option value="04:00:00">04.00 AM </option>
+        <option value="05:00:00">05.00 AM </option>
+        <option value="06:00:00">06.00 AM </option>
+        <option value="07:00:00">07.00 AM </option>
+        <option value="08:00:00">08.00 AM </option>
+                                              
+     </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+
+
+            <div class="row">
+                <div class="col-12 text-center">
+                    <button type="submit" name="submit" class="btn btn-outline-success btn-block btn-rounded">Update Status</button>
+                    
+                </div>
+            </div>
+
+
+        </form>
+
+    </div>
+</div>
+</div>
 
 
                             </div>

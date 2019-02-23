@@ -31,7 +31,21 @@ include('../db/config.php');
         <!-- endinject -->
         <?php include('common/icon.php'); ?>
 
-       
+       <script>
+            function userAvailability() {
+                $("#loaderIcon").show();
+                jQuery.ajax({
+                    url: "check_availability.php",
+                    data: 'check_value=' + $("#check_value").val(),
+                    type: "POST",
+                    success: function(data) {
+                        $("#user-availability-status1").html(data);
+                        $("#loaderIcon").hide();
+                    },
+                    error: function() {}
+                });
+            }
+        </script>
 
     </head>
 
@@ -73,7 +87,9 @@ $row=$query->fetch_assoc();
                                                         <label class="col-sm-3 col-form-label">Driver Name </label>
                                                         <div class="col-sm-9">
 
-                                                            <input type="text" id="check_value" onBlur="userAvailability()" name="driver_name" class="form-control" value="<?php echo htmlentities($row['driver_name']); ?>" readonly>
+                                                            <input type="text" id="check_value" onBlur="userAvailability()" name="driver_name" class="form-control" value="<?php echo htmlentities($row['driver_name']); ?>" required>
+
+                                                            <span id="user-availability-status1" style="font-size:12px;"></span>
 
                                                         </div>
                                                     </div>

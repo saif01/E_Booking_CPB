@@ -2547,10 +2547,22 @@ body,
 	color: #fff;
 	display: inline-block;
 	font-weight: 600;
-	margin-top: 5px;
+	margin: 3px;
 	padding: 8px 30px;
 	-webkit-transition: all 0.4s ease 0s;
 	transition: all 0.4s ease 0s;
+}
+
+
+
+.rent-btn-dan {
+	background-color: #DC143C;
+	color: #fff;
+	display: inline-block;
+	font-weight: 700;
+	margin-top: 5px;
+	padding: 8px 30px;
+	margin:5px;
 }
 
 .rent-btn:hover {

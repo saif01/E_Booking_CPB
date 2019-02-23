@@ -64,6 +64,10 @@ $drivLevs=mysqli_num_rows($drivLev);
 //**************** Police Requsition Status Checking ***********************//
  $police_req=mysqli_query($con,"SELECT * FROM `police_req` WHERE `car_id`='$car_id' AND `req_st`='1' AND ( `req_start` BETWEEN '$start_book' AND '$end_book' OR `req_end` BETWEEN '$start_book' AND '$end_book' OR '$start_book' BETWEEN `req_start` AND `req_end` OR '$end_book' BETWEEN `req_start` AND `req_end` )");
 $req_num=mysqli_num_rows($police_req);
+
+//**************** Car Maintence Status Checking ***********************//
+ $car_maintence=mysqli_query($con,"SELECT * FROM `car_maintenance` WHERE `car_id`='$car_id' AND `ment_st`='1' AND ( `ment_stat` BETWEEN '$start_book' AND '$end_book' OR `ment_end` BETWEEN '$start_book' AND '$end_book' OR '$start_book' BETWEEN `ment_stat` AND `ment_end` OR '$end_book' BETWEEN `ment_stat` AND `ment_end` )");
+$maintence=mysqli_num_rows($car_maintence);
       
         if(date($start_date) < date('Y-m-d'))
                 {
@@ -81,6 +85,13 @@ $req_num=mysqli_num_rows($police_req);
               {
                 $_SESSION['error']="ploce_requisition";
               }
+
+//************ For checking Car Maintence Have or Not *********//
+                elseif ($maintence > 0) 
+                {
+                   $_SESSION['error']="maintence";
+                   header('Location: ' . $_SERVER['HTTP_REFERER']);
+                }
               
 
 

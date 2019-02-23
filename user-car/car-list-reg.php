@@ -116,52 +116,67 @@ else{
                                           
                                             <div class="article-date">
 
-                                    <?php
-                             $driver_id=$row['driver_id'];
-                             $car_id=$row['car_id'];
+            <?php
+     $driver_id=$row['driver_id'];
+     $car_id=$row['car_id'];
 //********* Booking status checkinig by Current Date *****************//
-                             $query3=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND `boking_status`='1' AND '$currentTime' BETWEEN `start_date` AND `end_date`");
+$query3=mysqli_query($con,"SELECT * FROM `car_booking` WHERE `car_id`='$car_id' AND `boking_status`='1' AND '$currentTime' BETWEEN `start_date` AND `end_date`");
+
 //********* Driver Leave status checkinig by Current Date *****************//
-                             $drivLev=mysqli_query($con,"SELECT * FROM `driver_leave` WHERE `leave_status`='1' AND `driver_id`='$driver_id' AND '$currentTime' BETWEEN `driver_leave_start` AND `driver_leave_end`");
-//********* Police Requisition status checkinig by Current Date *****************//
-                             $polic_req=mysqli_query($con,"SELECT * FROM `police_req` WHERE `car_id`='$car_id' AND `req_st`='1' AND '$currentTime' BETWEEN `req_start` AND `req_end`");
+$drivLev=mysqli_query($con,"SELECT * FROM `driver_leave` WHERE `leave_status`='1' AND `driver_id`='$driver_id' AND '$currentTime' BETWEEN `driver_leave_start` AND `driver_leave_end`");
 
-                             //$row3=$query3->fetch_assoc();
-                             $row3=mysqli_num_rows($query3);
-                             $row4=mysqli_num_rows($drivLev);
-                             $p_row=mysqli_num_rows($polic_req);
+//********* Police Requisition status checkinig by CurrentDate*************//
+$polic_req=mysqli_query($con,"SELECT * FROM `police_req` WHERE `car_id`='$car_id' AND `req_st`='1' AND '$currentTime' BETWEEN `req_start` AND `req_end`");
 
-                            if ($row3>0) {
-                                //echo "Book";
-                                ?> <p style="color: red;"> Booked</p> <?php
-                            }
-                            elseif ($row4>0) {
-                                 ?> <p style="color: red;">Busy</p> <?php
-                            }
-                            elseif ($p_row>0) {
-                                 ?> <p style="color: red;">Busy</p> <?php
-                            }
-                            else{
-                                echo "Free";
-                            }
-                                 ?>   
-         
-                                            </div>
+//********* Car Maintence status checkinig by CurrentDate*************//
+$maintenceSQL=mysqli_query($con,"SELECT * FROM `car_maintenance` WHERE `car_id`='$car_id' AND `ment_st`='1'  AND '$currentTime' BETWEEN `ment_stat` AND `ment_end`");
 
-                                            <div class="text-center">
+     //$row3=$query3->fetch_assoc();
+     $row3=mysqli_num_rows($query3);
+     $row4=mysqli_num_rows($drivLev);
+     $p_row=mysqli_num_rows($polic_req);
+     $maintence_car=mysqli_num_rows($maintenceSQL);
+
+    if ($row3>0) {
+        echo '<p style="color: red;"> Booked</p>';
+    }
+    elseif ($row4>0) { 
+        echo '<p style="color: red;">Busy</p>'; 
+    }
+    elseif ($p_row>0) {
+         echo '<p style="color: red;">Busy</p>';
+    }
+    elseif ($maintence_car>0) {
+        echo '<p style="color: red;">Busy</p>';
+    }
+    else{
+        echo "Free";
+    }
+         ?>   
+
+                </div>
+
+                <div class="text-center">
+
                 <table class="table ">
 <?php
-//Driver Leave Date Show....
+//Driver Leave Date Show....Sql
 $driver_id=$row['driver_id'];
-$driverLevsql=mysqli_query($con,"SELECT * FROM `driver_leave` WHERE `leave_status`='1' AND `driver_id`='$driver_id' ORDER BY `driver_leave_id` DESC LIMIT 1");
+$driverLevsql=mysqli_query($con,"SELECT * FROM `driver_leave` WHERE `leave_status`='1' AND `driver_id`='$driver_id' AND `driver_leave_end` >= '$currentTime' ORDER BY `driver_leave_id` DESC LIMIT 1");
+// car maintence Sql
+$car_maintence=mysqli_query($con,"SELECT * FROM `car_maintenance` WHERE `driver_id`='$driver_id' AND `ment_st`='1' AND `ment_end` >= '$currentTime' ORDER BY `ment_id` DESC LIMIT 1");
+
 $driver_lev=$driverLevsql->fetch_assoc();
+$car_ment=$car_maintence->fetch_assoc();
 
-$driver_leave_start=$driver_lev['driver_leave_start'];
-$driver_leave_end=$driver_lev['driver_leave_end'];
+// driver leave
+if ( $driver_lev !='') { 
+echo '<h5><span class="badge badge-warning"> Driver Leave : '.date("M j, Y", strtotime($driver_lev['driver_leave_start'])).' To '.date("M j, Y", strtotime($driver_lev['driver_leave_end'])).'</span></h5>' ;
+}
 
-if ( $driver_leave_end >= $currentTime) {
-
-echo '<h5><span class="badge badge-warning"> Driver Leave :'.date("M j, Y", strtotime($driver_leave_start)).' To '.date("M j, Y", strtotime($driver_leave_end)).'</span></h5>' ;
+// car maintence
+if ( $car_ment !='') {
+echo '<h5><span class="badge badge-info">Maintenance : '.date("M j, Y", strtotime($car_ment['ment_stat'])).' To '.date("M j, Y", strtotime($car_ment['ment_end'])).'</span></h5>' ;
 }
 
  ?>
@@ -188,86 +203,88 @@ echo '<h5><span class="badge badge-warning"> Driver Leave :'.date("M j, Y", strt
 
 <a href="booking-car-reg?car_id=<?php echo ($row['car_id']);?>" class="readmore-btn">Book  <i class="far fa-arrow-alt-circle-right"></i></a>
 
-                                            
-                                        </div>
+                    
+                </div>
 
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Articles Content End -->
-        <!--  Driver Section Start -->
-                   <div class="col-lg-2">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Articles Content End -->
 
-                        <?php    
-                $st= $row['driver_status'];
-//************** Driver leave day counting ******************// 
-                $l_Stst=$row['leave_start'];
-                $l_Sted=$row['leave_end'];
+<!--  Driver Section Start -->
+<div class="col-lg-2">
 
-                //Start Time Subtraction and convert to days.
-                $ts1    =   strtotime($l_Stst);
-                $ts2    =   strtotime($l_Sted);
-                $seconds    = abs($ts2 - $ts1); # difference will always be positive
-                $leavedays = round($seconds/(60*60*24));
-
-                                   
-
-                         $driver_id=$row['driver_id'];
-                         $sql4=mysqli_query($con,"SELECT * FROM `car_driver` WHERE `driver_id`='$driver_id' AND '$currentdate' BETWEEN date(`leave_start`) AND date(`leave_end`)");
-
-                         $rowNum=mysqli_num_rows($sql4);
-                         //$rowNum=1;
-
-                            if($rowNum >0) { ?>
-
-                                <div class="article-thumb-s" >
-                                                                      
-                                    <a href="driver-details.php?driver_id=<?php echo ($row['driver_id']);?>" > <img src="../pimages/driver/<?php echo ($row['driver_img']);?>" class="img-responsive mx-auto d-block"  alt="Image" /> </a>
-
-                                
-                                    <p><?php echo ($row['driver_name']) ; ?> </p> 
-                                    <p style="background-color: red;  color: white; ">On Leave</p>                                                                    
-                                </div>
+<?php    
+$st= $row['driver_status'];
 
 
-                         <?php } 
-                         elseif($p_row >0) { ?>
+ $driver_id=$row['driver_id'];
+ $sql4=mysqli_query($con,"SELECT * FROM `car_driver` WHERE `driver_id`='$driver_id' AND '$currentdate' BETWEEN date(`leave_start`) AND date(`leave_end`)");
 
-                                <div class="article-thumb-s" >
-                                                                      
-                                    <a href="driver-details.php?driver_id=<?php echo ($row['driver_id']);?>" > <img src="../pimages/driver/<?php echo($row['driver_img']);?>" class="img-responsive mx-auto d-block"  alt="Image" /> </a>
-                                
-                                    <p><?php echo ($row['driver_name']) ; ?> </p> 
-                                    <p style="background-color: red;  color: white; ">Police REQ.</p>                                                                    
-                                </div>
+ $rowNum=mysqli_num_rows($sql4);
 
-                         <?php } 
-                          elseif ($st==0) { ?>
-
-                                <div class="article-thumb-s"> 
-                                    <a> <img src="../pimages/driver/def/absence.jpg" class="img-responsive mx-auto d-block" alt="Image" /> </a>
-
-                                    <p ><?php echo ($row['driver_name']) ; ?> </p> 
-                                    <p style="background-color: red; color: white; "> Emergency Leave </p>       
-                                </div>
-
-                         <?php } 
+// Show for Personal Leave
+    if($rowNum >0) { ?>
+<div class="article-thumb-s" >                                              
+    <a href="driver-details.php?driver_id=<?php echo ($row['driver_id']);?>" > <img src="../pimages/driver/<?php echo ($row['driver_img']);?>" class="img-responsive mx-auto d-block"  alt="Image" /> </a>       
+    <p><?php echo ($row['driver_name']) ; ?> </p> 
+    <p style="background-color: red;  color: white; ">On Leave</p>                                                                    
+</div>
 
 
-                        else{ ?>
+ <?php } 
 
-                                <div class="article-thumb-s" >
-                                                                      
-                                    <a href="driver-details.php?driver_id=<?php echo ($row['driver_id']);?>" > <img src="../pimages/driver/<?php echo($row['driver_img']);?>" class="img-responsive mx-auto d-block"  alt="Image" /> </a>
+  //Show for Police Requisiton
+ elseif($p_row >0) { ?>
 
-                                
-                                    <p><?php echo ($row['driver_name']) ; ?> </p> 
-                        <p><i class="fas fa-mobile-alt"></i> <a  href="tel:+88<?php echo ($row['driver_phone']) ; ?>"> <?php echo ($row['driver_phone']) ; ?> </a> 
-                                    </p>                                
-                                  
-                                </div> 
+        <div class="article-thumb-s" >
+                                              
+            <a href="driver-details.php?driver_id=<?php echo ($row['driver_id']);?>" > <img src="../pimages/driver/<?php echo($row['driver_img']);?>" class="img-responsive mx-auto d-block"  alt="Image" /> </a>
+        
+            <p><?php echo ($row['driver_name']) ; ?> </p> 
+            <p style="background-color: red;  color: white; ">Police REQ.</p>                                                                    
+        </div>
+
+ <?php }
+
+ //Show for emergency Leave 
+  elseif ($st==0) { ?>
+
+        <div class="article-thumb-s"> 
+            <a> <img src="../pimages/driver/def/absence.jpg" class="img-responsive mx-auto d-block" alt="Image" /> </a>
+
+            <p ><?php echo ($row['driver_name']) ; ?> </p> 
+            <p style="background-color: red; color: white; "> Emergency Leave </p>       
+        </div>
+
+ <?php } 
+
+//Show for Car Maintance
+elseif ($maintence_car > 0) { ?>
+
+    <div class="article-thumb-s"> 
+        <a href="driver-details.php?driver_id=<?php echo ($row['driver_id']);?>" > <img src="../pimages/driver/def/absence.jpg" class="img-responsive mx-auto d-block" alt="Image" /> </a>
+
+        <p ><?php echo htmlentities($row['driver_name']) ; ?> </p> 
+        <p style="background-color: red; color: white; ">Maintenance </p>       
+    </div>
+
+<?php } 
+
+
+else{ ?>
+
+        <div class="article-thumb-s" >
+                                              
+            <a href="driver-details.php?driver_id=<?php echo ($row['driver_id']);?>" > <img src="../pimages/driver/<?php echo($row['driver_img']);?>" class="img-responsive mx-auto d-block"  alt="Image" /> </a>
+        
+            <p><?php echo ($row['driver_name']) ; ?> </p> 
+<p><i class="fas fa-mobile-alt"></i> <a  href="tel:+88<?php echo ($row['driver_phone']) ; ?>"> <?php echo ($row['driver_phone']) ; ?> </a> 
+            </p>                                
+          
+        </div> 
 
 
                 <?php } ?>

@@ -28,7 +28,9 @@ else{
 
     
     <?php require('common/title.php'); ?> 
-    <?php require('common/allcss.php'); ?> 
+    <?php require('common/allcss.php'); ?>
+
+   
 
 
 </head>
@@ -155,16 +157,16 @@ $edate2=$date2->format('d-m-Y h:i:s A');
                                             <div>
                                                 <div class="card-body">
 
-                                                    <!-- Single Car Start -->
-                                                    <div class="single-car-wrap">
-                                                        <div class="row">
-                                                            <!-- Single Car Thumbnail -->
-                                                            <div class="col-lg-4">
-                                                                <div class="car-list-thumb-s">
+                                    <!-- Single Car Start -->
+                                    <div class="single-car-wrap">
+                                        <div class="row">
+                                            <!-- Single Car Thumbnail -->
+                                            <div class="col-lg-4">
+                                                <div class="car-list-thumb-s">
 <a href="car-details?car_id=<?php echo ($row['car_id']);?> ">  <img src="../pimages/car/<?php echo($row['car_img']);?>" class="rounded mx-auto d-block" alt="Image" /></a>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Single Car Thumbnail -->
+                                                </div>
+                                            </div>
+                                            <!-- Single Car Thumbnail -->
 
                                                             <!-- Single Car Info -->
                                         <div class="col-lg-8">
@@ -194,29 +196,38 @@ $edate2=$date2->format('d-m-Y h:i:s A');
                                                 </li>
                                             </ul>
 
+                                          
+<div class="row justify-content-center">
                 <?php 
             $booking_status=$row['boking_status'];
             $booked_Date = date($endDate);
 
-                if ($booked_Date > $currentTime && $booking_status==1) {?>                   
-<a href="cancle-booking?booking_id=<?php echo ($row['booking_id']); ?>" class="rent-btn" onclick="this.style.display = 'none'">Cancel Booking</a>
+                if ($booked_Date > $currentTime && $booking_status==1) {?>
+
+<form method="post" action="cancle-booking?booking_id=<?php echo ($row['booking_id']); ?>" onsubmit="return confirm('Are you want to Cancel Booking ???');">
+    
+    <input type="submit" class="rent-btn" name="cancel_booking"  value="Cancel Booking">
+</form>
+
+
+
 <!-- Modify Booking End Time -->
- <a href="javascript:void(0);" onClick="popUpWindow('booking-modify.php?booking_id=<?php echo ($row['booking_id']);?>');" class="rent-btn" title="Modify Info.">Modify Booking</a>
+ <a href="javascript:void(0);" onClick="popUpWindow('booking-modify.php?booking_id=<?php echo ($row['booking_id']);?>');" title="Modify Info."><button class="rent-btn"> Modify Booking</button></a>
                <?php
                 }
                 elseif($booking_status==0){
 //echo "Canceled";
-?> <button type="button" class="btn btn-danger">Booking Canceled</button> <?php
+?> <span class="rent-btn-dan">Booking Canceled</span> <?php
 
                    }
                 else{
-?> <button type="button" class="btn btn-danger">Date Expired</button> <?php
+?> <span class="rent-btn-dan">Date Expired</span> <?php
                 }
 
-if ($row['booking_cost'] !=='' && $row['driver_rating'] !=='' && $row['start_mileage'] !=='' && $end_mileage=$row['end_mileage'] !=='' && $row['comit_st'] =='' ) {
+if ($row['booking_cost'] !=='' && $row['driver_rating'] !=='' && $row['start_mileage'] !=='' && $end_mileage=$row['end_mileage'] !=='' && $row['comit_st'] =='' ) 
+{
     
-?> <button type="button" class="btn btn-info"> Commended </button> 
-<?php
+?> <span class="rent-btn-dan"> Commended </span> <?php
 }
 
 $startDateTime= $row['start_date'];   
@@ -229,10 +240,10 @@ if($comit_st=='' && $row['boking_status']=='1' && $Onlydate == $currentDate)
      $query2=mysqli_query($con,"SELECT `driver_id` FROM `car_driver` WHERE `car_id`='$car_id' ");
     $row2=$query2->fetch_assoc();
                         
-?><a href="user-comment?booking_id=<?php echo ($row['booking_id']); ?> &driver_id=<?php echo ($row2['driver_id']); ?>" class="rent-btn">Comment</a> 
+?><a href="user-comment?booking_id=<?php echo ($row['booking_id']); ?> &driver_id=<?php echo ($row2['driver_id']); ?>" ><button class="rent-btn"> Comment</button> </a> 
 <?php }?>
 
-                     
+  </div>                   
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -289,7 +300,7 @@ if($comit_st=='' && $row['boking_status']=='1' && $Onlydate == $currentDate)
     }
     </script>
 
-     
+   
 
 </body>
 

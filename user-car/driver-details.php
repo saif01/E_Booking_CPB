@@ -110,33 +110,38 @@ $value = $query->fetch_assoc();
                                     }
                                     else{
 
-                                        echo date("F j, Y", strtotime($value['leave_start'])) ." -- To -- ".date("F j, Y", strtotime($value['leave_end']));
+                                        echo date("F j, Y, g:i a", strtotime($value['leave_start'])) ." -- To -- ".date("F j, Y, g:i a", strtotime($value['leave_end']));
                                     }
 
                                     ?> 
 
 
                             </li>
-                        <li> Police Requisition : 
-                            <?php 
-                         
+                        
+<?php 
+// Police Requisition SQL                         
 $police_req=mysqli_query($con,"SELECT * FROM `police_req` WHERE `driver_id`='$driver_id' AND `req_st` ='1' AND `req_end` >= '$currentTime' ORDER BY `req_id` DESC LIMIT 1 ");
-$police_num=mysqli_num_rows($police_req);
+
+// car maintence Sql
+$car_maintence=mysqli_query($con,"SELECT * FROM `car_maintenance` WHERE `driver_id`='$driver_id' AND `ment_st`='1' AND `ment_end` >= '$currentTime' ORDER BY `ment_id` DESC LIMIT 1");
+
 $police_row=$police_req ->fetch_assoc();
+$car_ment=$car_maintence->fetch_assoc();
+
+// Police Requisition
+ if ($police_row !='') {
+echo '<li>Police Requisition : '.date("F j, Y, g:i a", strtotime($police_row['req_start'])).' -- To -- '.date("F j, Y, g:i a", strtotime($police_row['req_end'])).'</li>' ;
+    }
+
+// car maintence 
+ if ($car_ment !='') {
+echo '<li>Car Maintence : '.date("F j, Y, g:i a", strtotime($car_ment['ment_stat'])).' -- To -- '.date("F j, Y, g:i a", strtotime($car_ment['ment_end'])).'</li>' ;
+    }
+
+    ?> 
 
 
-                                    if ($police_num == 0) {
-                                       echo "No Data Available";
-                                    }
-                                    else{
-
-                    echo date("F j, Y, g:i a", strtotime($police_row['req_start'])) ." -- To -- ".date("F j, Y, g:i a", strtotime($police_row['req_end']));
-                                    }
-
-                                    ?> 
-
-
-                            </li>
+                           
                             	<li> </li>
                                 </ul>
                             </div>

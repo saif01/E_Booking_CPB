@@ -221,8 +221,18 @@ echo '<h5><p class="badge-warning text-dark"> Driver Leave :'.date("M j, Y", str
                       </div>
                       <?php 
                       echo htmlentities($_SESSION['error']="");
-                       }                      
+                       } 
 
+//***** If Car Maintence Then show*****//
+                       if($_SESSION['error']=="maintence")
+                        { ?>
+                      <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        <strong>Sorry!</strong> You can't Book because, this car send for maintenance purpose!!.
+                      </div>
+                      <?php 
+                      echo htmlentities($_SESSION['error']="");                     
+                     }
 //******** After Same Result Found Show This Message *************//
                        if($_SESSION['error']=="same_result")
                         { ?>

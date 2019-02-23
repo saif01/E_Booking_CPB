@@ -51,6 +51,14 @@ if (isset($_POST[submit]))
         
     }
 
+    elseif ($leaveType=='maintenance') 
+    {
+//************ Police Recogition Data Store In Database ***************//
+        $ment_st='1';
+        $police_recog_Sql=mysqli_query($con,"INSERT INTO `car_maintenance`(`ment_stat`, `ment_end`, `driver_id`, `car_id`, `ment_st`) VALUES ('$leave_satart','$leave_end','$driver_id','$car_id','$ment_st')");
+             
+    }
+
    
 
 
