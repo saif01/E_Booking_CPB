@@ -107,7 +107,7 @@ include('../db/config.php');
               <tbody>
                 <?php 
 $user_id=$_SESSION['user_id'];
-$query=mysqli_query($con,"SELECT cms_app_complain.app_id,cms_app_complain.com_details, cms_app_complain.file, cms_app_complain.status, cms_app_complain.reg, cms_app_soft.soft_name, cms_app_module.mod_name FROM cms_app_complain INNER JOIN cms_app_soft ON cms_app_complain.soft_id=cms_app_soft.soft_id INNER JOIN cms_app_module ON cms_app_complain.mod_id=cms_app_module.mod_id WHERE cms_app_complain.user_id='$user_id' ORDER BY cms_app_complain.app_id DESC");
+$query=mysqli_query($con,"SELECT cms_app_complain.app_id,cms_app_complain.com_details, cms_app_complain.document1, cms_app_complain.document2, cms_app_complain.document3, cms_app_complain.document4, cms_app_complain.status, cms_app_complain.reg, cms_app_soft.soft_name, cms_app_module.mod_name FROM cms_app_complain INNER JOIN cms_app_soft ON cms_app_complain.soft_id=cms_app_soft.soft_id INNER JOIN cms_app_module ON cms_app_complain.mod_id=cms_app_module.mod_id WHERE cms_app_complain.user_id='$user_id' ORDER BY cms_app_complain.app_id DESC");
 
     while($row=mysqli_fetch_array($query))
     {

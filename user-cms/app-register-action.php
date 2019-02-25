@@ -29,73 +29,96 @@ $mod_id=$_POST['mod_id'];
 $com_details=$_POST['com_details'];
 $status='Not Process';
 
-$fileName1=$_FILES['document']['tmp_name'];
- if ($fileName1 !=="") 
+$document1=$_FILES['document1']['tmp_name'];
+$document2=$_FILES['document2']['tmp_name'];
+$document3=$_FILES['document3']['tmp_name'];
+$document4=$_FILES['document4']['tmp_name'];
+
+ if ($document1 !=="" && $document2 !=="" && $document3 !=="" && $document4 !=="") 
      {
 
 
-		$file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['document']['name']);
-		    $storeFile="../pimages/app/".$file_name;
-		    $fileenq=$_FILES['document']['tmp_name'];
+		$document1=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['document1']['name']);
+		    $storeFile="../pimages/app/".$document1;
+		    $fileenq=$_FILES['document1']['tmp_name'];
+		    move_uploaded_file($fileenq,$storeFile);
+
+		$document2=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['document2']['name']);
+		    $storeFile="../pimages/app/".$document2;
+		    $fileenq=$_FILES['document2']['tmp_name'];
+		    move_uploaded_file($fileenq,$storeFile);
+
+		$document3=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['document3']['name']);
+		    $storeFile="../pimages/app/".$document3;
+		    $fileenq=$_FILES['document3']['tmp_name'];
+		    move_uploaded_file($fileenq,$storeFile);
+
+		$document4=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['document4']['name']);
+		    $storeFile="../pimages/app/".$document4;
+		    $fileenq=$_FILES['document4']['tmp_name'];
 		    move_uploaded_file($fileenq,$storeFile);
 
 
-		$query=mysqli_query($con,"INSERT INTO `cms_app_complain`(`user_id`, `soft_id`, `mod_id`, `com_details`, `file`, `status`) VALUES ('$user_id','$soft_id','$mod_id','$com_details','$file_name','$status')");
+		$query=mysqli_query($con,"INSERT INTO `cms_app_complain`(`user_id`, `soft_id`, `mod_id`, `com_details`, `document1`, `document2`, `document3`, `document4`, `status`) VALUES ('$user_id','$soft_id','$mod_id','$com_details','$document1','$document2','$document3','$document4','$status')");
 
-		//Count Complain Number
-		$sql=mysqli_query($con,"SELECT `app_id` FROM `cms_app_complain` ORDER BY `app_id` DESC LIMIT 1");
-		while($row=mysqli_fetch_array($sql))
-		    {
-		     $cmpn=$row['app_id'];
-		    }
+						
+		}
 
-				if ($query) 
-				{
-					?>		
-					<script>
-					setTimeout(function () { 
-					        swal({
-					          title: "Your Complain Number <?php echo($cmpn); ?> ",
-					          text: "Complain Added Successfully !!!",
-					          type: "success",
-					          confirmButtonText: "OK"
-					        },
-					        function(isConfirm){
-					          if (isConfirm) {
-					          	//history.back();
-					            window.location.href = "complain-submit.php";
-					          }
-					        }); },0);
+	elseif ($document1 !=="" && $document2 !=="" && $document3 !=="" ) 
+     {
 
-					</script>
 
-				    <?php
-				}
+		$document1=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['document1']['name']);
+		    $storeFile="../pimages/app/".$document1;
+		    $fileenq=$_FILES['document1']['tmp_name'];
+		    move_uploaded_file($fileenq,$storeFile);
 
-				else
-				{
-					
+		$document2=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['document2']['name']);
+		    $storeFile="../pimages/app/".$document2;
+		    $fileenq=$_FILES['document2']['tmp_name'];
+		    move_uploaded_file($fileenq,$storeFile);
 
-					?>		
-					<script>
-					setTimeout(function () { 
-					        swal({
-					          title: "Error Genareted!",
-					          text: "Report Not Added Properly!",
-					          type: "error",
-					          confirmButtonText: "OK"
-					        },
-					        function(isConfirm){
-					          if (isConfirm) {
-					          	history.back();
-					            
-					          }
-					        }); },0);
+		$document3=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['document3']['name']);
+		    $storeFile="../pimages/app/".$document3;
+		    $fileenq=$_FILES['document3']['tmp_name'];
+		    move_uploaded_file($fileenq,$storeFile);
+		
 
-					</script>
+		$query=mysqli_query($con,"INSERT INTO `cms_app_complain`(`user_id`, `soft_id`, `mod_id`, `com_details`, `document1`, `document2`, `document3`, `status`) VALUES ('$user_id','$soft_id','$mod_id','$com_details','$document1','$document2','$document3','$status')");
+						
+		}
 
-				    <?php
-				}
+	elseif ($document1 !=="" && $document2 !=="" ) 
+     {
+
+
+		$document1=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['document1']['name']);
+		    $storeFile="../pimages/app/".$document1;
+		    $fileenq=$_FILES['document1']['tmp_name'];
+		    move_uploaded_file($fileenq,$storeFile);
+
+		$document2=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['document2']['name']);
+		    $storeFile="../pimages/app/".$document2;
+		    $fileenq=$_FILES['document2']['tmp_name'];
+		    move_uploaded_file($fileenq,$storeFile);
+
+		
+		$query=mysqli_query($con,"INSERT INTO `cms_app_complain`(`user_id`, `soft_id`, `mod_id`, `com_details`, `document1`, `document2`, `status`) VALUES ('$user_id','$soft_id','$mod_id','$com_details','$document1','$document2','$status')");
+						
+		}
+
+	elseif ($document1 !=="" ) 
+     {
+
+
+		$document1=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['document1']['name']);
+		    $storeFile="../pimages/app/".$document1;
+		    $fileenq=$_FILES['document1']['tmp_name'];
+		    move_uploaded_file($fileenq,$storeFile);
+
+		
+		$query=mysqli_query($con,"INSERT INTO `cms_app_complain`(`user_id`, `soft_id`, `mod_id`, `com_details`, `document1`, `status`) VALUES ('$user_id','$soft_id','$mod_id','$com_details','$document1','$status')");
+						
 		}
 
 	else
@@ -109,55 +132,17 @@ $fileName1=$_FILES['document']['tmp_name'];
 		     $cmpn=$row['app_id'];
 		    }
 
-				if ($query) 
-				{
-					?>		
-					<script>
-					setTimeout(function () { 
-					        swal({
-					          title: "Your Complain Number <?php echo($cmpn); ?> ",
-					          text: "Complain Added Successfully !!!",
-					          type: "success",
-					          confirmButtonText: "OK"
-					        },
-					        function(isConfirm){
-					          if (isConfirm) {
-					          	//history.back();
-					            window.location.href = "complain-submit.php";
-					          }
-					        }); },0);
-
-					</script>
-
-				    <?php
-				}
-
-				else
-				{
-					
-
-					?>		
-					<script>
-					setTimeout(function () { 
-					        swal({
-					          title: "Error Genareted!",
-					          text: "Report Not Added Properly!",
-					          type: "error",
-					          confirmButtonText: "OK"
-					        },
-					        function(isConfirm){
-					          if (isConfirm) {
-					          	history.back();
-					            
-					          }
-					        }); },0);
-
-					</script>
-
-				    <?php
-				}
 
 	}
+
+//Count Complain Number
+		$sql=mysqli_query($con,"SELECT `app_id` FROM `cms_app_complain` ORDER BY `app_id` DESC LIMIT 1");
+		while($row=mysqli_fetch_array($sql))
+		    {
+		     $cmpn=$row['app_id'];
+		    }
+
+
 
 //Start Mail Send code
 
@@ -173,6 +158,7 @@ $fileName1=$_FILES['document']['tmp_name'];
 
   		$cc=$mailrow['bu_mail'];
 
+	 	//$to="kalam@cpbangladesh.com, hadi@cpbangladesh.com";
 	 	$to="syful.cse.bd@gmail.com";
         $sub="Application Complain no: $cmpn";
         $msg=" 
@@ -197,7 +183,58 @@ $fileName1=$_FILES['document']['tmp_name'];
         //send_mail($sub,$msg,$to);
 
         send_mail_withCC($sub,$msg,$to,$cc);
+
+
 // End Mail Code
+
+
+		if ($query) 
+			{
+					?>		
+					<script>
+					setTimeout(function () { 
+					        swal({
+					          title: "Your Complain Number <?php echo($cmpn); ?> ",
+					          text: "Complain Added Successfully !!!",
+					          type: "success",
+					          confirmButtonText: "OK"
+					        },
+					        function(isConfirm){
+					          if (isConfirm) {
+					          	//history.back();
+					            window.location.href = "complain-submit.php";
+					          }
+					        }); },0);
+
+					</script>
+				    <?php
+				}
+			else{
+					?>		
+					<script>
+					setTimeout(function () { 
+					        swal({
+					          title: "Your Complain Number <?php echo($cmpn); ?> ",
+					          text: "Complain Added Successfully !!!",
+					          type: "success",
+					          confirmButtonText: "OK"
+					        },
+					        function(isConfirm){
+					          if (isConfirm) {
+					          	//history.back();
+					            window.location.href = "complain-submit.php";
+					          }
+					        }); },0);
+
+					</script>
+				    <?php
+			}
+					
+
+
+					
+
+
 
   } 
 

@@ -12,7 +12,7 @@ $app_id=$_GET['app_id'];
 
 
 // 4 table Join for generate  report         
-$query=mysqli_query($con,"SELECT cms_app_complain.app_id, cms_app_complain.user_id, cms_app_complain.com_details, cms_app_complain.file, cms_app_complain.reg, cms_app_complain.last_up, cms_app_soft.soft_name, cms_app_module.mod_name ,user.user_name, user.user_dept FROM cms_app_complain INNER JOIN cms_app_soft ON cms_app_complain.soft_id=cms_app_soft.soft_id INNER JOIN cms_app_module ON cms_app_complain.mod_id=cms_app_module.mod_id INNER JOIN user ON cms_app_complain.user_id=user.user_id WHERE cms_app_complain.app_id='$app_id' ");
+$query=mysqli_query($con,"SELECT cms_app_complain.app_id, cms_app_complain.user_id, cms_app_complain.com_details, cms_app_complain.reg, cms_app_complain.last_up, cms_app_soft.soft_name, cms_app_module.mod_name ,user.user_name, user.user_dept FROM cms_app_complain INNER JOIN cms_app_soft ON cms_app_complain.soft_id=cms_app_soft.soft_id INNER JOIN cms_app_module ON cms_app_complain.mod_id=cms_app_module.mod_id INNER JOIN user ON cms_app_complain.user_id=user.user_id WHERE cms_app_complain.app_id='$app_id' ");
 
 
 $row=$query->fetch_assoc();

@@ -88,7 +88,7 @@ $row=$query->fetch_assoc();
                   </div>
                   <div class="checkbox checkbox-success checkbox-inline">
                       <input type="checkbox"  name="tools[]" value="Power Cord">
-                      <label>Cord</label>
+                      <label>Power Cord</label>
                   </div>
                    <div class="checkbox checkbox-success checkbox-inline">
                       <input type="checkbox"  name="tools[]" value="AC Adeptar">
@@ -96,16 +96,17 @@ $row=$query->fetch_assoc();
                   </div>
                   <div class="checkbox checkbox-success checkbox-inline">
                       <input type="checkbox"  name="tools[]" value="VGA Cord">
-                      <label>VGA</label>
+                      <label>VGA Cord</label>
                   </div>
                   <div class="checkbox checkbox-success checkbox-inline">
                        <input type="checkbox"  name="tools[]" value="USB Cord">
-                      <label>USB</label>
+                      <label>USB Cord</label>
                   </div>
                   <div class="checkbox checkbox-success checkbox-inline">
-                      <input type="checkbox"  name="tools[]" value="Power Supply"> 
-                      <label>Power Supply</label>
+                       <input type="checkbox"  name="tools[]" value="Toner/Cartridge">
+                      <label>Toner/Cartridge</label>
                   </div>
+                  
                   <input type="text" name="tools[]" placeholder="Others product that you provide mention here" value=""  class="form-control form-control-sm">
       </div>
 <?php } ?> 
@@ -191,6 +192,9 @@ $row=$query->fetch_assoc();
         <script src="assets/jquery-slimscroll/jquery.slimscroll.js"></script>
         <script src="assets/jquery-blockui/jquery.blockUI.js"></script>
 
+
+<script src="../assets/coustom/ajax/3.3.1_jquery.min.js"></script>
+
         <script>
             function show(x) {  
                 if (x==1) {
@@ -223,7 +227,7 @@ $row=$query->fetch_assoc();
           </script>
 
 
-<script src="../assets/coustom/ajax/3.3.1_jquery.min.js"></script>
+
 <!-- Bubmit Button Disable After submit form -->
 <script type="text/javascript">
     $(document).ready(function () {

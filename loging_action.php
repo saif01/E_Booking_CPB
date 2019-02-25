@@ -56,7 +56,7 @@ if($num>0)
 
                     else
                     {   
-                       $_SESSION['errmsg']="Your Account Has been blocked .Please contact IT  !!!";
+                       $_SESSION['errmsg']="Your Account Has been blocked .Please contact with IT  !!!";
                        $log=mysqli_query($con,"INSERT INTO `loginlog`(`user_name`, `user_id`, `user_ip`, `user_os`, `user_browser`, `user_device`, `user_status`) VALUES ('$user_name','$user_id','$ip','$os','$browser','$device','$st')");
 
                         // echo "<script>

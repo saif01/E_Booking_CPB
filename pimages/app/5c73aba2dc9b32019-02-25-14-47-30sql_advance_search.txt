@@ -1,0 +1,1 @@
+SELECT car_booking.booking_id, tbl_car.car_id, tbl_car.car_name, car_driver.driver_name FROM car_booking INNER JOIN tbl_car ON car_booking.car_id=tbl_car.car_id INNER JOIN car_driver ON tbl_car.car_id=car_driver.car_id GROUP BY tbl_car.car_id 

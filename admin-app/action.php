@@ -108,7 +108,7 @@ include('../db/config.php');
  $app_id=$_GET['app_id'];        
 
 // 4 table Join for generate  report         
-$query=mysqli_query($con,"SELECT cms_app_complain.app_id, cms_app_complain.user_id, cms_app_complain.com_details, cms_app_complain.file, cms_app_complain.status, cms_app_complain.reg, cms_app_complain.last_up, cms_app_soft.soft_name, cms_app_module.mod_name ,user.user_name, user.user_dept FROM cms_app_complain INNER JOIN cms_app_soft ON cms_app_complain.soft_id=cms_app_soft.soft_id INNER JOIN cms_app_module ON cms_app_complain.mod_id=cms_app_module.mod_id INNER JOIN user ON cms_app_complain.user_id=user.user_id WHERE cms_app_complain.app_id='$app_id' ");
+$query=mysqli_query($con,"SELECT cms_app_complain.app_id, cms_app_complain.user_id, cms_app_complain.com_details, cms_app_complain.document1, cms_app_complain.document2, cms_app_complain.document3, cms_app_complain.document4, cms_app_complain.status, cms_app_complain.reg, cms_app_complain.last_up, cms_app_soft.soft_name, cms_app_module.mod_name ,user.user_name, user.user_dept FROM cms_app_complain INNER JOIN cms_app_soft ON cms_app_complain.soft_id=cms_app_soft.soft_id INNER JOIN cms_app_module ON cms_app_complain.mod_id=cms_app_module.mod_id INNER JOIN user ON cms_app_complain.user_id=user.user_id WHERE cms_app_complain.app_id='$app_id' ");
 $row=$query->fetch_assoc();
 
 
@@ -158,20 +158,35 @@ $row=$query->fetch_assoc();
 
         <th class="col-md-1">File:</th>
 
-            <td class="col-md-1">
+            <td class="col-md-3">
 
-        <?php $file= $row['file']; 
-            if($file !='') {
-
-        ?><a href="../pimages/app/<?php echo ($file); ?>" class="btn btn-info btn-sm" download>File</a><?php 
+        <?php $file1= $row['document1'];
+                $file2= $row['document2'];
+                $file3= $row['document3'];
+                $file4= $row['document4']; 
+            if($file1 !='') {
+        ?><a href="../pimages/app/<?php echo ($file1); ?>" class="btn btn-info btn-sm " style="margin: 1px;" download>File-1</a><?php 
         }
-           else{
+
+         if($file2 !='') {
+        ?><a href="../pimages/app/<?php echo ($file2); ?>" class="btn btn-info btn-sm " style="margin: 1px;" download>File-2</a><?php 
+        }
+
+         if($file3 !='') {
+        ?><a href="../pimages/app/<?php echo ($file3); ?>" class="btn btn-info btn-sm" style="margin: 1px;" download>File-3</a><?php 
+        }
+
+         if($file4 !='') {
+        ?><a href="../pimages/app/<?php echo ($file4); ?>" class="btn btn-info btn-sm" style="margin: 1px;" download>File-4</a><?php 
+        }
+        if ($file1=='' && $file2=='' && $file3=='' && $file1 =='' )
+        {
                echo "No Files";
          }?> 
             </td>
                       
         <th class="col-md-1">Details: </th>
-             <td class="col-md-9"><?php echo ($row['com_details']) ; ?></td>
+             <td class="col-md-7"><?php echo ($row['com_details']) ; ?></td>
 
       </tr>
       

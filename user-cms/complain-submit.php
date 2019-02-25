@@ -170,7 +170,7 @@ while($row = mysqli_fetch_array($result))
         <input type="checkbox"  name="tools[]" value="AC Adeptar"> Adeptar
         <input type="checkbox"  name="tools[]" value="VGA Cord"> VGA Cord
         <input type="checkbox"  name="tools[]" value="Usb Cord"> Usb Cord
-        <input type="checkbox"  name="tools[]" value="Power Supply"> Power Supply
+        <input type="checkbox"  name="tools[]" value="Toner/Cartridge"> Toner/Cartridge
         <input type="text" name="tools[]" placeholder="Others product that you provide mention here" value=""  class="form-control form-control-sm">
                                                     
    </div>
@@ -233,18 +233,70 @@ while($row = mysqli_fetch_array($result))
 			</div>
   	   </div>
 
+
+
+
+
+
+<!--     <label >Document's (Photos or PDF)</label>
+       <div class="row col-md-12">
+            <div class="col-md-6">
+              <div class="form-group">
+                 <input type="file" id="doc1" name="document1" class="form-control" >
+
+                
+              </div>
+          </div> 
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="file" id="doc2" name="document2" class="form-control" >
+                  
+              </select>
+            </div>
+          </div>
+     </div>
+
+      <div class="row col-md-12">
+            <div class="col-md-6">
+              <div class="form-group">
+                 <input type="file" id="doc3" name="document3" class="form-control">
+                
+              </div>
+          </div> 
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="file" id="doc4" name="document4" class="form-control">
+                  
+              </select>
+            </div>
+          </div>
+     </div> -->
+
+          <div class="form-group">
+            <label>Document's (Photos or PDF)</label>
+           <input type="file" id="doc1" name="document1" class="form-control" >
+          </div>
+           <div class="form-group">
+           <input type="file" id="doc1" name="document2" class="form-control" >
+          </div>
+
+          <div class="form-group">
+           <input type="file" id="doc1" name="document3" class="form-control" >
+          </div>
+
+           <div class="form-group">
+           <input type="file" id="doc1" name="document4" class="form-control" >
+          </div>
+
 				 
 				  <div class="form-group">
 				    <label>Application Complain's Details</label>
-				    <textarea class="form-control" name="com_details" rows="3" placeholder="Enter Your Application's Problem In Details" required="required"></textarea>
+				    <textarea class="form-control" name="com_details" rows="2" placeholder="Enter Your Application's Problem In Details" required="required"></textarea>
 				  </div>
-				  <div class="form-group">
-				    <label >Document's (Photos or PDF)</label>
-				    <input type="file" name="document" class="form-control">
-				  </div>
+				 
 				  <div class="form-group">
 				    
-				     <input id="btnSubmit" type="submit" name="submit" class="btn btn-info btn-block" value=" Hit To Application Complain Register">
+				     <input id="btnSubmit2" type="submit" name="submit" class="btn btn-info btn-block" value=" Hit To Application Complain Register">
 				  </div>
 				</form>
         </div>
@@ -288,6 +340,8 @@ while($row = mysqli_fetch_array($result))
     <!--== Scroll Top Area End ==-->
 
 <script src="../assets/coustom/ajax_3.2.1-jquery.min.js"></script>
+
+<!-- <script src="../assets/coustom/ajax/3.3.1_jquery.min.js"></script> -->
 
     <!--=======================Javascript============================-->
     <?php require('common/alljs.php'); ?>
@@ -351,7 +405,7 @@ function pagerefresh() {
 </script>
 
 
-<!-- <script src="../assets/coustom/ajax/3.3.1_jquery.min.js"></script> -->
+
 <!-- Bubmit Button Disable After submit form -->
 <script type="text/javascript">
     $(document).ready(function () {
@@ -364,6 +418,39 @@ function pagerefresh() {
     }
 });
 </script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+    $('form').submit(function () {
+        setTimeout(function () { disableButton(); },0);
+    });
+
+    function disableButton() {
+        $("#btnSubmit2").prop('disabled', true);
+    }
+});
+</script>
+
+<!-- <script type="text/javascript">
+  
+  
+  var document1 = document.getElementById("doc1");
+  var document2 = document.getElementById("doc2");
+  var document3 = document.getElementById("doc3");
+  var document4 = document.getElementById("doc4");
+
+  if (document1.value.length > 0) {
+
+       document.getElementById("doc2").disabled = false;
+  }
+
+  else{
+    document.getElementById("doc2").disabled = true;
+  }
+
+
+
+</script> -->
 
 
 </body>
