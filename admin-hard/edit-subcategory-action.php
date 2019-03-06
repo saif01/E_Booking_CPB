@@ -1,6 +1,8 @@
 <?php
 session_start();
 error_reporting(0);
+date_default_timezone_set('Asia/Dhaka');
+$currentTime = date('Y-m-d H:i:s', time ());//H, Time in 24 hours show , h, for 12
 if(strlen($_SESSION['admin_hard_login'])==0)
   { 
 header('location:../admin');
@@ -21,7 +23,7 @@ if (isset($_POST['submit'])) {
 
 $subcategory=$_POST['subcategory'];
 
-$query=mysqli_query($con,"UPDATE `cms_hard_subcategory` SET `subcategory`='$subcategory' WHERE `sub_id`='$sub_id'");
+$query=mysqli_query($con,"UPDATE `cms_hard_subcategory` SET `subcategory`='$subcategory', `last_up`='$currentTime' WHERE `sub_id`='$sub_id'");
 
 
 		if ($query) 

@@ -21,6 +21,7 @@ $admin_room_st= $row['admin_room_st'];
 $admin_law_st= $row['admin_law_st'];
 $admin_hard_st= $row['admin_hard_st'];
 $admin_app_st= $row['admin_app_st'];
+$admin_inventory_st= $row['admin_inventory_st'];
 $admin_super_st= $row['admin_super_st']; 
   ?>
 
@@ -157,7 +158,23 @@ if ($admin_app_st=='1') {
       </a>   
     </div>
     
-<?php }  
+<?php }
+
+// Inventory Section
+if ($admin_inventory_st=='1') {
+  $_SESSION['admin_inventory']=$row['admin_login'];
+?>
+
+    <!--Complaint Management  -->
+    <div class="col-md-2 shadow-lg p-3 rounded saif text-center zoom" id="grad1">
+      <a href="../../admin-inventory">
+     
+        <i class="fas fa-warehouse" style="font-size:700%; color: #00FFFF "></i>
+        <span class="badge badge-dark" style="font-size: 120%; margin:2%;">Inventory</span>
+      </a>   
+    </div>
+    
+<?php }    
  
 //Super Admin Section
 if ($admin_super_st=='1') {
@@ -177,7 +194,7 @@ if ($admin_super_st=='1') {
 <?php } 
 
 //No Access
-if($admin_car_st=='0' && $admin_law_st=='0' && $admin_room_st=='0' && $admin_hard_st=='0' && $admin_app_st=='0' && $admin_super_st=='0')
+if($admin_car_st=='0' && $admin_law_st=='0' && $admin_room_st=='0' && $admin_hard_st=='0' && $admin_app_st=='0' && $admin_super_st=='0' && $admin_inventory_st=='0')
 {
 ?>
      

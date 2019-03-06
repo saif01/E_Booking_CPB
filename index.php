@@ -24,6 +24,8 @@ error_reporting(0);
 		});
 		</script>
 
+		
+
 	</head>
 	<body>
 		<!-- Preloader -->
@@ -39,7 +41,7 @@ error_reporting(0);
 
 			
 
-			<form action="loging_action.php" method="POST">
+			<form  action="loging_action.php" method="POST">
 
 				<span style="color:red;"><?php echo htmlentities($_SESSION['errmsg']); ?><?php echo htmlentities($_SESSION['errmsg']="");?></span> 
 
@@ -47,14 +49,18 @@ error_reporting(0);
 					<div class="input-group-prepend">
 						<span class="input-group-text bg-warning"><i class="fas fa-user"></i></span>
 					</div>
-					<input type="text" name="user_login" class="form-control text-center" placeholder="Enter your Login ID" >
+					<input type="text" name="user_login" class="form-control text-center" placeholder="Enter your Login ID" required="required" />
+
+					
 				</div>
 				<br> 
 				<div class="input-group">
 					<div class="input-group-prepend">
 						<span class="input-group-text bg-warning"><i class="fas fa-key"></i> <!-- <i class="material-icons" style="">vpn_key</i> --></span>
 					</div>
-					<input type="password" name="password" class="form-control text-center" placeholder="Enter your password" >
+					<input type="password" name="password" class="form-control text-center" placeholder="Enter Your AD Password" required="required" />
+
+					
 				</div>
 				<br><br>
 				<div class="input-group">
@@ -67,7 +73,7 @@ error_reporting(0);
 	<script src="login/js/jquery-slim.min.js"></script>
 	<script src="login/js/popper.min.js"></script>
 	<script src="login/js/bootstrap.min.js"></script>
-	
+
 
 	</body>
 </html>

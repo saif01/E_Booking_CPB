@@ -8,6 +8,16 @@ header('location:../admin');
 else{ 
 
 include('../db/config.php');
+
+// Department
+$department = '';
+$query1 = "SELECT * FROM `department` ORDER BY `dept_name`";
+$result1 = mysqli_query($con, $query1);
+while($row = mysqli_fetch_array($result1))
+{
+ $department .= '<option value="'.$row["dept_name"].'">'.$row["dept_name"].'</option>';
+}
+
 ?>
 
 
@@ -113,7 +123,7 @@ include('../db/config.php');
             <div class="form-group">
                 <label class="col-sm-3 control-label">Password</label>
                 <div class="col-sm-9">
-                  <input type="password" name="admin_pass" class="form-control" placeholder="Default Password" value="12345" required>
+                  <input type="password" name="admin_pass" class="form-control" placeholder="Default Password" value="12345" disabled="disabled">
                 </div>
             </div>
     </div>
@@ -144,9 +154,14 @@ include('../db/config.php');
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">Admin Department</label>
+                <label class="col-sm-3 control-label">Department</label>
                 <div class="col-sm-9">
-                   <input type="text" name="admin_dept" class="form-control" placeholder="Enter Admin Department Name" required>
+
+                    <select class="form-control" name="admin_dept" required="required">
+                            <option value="" disabled selected>Select Department Name</option>
+                          <?php echo $department; ?>
+                    </select>
+                   <!-- <input type="text" name="admin_dept" class="form-control" placeholder="Enter Admin Department Name" required> -->
                 </div>
             </div>            
     </div>

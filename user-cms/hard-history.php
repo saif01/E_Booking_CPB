@@ -130,7 +130,8 @@ $query=mysqli_query($con,"SELECT cms_hard_complain.hard_id, cms_hard_complain.us
 <!--Start Status Show  (Process, Warrenty, Dalivery)-->
 <?php
 $st=$row['status'];
-$ws=$row['warrenty']; 
+$ws=$row['warrenty'];
+$ds=$row['delivery']; 
 
  if($st == 'Closed') {?>
 <span class="badge badge-pill badge-danger" style="font-size: 15px;">Closed</span>
@@ -152,25 +153,27 @@ if($st == 'Not Process') {?>
     
 <?php }
 
+if($ds == 'Delivered') {?>
+<span class="badge badge-pill badge-danger" style="font-size: 15px;"> Delivered</span>
+    
+<?php }
 
+if($ds == 'Deliverable') {?>
+<span class="badge badge-pill badge-info" style="font-size: 15px;"> Deliverable</span>
+    
+<?php }
 
-             if ($ws=='') {
-                
-             }
-             elseif ($ws=='s_w' || $ws=='a_s_w' || $ws=='b_w') {
+     if ($ws=='') {
+        
+     }
+     elseif ( ($ws=='s_w' || $ws=='a_s_w' || $ws=='b_w') && $ds=='' ){
     ?>
 <span class="badge badge-pill badge-info" style="font-size: 15px;">Warrenty</span>
-    <?php
-               
-             }
+    <?php   
+             }?>
             
              
-             elseif ($ws=='dm_w') {
- ?>
-<span class="badge badge-pill badge-danger" style="font-size: 15px;">Damage</span>
-    <?php
-              
-             }?>
+            
  <!--Start Status Show  (Process, Warrenty, Dalivery)-->   
 </td>
 

@@ -88,7 +88,7 @@ $CMShadrComp=mysqli_num_rows($sql9);
 $sql10=mysqli_query($con,"SELECT * FROM `cms_hard_complain` WHERE `status`='Closed'");
 $CMShadrCompClos=mysqli_num_rows($sql10);
 //Total CMS Application Complains 
-$sql11=mysqli_query($con,"SELECT * FROM `cms_hard_complain`");
+$sql11=mysqli_query($con,"SELECT * FROM `cms_app_complain`");
 $CMSappComp=mysqli_num_rows($sql11);
 //Total CMS Application Closed Complains 
 $sql12=mysqli_query($con,"SELECT * FROM `cms_app_complain` WHERE `status`='Closed'");

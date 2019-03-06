@@ -75,7 +75,7 @@ $row=$query->fetch_assoc();
   <div class="panel-body">
              
                
-      <form  action="update-action.php?hard_id=<?php echo ($hard_id); ?>" method="post" >
+      <form  action="update-action.php?hard_id=<?php echo ($hard_id); ?>" method="post" enctype="multipart/form-data" >
 
   <?php 
   if($row['tools'] !='') {
@@ -123,11 +123,11 @@ $row=$query->fetch_assoc();
               <label class="col-sm-3 control-label text-danger">Deliverable:</label>
                 <div class="col-sm-9">
                    <div class="radio radio-info radio-inline">
-                        <input type="radio"  name="delivery"  value="Deliverable">
+                        <input type="radio" id="d_req_st"  name="delivery"  value="Deliverable" >
                         <label>Yes</label>
                     </div>
                     <div class="radio radio-inline">
-                        <input type="radio"  name="delivery" value="" checked>
+                        <input type="radio"  name="delivery" value="">
                         <label>No</label>
                     </div>
                 </div>
@@ -141,29 +141,39 @@ $row=$query->fetch_assoc();
           <label class="col-sm-3 control-label">Warranty Status:</label>
             <div class="col-sm-9">
                <div class="radio radio-info radio-inline">
-                    <input type="radio" onclick="show(1)"  name="warranty"  value="1">
+                    <input type="radio" id="w_req_st" name="warranty"  value="s_w" required="required">
                     <label>Yes</label>
                 </div>
                 <div class="radio radio-inline">
-                    <input type="radio"  onclick="show(0)"  name="warranty" value="0" checked>
+                    <input type="radio"  name="warranty" value="0">
                     <label>No</label>
                 </div>
             </div>
           </div>
 
 
-          <div class="form-group" id="show_st" style="display:none;" >
+          <!-- <div class="form-group" id="show_st" style="display:none;" >
             <label>Select Warranty Status:</label>
             <select class="form-control" name="warranty_st" >
               <option value="s_w">Sent To Warranty </option>
-              <!-- <option value="b_w">Back From Warranty </option> -->
+            
             </select>
-          </div>
+          </div> -->
 				  
 				  <div class="form-group">
 				    <label>Remarks</label>
-				    <textarea class="form-control" type="text" name="remarks" rows="3" placeholder="Write Somthing about this problem...... Like How Many days require to solve this issue." required="required"></textarea>
+				    <textarea class="form-control" type="text" name="remarks" rows="3" placeholder="Write Somthing about this problem...... Like How Many days require to solve this issue." required="required"></textarea> 
 				  </div>
+
+
+          <div class="form-group">
+            <label>File</label>
+            <input type="file" name="document" class="form-control">            
+          </div>
+
+
+
+
 				  <input id="btnSubmit" type="submit" name="submit" value="Hit To Update" class="btn btn-block btn-rounded btn-success">
 				</form>
                  		
@@ -213,11 +223,14 @@ $row=$query->fetch_assoc();
       
       if($(this).val() == 'Closed'){
           document.getElementById('showforClose').style.display = 'block';
+          document.getElementById("d_req_st").required = true;
+          document.getElementById("w_req_st").required = false;
            document.getElementById('forCloseWarranty').style.display = 'none';
       }
       else{
         document.getElementById('showforClose').style.display = 'none';
         document.getElementById('forCloseWarranty').style.display = 'block';
+        document.getElementById("w_req_st").required = false;
 
       }
 

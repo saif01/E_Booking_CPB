@@ -98,9 +98,9 @@ $row=$query->fetch_assoc();
  
   <button type="submit" name="submit"  class="btn btn-block btn-rounded btn-custom  btn-lg btn-primary waves-effect waves-light">Update</button>
 
-                		
+                        
 
-                	</form>
+                    </form>
 
    
                 </div>                                 
@@ -109,7 +109,7 @@ $row=$query->fetch_assoc();
         </div>
 
         
-    	<script>
+        <script>
             var resizefunc = [];
         </script>
         <script src="js/jquery.min.js"></script>
@@ -126,8 +126,8 @@ $row=$query->fetch_assoc();
 
         <!-- CUSTOM JS -->
         <script src="js/jquery.app.js"></script>
-	
-	</body>
+    
+    </body>
 </html>
 
 <?php } ?>

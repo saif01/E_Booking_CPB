@@ -106,7 +106,7 @@ $query=mysqli_query($con,"INSERT INTO `user`(`user_login`, `user_pass`, `user_na
             This Is Your C.P. Bangladesh IT-Portal User Account Details.</font><br><br><hr>
 
 		  <font size='4' color='blue'>Your LogIn ID : <b>$user_login</b></font><br>
-		  <font size='4' color='red'>Your Password :  <b>$user_pass </b></font><br>
+		  <font size='4' color='red'>Your Password :  <b>Your Current Password</b></font><br>
 
 		 <hr><br><br>
 

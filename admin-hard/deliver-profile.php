@@ -85,18 +85,7 @@ $row=$query->fetch_assoc();
                  		<td><?php echo $row['remarks'];?></td>
                 		
                  	</tr>
-                 	<tr>
-                 		<th>Status</th>
-                 		<td><?php $st =$row['file'];
-
-				          if ($st!='') {
-?><a href="../pimages/delivery/<?php echo ($st); ?>" class="btn btn-info btn-sm" download>File</a><?php
-				          }
-				          else{
-				            echo "No Document";
-				          }?></td>
-                		
-                 	</tr>
+                 	
                  	
                  </table>
                 </div>                                 

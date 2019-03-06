@@ -45,7 +45,11 @@ include('../db/config.php');
         <link href="css/helper.css" rel="stylesheet" type="text/css" />
         <link href="css/style.css" rel="stylesheet" type="text/css" />
 
-        <script src="js/modernizr.min.js"></script>
+         <!--  for Mini Preview -->
+        <link href="../assets/mini_preview/jquery.minipreview.css" rel="stylesheet" type="text/css" />
+
+
+        <!-- <script src="js/modernizr.min.js"></script> -->
 
         <script language="javascript" type="text/javascript">
             var popUpWin = 0;
@@ -56,7 +60,24 @@ include('../db/config.php');
                 }
                 popUpWin = open(URLStr, 'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width=' + 600 + ',height=' + 580 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
             }
-        </script> 
+        </script>
+
+        <style type="text/css">
+            .f_btn{
+               /* margin-left: -40px;*/
+               float: left;
+            }
+
+            .p_btn{
+                margin-left:15px;
+                float: center;
+            }
+
+            .f_dn{
+                float: center;
+            }
+            
+        </style> 
         
     </head>
 
@@ -154,43 +175,187 @@ $row=$query->fetch_assoc();
 
 <table class="table">
 
-      <tr>
+
+      <?php 
+
+            $file1= $row['document1'];
+            $file2= $row['document2'];
+            $file3= $row['document3'];
+            $file4= $row['document4']; 
+
+        //File 1 extension
+            $file1= $row['document1']; 
+            $info1 = pathinfo($file1);
+            $ext1= $info1["extension"];
+
+        //File 2 extension
+            $file2 = $row['document2']; 
+            $info2 = pathinfo($file2);
+            $ext2 = $info2["extension"];
+
+        //File 3 extension
+            $file3= $row['document3']; 
+            $info3 = pathinfo($file3);
+            $ext3= $info3["extension"];
+
+        //File 4 extension
+            $file4= $row['document4']; 
+            $info4 = pathinfo($file4);
+            $ext4= $info4["extension"];
+
+  ?>
+
+      <tr> 
+
+
+  
 
         <th class="col-md-1">File:</th>
 
-            <td class="col-md-3">
+       
+<!-- File One  -->
+            
+        <?php  
+            if($file1 !='') {?>
 
-        <?php $file1= $row['document1'];
-                $file2= $row['document2'];
-                $file3= $row['document3'];
-                $file4= $row['document4']; 
-            if($file1 !='') {
-        ?><a href="../pimages/app/<?php echo ($file1); ?>" class="btn btn-info btn-sm " style="margin: 1px;" download>File-1</a><?php 
-        }
+    
+        <td class="col-md-2"  
+<?php 
+if ( $ext1 == "jpg" || $ext1 == "png" || $ext1 == "JPG" || $ext1 == "PNG" ) { echo " id='min_preview' "; } ?> >
 
-         if($file2 !='') {
-        ?><a href="../pimages/app/<?php echo ($file2); ?>" class="btn btn-info btn-sm " style="margin: 1px;" download>File-2</a><?php 
-        }
 
-         if($file3 !='') {
-        ?><a href="../pimages/app/<?php echo ($file3); ?>" class="btn btn-info btn-sm" style="margin: 1px;" download>File-3</a><?php 
-        }
+    <?php
 
-         if($file4 !='') {
-        ?><a href="../pimages/app/<?php echo ($file4); ?>" class="btn btn-info btn-sm" style="margin: 1px;" download>File-4</a><?php 
-        }
+        if ( $ext1 == "jpg" || $ext1 == "png" || $ext1 == "JPG" || $ext1 == "PNG" ) { ?>
+
+        <a href="../pimages/app/<?php echo ($file1); ?>" class="btn btn-info btn-sm f_btn" download>File-1</a>
+
+        <button type="button" class="btn btn-success btn-sm p_btn" onClick=window.open("preview?file=<?php echo ($file1);?>","Ratting","width=850,height=570,top=80,toolbar=0,status=0,"); > <i class="fa fa-search"></i> Preview 1</button>
+        
+
+          
+       <?php }
+       // Only Preview Show for other File
+        else{?>
+
+        <a href="../pimages/app/<?php echo ($file2); ?>" class="btn btn-danger btn-sm f_dn"  download="download"><i class="fa fa-download" ></i> Download</a>
+
+        <?php } ?> </td>
+
+
+       <?php  }
+
+
+// File two
+
+        if($file2 !='') {?>
+
+        <td class="col-md-2"  
+<?php 
+if ( $ext2 == "jpg" || $ext2 == "png" || $ext2 == "JPG" || $ext2 == "PNG" ) { echo " id='min_preview' "; } ?> >
+
+
+    <?php
+
+        if ( $ext2 == "jpg" || $ext2 == "png" || $ext2 == "JPG" || $ext2 == "PNG" ) { ?>
+
+        <a href="../pimages/app/<?php echo ($file2); ?>" class="btn btn-info btn-sm f_btn" download>File-1</a>
+
+        <button type="button" class="btn btn-success btn-sm p_btn" onClick=window.open("preview?file=<?php echo ($file2);?>","Ratting","width=850,height=570,top=80,toolbar=0,status=0,"); > <i class="fa fa-search"></i> Preview 2</button>
+        
+
+          
+       <?php }
+       // Only Preview Show for other File
+        else{?>
+
+        <a href="../pimages/app/<?php echo ($file2); ?>" class="btn btn-danger btn-sm f_dn"  download="download"><i class="fa fa-download" ></i> Download</a>
+
+        <?php } ?> </td>
+
+
+       <?php  }
+
+
+ if($file3 !='') {?>
+
+        <td class="col-md-2"  
+<?php 
+if ( $ext3 == "jpg" || $ext3 == "png" || $ext3 == "JPG" || $ext3 == "PNG" ) { echo " id='min_preview' "; } ?> >
+
+
+    <?php
+
+        if ( $ext3 == "jpg" || $ext3 == "png" || $ext3 == "JPG" || $ext3 == "PNG" ) { ?>
+
+        <a href="../pimages/app/<?php echo ($file3); ?>" class="btn btn-info btn-sm f_btn" download>File-1</a>
+
+        <button type="button" class="btn btn-success btn-sm p_btn" onClick=window.open("preview?file=<?php echo ($file3);?>","Ratting","width=850,height=570,top=80,toolbar=0,status=0,"); > <i class="fa fa-search"></i> Preview 3</button>
+        
+
+          
+       <?php }
+       // Only Preview Show for other File
+        else{?>
+
+        <a href="../pimages/app/<?php echo ($file3); ?>" class="btn btn-danger btn-sm f_dn"  download="download"><i class="fa fa-download" ></i> Download</a>
+
+        <?php } ?> </td>
+
+
+       <?php  }
+
+
+         if($file4 !='') {?>
+
+        <td class="col-md-2"  
+<?php 
+if ( $ext4 == "jpg" || $ext4 == "png" || $ext4 == "JPG" || $ext4 == "PNG" ) { echo " id='min_preview' "; } ?> >
+
+
+    <?php
+
+        if ( $ext4 == "jpg" || $ext4 == "png" || $ext4 == "JPG" || $ext4 == "PNG" ) { ?>
+
+        <a href="../pimages/app/<?php echo ($file4); ?>" class="btn btn-info btn-sm f_btn" download>File-1</a>
+
+        <button type="button" class="btn btn-success btn-sm p_btn" onClick=window.open("preview?file=<?php echo ($file4);?>","Ratting","width=850,height=570,top=80,toolbar=0,status=0,"); > <i class="fa fa-search"></i> Preview 4</button>
+        
+
+          
+       <?php }
+       // Only Preview Show for other File
+        else{?>
+
+        <a href="../pimages/app/<?php echo ($file4); ?>" class="btn btn-danger btn-sm f_dn"  download="download"><i class="fa fa-download" ></i> Download</a>
+
+        <?php } ?> </td>
+
+         
+        <?php }
+
+
         if ($file1=='' && $file2=='' && $file3=='' && $file1 =='' )
-        {
-               echo "No Files";
-         }?> 
-            </td>
-                      
-        <th class="col-md-1">Details: </th>
-             <td class="col-md-7"><?php echo ($row['com_details']) ; ?></td>
+        {?>
+                <td class="col-md-10" >
+                    Document Not Send .....
+                </td>
 
+  <?php }?> 
+          
+                      
       </tr>
-      
 </table>
+<table class="table">
+     <tr>
+        <th class="col-md-1">Details: </th>
+             <td class="col-md-11"><?php echo ($row['com_details']) ; ?></td>
+          
+      </tr>   
+</table>
+     
+      
+
 <table class="table">
       <tr>
           <th class="col-md-2">Final Status:</th>
@@ -240,7 +405,7 @@ if($row['status'] == 'Closed') {
 else{
 
 ?>
-<a href="javascript:void(0);" onClick="popUpWindow('update-complain?app_id=<?php echo ($row['app_id']); ?>');" title="Update" class="btn btn-danger btn-block btn-rounded"> Take Action </a>
+<a href="javascript:void(0);" onClick="popUpWindow('update-complain?app_id=<?php echo ($row['app_id']); ?>');" title="Update" class="btn btn-danger btn-block btn-rounded"><i class="fa fa-external-link"></i> Take Action </a>
  <?php } ?>              
             </td>    
 
@@ -297,13 +462,22 @@ else{
         <script src="assets/fastclick/fastclick.js"></script>
         <script src="assets/jquery-slimscroll/jquery.slimscroll.js"></script>
         <script src="assets/jquery-blockui/jquery.blockUI.js"></script>
-
+        <!-- for Mini preview js -->
+        <script src="../assets/mini_preview/jquery.minipreview.js"></script>
         
         <!-- CUSTOM JS -->
         <script src="js/jquery.app.js"></script>
 
 
-    
+     <script type="text/javascript">
+    // FOr Preview  
+       $('#min_preview a').miniPreview({
+              width: 140,
+              height: 150,
+              scale: .25,
+              prefetch: 'pageload'
+             });
+     </script>
 
    
     

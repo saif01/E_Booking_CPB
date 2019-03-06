@@ -115,26 +115,26 @@ while($row = mysqli_fetch_array($result))
 
 <form class="form-horizontal" action="add-subcategory-action.php" method="post">
 
-	<div class="col-md-6">
-    	<div class="form-group">
+    <div class="col-md-6">
+        <div class="form-group">
                 <label class="col-sm-3 control-label">Subcategory</label>
                 <div class="col-sm-9">
                   <input type="text" id="check_value" onBlur="userAvailability()" name="subcategory" class="form-control"  placeholder="Enter CPB Hardware Subcategory Name" required>
-            	  <span id="user-availability-status1" style="font-size:12px;"></span>
+                  <span id="user-availability-status1" style="font-size:12px;"></span>
                   <span class="btn btn-sm btn-warning btn-custom" style="float: right; margin: 3px;">Check</span>
                 </div>
             </div>
 
 
     </div>
-	<div class="col-md-6"> 
+    <div class="col-md-6"> 
             <div class="form-group">
                 <label class="col-sm-3 control-label">Category</label>
                 <div class="col-sm-9">
-                	<select class="form-control" name="cat_id" required="required">
-                		<option value="" disabled selected>Select Category</option>
-                		<?php echo $category; ?>
-                	</select>
+                    <select class="form-control" name="cat_id" required="required">
+                        <option value="" disabled selected>Select Category</option>
+                        <?php echo $category; ?>
+                    </select>
                   
                 </div>
             </div>
@@ -153,7 +153,7 @@ while($row = mysqli_fetch_array($result))
     
                     </form>
 
-			</div> <!-- Panel-body -->
+            </div> <!-- Panel-body -->
             
         </div> <!-- Panel -->
     </div> <!-- col-->
@@ -181,12 +181,13 @@ while($row = mysqli_fetch_array($result))
                                 <th>Category</th>
                                 <th>Subcategory</th>
                                 <th>Registration Time</th>
+                                <th>Last Update</th>
                                 <th>Action</th>
                             </tsr>
                         </thead>
             <tbody>
 <?php 
-    $query=mysqli_query($con,"SELECT cms_hard_subcategory.sub_id, cms_hard_subcategory.subcategory, cms_hard_subcategory.reg, cms_hard_category.category FROM cms_hard_subcategory INNER JOIN cms_hard_category ON cms_hard_subcategory.cat_id=cms_hard_category.cat_id ORDER BY cms_hard_subcategory.sub_id DESC");
+    $query=mysqli_query($con,"SELECT cms_hard_subcategory.sub_id, cms_hard_subcategory.subcategory, cms_hard_subcategory.reg, cms_hard_subcategory.last_up, cms_hard_category.category FROM cms_hard_subcategory INNER JOIN cms_hard_category ON cms_hard_subcategory.cat_id=cms_hard_category.cat_id ORDER BY cms_hard_subcategory.sub_id DESC");
     
         while($row=mysqli_fetch_array($query))
         { ?>
@@ -201,6 +202,15 @@ while($row = mysqli_fetch_array($result))
                    
                     <td>
                  <?php echo date("F j, Y g:i a", strtotime($row['reg'])); ?> 
+                    </td>
+                    <td>
+
+                 <?php
+                 if ($row['last_up'] =='') {
+                    echo "No Update";
+                 }else{
+                    echo date("F j, Y g:i a", strtotime($row['last_up'])); 
+                 }?> 
                     </td>
 
                     <td>
@@ -222,7 +232,7 @@ while($row = mysqli_fetch_array($result))
 
 
 
-			</div> <!-- Panel-body -->
+            </div> <!-- Panel-body -->
             
         </div> <!-- Panel -->
     </div> <!-- col-->

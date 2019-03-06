@@ -1,6 +1,8 @@
 <?php
 session_start();
 error_reporting(0);
+date_default_timezone_set('Asia/Dhaka');
+$currentTime = date('Y-m-d H:i:s', time ());//H, Time in 24 hours show , h, for 12
 if(strlen($_SESSION['admin-super-login'])==0)
   { 
 header('location:../admin');
@@ -22,7 +24,7 @@ if (isset($_POST['submit'])) {
 
 $location_name=$_POST['location_name'];
 
-$query=mysqli_query($con,"UPDATE `bu_location` SET `location_name`='$location_name' WHERE `bul_id`='$bul_id'");
+$query=mysqli_query($con,"UPDATE `bu_location` SET `location_name`='$location_name', `last_up`='$currentTime' WHERE `bul_id`='$bul_id'");
 
 
 		if ($query) 

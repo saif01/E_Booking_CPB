@@ -158,6 +158,7 @@ include('../db/config.php');
                               
                                 <th>Business Location</th>
                                 <th>Registration Time</th>
+                                <th>Last Update</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -175,6 +176,15 @@ include('../db/config.php');
                    
                     <td>
                  <?php echo date("F j, Y g:i a", strtotime($row['reg'])); ?> 
+                    </td>
+                       <td>
+
+                 <?php
+                 if ($row['last_up'] =='') {
+                    echo "No Update";
+                 }else{
+                    echo date("F j, Y g:i a", strtotime($row['last_up'])); 
+                 }?> 
                     </td>
 
                     <td>

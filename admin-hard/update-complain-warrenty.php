@@ -76,7 +76,7 @@ $row=$query->fetch_assoc();
   <div class="panel-body">
              
                 
-      <form  action="update-sw-action.php?hard_id=<?php echo ($hard_id); ?>" method="post" >
+      <form  action="update-sw-action.php?hard_id=<?php echo ($hard_id); ?>" method="post" enctype="multipart/form-data" >
 
   
           <div class="form-group" id="show_st" >
@@ -93,6 +93,13 @@ $row=$query->fetch_assoc();
 				    <label>Remarks</label>
 				    <textarea class="form-control" type="text" name="remarks" rows="3" placeholder="Write Somthing about this problem...... Like How Many days require to solve this issue." required="required"></textarea>
 				  </div>
+
+           <div class="form-group">
+            <label>File</label>
+            <input type="file" name="document" class="form-control">            
+          </div>
+
+
 				  <input id="btnSubmit" type="submit" name="submit" value="Hit To Update" class="btn btn-block btn-rounded btn-success">
 				</form>
                  		

@@ -101,7 +101,7 @@ $query=mysqli_query($con,"INSERT INTO `admin`(`admin_login`, `admin_pass`, `admi
             <font size='2' color='green'>Dear $admin_name,<br><br>
              This Is Your C.P. BAngladesh It-Portal Admin Account Details.</font><br><br><hr>
 		  <font size='4' color='blue'>Your LogIn ID : <b>$admin_login</b>, </font><br>
-		  <font size='4' color='red'>Your Password :  <b>$admin_pass </b>.</font><br>
+		  <font size='4' color='red'>Your Password :  <b>Your Current Password</b>.</font><br>
 
 		 <hr><br><br>
 

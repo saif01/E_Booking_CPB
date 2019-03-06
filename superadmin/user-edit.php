@@ -21,6 +21,15 @@ while($row = mysqli_fetch_array($result))
 }
 
 
+// Department
+$department = '';
+$query1 = "SELECT * FROM `department` ORDER BY `dept_name`";
+$result1 = mysqli_query($con, $query1);
+while($row = mysqli_fetch_array($result1))
+{
+ $department .= '<option value="'.$row["dept_name"].'">'.$row["dept_name"].'</option>';
+}
+
 ?>
 
 
@@ -169,7 +178,12 @@ $row=$query->fetch_assoc();
             <div class="form-group">
                 <label class="col-sm-3 control-label">Department</label>
                 <div class="col-sm-9">
-                   <input type="text" name="user_dept" class="form-control" value="<?php echo($row['user_dept']); ?>" required>
+
+                    <select class="form-control" name="user_dept" required="required">
+                            <option value="<?php echo($row['user_dept']); ?>"><?php echo($row['user_dept']); ?></option>
+                          <?php echo $department; ?>
+                        </select>
+                   
                 </div>
             </div>
 

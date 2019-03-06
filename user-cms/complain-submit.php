@@ -380,7 +380,6 @@ $(document).ready(function(){
 
 
 // For Hardware DropDow 
-
 $(document).ready(function(){
 	$("#category").on("change", function () { 
 		var cat_id=$(this).val();

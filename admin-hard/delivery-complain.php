@@ -80,11 +80,11 @@ $row=$query->fetch_assoc();
  
            		<div class="form-group">
 				    <label>Receiver's Name</label>
-				    <input type="text" class="form-control" name="name" placeholder="Enter Product Receiver Name" required>
+				    <input type="text" class="form-control" name="name" placeholder="Enter Product Receiver Name" required="required">
 				</div>
 				<div class="form-group">
 				    <label>Receiver's Contract</label>
-				    <input type="Number" class="form-control" name="contact" placeholder="Enter Product Receiver Phone Number" required>
+				    <input type="number" class="form-control" name="contact" placeholder="Enter Product Receiver Phone Number" maxlength="11" required="required">
 				</div>
 				
 				  <div class="form-group">
@@ -96,7 +96,7 @@ $row=$query->fetch_assoc();
 				    <input type="file" class="form-control" name="document" >
 				</div>
 
-				  <input type="submit" name="submit" value="Hit To Update" class="btn btn-block btn-rounded btn-success">
+				  <input type="submit" id="btnSubmit" name="submit" value="Hit To Update" class="btn btn-block btn-rounded btn-success">
 				</form>
                  		
 
@@ -111,7 +111,7 @@ $row=$query->fetch_assoc();
         </script>
 
         <!-- jQuery  -->
-        <script src="js/jquery.min.js"></script>
+        <!-- <script src="js/jquery.min.js"></script> -->
         <script src="js/bootstrap.min.js"></script>
         <script src="js/waves.js"></script>
         <script src="js/wow.min.js"></script>
@@ -124,8 +124,19 @@ $row=$query->fetch_assoc();
         <script src="assets/jquery-slimscroll/jquery.slimscroll.js"></script>
         <script src="assets/jquery-blockui/jquery.blockUI.js"></script>
 
-        
-               
+       <script src="../assets/coustom/ajax/3.3.1_jquery.min.js"></script> 
+          <!-- Bubmit Button Disable After submit form -->
+<script type="text/javascript">
+    $(document).ready(function () {
+    $('form').submit(function () {
+        setTimeout(function () { disableButton(); },0);
+    });
+
+    function disableButton() {
+        $("#btnSubmit").prop('disabled', true);
+    }
+});
+</script>     
 
 	</body>
 </html>

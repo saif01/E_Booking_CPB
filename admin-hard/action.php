@@ -45,7 +45,12 @@ include('../db/config.php');
         <link href="css/helper.css" rel="stylesheet" type="text/css" />
         <link href="css/style.css" rel="stylesheet" type="text/css" />
 
-        <script src="js/modernizr.min.js"></script>
+       <!--  for Mini Preview -->
+        <link href="../assets/mini_preview/jquery.minipreview.css" rel="stylesheet" type="text/css" />
+
+        <!-- <script src="js/modernizr.min.js"></script> -->
+
+
 
         <script language="javascript" type="text/javascript">
             var popUpWin = 0;
@@ -169,21 +174,21 @@ $row=$query->fetch_assoc();
              <td class="col-md-2">
             <?php $d_st= $row['delivery'];
 
-            if ($row['status']=='Damaged') {
+            if ( $row['status']=='Damaged' ) {
                 echo "Product Damaged";
              }
 
-            elseif ($row['status']=='Closed') {
+            elseif ( $row['status']=='Closed' && $d_st=='' ) {
                 echo "Product Closed";
              }
-            elseif ($d_st=='') {
+            elseif ( $d_st=='' ) {
               echo "Not Closed";
             }
 
-            elseif ($d_st=='Notdeliverable') {
+            elseif ( $d_st=='Notdeliverable' ) {
                echo "Not Deliverable";
             }
-            elseif ($d_st=='Deliverable') {
+            elseif ( $d_st=='Deliverable' ) {
                echo "Deliverable";
             }
 
@@ -216,20 +221,43 @@ $row=$query->fetch_assoc();
 
         <th class="col-md-1">File:</th>
 
-            <td class="col-md-1">
+         <?php $file= $row['documents'];
 
-        <?php $file= $row['documents']; 
-            if($file !='') {
+         //File 1 extension
+            $fileu= $row['documents']; 
+            $infou = pathinfo($fileu);
+            $extu= $infou["extension"];
 
-        ?><a href="../pimages/hard/<?php echo ($file); ?>" class="btn btn-info btn-sm" download>File</a><?php 
+          ?>
+
+            <td class="col-md-2" <?php 
+if ( $extu == "jpg" || $extu == "png" || $extu == "JPG" || $extu == "PNG" ) { echo " id='min_preview' "; } ?> >
+
+<?php  
+    if($fileu !='') {
+
+            if ( $extu == "jpg" || $extu == "png" || $extu == "JPG" || $extu == "PNG" ) 
+              { ?>
+
+
+    <a href="../pimages/hard/<?php echo ($file); ?>" class="btn btn-info btn-sm" style="float:left;" download>File</a> 
+
+     <button type="button" class="btn btn-success btn-sm" style="float:right; " onClick=window.open("preview?file=<?php echo ($file);?>","Ratting","width=850,height=570,top=80,toolbar=0,status=0,"); > <i class="fa fa-search"></i> Preview</button>
+          
+          <?php }else{ ?>
+    <a href="../pimages/hard/<?php echo ($file); ?>" class="btn btn-danger btn-sm" style="float:center;" download="download"><i class="fa fa-download" ></i> Download</a>
+
+           <?php }
+
+
         }
-           else{
-               echo "No Files";
-         }?> 
+   else{
+       echo "No Files";
+  }?> 
             </td>
                       
         <th class="col-md-1">Details: </th>
-             <td class="col-md-9"><?php echo ($row['details']) ; ?></td>
+             <td class="col-md-8"><?php echo ($row['details']) ; ?></td>
 
       </tr>
       
@@ -247,20 +275,72 @@ $row=$query->fetch_assoc();
 
 <!-- Data Fetch from Remarks Table -->
 <?php
-$queryRem=mysqli_query($con,"SELECT cms_hard_remarks.status, cms_hard_remarks.remarks, cms_hard_remarks.reg, admin.admin_name FROM cms_hard_remarks INNER JOIN admin ON cms_hard_remarks.action_by=admin.admin_id WHERE cms_hard_remarks.hard_id='$hard_id' ORDER BY cms_hard_remarks.hard_rem_id ASC ");
+$queryRem=mysqli_query($con,"SELECT cms_hard_remarks.status, cms_hard_remarks.remarks, cms_hard_remarks.document, cms_hard_remarks.reg, admin.admin_name FROM cms_hard_remarks INNER JOIN admin ON cms_hard_remarks.action_by=admin.admin_id WHERE cms_hard_remarks.hard_id='$hard_id' ORDER BY cms_hard_remarks.hard_rem_id ASC ");
     while($row2=mysqli_fetch_array($queryRem))
     {
 ?>
-<table class="table" style="background: #DCDCDC; ">
+
+<div style="background: #DCDCDC; ">
+<table class="table" >
    
     <tr>
          <th class="col-md-1">Status</th>
             <td class="col-md-2"><?php echo ($row2['status']); ?></td>
         
         <th class="col-md-1">Time</th>
-            <td class="col-md-3"><?php echo date("F j, Y, g:i a", strtotime($row2['reg'])); ?></td>
+            <td class="col-md-2"><?php echo date("F j, Y, g:i a", strtotime($row2['reg'])); ?></td>
 
+
+
+
+         <th class="col-md-1">Document44444</th>
+            <td class="col-md-2"  
+            <?php 
+            $file2= $row2['document']; 
+            $info = pathinfo($file2);
+            $ext= $info["extension"];
+// Only Preview Show JPG and PNG 
+  if ($ext == "jpg" || $ext == "png" || $ext == "JPG" || $ext == "PNG" ) { echo " id='min_preview' "; } ?> >
+
+<?php 
+  if($file2 !='') {
+   
+// Only Preview Show JPG and PNG 
+ if ( $ext == "jpg" || $ext == "png" || $ext == "JPG" || $ext == "PNG" ) 
+
+  { ?>
+<a href="../pimages/hardaction/<?php echo ($file2); ?>" class="btn btn-info btn-sm" style="float:left;" download="download">Document</a>
+
+ <button type="button" class="btn btn-success btn-sm" style="float:right; " onClick=window.open("preview?file2=<?php echo ($file2);?>","Ratting","width=850,height=570,top=80,toolbar=0,status=0,"); > <i class="fa fa-search"></i> Preview</button>
+
+<?php } 
+
+else{?>
+
+<a href="../pimages/hardaction/<?php echo ($file2); ?>" class="btn btn-danger btn-sm" style="float:right;" download="download"><i class="fa fa-download" ></i> Download</a>
+
+ <?php } 
+
+    }
+     else{
+         echo "No Document Send";
+   }?> 
+
+
+
+            </td>
     </tr>
+
+  </table>
+
+
+
+
+
+  <table class="table">
+      
+      <tr>
+
         <th class="col-md-1">Action By</th>
             <td class="col-md-2"> <?php echo ($row2['admin_name']); ?></td>
        
@@ -268,10 +348,13 @@ $queryRem=mysqli_query($con,"SELECT cms_hard_remarks.status, cms_hard_remarks.re
             <td class="col-md-8"><?php echo ($row2['remarks']); ?></td>
     </tr>
     
-
 </table>
+</div>
+
 <?php } ?>
 <!-- End Remarks data show-->
+
+
 
 
 
@@ -305,7 +388,7 @@ elseif($row['status'] == 'Closed' && $row['delivery']=='') {
 // Complain Closed And Product Deliverable
 elseif($row['status'] == 'Closed' && $row['delivery']=='Deliverable'){?>
 
-<a href="javascript:void(0);" onClick="popUpWindow('delivery-complain?hard_id=<?php echo ($row['hard_id']); ?>');" title="Update" class="btn btn-danger btn-block btn-rounded"> Take Action </a>
+<a href="javascript:void(0);" onClick="popUpWindow('delivery-complain?hard_id=<?php echo ($row['hard_id']); ?>');" title="Update" class="btn btn-danger btn-block btn-rounded"><i class="fa fa-external-link"></i> Take Action </a>
 
  <?php }
 
@@ -314,21 +397,21 @@ elseif($row['status'] == 'Closed' && $row['delivery']=='Deliverable'){?>
 // Show For Warranty Only (Send Warrenty Or Again Send Warrenty)
 elseif( ($row['warrenty'] == 's_w' || $row['warrenty'] == 'a_s_w') && $row['last_up'] != ''){?>
 
-<a href="javascript:void(0);" onClick="popUpWindow('update-complain-warrenty?hard_id=<?php echo ($row['hard_id']); ?>');" title="Update" class="btn btn-danger btn-block btn-rounded"> Take Action </a>
+<a href="javascript:void(0);" onClick="popUpWindow('update-complain-warrenty?hard_id=<?php echo ($row['hard_id']); ?>');" title="Update" class="btn btn-danger btn-block btn-rounded"><i class="fa fa-external-link"></i> Take Action </a>
 
  <?php }
 
  // Show for Second Step action
- elseif( ($row['warrenty'] =='' || $row['warrenty'] =='b_w' ) && $row['last_up'] !='' && $row['status'] =='Processing' ){?>
+ elseif( ($row['warrenty'] =='0' || $row['warrenty'] =='' || $row['warrenty'] =='b_w' ) && $row['last_up'] !='' && $row['status'] =='Processing' ){?>
 
-<a href="javascript:void(0);" onClick="popUpWindow('update-complain2?hard_id=<?php echo ($row['hard_id']); ?>');" title="Update" class="btn btn-danger btn-block btn-rounded"> Take Action </a>
+<a href="javascript:void(0);" onClick="popUpWindow('update-complain2?hard_id=<?php echo ($row['hard_id']); ?>');" title="Update" class="btn btn-danger btn-block btn-rounded"><i class="fa fa-external-link"></i> Take Action </a>
 
  <?php }
 
 // Show for frist Step
 elseif($row['last_up'] ==''){?>
 
-<a href="javascript:void(0);" onClick="popUpWindow('update-complain?hard_id=<?php echo ($row['hard_id']); ?>');" title="Update" class="btn btn-danger btn-block btn-rounded"> Take Action </a>
+<a href="javascript:void(0);" onClick="popUpWindow('update-complain?hard_id=<?php echo ($row['hard_id']); ?>');" title="Update" class="btn btn-danger btn-block btn-rounded"><i class="fa fa-external-link"></i> Take Action </a>
 
  <?php } ?>              
             </td>    
@@ -390,15 +473,26 @@ elseif($row['last_up'] ==''){?>
         <script src="assets/jquery-slimscroll/jquery.slimscroll.js"></script>
         <script src="assets/jquery-blockui/jquery.blockUI.js"></script>
 
-        
+        <!-- for Mini preview js -->
+        <script src="../assets/mini_preview/jquery.minipreview.js"></script>
+
+      
         <!-- CUSTOM JS -->
         <script src="js/jquery.app.js"></script>
 
 
-    
+    <script type="text/javascript">
+// FOr Preview  
+       $('#min_preview a').miniPreview({
+              width: 140,
+              height: 150,
+              scale: .25,
+              prefetch: 'pageload'
+             });
+   </script>
 
-   
-    
+
+
     </body>
 </html>
 

@@ -1,5 +1,3 @@
-
-
 <div class="left side-menu">
                 <div class="sidebar-inner slimscrollleft">
                     
@@ -96,6 +94,15 @@
                 
             </a>
         </li>
+        <li> 
+            <a href="department" class="waves-effect">
+                <i class="md md-dehaze text-success"></i>
+                <span>Departments</span>
+                
+            </a>
+        </li>
+
+
 
         <li> 
             <a href="login-log" class="waves-effect">

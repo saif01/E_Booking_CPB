@@ -106,8 +106,8 @@ include('../db/config.php');
 		                                                  <th>Subcategory</th>
 		                                                  <th>User</th>
 		                                                  
-                                                    	  <th>Received</th>
-                                                    	  <th>Dept.</th>
+                                                    	<th>Received</th>
+                                                    	<th>Dept.</th>
 		                                                  <th>Days</th>
 		                                                  <th>Registration</th>
 		                                                  <th>Close</th>

@@ -9,7 +9,23 @@ else{
  
 include('../db/config.php');
 
+// For User Location 
+$location = '';
+$query = "SELECT * FROM `bu_location` ORDER BY `location_name`";
+$result = mysqli_query($con, $query);
+while($row = mysqli_fetch_array($result))
+{
+ $location .= '<option value="'.$row["bul_id"].'">'.$row["location_name"].'</option>';
+}
 
+// Department
+$department = '';
+$query1 = "SELECT * FROM `department` ORDER BY `dept_name`";
+$result1 = mysqli_query($con, $query1);
+while($row = mysqli_fetch_array($result1))
+{
+ $department .= '<option value="'.$row["dept_name"].'">'.$row["dept_name"].'</option>';
+}
 ?> 
 
 <!DOCTYPE html>
@@ -45,13 +61,15 @@ include('../db/config.php');
         <link href="css/helper.css" rel="stylesheet" type="text/css" />
         <link href="css/style.css" rel="stylesheet" type="text/css" />
 
-        <script src="js/modernizr.min.js"></script>
+       <!--  <script src="js/modernizr.min.js"></script> -->
 
   <!-- DataTables -->
         <link href="assets/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
          <!--Excel DataTables -->
   <!--   <link href="assets/datatables/excel/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/datatables/excel/buttons.dataTables.min.css" rel="stylesheet" type="text/css" /> -->
+
+   
 
     <style type="text/css">
         img {
@@ -108,7 +126,8 @@ include('../db/config.php');
                              <div class="col-md-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading"> 
-                                       <a href="user-reg" class="btn btn-sm btn-info" style="float: right;">Add New</a>
+                                       <!-- <a href="user-reg" class="btn btn-sm btn-info" style="float: right;">Add New</a> -->
+                                       <button type="button" class="btn btn-sm btn-success view_data" style="float: right;">Add New</button> 
                                         <h3 class="panel-title">All User Information</h3>
 
                                     </div>
@@ -262,13 +281,202 @@ include('../db/config.php');
                 </footer>
 
             </div>
-          
-
-
-            
-
+ 
         </div>
         <!-- END wrapper -->
+
+
+
+
+<!--  Modal content for the above example -->
+    <div id="dataModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button"  class="close text-danger" data-dismiss="modal" aria-hidden="true"><i class="fa fa-close"></i></button>
+                    <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+                </div>
+                <div class="modal-body">
+                  <!-- action="user-reg-action.php"   -->
+
+  <form data-toggle="validator" role="form" action="user-reg-action.php" method="post" enctype="multipart/form-data">
+        <div class="row"> 
+            <div class="col-md-4"> 
+                <div class="form-group has-feedback"> 
+                    <label for="check_value" class="control-label">User ID</label> 
+                    <input type="text" id="check_value" onBlur="userAvailability()" name="user_login" class="form-control"  placeholder="Enter User Login ID" pattern="([^A-Z]*[a-z])" data-error="Put Valid ID" required="required">
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <span id="user-availability-status1" style="font-size:12px;"></span>
+
+                 <div class="help-block with-errors"></div>
+
+                <!--  pattern="([^A-Z]*[a-z]{3,}).[a-z]{3}$" 
+                 Only put lower case alfabet then dout then 3 character lowercase letter -->
+                </div> 
+            </div> 
+
+            <div class="col-md-4">
+
+               <div class="form-group"> 
+                    <label for="password" class="control-label">Password</label> 
+                    <input id="password" type="password" name="user_pass" class="form-control" placeholder="Default Password" value="12345" disabled="disabled">
+                   
+                </div> 
+              
+            </div>
+            
+            <div class="col-md-4"> 
+                <div class="form-group has-feedback"> 
+                    <label for="user_name" class="control-label">User Name</label> 
+                    <input type="text" id="user_name" name="user_name" class="form-control" placeholder="Enter User Full Name" maxlength="15" required="required" />
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </div>                        
+            </div> 
+
+
+
+     </div>
+
+
+     <div class="row"> 
+            <div class="col-md-4 "> 
+                <div class="form-group has-feedback"> 
+                    <label for="user_contact" class="control-label">User Contact</label> 
+                   <input id="user_contact" type="tel" pattern="^[0-9]{11}$"  name="user_contact" placeholder="Enter User Phone Number" class="form-control" data-error="Put 11 digits number" required="required" />
+                   <span class="glyphicon form-control-feedback" aria-hidden="true"></span>  
+                   <div class="help-block with-errors"></div> 
+
+                </div> 
+            </div> 
+            <div class="col-md-4"> 
+                <div class="form-group has-feedback"> 
+                    <label for="user_mail" class="control-label">User Email</label> 
+                    <input type="email" id="user_mail" name="user_mail" class="form-control" placeholder="Enter User Email Address" data-error="Put valid Email" required="required" />
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <div class="help-block with-errors"></div>
+                                           
+                </div> 
+            </div> 
+            <div class="col-md-4"> 
+                <div class="form-group has-feedback"> 
+                    <label for="bu_mail" class="control-label">B.U. Email</label> 
+                    <input type="text" id="bu_mail" name="bu_mail" class="form-control" placeholder="Enter User B.U. Head Email Address" required="required" />
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                   
+                </div> 
+            </div> 
+     </div>
+
+     <div class="row"> 
+            <div class="col-md-4"> 
+                <div class="form-group has-feedback"> 
+                    <label for="user_office_id" class="control-label">User Office ID</label> 
+                    <input type="text" id="user_office_id" name="user_office_id" class="form-control" placeholder="Enter User Office ID" pattern="^[A-Z]{2}[0-9]{7}$" data-error="Start with BD and Put 7 digits ID" required="required" />
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                       
+                    <div class="help-block with-errors"></div>
+            
+                </div> 
+            </div> 
+            <div class="col-md-4"> 
+                <div class="form-group has-feedback"> 
+                    <label for="user_location" class="control-label">User Location</label> 
+                    <select id="user_location" class="form-control" name="user_location" data-error="Choose One Option" required="required">
+                      <option value="" disabled selected>Select Location Name</option>
+                          <?php echo $location; ?>
+                  </select>
+                  <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                   <div class="help-block with-errors"></div>
+                </div> 
+            </div> 
+            <div class="col-md-4"> 
+                <div class="form-group has-feedback"> 
+                    <label for="user_dept" class="control-label">Department</label> 
+                    <select id="user_dept" class="form-control" name="user_dept" data-error="Choose One Option" required="required">
+                            <option value="" disabled selected>Select Location Name</option>
+                          <?php echo $department; ?>
+                        </select> 
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors"></div>
+                </div> 
+            </div> 
+     </div>
+
+     <div class="row"> 
+            <div class="col-md-4"> 
+                <div class="form-group"> 
+                    <label class="control-label">Active</label> 
+                    <div class="radio radio-info radio-inline">
+                        <input type="radio" id="inlineRadio1" value="1" name="show_st" checked>
+                        <label for="inlineRadio1"> Yes </label>
+                    </div>
+                    <div class="radio radio-inline">
+                        <input type="radio" id="inlineRadio2" value="0" name="show_st">
+                        <label for="inlineRadio2"> No </label>
+                    </div>
+            
+                </div>
+
+
+                <div class="form-group"> 
+                    <label class="control-label">Access</label> 
+                    <div class="checkbox checkbox-success checkbox-inline">
+                    <input type="checkbox" name="user_car_st" value="1">
+                    <label for="inlineCheckbox1"> Car </label>
+                  </div>
+                  <div class="checkbox checkbox-success checkbox-inline">
+                      <input type="checkbox" name="user_room_st" value="1">
+                      <label for="inlineCheckbox2"> Room </label>
+                  </div>
+                  <div class="checkbox checkbox-success checkbox-inline">
+                      <input type="checkbox" name="user_law_st"  value="1">
+                      <label for="inlineCheckbox3"> Legal </label>
+                  </div>
+                    <div class="checkbox checkbox-success checkbox-inline">
+                        <input type="checkbox" name="user_cms_st"  value="1">
+                        <label for="inlineCheckbox3"> CMS </label>
+                    </div>
+                    
+                </div>
+
+
+            </div> 
+            <div class="col-md-4"> 
+
+              <div class="form-group"> 
+                    <label for="photo" class="control-label">User Image</label> 
+                     <input name="photo" id="photo" type="file" class="form-control file-upload-info" onchange="document.getElementById('preview1').src = window.URL.createObjectURL(this.files[0])" accept="image/x-png,image/jpeg" required="required" />  
+                </div> 
+                 
+            </div> 
+            <div class="col-md-4"> 
+
+               <div class="form-group"> 
+                    <label class="control-label">Photo Preview</label> 
+                     <img id="preview1" alt="Image Not Selected" class="rounded mx-auto d-block" width="100" height="100" />  
+                </div> 
+                
+            </div> 
+     </div> 
+
+     <div class="row">
+        <div class="form-group">    
+          <button id="btnSubmit" type="submit" name="submit"  class="btn btn-block btn-rounded btn-custom  btn-lg btn-primary waves-effect waves-light">Submit </button>
+        </div>       
+     </div>       
+</form>
+
+
+
+ <div class="modal-footer">
+                    <button type="button" class="btn btn-success waves-effect" data-dismiss="modal">Close</button>
+                    
+                </div>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 
     
@@ -290,24 +498,75 @@ include('../db/config.php');
         <script src="assets/jquery-slimscroll/jquery.slimscroll.js"></script>
         <script src="assets/jquery-blockui/jquery.blockUI.js"></script>
 
-        
-
        <!-- CUSTOM JS -->
         <script src="js/jquery.app.js"></script>
 
-       
+      <!-- Bootstrap Form VAlidation Plugins -->
+        <script src="../assets/coustom/BootstrapValidator/0.11.9.validator.min.js"></script>
 
+       <!--  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script> -->
+       
+        <!-- Data TAble -->
         <script src="assets/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/datatables/dataTables.bootstrap.js"></script>
 
-
         <script type="text/javascript">
-            $(document).ready(function() {
+           jQuery(document).ready(function() {
                 $('#datatable').dataTable({
                     "order": []
                 });
             } );
         </script>
+
+        
+
+    
+ 
+   
+     <script type="text/javascript">
+        //Modal Show Data
+         jQuery(document).ready(function(){  
+              jQuery('.view_data').click(function(){  
+                   jQuery('#dataModal').modal("show");  
+                  
+              }); 
+
+              //After submit Form submit button disabled
+              jQuery('form').on("submit", function(){
+
+                setTimeout(function(){
+                  setTimeout(function() { disableButton();},100);
+
+                  function disableButton(){
+                     jQuery("#btnSubmit").prop('disabled', true);
+                  }
+                })
+                  
+                   
+                 });
+
+         });  
+    </script>
+
+     <script>
+        function userAvailability() {
+            jQuery("#loaderIcon").show();
+            jQuery.ajax({
+                url: "check_availabe_user.php",
+                data: 'check_value=' + $("#check_value").val(),
+                type: "POST",
+                success: function(data) {
+                    $("#user-availability-status1").html(data);
+                    $("#loaderIcon").hide();
+                },
+                error: function() {}
+            });
+        }
+    </script>
+
+   
+
+
 
 
 
@@ -320,7 +579,7 @@ include('../db/config.php');
         }
         popUpWin = open(URLStr, 'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width=' + 600 + ',height=' + 780 + ',left=' + left + ', top=' + top + ',screenX=' + left + ',screenY=' + top + '');
     }
-</script>  
+  </script>  
 
   
  <!-- sweet alerts -->
@@ -439,6 +698,46 @@ include('../db/config.php');
     </script>
 <!--**************** End Sweet Alert Script code *******************-->      
    
+
+ 
+<!-- 
+ <script type="text/javascript">
+        $(document).ready(function(){
+ 
+    $('#simple_form input').jqBootstrapValidation({
+     preventSubmit: true,
+     submitSuccess: function($form, event){     
+      event.preventDefault();
+      $this = $('#send_button');
+      $this.prop('disabled', true);
+      var form_data = $("#simple_form").serialize();
+      $.ajax({
+       url:"reg-action.php",
+       method:"POST",
+       data:form_data,
+       success:function(){
+        $('#success').html("<div class='alert alert-success'><strong>Your message has been sent. </strong></div>");
+        $('#simple_form').trigger('reset');
+       },
+       error:function(){
+        $('#success').html("<div class='alert alert-danger'>There is some error</div>");
+        $('#simple_form').trigger('reset');
+       },
+       complete:function(){
+        setTimeout(function(){
+         $this.prop("disabled", false);
+         $('#success').html('');
+        }, 5000);
+       }
+      });
+     },
+    });
+
+});
+    </script> -->
+
+
+
     
     </body>
 </html>

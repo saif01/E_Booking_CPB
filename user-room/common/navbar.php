@@ -36,7 +36,7 @@ $query2=mysqli_query($con,"SELECT `user_img` FROM `user` WHERE `user_id`='$user_
                                         <li><a href="user-booked-room">My Booked Room</a></li>
                                         <li><a href="profile">My Profile</a></li>
                                         <li><a href="booking-history">My Booking History</a></li>                                        
-                                         <li><a href="change-pass">Change Password</a></li>
+                                         <!-- <li><a href="change-pass">Change Password</a></li> -->
                                         <li><a href="logout"> logout</a></li>
                                     </ul> 
                                  </li>   

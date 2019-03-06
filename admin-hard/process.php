@@ -136,7 +136,7 @@ while($row=mysqli_fetch_array($query))
                       <td>
                <?php
                 $ws=$row['warrenty']; 
-             if ($ws=='') {
+             if ($ws=='0' || $ws=='') {
                 echo "No warrenty"; 
              }
              elseif ($ws=='s_w') {

@@ -7,9 +7,9 @@
 
  function send_mail($sub,$msg,$to){
 
- //$file=$_FILES["file"];
-        //$sendFile=$_FILES["sendFile"]["name"];
-        //move_uploaded_file($_FILES["sendFile"]["tmp_name"],"files/".$_FILES["sendFile"]["name"]);
+        // $file=$_FILES["file"];
+        // $sendFile=$_FILES["sendFile"]["name"];
+        // move_uploaded_file($_FILES["sendFile"]["tmp_name"],"files/".$_FILES["sendFile"]["name"]);
 
         //echo $msg;
    
@@ -24,11 +24,10 @@
             $mail->setFrom('it-noreply@cpbangladesh.com', 'CPB-IT Portal');
             $mail->addAddress($to); 
             
-           $mail->addAttachment($_FILES['sendFile']['tmp_name'], $_FILES['sendFile']['name']);        
+           //$mail->addAttachment($_FILES['sendFile']['tmp_name'], $_FILES['sendFile']['name']);        
             $mail->isHTML(true);                                 
             $mail->Subject = $sub;
             $mail->Body    = $msg;
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
             $mail->send();
 
 

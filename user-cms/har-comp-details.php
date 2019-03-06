@@ -61,7 +61,17 @@ $row=$query->fetch_assoc();
 	</tr>
 	<tr>
 		<th>Warrenty</th>
-		<td><?php echo ($row['warrenty']); ?></td>
+		<td><?php $ws= $row['warrenty']; 
+		
+		if ( $ws=='s_w' ) {
+			echo "Send to Warrenty";
+		}
+		elseif ( $ws=='a_s_w' ) {
+			echo "Again send to Warrenty";
+		}
+		elseif ( $ws=='b_w' ) {
+			echo "Back from Warrenty";
+		}?></td>
 	</tr>
 	<tr>
 		<th>Delivery</th>

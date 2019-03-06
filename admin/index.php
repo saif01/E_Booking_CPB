@@ -60,7 +60,7 @@ error_reporting(0);
                                 <div class="form-group">
                                     <label class="label">Username</label>
                                     <div class="input-group">
-                                        <input type="text" name="admin_login" class="form-control" placeholder="Admin LogIn ID">
+                                        <input type="text" name="admin_login" class="form-control" placeholder="Enter AD ID" required="required">
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                         <i class="mdi mdi-check-circle-outline"></i>
@@ -71,7 +71,7 @@ error_reporting(0);
                                 <div class="form-group">
                                     <label class="label">Password</label>
                                     <div class="input-group">
-                                        <input type="password" name="admin_pass" class="form-control" placeholder="*********">
+                                        <input type="password" name="admin_pass" class="form-control" placeholder="Enter AD Password" required="required">
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                         <i class="mdi mdi-check-circle-outline"></i>

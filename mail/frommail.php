@@ -5,5 +5,9 @@
 // define('FROM_MAIL', 'saifulislamw60@gmail.com');
 // 	define('PASS', 'SAIFULislam$25');
 
+
+	$fromMailAddress='it-noreply@cpbangladesh.com';
+	$mailNam='CPB-IT Portal';
+
 	
 ?>

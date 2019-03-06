@@ -35,7 +35,7 @@
                                     <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="../pimages/admin/<?php echo $row['admin_img']; ?>" alt="user-img" class="img-circle"> </a>
                                     <ul class="dropdown-menu">
                                         
-                                        <li><a href="change-password"><i class="md md-lock"></i>Change Password</a></li>
+                                       <!--  <li><a href="change-password"><i class="md md-lock"></i>Change Password</a></li> -->
                                         <li><a href="logout"><i class="md md-settings-power"></i> Logout</a></li>
                                     </ul>
                                 </li>

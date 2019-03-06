@@ -108,33 +108,33 @@ include('../db/config.php');
 
 <form class="form-horizontal" action="add-category-action.php" method="post">
 
-	<div class="col-md-6"> 
+    <div class="col-md-6"> 
             <div class="form-group">
                 <label class="col-sm-3 control-label">Category Type</label>
                 <div class="col-sm-9">
                   <input type="text" id="check_value" onBlur="userAvailability()" name="category" class="form-control"  placeholder="Enter CPB Hardware Category Type" required>
-            	  <span id="user-availability-status1" style="font-size:12px;"></span>
+                  <span id="user-availability-status1" style="font-size:12px;"></span>
                 </div>
             </div>
             
     </div>
     <div class="col-md-6">
-    	<div class="col-sm-3 control-label">
+        <div class="col-sm-3 control-label">
             
         </div>
                 <div class="col-sm-9">
 
-    	   
+           
 <button type="submit" name="submit"  class="btn btn-block btn-rounded btn-custom  btn-lg btn-primary waves-effect waves-light">Add Category</button>
 
            </div>
-		
+        
     </div>
     <span class="btn btn-sm btn-warning btn-custom">Check</span>
                     </form>
                     
 
-			</div> <!-- Panel-body -->
+            </div> <!-- Panel-body -->
             
         </div> <!-- Panel -->
     </div> <!-- col-->
@@ -161,6 +161,7 @@ include('../db/config.php');
                               
                                 <th>Category</th>
                                 <th>Registration Time</th>
+                                <th>Last Update</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -178,6 +179,15 @@ include('../db/config.php');
                    
                     <td>
                  <?php echo date("F j, Y g:i a", strtotime($row['reg'])); ?> 
+                    </td>
+                    <td>
+
+                 <?php
+                 if ($row['last_up'] =='') {
+                    echo "No Update";
+                 }else{
+                    echo date("F j, Y g:i a", strtotime($row['last_up'])); 
+                 }?> 
                     </td>
 
                     <td>
@@ -200,7 +210,7 @@ include('../db/config.php');
 
 
 
-			</div> <!-- Panel-body -->
+            </div> <!-- Panel-body -->
             
         </div> <!-- Panel -->
     </div> <!-- col-->
@@ -254,7 +264,7 @@ include('../db/config.php');
         <script type="text/javascript">
             $(document).ready(function() {
                 $('#datatable').dataTable({
-                	"order": []
+                    "order": []
                 });
             } );
         </script>

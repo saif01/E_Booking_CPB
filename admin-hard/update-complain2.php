@@ -75,7 +75,7 @@ $row=$query->fetch_assoc();
   <div class="panel-body">
              
                
-      <form  action="update-action2.php?hard_id=<?php echo ($hard_id); ?>" method="post" >
+      <form  action="update-action2.php?hard_id=<?php echo ($hard_id); ?>" method="post" enctype="multipart/form-data" >
 
   
 				  <div class="form-group">
@@ -91,11 +91,11 @@ $row=$query->fetch_assoc();
 		          <label class="col-sm-3 control-label">Delivery Able:</label>
 		            <div class="col-sm-9">
 		               <div class="radio radio-info radio-inline">
-		                    <input type="radio"  name="delivery"  value="Deliverable">
+		                    <input type="radio"  name="delivery" id="d_req_st" value="Deliverable">
 		                    <label>Yes</label>
 		                </div>
 		                <div class="radio radio-inline">
-		                    <input type="radio"  name="delivery" value="Notdeliverable" checked>
+		                    <input type="radio"  name="delivery" value="Notdeliverable">
 		                    <label>No</label>
 		                </div>
 		            </div>
@@ -107,6 +107,14 @@ $row=$query->fetch_assoc();
 				    <label>Remarks</label>
 				    <textarea class="form-control" type="text" name="remarks" rows="3" placeholder="Write Somthing about this problem...... Like How Many days require to solve this issue." required="required"></textarea>
 				  </div>
+
+         <div class="form-group">
+            <label>File</label>
+            <input type="file" name="document" class="form-control">            
+          </div>
+
+
+
 				  <input id="btnSubmit" type="submit" name="submit" value="Hit To Update" class="btn btn-block btn-rounded btn-success">
 				</form>
                  		
@@ -143,6 +151,7 @@ $row=$query->fetch_assoc();
 	    
 	    if($(this).val() == 'Closed'){
 	        document.getElementById('show_st').style.display = 'block';
+           document.getElementById("d_req_st").required = true;
 	    }
 	    else{
 	    	document.getElementById('show_st').style.display = 'none';

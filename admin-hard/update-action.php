@@ -10,8 +10,20 @@ header('location:../admin');
 else{ 
 include('../db/config.php');
 //For Send Mail
-require('../mail/sendmail.php');
-require('../mail/address.php');
+include('../mail/mail/PHPMailerAutoload.php');
+//Send from which mail Adress 
+include('../mail/frommail.php');
+//CPB Hardware Adress 
+include('../mail/address.php');
+
+
+
+$hard_id=$_GET['hard_id'];
+$admin_id=$_SESSION['admin_id'];
+
+//SQL For Mail Sending
+$mailSQL=mysqli_query($con,"SELECT  user.user_name, user.user_mail, user.bu_mail FROM user INNER JOIN cms_hard_complain ON user.user_id=cms_hard_complain.user_id WHERE cms_hard_complain.hard_id='$hard_id'");
+	$mailrow=$mailSQL->fetch_assoc();
 
 ?>
 <!--*********start Sweet alert For Submiting data **********-->
@@ -21,163 +33,60 @@ require('../mail/address.php');
 <!--*********end Sweet alert For Submiting data **********-->
 <?php
 
+
+			
+
+
+
 if (isset($_POST['submit'])) {
 
-$hard_id=$_GET['hard_id'];
-$admin_id=$_SESSION['admin_id'];
+
 
 $status= $_POST['status'];
 $remarks= $_POST['remarks'];
-$warranty= $_POST['warranty_st'];
+$warranty= $_POST['warranty'];
 $delivery= $_POST['delivery'];
 
 $toolsall=$_POST['tools'];
 $tools= implode(",",$toolsall); 
 
 
-if($_POST['warranty'] =='1')
-	{
-	
-	// Store Data in CMS Hardware Remarks Table
-	$sql3=mysqli_query($con,"INSERT INTO `cms_hard_remarks`(`hard_id`, `status`, `remarks`, `warrenty`, `action_by`) VALUES ('$hard_id','$status','$remarks','$warranty','$admin_id')");
-	// Store Data in CMS Hardware Complain Table
-	$sql4=mysqli_query($con,"UPDATE `cms_hard_complain` SET `status`='$status',`warrenty`='$warranty',`last_up`='$currentTime' WHERE `hard_id`='$hard_id'");
 
 
-					if($sql3 && $sql4)
-					    {
+$user_name=$mailrow['user_name'];
+$to=$mailrow['user_mail'];
+$cc=$mailrow['bu_mail'];
+$sub="Hardware Complain no: $hard_id";
 
-							?>		
-							<script>
-							setTimeout(function () { 
-							        swal({
-							          title: "Successfully!",
-							          text: "Remarks Uddated Completed!",
-							          type: "success",
-							          confirmButtonText: "OK"
-							        },
-							        function(isConfirm){
-							          if (isConfirm) {
-							          	//history.back();
-							            //window.location.href = "not-process";
-							            window.opener.location.reload();
-							          	window.close();
-
-			    
-							          }
-							        }); },0);
-
-							</script>
-
-						    <?php
-						}
+ 
+ $fileName1=$_FILES['document']['tmp_name'];
 
 
-						else
-						{
-							
-							?>		
-							<script>
-							setTimeout(function () { 
-							        swal({
-							          title: "Error Genareted!",
-							          text: "Remarks Not Uddated Completed!",
-							          type: "error",
-							          confirmButtonText: "OK"
-							        },
-							        function(isConfirm){
-							          if (isConfirm) {
-							          	history.back();
-							            //window.location.href = "advisor-all.php";
-							          }
-							        }); },0);
+	$mail = new PHPMailer;
+    $mail->isSMTP();                                       
+    $mail->Host = 'smtp.gmail.com';  
+    $mail->SMTPAuth = true;                                
+    $mail->Username =FROM_MAIL;                 
+    $mail->Password =PASS;                           
+    $mail->SMTPSecure = 'tls';                            
+    $mail->Port = 587;                                     
+    $mail->setFrom($fromMailAddress, $mailNam);
+    // Add Multiple Address for To
+    $arrayto = explode(",",$to);
+    $nbto = count($arrayto);
+    for ($t=0;$t<$nbto;$t++) { $mail->addAddress($arrayto[$t]); }
+    // Add Multiple Address for CC
+    $array = explode(",",$cc);
+    $nb = count($array);
+    for ($i=0;$i<$nb;$i++) { $mail->addCC($array[$i]); }
+    $mail->addAttachment($_FILES['document']['tmp_name'], $_FILES['document']['name']);  
+    $mail->isHTML(true);                                 
+    $mail->Subject = $sub;
+   
 
-							</script>
-
-						    <?php
-						}
-			 
-	}
-
-
-
-
-	 else
-	{
-		
-	// Store Data in CMS Hardware Remarks Table
-	$sql=mysqli_query($con,"INSERT INTO `cms_hard_remarks`(`hard_id`, `status`, `remarks`, `action_by`) VALUES ('$hard_id','$status','$remarks','$admin_id')");
-	// Store Data in CMS Hardware Complain Table
-	$sql2=mysqli_query($con,"UPDATE `cms_hard_complain` SET `status`='$status',`delivery`='$delivery',`last_up`='$currentTime' WHERE `hard_id`='$hard_id'");
-
-
-							if($sql && $sql2)
-							    {
-
-									?>		
-									<script>
-									setTimeout(function () { 
-									        swal({
-									          title: "Successfully!",
-									          text: "Remarks Uddated Completed!",
-									          type: "success",
-									          confirmButtonText: "OK"
-									        },
-									        function(isConfirm){
-									          if (isConfirm) {
-									          	//history.back();
-									            //window.location.href = "not-process";
-									            window.opener.location.reload();
-									          	window.close();
-
-					    
-									          }
-									        }); },0);
-
-									</script>
-
-								    <?php
-								}
-
-								else
-								{
-									
-									?>		
-									<script>
-									setTimeout(function () { 
-									        swal({
-									          title: "Error Genareted!",
-									          text: "Remarks Not Uddated Completed!",
-									          type: "error",
-									          confirmButtonText: "OK"
-									        },
-									        function(isConfirm){
-									          if (isConfirm) {
-									          	history.back();
-									           
-									          }
-									        }); },0);
-
-									</script>
-
-								    <?php
-								}
-					 
-	}
-
-
-
-//SQL For Mail Sending
-$mailSQL=mysqli_query($con,"SELECT  user.user_name, user.user_mail, user.bu_mail FROM user INNER JOIN cms_hard_complain ON user.user_id=cms_hard_complain.user_id WHERE cms_hard_complain.hard_id='$hard_id'");
-	$mailrow=$mailSQL->fetch_assoc();
-
-	$user_name=$mailrow['user_name'];
-	$to=$mailrow['user_mail'];
-	$cc=$mailrow['bu_mail'];
-    $sub="Hardware Complain no: $hard_id";
 
 // IF tools not have but warranty have then send this mail
-    if ($toolsall=='' && $_POST['warranty']=='1' ) {
+    if ($toolsall=='' && $warranty=='s_w' ) {
 
     	$msg=" 
         <html>
@@ -192,11 +101,12 @@ $mailSQL=mysqli_query($con,"SELECT  user.user_name, user.user_mail, user.bu_mail
             </body>
         </html> ";
 
-        send_mail_withCC($sub,$msg,$to,$cc);
-    	
-    }
+    $mail->Body = $msg;
+    $mail->send();
+}
+
 // IF tools have but warranty not have then send this mail
-    elseif ($toolsall !='' && $_POST['warranty']=='0' ) {
+    elseif ($toolsall !='' && $warranty=='0' ) {
 
     	$msg=" 
         <html>
@@ -214,12 +124,15 @@ $mailSQL=mysqli_query($con,"SELECT  user.user_name, user.user_mail, user.bu_mail
             </body>
         </html> ";
 
-        send_mail_withCC($sub,$msg,$to,$cc);
-    	
-    }
+    $mail->Body = $msg;
+    $mail->send();
+
+}
+
+
 
 // IF tools and warranty both not have then send this mail
-elseif ($toolsall =='' && $_POST['warranty']=='0' ) {
+elseif ($toolsall =='' && $warranty=='0' ) {
 
     	$msg=" 
         <html>
@@ -234,12 +147,14 @@ elseif ($toolsall =='' && $_POST['warranty']=='0' ) {
             </body>
         </html>";
 
-       send_mail_withCC($sub,$msg,$to,$cc);
-    	
-    }
+    $mail->Body = $msg;
+    $mail->send();
 
-    // IF tools and warranty both have then send this mail
-elseif ($toolsall !='' && $_POST['warranty']=='1' ) {
+}
+
+
+// IF tools  and warranty both have then send this mail
+elseif ($toolsall !='' && $warranty=='s_w' ) {
 
     	$msg=" 
         <html>
@@ -256,17 +171,182 @@ elseif ($toolsall !='' && $_POST['warranty']=='1' ) {
             </body>
         </html>";
 
-       send_mail_withCC($sub,$msg,$to,$cc);
-    	
-    }
+    $mail->Body = $msg;
+    $mail->send();
 
-// End Mail Code
+}
+
+
+
+
+//Successfully Back
+function backto()
+	{
+	?>		
+	<script>
+	setTimeout(function () { 
+	        swal({
+	          title: "Successfully!",
+	          text: "Remarks Uddated Completed!",
+	          type: "success",
+	          confirmButtonText: "OK"
+	        },
+	        function(isConfirm){
+	          if (isConfirm) {
+	          	//history.back();
+	            //window.location.href = "not-process";
+	            window.opener.location.reload();
+	          	window.close();
+
+
+	          }
+	        }); },0);
+
+	</script>
+
+<?php
+ }
+
+//Error Back
+ function backtoError()
+	{
+	?>		
+	<script>
+	setTimeout(function () { 
+	        swal({
+	          title: "Error Generated!",
+	          text: "Remarks Not Uddated Completed!",
+	          type: "error",
+	          confirmButtonText: "OK"
+	        },
+	        function(isConfirm){
+	          if (isConfirm) {
+	          	//history.back();
+	            //window.location.href = "not-process";
+	            window.opener.location.reload();
+	          	window.close();
+
+
+	          }
+	        }); },0);
+
+	</script>
+
+<?php
+ }
+
+
+
+// IF Processing + warranty + no Documents
+if($status=='Processing' && $fileName1 =='')
+	{
+	
+	// Store Data in CMS Hardware Remarks Table
+	$query=mysqli_query($con,"INSERT INTO `cms_hard_remarks`(`hard_id`, `status`, `remarks`, `warrenty`, `action_by`) VALUES ('$hard_id','$status','$remarks','$warranty','$admin_id')");
+
+	// Store Data in CMS Hardware Complain Table
+	$query1=mysqli_query($con,"UPDATE `cms_hard_complain` SET `status`='$status',`warrenty`='$warranty',`last_up`='$currentTime' WHERE `hard_id`='$hard_id'");
+
+  
+	//For Reload and Close Function
+		if ($query && $query1 && $mail) {
+			backto();
+		}else{
+			backtoError();
+		}
+							
+	}
+
+
+
+
+// IF Processing + No warranty + Documents
+elseif($status=='Processing' && $fileName1 !=='')
+	{
+
+	
+	$file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['document']['name']);
+		    $storeFile = "../pimages/hardaction/".$file_name;
+		    $fileenq = $_FILES['document']['tmp_name'];
+		    $store = move_uploaded_file($fileenq,$storeFile);
+
+		// Store Data in CMS Hardware Remarks Table
+	$query=mysqli_query($con,"INSERT INTO `cms_hard_remarks`(`hard_id`, `status`, `remarks`, `warrenty`, `document`, `action_by`) VALUES ('$hard_id','$status','$remarks','$warranty','$file_name','$admin_id')");
+
+	// Store Data in CMS Hardware Complain Table
+	$query1=mysqli_query($con,"UPDATE `cms_hard_complain` SET `status`='$status',`warrenty`='$warranty',`last_up`='$currentTime' WHERE `hard_id`='$hard_id'");
 
 			
+    //For Reload and Close Function
+		if ( $query && $query1 && $mail && $store ) {
+			backto();
+		}else{
+			backtoError();
+		}
+	}
 
+
+
+
+// IF Closed + Documents
+	elseif($status=='Closed' && $fileName1 !=='')
+	{
+
+
+	$file_name=uniqid().date("Y-m-d-H-i-s").str_replace(" ", "_", $_FILES['document']['name']);
+	    $storeFile = "../pimages/hardaction/".$file_name;
+	    $fileenq = $_FILES['document']['tmp_name'];
+	    $store = move_uploaded_file($fileenq,$storeFile);
+
+// Store Data in CMS Hardware Remarks Table
+	$query=mysqli_query($con,"INSERT INTO `cms_hard_remarks`(`hard_id`, `status`, `remarks`, `warrenty`, `document`, `action_by`) VALUES ('$hard_id','$status','$remarks','$warranty','$file_name','$admin_id')");
+
+	// Store Data in CMS Hardware Complain Table
+	$query1=mysqli_query($con,"UPDATE `cms_hard_complain` SET `status`='$status',`delivery`='$delivery',`last_up`='$currentTime' WHERE `hard_id`='$hard_id'");
 		
-			
-	} 
+		//For Reload and Close Function
+		if ( $query && $query1 && $mail && $store ) {
+			backto();
+		}else{
+			backtoError();
+		}			 
+	}
+
+
+
+// IF Closed  no Documents
+	elseif( $status=='Closed' && $fileName1 =='' )
+	{	
+	// Store Data in CMS Hardware Remarks Table
+	$query=mysqli_query($con,"INSERT INTO `cms_hard_remarks`(`hard_id`, `status`, `remarks`, `action_by`) VALUES ('$hard_id','$status','$remarks','$admin_id')");
+
+	// Store Data in CMS Hardware Complain Table
+	$query1=mysqli_query($con,"UPDATE `cms_hard_complain` SET `status`='$status',`delivery`='$delivery',`last_up`='$currentTime' WHERE `hard_id`='$hard_id'");
+		
+
+		//For Reload and Close Function
+		if ( $query && $query1 && $mail ) {
+			backto();
+		}else{
+			backtoError();
+		}			 
+	}
+
+
+
+
+
+	else{
+
+		backtoError();
+	}
+
+
+
+
+   
+						
+	}//end Submit 
 
 
  }?>
